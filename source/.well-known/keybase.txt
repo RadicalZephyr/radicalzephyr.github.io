@@ -1,0 +1,65 @@
+==================================================================
+https://keybase.io/radicalzephyr
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://zephyrizing.net
+  * I am radicalzephyr (https://keybase.io/radicalzephyr) on keybase.
+  * I have a public key with fingerprint F225 FDC5 C9B0 29F7 EFD0  2DCD 3585 34C6 11F0 56F5
+
+To claim this, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "fingerprint": "f225fdc5c9b029f7efd02dcd358534c611f056f5",
+            "host": "keybase.io",
+            "key_id": "358534C611F056F5",
+            "uid": "ebc50a8c24e19a6410b53313e4148c00",
+            "username": "radicalzephyr"
+        },
+        "service": {
+            "hostname": "zephyrizing.net",
+            "protocol": "http:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1396735860,
+    "expire_in": 157680000,
+    "prev": "fafd845ee9e595f25ea07ec582f488b3dc5ec164139cae396efe55dc566d0081",
+    "seqno": 6,
+    "tag": "signature"
+}
+
+with the aforementioned key, yielding the PGP signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: GnuPG/MacGPG2 v2.0.22 (Darwin)
+Comment: GPGTools - https://gpgtools.org
+
+owE1kV1IFFEUx2fLtdqQtQLJNB8uGkG7Ol93dmZZcmNNoqJIcaMHWebjjk6tM+vs
++LnKSrWKhWWZkj3UQ0YZPRRSIQVZgkTRB6hgEPaiVPSBFZZGRHfU7svlnvM7/3P+
+53ZnrCZcDphixzbMhecdz0cWJaI8mEwkgGQoTcCfAMfQ0qVqehUyY6amW8APVJqG
+qiJDWZBIWlB9SFVIWpEVBvKQYWWOolQScioEHlBtxO0KLCOJcVSoGTiGHxFNwdFl
+PoT5UsyX2nzdUgJJMiRFXqZZRAkix1KkBBmGYhBLsbxMkjYYR6Yu1iBMm6KiyWK0
+GcWqm0zQ6gE4Va/JyB7c7r+CLee1ZmylUEcW1oiZhmXIRhQnqy0r5rdrraaYDTcg
+KbIiE5E0XcFFuKAemXHN0IGfwqRsabYuxQicDzvhSA9AjTHNRBHNJqCP40l87Dao
+3t6aqCo8CxESEBSgSkMkkj4kQ55WWZ6XGLxQJFPYLCPIIsKqSEUQ4ijHKSTJU8A2
+VqsbwM/hMcUqLBnXqnTRqjMRaO105KYRDheR7lxl/yDhWpf5/1/DT9YSF758ZP8c
+fhrNnnx7ZygQyr6tTGcpk0H/bsVNjZb//HE6P639QcALWvJqife9Dc6xsBnK6Ulv
+Ob43VMirw1sKzmzt7G/J+X3enLgf7+i7Oj0Sbb0iVbj3F00EZwfuaa5U5qmp4R5i
+/GZ7ds32qYq8oQH1UzG9Pim9c/QHFhYODr5eLHqYv2OnccIbySAOuMPXvUnrm9C2
++cj3Gc+26bnwNfRXoM2JN95nh5yPXz4iEwW/cirnFto36UZJTcWlslTvh57gxbO5
+yq3R7q7U3V1Hb7hLPk+WtZ17NbSPKXa+mJ1J9s13+AbZjR1Z4wOVvoI9s/yak4HL
+XbEutvHrPw==
+=loYQ
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/radicalzephyr
+
+==================================================================
