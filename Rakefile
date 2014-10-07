@@ -60,6 +60,14 @@ task :generate do
   system "jekyll build"
 end
 
+desc "Degub jekyll build"
+task :gentrace do
+  raise "### You haven't set anything up yet. First run `rake install` to set up an Octopress theme." unless File.directory?(source_dir)
+  puts "## Generating Site with Jekyll --trace"
+  system "compass compile --css-dir #{source_dir}/stylesheets"
+  system "jekyll build --trace"
+end
+
 desc "Watch the site and regenerate when it changes"
 task :watch do
   raise "### You haven't set anything up yet. First run `rake install` to set up an Octopress theme." unless File.directory?(source_dir)
