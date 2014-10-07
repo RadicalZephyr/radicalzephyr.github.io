@@ -5,13 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Clojure, LeJOS and EV3 - Zephyrizing</title>
+  <title>&#8230; And This Is Why Master Should Be Stable - Zephyrizing</title>
   <meta name="author" content="Geoff Shannon">
 
   
-  <meta name="description" content="I&rsquo;ve had the opportunity in the last couple weeks to start playing
-with a Lego Mindstorms EV3. Since this hardware is such a new release
-though &hellip;">
+  <meta name="description" content="Second day at Hacker School. I spent the morning doing two things: getting my blog setup to use Octopress.
+helping another HS-er troubleshoot getting &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +19,7 @@ though &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.zephyrizing.net/blog/2013/10/31/leJOS-and-EV3">
+  <link rel="canonical" href="http://www.zephyrizing.net/blog/2014/10/07/dot-dot-dot-and-this-is-why-master-should-be-stable">
   <link href="/favicon.ico" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Zephyrizing" type="application/atom+xml">
@@ -70,7 +69,7 @@ though &hellip;">
   
   <header>
     
-      <h1 class="entry-title">Clojure, LeJOS and EV3</h1>
+      <h1 class="entry-title">&#8230; And This Is Why Master Should Be Stable</h1>
     
     
       <p class="meta">
@@ -79,54 +78,56 @@ though &hellip;">
 
 
 
-<time class='entry-date' datetime='2013-10-31T22:00:00-04:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>31</span><span class='date-suffix'>st</span>, <span class='date-year'>2013</span></span> <span class='time'>10:00 pm</span></time>
+<time class='entry-date' datetime='2014-10-07T13:28:48-04:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>1:28 pm</span></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>I&rsquo;ve had the opportunity in the last couple weeks to start playing
-with a Lego Mindstorms EV3.  Since this hardware is such a new release
-though, most of the normal contenders in the robot programming scene
-(namely, RobotC) haven&rsquo;t had time to update their offerings to work
-with it.</p>
+<div class="entry-content"><p>Second day at Hacker School.  I spent the morning doing two things:</p>
 
-<p>Enter <a href="http://lejos.org">LeJOS</a>.  Apparently the maintainer of the LeJOS project
-got early access to the developer documentation and other necessary
-infos, so he&rsquo;s been able to develop a setup for allowing people to
-program their EV3 using Java.</p>
+<ul>
+<li>getting my blog setup to use <a href="http://octopress.org/">Octopress</a>.</li>
+<li>helping another HS-er troubleshoot getting setup with <a href="http://flask.pocoo.org/">Flask</a> and <a href="http://flask.pocoo.org/docs/0.10/tutorial/introduction/">Flaskr</a>.</li>
+</ul>
+
 
 <!--more-->
 
 
-<p>It&rsquo;s a really elegant solution actually.  Since the EV3 already runs a
-full linux kernel, he just modified the base Legos linux image.  You
-then partition a microSD card and write this image to it.  Now you can
-boot the EV3 from the microSD card and ssh into it over either WiFi
-(if you have an external USB wifi adapter that&rsquo;s compatible), or over
-USB (a more recent feature).</p>
+<p>Yesterday, I was super frustrated by the difficulties I had in getting
+Octopress going, and was reminded of the frustrations with setting up
+Ruby environments that led me to wipe my computer and start from
+scratch a few weeks ago.  You know, that and a certain amount of boredom.</p>
 
-<p>My next goal is to get a clojure projet running on the ev3.  There are
-two approaches that I could take.  First, I could try AOT compiling my
-clojure source and then shipping just the uberjar to the EV3.  This
-seems the most straightforward.  However, following this plan I almost
-immediately ran into a stumbling block.  The LeJOS java library cannot
-be compiled using Leiningen when not on the EV3.</p>
+<p>Anyhow, I was able to make more headway today, largely because I
+sorted out all of the really silly stuff yesterday.</p>
 
-<p>Apparently this is because something about the clojure compilation
-process actually loads the EV3 classes into the JVM.  This causes the
-static initializers to be run.  And the static initializers look for
-specific files in the /dev directory to try and do their thing.</p>
+<p>But helping Sammy with setting up <a href="http://flask.pocoo.org/">Flask</a> was a nightmare!  TL;DR, we
+figured it out, and it was incredibly simple.</p>
 
-<p>Obviously, when you&rsquo;re not on an EV3 these files don&rsquo;t exist.</p>
+<p>First off, there were some minor SNAFU&rsquo;s with me showing her about
+[virtualenv], and explaining briefly how it works and how why she
+should use it.  But then, we were confronted with these instructions
+on the <a href="https://github.com/mitsuhiko/flask/tree/master/examples/flaskr">Flaskr doc page</a> on Github, a natural place to
+look when the <a href="http://flask.pocoo.org/docs/0.10/tutorial/introduction/">&ldquo;actual&rdquo; docs</a> don&rsquo;t mention anything about how
+to install or setup the damn thing.</p>
 
-<p>So the second way of doing things would be to attempt to install
-leiningen on the EV3 itself.  I see a lot of potential problems with
-this, first and foremost being how do I do it without a direct
-connection to the internet?  Secondly, the linux installation is very
-minimal, and might not actually contain all the necessary tools to
-install and use leiningen.</p>
+<p>WWe spent nearly two and a half hours searching for the mythical
+<code>flask</code> binary, to no avail.  Finally, after I inadvertently ran
+aacross this <a href="https://github.com/mitsuhiko/flask/issues/1180">flask issue</a>, it dawned on me that we might be
+having the same problem.  Well, that&rsquo;s not quite true.  In reality, I
+got so frustrated that I decided to just try the simplest thing that I
+could think of to get flaskr to run <code>python flaskr.py</code>.  Low and
+behold, it worked!!  Then, in retrospect, having seen that issue
+describing the disconnect between the docs for flaskr in the flask
+<code>master</code> branch and what the latest stable version was, I went and
+looked at the <a href="https://github.com/mitsuhiko/flask/tree/0.10.1/examples/flaskr">last stable release docs</a> for flaskr, and
+there it was. Simple instructions to do the simple, straightforward
+thing.</p>
+
+<p>[[virtualenv]: <a href="http://virtualenv.readthedocs.org/en/latest/virtualenv.html">http://virtualenv.readthedocs.org/en/latest/virtualenv.html</a></p>
 </div>
 
 
@@ -142,12 +143,12 @@ install and use leiningen.</p>
 
 
 
-<time class='entry-date' datetime='2013-10-31T22:00:00-04:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>31</span><span class='date-suffix'>st</span>, <span class='date-year'>2013</span></span> <span class='time'>10:00 pm</span></time>
+<time class='entry-date' datetime='2014-10-07T13:28:48-04:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>1:28 pm</span></time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/ev3/'>ev3</a>, <a class='category' href='/blog/categories/java/'>java</a>, <a class='category' href='/blog/categories/programming/'>programming</a>
+    <a class='category' href='/blog/categories/programming/'>programming</a>, <a class='category' href='/blog/categories/rant/'>rant</a>, <a class='category' href='/blog/categories/troubleshooting/'>troubleshooting</a>
   
 </span>
 
@@ -156,7 +157,7 @@ install and use leiningen.</p>
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://www.zephyrizing.net/blog/2013/10/31/leJOS-and-EV3/" data-via="RadicalZephyr" data-counturl="http://www.zephyrizing.net/blog/2013/10/31/leJOS-and-EV3/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://www.zephyrizing.net/blog/2014/10/07/dot-dot-dot-and-this-is-why-master-should-be-stable/" data-via="RadicalZephyr" data-counturl="http://www.zephyrizing.net/blog/2014/10/07/dot-dot-dot-and-this-is-why-master-should-be-stable/" >Tweet</a>
   
   
   
@@ -165,10 +166,8 @@ install and use leiningen.</p>
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/09/03/why-am-i-doing-this/" title="Previous Post: Why am I doing this?">&laquo; Why am I doing this?</a>
+        <a class="basic-alignment left" href="/blog/2014/06/12/keybase-hackernews-q&a/" title="Previous Post: Keybase Hacker News Q&A">&laquo; Keybase Hacker News Q&A</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/04/17/lejos-and-clojure/" title="Next Post: LeJOS and Clojure">LeJOS and Clojure &raquo;</a>
       
     </p>
   </footer>

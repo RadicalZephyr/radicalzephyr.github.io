@@ -4,7 +4,7 @@
   <title><![CDATA[Zephyrizing]]></title>
   <link href="http://www.zephyrizing.net/atom.xml" rel="self"/>
   <link href="http://www.zephyrizing.net/"/>
-  <updated>2014-10-07T11:45:03-04:00</updated>
+  <updated>2014-10-07T14:15:20-04:00</updated>
   <id>http://www.zephyrizing.net/</id>
   <author>
     <name><![CDATA[Geoff Shannon]]></name>
@@ -12,6 +12,57 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[... And This Is Why Master Should Be Stable]]></title>
+    <link href="http://www.zephyrizing.net/blog/2014/10/07/dot-dot-dot-and-this-is-why-master-should-be-stable/"/>
+    <updated>2014-10-07T13:28:48-04:00</updated>
+    <id>http://www.zephyrizing.net/blog/2014/10/07/dot-dot-dot-and-this-is-why-master-should-be-stable</id>
+    <content type="html"><![CDATA[<p>Second day at Hacker School.  I spent the morning doing two things:</p>
+
+<ul>
+<li>getting my blog setup to use <a href="http://octopress.org/">Octopress</a>.</li>
+<li>helping another HS-er troubleshoot getting setup with <a href="http://flask.pocoo.org/">Flask</a> and <a href="http://flask.pocoo.org/docs/0.10/tutorial/introduction/">Flaskr</a>.</li>
+</ul>
+
+
+<!--more-->
+
+
+<p>Yesterday, I was super frustrated by the difficulties I had in getting
+Octopress going, and was reminded of the frustrations with setting up
+Ruby environments that led me to wipe my computer and start from
+scratch a few weeks ago.  You know, that and a certain amount of boredom.</p>
+
+<p>Anyhow, I was able to make more headway today, largely because I
+sorted out all of the really silly stuff yesterday.</p>
+
+<p>But helping Sammy with setting up <a href="http://flask.pocoo.org/">Flask</a> was a nightmare!  TL;DR, we
+figured it out, and it was incredibly simple.</p>
+
+<p>First off, there were some minor SNAFU&rsquo;s with me showing her about
+[virtualenv], and explaining briefly how it works and how why she
+should use it.  But then, we were confronted with these instructions
+on the <a href="https://github.com/mitsuhiko/flask/tree/master/examples/flaskr">Flaskr doc page</a> on Github, a natural place to
+look when the <a href="http://flask.pocoo.org/docs/0.10/tutorial/introduction/">&ldquo;actual&rdquo; docs</a> don&rsquo;t mention anything about how
+to install or setup the damn thing.</p>
+
+<p>WWe spent nearly two and a half hours searching for the mythical
+<code>flask</code> binary, to no avail.  Finally, after I inadvertently ran
+aacross this <a href="https://github.com/mitsuhiko/flask/issues/1180">flask issue</a>, it dawned on me that we might be
+having the same problem.  Well, that&rsquo;s not quite true.  In reality, I
+got so frustrated that I decided to just try the simplest thing that I
+could think of to get flaskr to run <code>python flaskr.py</code>.  Low and
+behold, it worked!!  Then, in retrospect, having seen that issue
+describing the disconnect between the docs for flaskr in the flask
+<code>master</code> branch and what the latest stable version was, I went and
+looked at the <a href="https://github.com/mitsuhiko/flask/tree/0.10.1/examples/flaskr">last stable release docs</a> for flaskr, and
+there it was. Simple instructions to do the simple, straightforward
+thing.</p>
+
+<p>[[virtualenv]: <a href="http://virtualenv.readthedocs.org/en/latest/virtualenv.html">http://virtualenv.readthedocs.org/en/latest/virtualenv.html</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Keybase Hacker News Q&A]]></title>
