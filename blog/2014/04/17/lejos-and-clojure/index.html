@@ -1,0 +1,283 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>LeJOS and Clojure - Zephyrizing</title>
+  <meta name="author" content="Geoff Shannon">
+
+  
+  <meta name="description" content="This is a short followup to my first post about
+experimenting with the Lego EV3&rsquo;s and leJOS. Shortly
+after I wrote that post, I went on the &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://www.zephyrizing.net/blog/2014/04/17/lejos-and-clojure">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Zephyrizing" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Zephyrizing</a></h1>
+  
+    <h2>Thoughts on cast-iron seasoning, programming and everything&#8230;</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:www.zephyrizing.net" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">LeJOS and Clojure</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-04-17T19:00:00-04:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>7:00 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>This is a short followup to my first post about
+<a href="/blog/2013/09/03/why-am-i-doing-this/">experimenting with the Lego EV3&rsquo;s</a> and <a href="http://lejos.org">leJOS</a>. Shortly
+after I wrote that post, I went on the Clojure IRC channel and talked
+to <a href="http://technomancy.us/">Phil Hagelberg</a> and some other helpful folks about my
+issues. They steered me away from attempting to install <a href="http://leiningen.org/">Leiningen</a> on
+the EV3 itself, which was a relief since I think that way lay
+madness. Instead, they suggested that I have a small launcher program
+that would just setup a REPL. Then I could run my robot-controlling
+Clojure code from there.</p>
+
+<!--more-->
+
+
+<p>This advice led to the creation of <a href="https://github.com/RadicalZephyr/ev3-nrepl">ev3-nrepl</a>. It&rsquo;s basically a small
+skeleton Clojure project to provide the basis for running Clojure code
+on the EV3. It&rsquo;s a minimalist setup, so it should provide a good
+starting point for other people to continue experimenting. I tried to
+explain how to use it fairly clearly, as well as add all the links to
+the necessary documentation to get leJOS running on the EV3.</p>
+
+<p>Unfortunately, despite this seemingly great start, I never ended up
+actually doing anything interesting with Clojure on the EV3. There are
+two related reasons for this. First, the robotics class I was in
+started having actual coding assignments (thanks to the fact that we
+could now run leJOS). Second, it turns out that leJOS is designed from
+an incredibly stateful and imperative point of view. This makes it
+very hard to develop clean Clojure code that makes use of their
+API. Specifically, leJOS makes the assumption that any code making use
+of it is going to start-up, do robot stuff, and then die. A Clojure
+REPL obviously breaks this assumption rather badly. As it turned out,
+this was the most painful when I was trying to figure out how to
+program and build my robot at the same time.</p>
+
+<p>What I wanted to do was be able to open a Clojure REPL connect to it,
+and then leave it running for a long time. This is my normal modus
+operandi, but the EV3 makes it even more critical that this
+work. Because of the limited hardware, it takes several minutes for
+nrepl to actually boot up.</p>
+
+<p>I think that using Clojure as a prototyping tool for building robots
+with the EV3 could be incredibly powerful. All of the
+<a href="http://www.infoq.com/presentations/Clojure-Java-Interop">arguments</a>
+for why Clojure is a great language for exploring Java API&rsquo;s are
+applicable to working with the EV3 API&rsquo;s. Possibly even more so, since
+there is something really, really cool about typing some commands at
+the REPL and having your robot start moving around and doing
+stuff. Unfortunately, because of the current architecture of leJOS and
+the limited processing power of the EV3&rsquo;s it&rsquo;s not quite there yet.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Geoff Shannon</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2014-04-17T19:00:00-04:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>7:00 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/clojure/'>clojure</a>, <a class='category' href='/blog/categories/ev3/'>ev3</a>, <a class='category' href='/blog/categories/programming/'>programming</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://www.zephyrizing.net/blog/2014/04/17/lejos-and-clojure/" data-via="RadicalZephyr" data-counturl="http://www.zephyrizing.net/blog/2014/04/17/lejos-and-clojure/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/10/31/leJOS-and-EV3/" title="Previous Post: Clojure, LeJOS and EV3">&laquo; Clojure, LeJOS and EV3</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/04/21/the-summary-and-evaluation-how-i-figured-out-why-i-went-to-college/" title="Next Post: The Summary and Evaluation - How I Figured Out Why I Went to College">The Summary and Evaluation - How I Figured Out Why I Went to College &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/06/12/keybase-hackernews-q&a/">Keybase Hacker News Q&A</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/22/s-&-e-part-one:-the-single-story/">S & E Part One: The Single Story</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/04/21/the-summary-and-evaluation-how-i-figured-out-why-i-went-to-college/">The Summary and Evaluation - How I Figured Out Why I Went to College</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/04/17/lejos-and-clojure/">LeJOS and Clojure</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/10/31/leJOS-and-EV3/">Clojure, LeJOS and EV3</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/RadicalZephyr">@RadicalZephyr</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'RadicalZephyr',
+            count: 7,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Geoff Shannon -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

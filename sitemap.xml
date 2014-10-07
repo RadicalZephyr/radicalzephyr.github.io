@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  
+  <url>
+    <loc>http://www.zephyrizing.net/blog/2014/06/12/keybase-hackernews-q&a/</loc>
+    
+    <lastmod>2014-06-12T00:00:00-04:00</lastmod>
+    
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.zephyrizing.net/blog/2014/05/22/s-&-e-part-one:-the-single-story/</loc>
+    
+    <lastmod>2014-05-22T23:00:00-04:00</lastmod>
+    
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.zephyrizing.net/blog/2014/04/21/the-summary-and-evaluation-how-i-figured-out-why-i-went-to-college/</loc>
+    
+    <lastmod>2014-04-21T21:00:00-04:00</lastmod>
+    
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.zephyrizing.net/blog/2014/04/17/lejos-and-clojure/</loc>
+    
+    <lastmod>2014-04-17T19:00:00-04:00</lastmod>
+    
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.zephyrizing.net/blog/2013/10/31/leJOS-and-EV3/</loc>
+    
+    <lastmod>2013-10-31T22:00:00-04:00</lastmod>
+    
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.zephyrizing.net/blog/2013/09/03/why-am-i-doing-this/</loc>
+    
+    <lastmod>2013-09-03T04:00:00-04:00</lastmod>
+    
+    <priority>0.8</priority>
+  </url>
+  
+  
+  <url>
+    <loc>http://www.zephyrizing.net/blog/archives/</loc>
+    <lastmod>2014-10-07T11:45:03-04:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.zephyrizing.net/</loc>
+    <lastmod>2014-10-07T11:45:03-04:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  
+  
+</urlset>
