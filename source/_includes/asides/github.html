@@ -21,6 +21,7 @@
             user: '{{site.github_user}}',
             count: {{site.github_repo_count}},
             skip_forks: {{site.github_skip_forks}},
+            to_skip: {{site.github_skip_repos_list | jsonify}},
             target: '#gh_repos'
         });
     });
