@@ -12,6 +12,10 @@ why I'm here and similar topics.
 
 [Hacker School]: https://www.hackerschool.com/
 
+<!--more-->
+
+### Week Review
+
 #### Monday
 
 This week has been a blur in some ways and incredibly long in others.
@@ -109,5 +113,45 @@ the space when others are.
 
 ### Project Ideas
 
-Given some of my meta
+Given some of my meta-dissatisfaction that I felt on Thursday
+regarding what I've been working on, I thought I might try to list
+some other projects that seem more "Hacker School worthy".
+
+Looking to the [three traits of an awesome Hacker Schooler][3traits],
+I started thinking about what are some challenging (strive for
+greatness) problems that I could approach with rigor.
+
+[3traits]: https://www.hackerschool.com/manual#sec-principles
+
+
 - Dive into the bug in auto-fill in emacs, try to fix it
+- Pursue learning more graphics stuff (since I've been sort of
+  intimidated by it for a while). Project-wise, it might be
+  interesting to try and discover what sort of work it would take to
+  update Emacs' rendering engine.
+- Try to dive into the Boomerang decompiler's source code and
+  understand it
+
+
+And some other random things I want to do (but might not be feasible):
+
+- Implement a language that has lispy-prefix syntax but OCaml
+  semantics; in particular that has type-inferencing
+- To that end, implement the type inferencing engine that powers OCaml
+  type inferences
+- Port Boomerang to use the LLVM architecture
+
+### Final Thoughts
+
+It's frustrating how many of the things that I want to do still have
+what seems like huge mounds of prerequisites in front of them. I want
+to do all of these interesting language things, but I feel like I'm
+blocked from doing them because I want to do them in LLVM, but I don't
+know anything about actually using the LLVM.
+
+Also, when I was reflecting on what I need to do to become a better
+programmer, one of the recurring thoughts I responded with is that I
+need to write/work on a larger system/project. I feel like I have
+quite a bit of experience taking an small projects. But not something
+like YRAS... Which, I think, is one reason that I am absolutely
+terrified of starting that project.
