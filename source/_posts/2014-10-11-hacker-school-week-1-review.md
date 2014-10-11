@@ -3,7 +3,7 @@ layout: post
 title: "Hacker School: Week 1 Review"
 date: 2014-10-11 04:48:52 -0400
 comments: true
-categories: Hacker School
+categories: ["Hacker School"]
 ---
 
 So, I can't sleep, and it's the end of my first week at
@@ -52,9 +52,11 @@ sort of broken-ish state.
 
 On Tuesday I felt much calmer. I'm having a hard time remembering now
 what exactly I worked on. I believe it was working through
-_[Real World OCaml]_ though.  I didn't get very far, but I also spent a
-bit of time helping Sammy out, and fixing up this blog with Octopress.
+_[Real World OCaml]_ though.  I didn't get very far, but I also spent
+a bit of time [helping Sammy out][masterstable], and fixing up this
+blog with Octopress.
 
+[masterstable]: {% post_url 2014-10-07-dot-dot-dot-and-this-is-why-master-should-be-stable %}
 [Real World OCaml]: https://realworldocaml.org/
 
 ### Wednesday
