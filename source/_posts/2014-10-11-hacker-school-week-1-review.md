@@ -14,9 +14,9 @@ why I'm here and similar topics.
 
 <!--more-->
 
-### Week Review
+## Week Review
 
-#### Monday
+### Monday
 
 This week has been a blur in some ways and incredibly long in others.
 I started out on Monday with an interesting but ultimately abortive
@@ -48,7 +48,7 @@ sort of broken-ish state.
 
 [snake-puzzle-solver]: https://github.com/RadicalZephyr/snake-puzzle-solver
 
-#### Tuesday
+### Tuesday
 
 On Tuesday I felt much calmer. I'm having a hard time remembering now
 what exactly I worked on. I believe it was working through
@@ -57,7 +57,7 @@ bit of time helping Sammy out, and fixing up this blog with Octopress.
 
 [Real World OCaml]: https://realworldocaml.org/
 
-#### Wednesday
+### Wednesday
 
 Through some poor decision-making Tuesday evening (i.e. eating two
 slices of pizza, and also drinking a not inconsiderable amount) I was
@@ -67,7 +67,7 @@ that it was the pizza. In retrospect, the symptoms were very
 hangover-like. Perhaps I just got much drunker than I thought I did?
 Hard to say.
 
-#### Thursday
+### Thursday
 
 On Thursday I powered through the first third or so of _Real World
 OCaml_. That was awesome. OCaml is a fascinating language, and even
@@ -99,7 +99,7 @@ enough to create the equivalent of the `minishell.c` that Nelson gives
 out as the basis for the shell, and to complete the equivalent of
 assignment 1.
 
-#### Friday
+### Friday
 
 I somehow gained the impression that showing up at the space was less
 expected on Friday. Now I'm really not sure where/how I got that
@@ -111,7 +111,7 @@ literally years. So, overall win even if I did totally miss out on a
 HS day.  But again, it makes me feel sort of disconnected to be not at
 the space when others are.
 
-### Project Ideas
+## Project Ideas
 
 Given some of my meta-dissatisfaction that I felt on Thursday
 regarding what I've been working on, I thought I might try to list
@@ -141,7 +141,7 @@ And some other random things I want to do (but might not be feasible):
   type inferences
 - Port Boomerang to use the LLVM architecture
 
-### Final Thoughts
+## Final Thoughts
 
 It's frustrating how many of the things that I want to do still have
 what seems like huge mounds of prerequisites in front of them. I want
