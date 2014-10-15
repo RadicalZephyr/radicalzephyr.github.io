@@ -281,4 +281,63 @@ user=> (apply * [3 1])
 3
 user=> (apply / [3 1])
 3
+
+;; More experiments
+user=> (defmacro dotest3 []
+  #_=>   (let [+-res (apply + [3 1])
+  #_=>         --res (apply - [3 1])
+  #_=>         *-res (apply * [3 1])
+  #_=>         div-res (apply / [3 1])]
+  #_=>    `[~+-res ~--res ~*-res ~div-res]))
+3#'user/dotest3
+user=> (dotest3)
+[4 2 3 3]
+
+;; And another
+user=> (defmacro dotest4 []
+  #_=>   (let [args [3 1]
+  #_=>         +-res (apply + args)
+  #_=>         --res (apply - args)
+  #_=>         *-res (apply * args)
+  #_=>         div-res (apply / args)]
+  #_=>    `[~+-res ~--res ~*-res ~div-res]))
+#'user/dotest4
+user=> (dotest4)
+[4 2 3 3]
+
+;; This might be important...
+user=> (defmacro dotest5 [op args]
+  #_=>   (let [res (apply op args)]
+  #_=>    `[~op ~args ~res]))
+#'user/dotest5
+user=> (dotest5 + [3 1 2])
+ArityException Wrong number of args (1) passed to: Symbol  clojure.lang.Compiler.macroexpand1 (Compiler.java:6557)
+
+;; Or not... may just be a problem
+user=> (defmacro dotest5 [op args]
+  #_=>   (let [res (apply op args)]
+  #_=>  `[~args ~res]))
+#'user/dotest5
+user=> (dotest5 + [1 2])
+[[1 2] 2]
+
+;; For sanity checking purposes, since apply can only be used with
+;; functions
+user=> (fn? +)
+true
+user=> (fn? -)
+true
+user=> (fn? *)
+true
+user=> (fn? /)
+true
+
+;; And as Kevin Lynagh helpfully pointed out to me, macros don't
+;; evaluate their arguments...  Time to re-read the section on macros
+;; in Joy of Clojure
+user=> (apply '+ [1 2])
+2
+user=> (apply (eval '+) [1 2])
+3
+
 ```
