@@ -4,7 +4,7 @@
   <title><![CDATA[Zephyrizing]]></title>
   <link href="http://www.zephyrizing.net/atom.xml" rel="self"/>
   <link href="http://www.zephyrizing.net/"/>
-  <updated>2014-10-11T15:14:28-04:00</updated>
+  <updated>2014-10-15T00:12:26-04:00</updated>
   <id>http://www.zephyrizing.net/</id>
   <author>
     <name><![CDATA[Geoff Shannon]]></name>
@@ -12,6 +12,375 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Adventures With Clojure Macros]]></title>
+    <link href="http://www.zephyrizing.net/blog/2014/10/14/adventures-with-clojure-macros/"/>
+    <updated>2014-10-14T19:20:56-04:00</updated>
+    <id>http://www.zephyrizing.net/blog/2014/10/14/adventures-with-clojure-macros</id>
+    <content type="html"><![CDATA[<p>So, this is the second day of my second week of <a href="https://www.hackerschool.com/">Hacker School</a>. I&rsquo;m
+finally starting to feel like I&rsquo;m getting into the
+groove. etc. etc. about stuff I&rsquo;ve been working on SICP, LLVM tut,
+then on and off back to clojure stuff.  (aside about how good it is to
+be able to move between different types of personal projects, gumption
+etc.)</p>
+
+<!--more-->
+
+
+<p>So I tackled <a href="http://mitpress.mit.edu/books/design-concepts-programming-languages">DCPL</a> in Clojure once again. I found two sort of scary
+things. One, although my code was in a git repo, it wasn&rsquo;t pushed to
+Github. Two, there was a big hairy macro that had apparently replaced
+the core of my postfix program, but it wasn&rsquo;t checked in!!! Bad past
+Geoff, very bad, no good software practices&hellip;</p>
+
+<p>Anyhow, so I cleaned things up, and pushed up to Github (it&rsquo;s
+<a href="https://github.com/RadicalZephyr/postfix-clj">here</a> FYI), and then I started playing with that macro
+again. Turns out it pretty much worked. After a bit of mucking around
+I managed to get it going. This quick success buoyed my spirits and I
+thought, why don&rsquo;t I write another&hellip; replacing repetitive code is
+awesome etc.</p>
+
+<p>Then there I wrote some tests, and it turns out that it didn&rsquo;t
+actually work. Repeat for the better part of two hours with testing
+getting slowly better and my implementation getting slowly more
+correct. But, there were lots of little successes throughout, so I
+didn&rsquo;t get discouraged, and the thrill of surmounting the difficulties
+I encountered gave me a warm glow when I overcame them (macro writing
+is hard! I know, because <a href="http://www.paulgraham.com/avg.html">Paul Graham told me so</a> ;).</p>
+
+<p>Anyhow, my success at writing this one macro made me want to write
+another.  And I immediately saw an opportunity!  All of the binary
+math operations for postfix are going to have the exact same form,
+even with the last macro I wrote. etc. etc. about that macro, goes
+pretty smooth.</p>
+
+<p>Anyhow, so that went alright and now there are a bunch of tests I want
+to write, just to validate that my macro is producing reasonable code
+and continues to do so.</p>
+
+<p>But&hellip; these tests are going to be SOOOO similar!!!  Are you thinking
+what I&rsquo;m thinking? Awww, yeah! Time for another macro.</p>
+
+<p>So I start writing a macro to generate some simple tests for me.</p>
+
+<p>All the tests have this general form:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">deftest</span> <span class="nv">subcommand-test</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">testing</span> <span class="s">&quot;Sub command&quot;</span>
+</span><span class='line'>    <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nb">= </span><span class="p">(</span><span class="nf">sub-cmd</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">2</span><span class="p">])</span>
+</span><span class='line'>           <span class="p">[</span><span class="mi">-1</span><span class="p">]))</span>
+</span><span class='line'>    <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nb">= </span><span class="p">(</span><span class="nf">sub-cmd</span> <span class="p">[</span><span class="mi">0</span> <span class="mi">3</span> <span class="mi">2</span><span class="p">])</span>
+</span><span class='line'>           <span class="p">[</span><span class="mi">0</span> <span class="mi">1</span><span class="p">]))</span>
+</span><span class='line'>    <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nf">thrown-with-msg?</span> <span class="nv">clojure.lang.ExceptionInfo</span>
+</span><span class='line'>                          <span class="o">#</span><span class="s">&quot;sub: not enough values on the stack&quot;</span>
+</span><span class='line'>                          <span class="p">(</span><span class="nf">sub-cmd</span> <span class="p">[</span><span class="mi">1</span><span class="p">])))))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So I start my macro working on that basic outline. Over the course of
+another hour or so, I tweak and work it up to be this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defmacro </span><span class="nv">defbinary-op-test</span> <span class="p">[</span><span class="nv">cmd-name</span> <span class="nv">op</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">cmd-name</span> <span class="p">(</span><span class="nb">name </span><span class="nv">cmd-name</span><span class="p">)</span>
+</span><span class='line'>        <span class="nv">fn-name</span>  <span class="p">(</span><span class="nb">symbol </span><span class="p">(</span><span class="nb">str </span><span class="nv">cmd-name</span> <span class="s">&quot;-cmd&quot;</span><span class="p">))</span>
+</span><span class='line'>        <span class="nv">test-args</span> <span class="p">[</span><span class="mi">3</span> <span class="mi">1</span><span class="p">]</span>
+</span><span class='line'>        <span class="nv">op-result</span> <span class="p">(</span><span class="nb">vector </span><span class="p">(</span><span class="nb">apply </span><span class="nv">op</span> <span class="p">(</span><span class="nb">reverse </span><span class="nv">test-args</span><span class="p">)))]</span>
+</span><span class='line'>    <span class="p">(</span><span class="nb">prn </span><span class="s">&quot;test-args:&quot;</span> <span class="nv">test-args</span> <span class="s">&quot;\nop result:&quot;</span> <span class="nv">op-result</span><span class="p">)</span>
+</span><span class='line'>    <span class="o">`</span><span class="p">(</span><span class="nf">testing</span> <span class="o">~</span><span class="p">(</span><span class="nb">str </span><span class="nv">cmd-name</span> <span class="s">&quot; command&quot;</span><span class="p">)</span>
+</span><span class='line'>       <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="o">~</span><span class="ss">&#39;=</span> <span class="p">(</span><span class="o">~</span><span class="nv">fn-name</span> <span class="o">~</span><span class="nv">test-args</span><span class="p">)</span>
+</span><span class='line'>              <span class="o">~</span><span class="nv">op-result</span><span class="p">))</span>
+</span><span class='line'>       <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="o">~</span><span class="ss">&#39;=</span> <span class="p">(</span><span class="o">~</span><span class="nv">fn-name</span> <span class="o">~</span><span class="p">(</span><span class="nb">into </span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="nv">test-args</span><span class="p">))</span>
+</span><span class='line'>              <span class="o">~</span><span class="p">(</span><span class="nb">into </span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="nv">op-result</span><span class="p">)))</span>
+</span><span class='line'>       <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="o">~</span><span class="ss">&#39;thrown-with-msg?</span> <span class="nv">clojure.lang.ExceptionInfo</span>
+</span><span class='line'>                               <span class="p">(</span><span class="nb">re-pattern </span><span class="o">~</span><span class="p">(</span><span class="nb">str </span><span class="nv">cmd-name</span>
+</span><span class='line'>                                                 <span class="s">&quot;: not enough values on the stack&quot;</span><span class="p">))</span>
+</span><span class='line'>                               <span class="p">(</span><span class="o">~</span><span class="nv">fn-name</span> <span class="p">[</span><span class="mi">1</span><span class="p">]))))))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Okay, it looks like a monster.  But it&rsquo;s pretty straightforward.
+Since my binary ops are actually implemented by the core functions
+they represent I&rsquo;m not concerned with the correctness or with testing
+that they work per se. I&rsquo;m more concerned with the vectors going in
+and coming out.  So I figure, I&rsquo;ll use the same numbers for all of
+them, and have the macro generate the result of actually applying the
+given binary operator to the data I&rsquo;ve hardcoded.</p>
+
+<p>That&rsquo;s whats going inside the <code>let</code> with <code>test-args</code> and <code>op-result</code>.</p>
+
+<p>There are a couple of other tricky things I found out. For instance,
+the <code>is</code> testing macro is looking for exactly the symbol <code>=</code> not for
+<code>clojure.core/=</code> or for <code>postfix.core-test/thrown-with-msg?</code>. I know,
+because those are the things <code>defbinary-op-test</code> produced before I put
+in the unquoted-quote <code>~'</code> to stop the automatic namespace resolution,
+as described in the <a href="http://www.manning.com/fogus2/">Joy of Clojure</a>.</p>
+
+<p>But then, after I debugged all of these little problems, I discovered
+that, though my tests were being generated syntactically correctly,
+they were failing!</p>
+
+<p>Now, given the way that I constructed the macro, this didn&rsquo;t seem
+possible.  I mean, I&rsquo;m literally testing that my command, which uses
+the given operator, produces the same thing as that operator.</p>
+
+<p>So I dig in to make sure my macro is doing the right stuff, and pull
+out <code>(clojure.pprint/pprint (macroexpand-1 '(defbinary-op-test add
++)))</code></p>
+
+<p>which produces this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">clojure.test/testing</span>
+</span><span class='line'> <span class="s">&quot;add command&quot;</span>
+</span><span class='line'> <span class="p">(</span><span class="nf">clojure.test/is</span> <span class="p">(</span><span class="nb">= </span><span class="p">(</span><span class="nf">add-cmd</span> <span class="p">[</span><span class="mi">3</span> <span class="mi">1</span><span class="p">])</span> <span class="p">[</span><span class="mi">3</span><span class="p">]))</span>
+</span><span class='line'> <span class="p">(</span><span class="nf">clojure.test/is</span> <span class="p">(</span><span class="nb">= </span><span class="p">(</span><span class="nf">add-cmd</span> <span class="p">[</span><span class="mi">0</span> <span class="mi">3</span> <span class="mi">1</span><span class="p">])</span> <span class="p">[</span><span class="mi">0</span> <span class="mi">3</span><span class="p">]))</span>
+</span><span class='line'> <span class="p">(</span><span class="nf">clojure.test/is</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">thrown-with-msg?</span>
+</span><span class='line'>   <span class="nv">clojure.lang.ExceptionInfo</span>
+</span><span class='line'>   <span class="p">(</span><span class="nf">clojure.core/re-pattern</span> <span class="s">&quot;add: not enough values on the stack&quot;</span><span class="p">)</span>
+</span><span class='line'>   <span class="p">(</span><span class="nf">add-cmd</span> <span class="p">[</span><span class="mi">1</span><span class="p">]))))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Okay, okay everything looks good&hellip; Wait a second&hellip; Did the macro
+produce the result that 3 + 1 is 3?  Okay, let&rsquo;s take a closer look at
+that macro again. Specifically, the two relevant portions of the let:</p>
+
+<pre><code>test-args [3 1]
+op-result (vector (apply op (reverse test-args)))]
+</code></pre>
+
+<p>and the part where <code>op-result</code> is used:</p>
+
+<pre><code>(is (~'= (~fn-name ~test-args)
+       ~op-result))
+</code></pre>
+
+<p>Okay, everthing looks pretty kosher, but to be sure, let&rsquo;s try it out
+in the repl, with the appropriate values filled in.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">op</span> <span class="nv">+</span>
+</span><span class='line'>      <span class="nv">test-args</span> <span class="p">[</span><span class="mi">3</span> <span class="mi">1</span><span class="p">]]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nb">vector </span><span class="p">(</span><span class="nb">apply </span><span class="nv">op</span> <span class="p">(</span><span class="nb">reverse </span><span class="nv">test-args</span><span class="p">))))</span>
+</span><span class='line'><span class="c1">;; =&gt; [4]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That&rsquo;s correct.  But that macroexpand clearly shows a <code>[3]</code> where that
+<code>[4]</code> should be.</p>
+
+<p>Okay, maybe I didn&rsquo;t reproduce something correctly in the REPL.  Let&rsquo;s
+put some print statements in the macro before the expansion</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defmacro </span><span class="nv">defbinary-op-test</span> <span class="p">[</span><span class="nv">cmd-name</span> <span class="nv">op</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">cmd-name</span> <span class="p">(</span><span class="nb">name </span><span class="nv">cmd-name</span><span class="p">)</span>
+</span><span class='line'>        <span class="nv">fn-name</span>  <span class="p">(</span><span class="nb">symbol </span><span class="p">(</span><span class="nb">str </span><span class="nv">cmd-name</span> <span class="s">&quot;-cmd&quot;</span><span class="p">))</span>
+</span><span class='line'>        <span class="nv">test-args</span> <span class="p">[</span><span class="mi">3</span> <span class="mi">1</span><span class="p">]</span>
+</span><span class='line'>        <span class="nv">op-result</span> <span class="p">(</span><span class="nb">vector </span><span class="p">(</span><span class="nb">apply </span><span class="nv">op</span> <span class="p">(</span><span class="nb">reverse </span><span class="nv">test-args</span><span class="p">)))]</span>
+</span><span class='line'>    <span class="p">(</span><span class="nb">prn </span><span class="s">&quot;test-args:&quot;</span> <span class="nv">test-args</span> <span class="s">&quot;op result:&quot;</span> <span class="nv">op-result</span><span class="p">)</span>
+</span><span class='line'>    <span class="o">`</span><span class="p">(</span><span class="nf">testing</span> <span class="o">~</span><span class="p">(</span><span class="nb">str </span><span class="nv">cmd-name</span> <span class="s">&quot; command&quot;</span><span class="p">)</span>
+</span><span class='line'>       <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="o">~</span><span class="ss">&#39;=</span> <span class="p">(</span><span class="o">~</span><span class="nv">fn-name</span> <span class="o">~</span><span class="nv">test-args</span><span class="p">)</span>
+</span><span class='line'>              <span class="o">~</span><span class="nv">op-result</span><span class="p">))</span>
+</span><span class='line'>       <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="o">~</span><span class="ss">&#39;=</span> <span class="p">(</span><span class="o">~</span><span class="nv">fn-name</span> <span class="o">~</span><span class="p">(</span><span class="nb">into </span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="nv">test-args</span><span class="p">))</span>
+</span><span class='line'>              <span class="o">~</span><span class="p">(</span><span class="nb">into </span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="nv">op-result</span><span class="p">)))</span>
+</span><span class='line'>       <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="o">~</span><span class="ss">&#39;thrown-with-msg?</span> <span class="nv">clojure.lang.ExceptionInfo</span>
+</span><span class='line'>                               <span class="p">(</span><span class="nb">re-pattern </span><span class="o">~</span><span class="p">(</span><span class="nb">str </span><span class="nv">cmd-name</span>
+</span><span class='line'>                                                 <span class="s">&quot;: not enough values on the stack&quot;</span><span class="p">))</span>
+</span><span class='line'>                               <span class="p">(</span><span class="o">~</span><span class="nv">fn-name</span> <span class="p">[</span><span class="mi">1</span><span class="p">]))))))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>When I reload the namespace I get this:</p>
+
+<pre><code>:reloading (postfix.core postfix.core-test)
+"test-args:" [3 1] "op result:" [3]
+"test-args:" [3 1] "op result:" [3]
+"test-args:" [3 1] "op result:" [3]
+"test-args:" [3 1] "op result:" [3]
+</code></pre>
+
+<p>Okay, that&rsquo;s clearly what&rsquo;s happening but it&rsquo;s still really strange
+that the <code>[3]</code> is showing up at all. So how about a
+<a href="https://en.wikipedia.org/wiki/Minimal_Working_Example">minimal working example</a> (or rather, not-working in this case)?</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defmacro </span><span class="nv">deftestaddproblem</span> <span class="p">[</span><span class="nv">op</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">test-args</span> <span class="p">[</span><span class="mi">3</span> <span class="mi">1</span><span class="p">]</span>
+</span><span class='line'>        <span class="nv">op-result</span> <span class="p">(</span><span class="nb">vector </span><span class="p">(</span><span class="nb">apply </span><span class="nv">op</span> <span class="p">(</span><span class="nb">reverse </span><span class="nv">test-args</span><span class="p">)))]</span>
+</span><span class='line'>    <span class="o">`</span><span class="p">[</span><span class="o">~</span><span class="nv">test-args</span> <span class="o">~</span><span class="nv">op-result</span><span class="p">]))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then macroexpanding it:</p>
+
+<pre><code>(clojure.pprint/pprint (macroexpand-1 '(deftestaddproblem +)))
+[[3 1] [3]]
+</code></pre>
+
+<p>Just for sanity, lets make sure it&rsquo;s the right version of <code>+</code>:</p>
+
+<pre><code>(clojure.pprint/pprint (macroexpand-1 '(deftestaddproblem clojure.core/+)))
+[[3 1] [3]]
+</code></pre>
+
+<p>What is going on!?!?!?!?! Okay, back to the REPL. This time, a raw
+REPL from <code>lein repl</code> in my home directory.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="nv">user=&gt;</span> <span class="p">(</span><span class="kd">defmacro </span><span class="nv">dotest</span> <span class="p">[</span><span class="nv">op</span><span class="p">]</span>
+</span><span class='line'>  <span class="o">#</span><span class="nv">_=&gt;</span>   <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">test-args</span> <span class="p">[</span><span class="mi">3</span> <span class="mi">1</span><span class="p">]</span>
+</span><span class='line'>  <span class="o">#</span><span class="nv">_=&gt;</span>         <span class="nv">op-result</span> <span class="p">(</span><span class="nb">vector </span><span class="p">(</span><span class="nb">apply </span><span class="nv">op</span> <span class="p">(</span><span class="nb">reverse </span><span class="nv">test-args</span><span class="p">)))]</span>
+</span><span class='line'>  <span class="o">#</span><span class="nv">_=&gt;</span>     <span class="o">`</span><span class="p">[</span><span class="o">~</span><span class="nv">test-args</span> <span class="o">~</span><span class="nv">op-result</span><span class="p">]))</span>
+</span><span class='line'><span class="o">#</span><span class="ss">&#39;user/dotest</span>
+</span><span class='line'><span class="nv">user=&gt;</span> <span class="p">(</span><span class="nf">dotest</span> <span class="nv">+</span><span class="p">)</span>
+</span><span class='line'><span class="p">[[</span><span class="mi">3</span> <span class="mi">1</span><span class="p">]</span> <span class="p">[</span><span class="mi">3</span><span class="p">]]</span>
+</span><span class='line'><span class="nv">user=&gt;</span> <span class="p">(</span><span class="nf">dotest</span> <span class="nv">-</span><span class="p">)</span>
+</span><span class='line'><span class="p">[[</span><span class="mi">3</span> <span class="mi">1</span><span class="p">]</span> <span class="p">[</span><span class="mi">3</span><span class="p">]]</span>
+</span><span class='line'><span class="nv">user=&gt;</span> <span class="p">(</span><span class="nf">dotest</span> <span class="nv">*</span><span class="p">)</span>
+</span><span class='line'><span class="p">[[</span><span class="mi">3</span> <span class="mi">1</span><span class="p">]</span> <span class="p">[</span><span class="mi">3</span><span class="p">]]</span>
+</span><span class='line'><span class="nv">user=&gt;</span> <span class="p">(</span><span class="nf">dotest</span> <span class="nv">/</span><span class="p">)</span>
+</span><span class='line'><span class="p">[[</span><span class="mi">3</span> <span class="mi">1</span><span class="p">]</span> <span class="p">[</span><span class="mi">3</span><span class="p">]]</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">;;; And without using the macro preprocessing</span>
+</span><span class='line'><span class="nv">user=&gt;</span> <span class="p">(</span><span class="nb">vector </span><span class="p">(</span><span class="nb">apply + </span><span class="p">(</span><span class="nb">reverse </span><span class="p">[</span><span class="mi">3</span> <span class="mi">1</span><span class="p">])))</span>
+</span><span class='line'><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+</span><span class='line'><span class="nv">user=&gt;</span> <span class="p">(</span><span class="nb">vector </span><span class="p">(</span><span class="nb">apply - </span><span class="p">(</span><span class="nb">reverse </span><span class="p">[</span><span class="mi">3</span> <span class="mi">1</span><span class="p">])))</span>
+</span><span class='line'><span class="p">[</span><span class="mi">-2</span><span class="p">]</span>
+</span><span class='line'><span class="nv">user=&gt;</span> <span class="p">(</span><span class="nb">vector </span><span class="p">(</span><span class="nb">apply * </span><span class="p">(</span><span class="nb">reverse </span><span class="p">[</span><span class="mi">3</span> <span class="mi">1</span><span class="p">])))</span>
+</span><span class='line'><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+</span><span class='line'><span class="nv">user=&gt;</span> <span class="p">(</span><span class="nb">vector </span><span class="p">(</span><span class="nb">apply / </span><span class="p">(</span><span class="nb">reverse </span><span class="p">[</span><span class="mi">3</span> <span class="mi">1</span><span class="p">])))</span>
+</span><span class='line'><span class="p">[</span><span class="mi">1</span><span class="nv">/3</span><span class="p">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">;; Removing more complexity...</span>
+</span><span class='line'><span class="nv">user=&gt;</span> <span class="p">(</span><span class="kd">defmacro </span><span class="nv">dotest2</span> <span class="p">[</span><span class="nv">op</span><span class="p">]</span>
+</span><span class='line'>  <span class="o">#</span><span class="nv">_=&gt;</span>   <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">test-args</span> <span class="p">[</span><span class="mi">3</span> <span class="mi">1</span><span class="p">]</span>
+</span><span class='line'>  <span class="o">#</span><span class="nv">_=&gt;</span>         <span class="nv">op-result</span> <span class="p">(</span><span class="nb">apply </span><span class="nv">op</span> <span class="nv">test-args</span><span class="p">)]</span>
+</span><span class='line'>  <span class="o">#</span><span class="nv">_=&gt;</span>    <span class="o">`</span><span class="p">[</span><span class="o">~</span><span class="nv">test-args</span> <span class="o">~</span><span class="nv">op-result</span><span class="p">]))</span>
+</span><span class='line'><span class="o">#</span><span class="ss">&#39;user/dotest2</span>
+</span><span class='line'><span class="nv">user=&gt;</span> <span class="p">(</span><span class="nf">dotest2</span> <span class="nv">+</span><span class="p">)</span>
+</span><span class='line'><span class="p">[[</span><span class="mi">3</span> <span class="mi">1</span><span class="p">]</span> <span class="mi">1</span><span class="p">]</span>
+</span><span class='line'><span class="nv">user=&gt;</span> <span class="p">(</span><span class="nf">dotest2</span> <span class="nv">-</span><span class="p">)</span>
+</span><span class='line'><span class="p">[[</span><span class="mi">3</span> <span class="mi">1</span><span class="p">]</span> <span class="mi">1</span><span class="p">]</span>
+</span><span class='line'><span class="nv">user=&gt;</span> <span class="p">(</span><span class="nf">dotest2</span> <span class="nv">*</span><span class="p">)</span>
+</span><span class='line'><span class="p">[[</span><span class="mi">3</span> <span class="mi">1</span><span class="p">]</span> <span class="mi">1</span><span class="p">]</span>
+</span><span class='line'><span class="nv">user=&gt;</span> <span class="p">(</span><span class="nf">dotest2</span> <span class="nv">/</span><span class="p">)</span>
+</span><span class='line'><span class="p">[[</span><span class="mi">3</span> <span class="mi">1</span><span class="p">]</span> <span class="mi">1</span><span class="p">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">;; And again outside of the macro</span>
+</span><span class='line'><span class="nv">user=&gt;</span> <span class="p">(</span><span class="nb">apply + </span><span class="p">[</span><span class="mi">3</span> <span class="mi">1</span><span class="p">])</span>
+</span><span class='line'><span class="mi">4</span>
+</span><span class='line'><span class="nv">user=&gt;</span> <span class="p">(</span><span class="nb">apply - </span><span class="p">[</span><span class="mi">3</span> <span class="mi">1</span><span class="p">])</span>
+</span><span class='line'><span class="mi">2</span>
+</span><span class='line'><span class="nv">user=&gt;</span> <span class="p">(</span><span class="nb">apply * </span><span class="p">[</span><span class="mi">3</span> <span class="mi">1</span><span class="p">])</span>
+</span><span class='line'><span class="mi">3</span>
+</span><span class='line'><span class="nv">user=&gt;</span> <span class="p">(</span><span class="nb">apply / </span><span class="p">[</span><span class="mi">3</span> <span class="mi">1</span><span class="p">])</span>
+</span><span class='line'><span class="mi">3</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Hacker School: Week 1 Review]]></title>
