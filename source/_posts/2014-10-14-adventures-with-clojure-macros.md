@@ -17,25 +17,32 @@ etc.)
 
 <!--more-->
 
-So I tackled DCPL in Clojure once again. I found two sort of scary
+So I tackled [DCPL] in Clojure once again. I found two sort of scary
 things. One, although my code was in a git repo, it wasn't pushed to
 Github. Two, there was a big hairy macro that had apparently replaced
 the core of my postfix program, but it wasn't checked in!!! Bad past
 Geoff, very bad, no good software practices...
 
+[DCPL]: http://mitpress.mit.edu/books/design-concepts-programming-languages
 
-Anyhow, so I cleaned things up, and pushed up top Github (it's here
-FYI), and then I started playing with that macro again. Turns out it
-pretty much worked. After a bit of mucking around I managed to get it
-going. This quick success buoyed my spirits and I thought, why don't I
-write another... replacing commands etc. etc.
+Anyhow, so I cleaned things up, and pushed up to Github (it's
+[here][postfix-code] FYI), and then I started playing with that macro
+again. Turns out it pretty much worked. After a bit of mucking around
+I managed to get it going. This quick success buoyed my spirits and I
+thought, why don't I write another... replacing repetitive code is
+awesome etc.
 
+[postfix-code]: https://github.com/RadicalZephyr/postfix-clj
 
-Then there were more tests to be written, and it turns out that
-it didn't actually work. Repeat for the better part of two hours. But,
-there was lots of little success in there, so I felt not discouraged,
-but actually encouraged by the difficulty's I encountered (macro
-writing is hard! I know, because [Paul Graham told me so][pgmacro] ;).
+Then there I wrote some tests, and it turns out that it didn't
+actually work. Repeat for the better part of two hours with testing
+getting slowly better and my implementation getting slowly more
+correct. But, there were lots of little successes throughout, so I
+didn't get discouraged, and the thrill of surmounting the difficulties
+I encountered gave me a warm glow when I overcame them (macro writing
+is hard! I know, because [Paul Graham told me so][pgmacro] ;).
+
+[pgmacro]: http://www.paulgraham.com/avg.html
 
 Anyhow, my success at writing this one macro made me want to write
 another.  And I immediately saw an opportunity!  All of the binary
@@ -54,7 +61,7 @@ So I start writing a macro to generate some simple tests for me.
 
 All the tests have this general form:
 
-```
+``` clojure
 (deftest subcommand-test
   (testing "Sub command"
     (is (= (sub-cmd [1 2])
@@ -89,24 +96,25 @@ another hour or so, I tweak and work it up to be this:
                                (~fn-name [1]))))))
 ```
 
-
 Okay, it looks like a monster.  But it's pretty straightforward.
 Since my binary ops are actually implemented by the core functions
 they represent I'm not concerned with the correctness or with testing
-that they work per se. I'm more concerned with the command producing
-the right output from a given input in terms of the vectors going in
+that they work per se. I'm more concerned with the vectors going in
 and coming out.  So I figure, I'll use the same numbers for all of
 them, and have the macro generate the result of actually applying the
 given binary operator to the data I've hardcoded.
 
-That's whats going inside the let with test-args and op-result.
+That's whats going inside the `let` with `test-args` and `op-result`.
 
 There are a couple of other tricky things I found out. For instance,
 the `is` testing macro is looking for exactly the symbol `=` not for
 `clojure.core/=` or for `postfix.core-test/thrown-with-msg?`. I know,
 because those are the things `defbinary-op-test` produced before I put
-in the unquoted-quote `~'` as described in the
-[Joy of Clojure][awesomebook].
+in the unquoted-quote `~'` to stop the automatic namespace resolution,
+as described in the [Joy of Clojure][awesomebook].
+
+[awesomebook]: http://www.manning.com/fogus2/
+
 
 But then, after I debugged all of these little problems, I discovered
 that, though my tests were being generated syntactically correctly,
@@ -193,7 +201,11 @@ When I reload the namespace I get this:
     "test-args:" [3 1] "op result:" [3]
 
 Okay, that's clearly what's happening but it's still really strange
-that the `[3]` is showing up at all. So how about an [MWE]?
+that the `[3]` is showing up at all. So how about a
+[minimal working example][MWE] (or rather, not-working in this case)?
+
+[MWE]: https://en.wikipedia.org/wiki/Minimal_Working_Example
+
 
 ``` clojure
 (defmacro deftestaddproblem [op]
