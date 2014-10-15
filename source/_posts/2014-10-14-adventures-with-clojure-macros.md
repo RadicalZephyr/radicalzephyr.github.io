@@ -229,4 +229,56 @@ Just for sanity, lets make sure it's the right version of `+`:
     [[3 1] [3]]
 
 
-What is going on!?!?!?!?!
+What is going on!?!?!?!?! Okay, back to the REPL. This time, a raw
+REPL from `lein repl` in my home directory.
+
+``` clojure
+user=> (defmacro dotest [op]
+  #_=>   (let [test-args [3 1]
+  #_=>         op-result (vector (apply op (reverse test-args)))]
+  #_=>     `[~test-args ~op-result]))
+#'user/dotest
+user=> (dotest +)
+[[3 1] [3]]
+user=> (dotest -)
+[[3 1] [3]]
+user=> (dotest *)
+[[3 1] [3]]
+user=> (dotest /)
+[[3 1] [3]]
+
+;;; And without using the macro preprocessing
+user=> (vector (apply + (reverse [3 1])))
+[4]
+user=> (vector (apply - (reverse [3 1])))
+[-2]
+user=> (vector (apply * (reverse [3 1])))
+[3]
+user=> (vector (apply / (reverse [3 1])))
+[1/3]
+
+;; Removing more complexity...
+user=> (defmacro dotest2 [op]
+  #_=>   (let [test-args [3 1]
+  #_=>         op-result (apply op test-args)]
+  #_=>    `[~test-args ~op-result]))
+#'user/dotest2
+user=> (dotest2 +)
+[[3 1] 1]
+user=> (dotest2 -)
+[[3 1] 1]
+user=> (dotest2 *)
+[[3 1] 1]
+user=> (dotest2 /)
+[[3 1] 1]
+
+;; And again outside of the macro
+user=> (apply + [3 1])
+4
+user=> (apply - [3 1])
+2
+user=> (apply * [3 1])
+3
+user=> (apply / [3 1])
+3
+```
