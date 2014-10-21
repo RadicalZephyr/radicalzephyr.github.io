@@ -405,6 +405,64 @@ REPL from <code>lein repl</code> in my home directory.</p>
 <span class='line-number'>46</span>
 <span class='line-number'>47</span>
 <span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+<span class='line-number'>104</span>
+<span class='line-number'>105</span>
+<span class='line-number'>106</span>
 </pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="nv">user=&gt;</span> <span class="p">(</span><span class="kd">defmacro </span><span class="nv">dotest</span> <span class="p">[</span><span class="nv">op</span><span class="p">]</span>
 </span><span class='line'>  <span class="o">#</span><span class="nv">_=&gt;</span>   <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">test-args</span> <span class="p">[</span><span class="mi">3</span> <span class="mi">1</span><span class="p">]</span>
 </span><span class='line'>  <span class="o">#</span><span class="nv">_=&gt;</span>         <span class="nv">op-result</span> <span class="p">(</span><span class="nb">vector </span><span class="p">(</span><span class="nb">apply </span><span class="nv">op</span> <span class="p">(</span><span class="nb">reverse </span><span class="nv">test-args</span><span class="p">)))]</span>
@@ -452,6 +510,64 @@ REPL from <code>lein repl</code> in my home directory.</p>
 </span><span class='line'><span class="nv">user=&gt;</span> <span class="p">(</span><span class="nb">apply * </span><span class="p">[</span><span class="mi">3</span> <span class="mi">1</span><span class="p">])</span>
 </span><span class='line'><span class="mi">3</span>
 </span><span class='line'><span class="nv">user=&gt;</span> <span class="p">(</span><span class="nb">apply / </span><span class="p">[</span><span class="mi">3</span> <span class="mi">1</span><span class="p">])</span>
+</span><span class='line'><span class="mi">3</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">;; More experiments</span>
+</span><span class='line'><span class="nv">user=&gt;</span> <span class="p">(</span><span class="kd">defmacro </span><span class="nv">dotest3</span> <span class="p">[]</span>
+</span><span class='line'>  <span class="o">#</span><span class="nv">_=&gt;</span>   <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">+-res</span> <span class="p">(</span><span class="nb">apply + </span><span class="p">[</span><span class="mi">3</span> <span class="mi">1</span><span class="p">])</span>
+</span><span class='line'>  <span class="o">#</span><span class="nv">_=&gt;</span>         <span class="nv">--res</span> <span class="p">(</span><span class="nb">apply - </span><span class="p">[</span><span class="mi">3</span> <span class="mi">1</span><span class="p">])</span>
+</span><span class='line'>  <span class="o">#</span><span class="nv">_=&gt;</span>         <span class="nv">*-res</span> <span class="p">(</span><span class="nb">apply * </span><span class="p">[</span><span class="mi">3</span> <span class="mi">1</span><span class="p">])</span>
+</span><span class='line'>  <span class="o">#</span><span class="nv">_=&gt;</span>         <span class="nv">div-res</span> <span class="p">(</span><span class="nb">apply / </span><span class="p">[</span><span class="mi">3</span> <span class="mi">1</span><span class="p">])]</span>
+</span><span class='line'>  <span class="o">#</span><span class="nv">_=&gt;</span>    <span class="o">`</span><span class="p">[</span><span class="o">~</span><span class="nv">+-res</span> <span class="o">~</span><span class="nv">--res</span> <span class="o">~</span><span class="nv">*-res</span> <span class="o">~</span><span class="nv">div-res</span><span class="p">]))</span>
+</span><span class='line'><span class="mi">3</span><span class="o">#</span><span class="ss">&#39;user/dotest3</span>
+</span><span class='line'><span class="nv">user=&gt;</span> <span class="p">(</span><span class="nf">dotest3</span><span class="p">)</span>
+</span><span class='line'><span class="p">[</span><span class="mi">4</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">3</span><span class="p">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">;; And another</span>
+</span><span class='line'><span class="nv">user=&gt;</span> <span class="p">(</span><span class="kd">defmacro </span><span class="nv">dotest4</span> <span class="p">[]</span>
+</span><span class='line'>  <span class="o">#</span><span class="nv">_=&gt;</span>   <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">args</span> <span class="p">[</span><span class="mi">3</span> <span class="mi">1</span><span class="p">]</span>
+</span><span class='line'>  <span class="o">#</span><span class="nv">_=&gt;</span>         <span class="nv">+-res</span> <span class="p">(</span><span class="nb">apply + </span><span class="nv">args</span><span class="p">)</span>
+</span><span class='line'>  <span class="o">#</span><span class="nv">_=&gt;</span>         <span class="nv">--res</span> <span class="p">(</span><span class="nb">apply - </span><span class="nv">args</span><span class="p">)</span>
+</span><span class='line'>  <span class="o">#</span><span class="nv">_=&gt;</span>         <span class="nv">*-res</span> <span class="p">(</span><span class="nb">apply * </span><span class="nv">args</span><span class="p">)</span>
+</span><span class='line'>  <span class="o">#</span><span class="nv">_=&gt;</span>         <span class="nv">div-res</span> <span class="p">(</span><span class="nb">apply / </span><span class="nv">args</span><span class="p">)]</span>
+</span><span class='line'>  <span class="o">#</span><span class="nv">_=&gt;</span>    <span class="o">`</span><span class="p">[</span><span class="o">~</span><span class="nv">+-res</span> <span class="o">~</span><span class="nv">--res</span> <span class="o">~</span><span class="nv">*-res</span> <span class="o">~</span><span class="nv">div-res</span><span class="p">]))</span>
+</span><span class='line'><span class="o">#</span><span class="ss">&#39;user/dotest4</span>
+</span><span class='line'><span class="nv">user=&gt;</span> <span class="p">(</span><span class="nf">dotest4</span><span class="p">)</span>
+</span><span class='line'><span class="p">[</span><span class="mi">4</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">3</span><span class="p">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">;; This might be important...</span>
+</span><span class='line'><span class="nv">user=&gt;</span> <span class="p">(</span><span class="kd">defmacro </span><span class="nv">dotest5</span> <span class="p">[</span><span class="nv">op</span> <span class="nv">args</span><span class="p">]</span>
+</span><span class='line'>  <span class="o">#</span><span class="nv">_=&gt;</span>   <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">res</span> <span class="p">(</span><span class="nb">apply </span><span class="nv">op</span> <span class="nv">args</span><span class="p">)]</span>
+</span><span class='line'>  <span class="o">#</span><span class="nv">_=&gt;</span>    <span class="o">`</span><span class="p">[</span><span class="o">~</span><span class="nv">op</span> <span class="o">~</span><span class="nv">args</span> <span class="o">~</span><span class="nv">res</span><span class="p">]))</span>
+</span><span class='line'><span class="o">#</span><span class="ss">&#39;user/dotest5</span>
+</span><span class='line'><span class="nv">user=&gt;</span> <span class="p">(</span><span class="nf">dotest5</span> <span class="nb">+ </span><span class="p">[</span><span class="mi">3</span> <span class="mi">1</span> <span class="mi">2</span><span class="p">])</span>
+</span><span class='line'><span class="nv">ArityException</span> <span class="nv">Wrong</span> <span class="nv">number</span> <span class="nv">of</span> <span class="nv">args</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="nv">passed</span> <span class="nv">to</span><span class="err">:</span> <span class="nv">Symbol</span>  <span class="nv">clojure.lang.Compiler.macroexpand1</span> <span class="p">(</span><span class="nf">Compiler.java</span><span class="ss">:6557</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">;; Or not... may just be a problem</span>
+</span><span class='line'><span class="nv">user=&gt;</span> <span class="p">(</span><span class="kd">defmacro </span><span class="nv">dotest5</span> <span class="p">[</span><span class="nv">op</span> <span class="nv">args</span><span class="p">]</span>
+</span><span class='line'>  <span class="o">#</span><span class="nv">_=&gt;</span>   <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">res</span> <span class="p">(</span><span class="nb">apply </span><span class="nv">op</span> <span class="nv">args</span><span class="p">)]</span>
+</span><span class='line'>  <span class="o">#</span><span class="nv">_=&gt;</span>  <span class="o">`</span><span class="p">[</span><span class="o">~</span><span class="nv">args</span> <span class="o">~</span><span class="nv">res</span><span class="p">]))</span>
+</span><span class='line'><span class="o">#</span><span class="ss">&#39;user/dotest5</span>
+</span><span class='line'><span class="nv">user=&gt;</span> <span class="p">(</span><span class="nf">dotest5</span> <span class="nb">+ </span><span class="p">[</span><span class="mi">1</span> <span class="mi">2</span><span class="p">])</span>
+</span><span class='line'><span class="p">[[</span><span class="mi">1</span> <span class="mi">2</span><span class="p">]</span> <span class="mi">2</span><span class="p">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">;; For sanity checking purposes, since apply can only be used with</span>
+</span><span class='line'><span class="c1">;; functions</span>
+</span><span class='line'><span class="nv">user=&gt;</span> <span class="p">(</span><span class="nf">fn?</span> <span class="nv">+</span><span class="p">)</span>
+</span><span class='line'><span class="nv">true</span>
+</span><span class='line'><span class="nv">user=&gt;</span> <span class="p">(</span><span class="nf">fn?</span> <span class="nv">-</span><span class="p">)</span>
+</span><span class='line'><span class="nv">true</span>
+</span><span class='line'><span class="nv">user=&gt;</span> <span class="p">(</span><span class="nf">fn?</span> <span class="nv">*</span><span class="p">)</span>
+</span><span class='line'><span class="nv">true</span>
+</span><span class='line'><span class="nv">user=&gt;</span> <span class="p">(</span><span class="nf">fn?</span> <span class="nv">/</span><span class="p">)</span>
+</span><span class='line'><span class="nv">true</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">;; And as Kevin Lynagh helpfully pointed out to me, macros don&#39;t</span>
+</span><span class='line'><span class="c1">;; evaluate their arguments...  Time to re-read the section on macros</span>
+</span><span class='line'><span class="c1">;; in Joy of Clojure</span>
+</span><span class='line'><span class="nv">user=&gt;</span> <span class="p">(</span><span class="nb">apply </span><span class="ss">&#39;+</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">2</span><span class="p">])</span>
+</span><span class='line'><span class="mi">2</span>
+</span><span class='line'><span class="nv">user=&gt;</span> <span class="p">(</span><span class="nb">apply </span><span class="p">(</span><span class="nb">eval </span><span class="ss">&#39;+</span><span class="p">)</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">2</span><span class="p">])</span>
 </span><span class='line'><span class="mi">3</span>
 </span></code></pre></td></tr></table></div></figure>
 
