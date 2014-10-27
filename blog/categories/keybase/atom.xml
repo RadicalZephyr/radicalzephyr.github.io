@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Keybase | Zephyrizing]]></title>
   <link href="http://www.zephyrizing.net/blog/categories/keybase/atom.xml" rel="self"/>
   <link href="http://www.zephyrizing.net/"/>
-  <updated>2014-10-21T13:20:16-04:00</updated>
+  <updated>2014-10-27T00:41:58-04:00</updated>
   <id>http://www.zephyrizing.net/</id>
   <author>
     <name><![CDATA[Geoff Shannon]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Keybase Hacker News Q&A]]></title>
-    <link href="http://www.zephyrizing.net/blog/2014/06/12/keybase-hackernews-q&a/"/>
+    <link href="http://www.zephyrizing.net/blog/2014/06/12/keybase-hackernews-q&amp;a/"/>
     <updated>2014-06-12T00:00:00-04:00</updated>
-    <id>http://www.zephyrizing.net/blog/2014/06/12/keybase-hackernews-q&a</id>
+    <id>http://www.zephyrizing.net/blog/2014/06/12/keybase-hackernews-q&amp;a</id>
     <content type="html"><![CDATA[I started using [Keybase] sometime back in April. I've been interested
 in doing crypto stuff for a long time, starting with using an SSH
 keypair instead of a password to access the WWU CS department's

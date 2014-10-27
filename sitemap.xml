@@ -3,6 +3,14 @@
   
   
   <url>
+    <loc>http://www.zephyrizing.net/blog/2014/10/26/on-the-importance-of-distinguishing-between-stable-and-development-documentation/</loc>
+    
+    <lastmod>2014-10-26T23:10:04-04:00</lastmod>
+    
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
     <loc>http://www.zephyrizing.net/blog/2014/10/14/adventures-with-clojure-macros/</loc>
     
     <lastmod>2014-10-14T19:20:56-04:00</lastmod>
@@ -27,7 +35,7 @@
   </url>
   
   <url>
-    <loc>http://www.zephyrizing.net/blog/2014/06/12/keybase-hackernews-q&a/</loc>
+    <loc>http://www.zephyrizing.net/blog/2014/06/12/keybase-hackernews-q&amp;a/</loc>
     
     <lastmod>2014-06-12T00:00:00-04:00</lastmod>
     
@@ -35,7 +43,7 @@
   </url>
   
   <url>
-    <loc>http://www.zephyrizing.net/blog/2014/05/22/s-&-e-part-one:-the-single-story/</loc>
+    <loc>http://www.zephyrizing.net/blog/2014/05/22/s-&amp;-e-part-one:-the-single-story/</loc>
     
     <lastmod>2014-05-22T23:00:00-04:00</lastmod>
     
@@ -77,14 +85,14 @@
   
   <url>
     <loc>http://www.zephyrizing.net/blog/archives/</loc>
-    <lastmod>2014-10-21T13:20:16-04:00</lastmod>
+    <lastmod>2014-10-27T00:41:58-04:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
     <loc>http://www.zephyrizing.net/</loc>
-    <lastmod>2014-10-21T13:20:16-04:00</lastmod>
+    <lastmod>2014-10-27T00:41:58-04:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
