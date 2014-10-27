@@ -14,3 +14,29 @@ context, maybe it's time to dive in a bit and see what's really the issue.
 
 [stable]: {% post_url 2014-10-07-dot-dot-dot-and-this-is-why-master-should-be-stable %}
 <!--more-->
+
+As the title hints, this issue is really more about being able to
+match the documentation of a project to a particular version. The
+problem with Flaskr was that when you went searching for the
+documentation, you most easily found the documentation for the
+currently in development branch. This isn't a problem when no major
+changes have been made, but when there are major changes this becomes
+an issue.
+
+[[Talk about LLVM issues being similar]]
+
+This problem is sort of ironic as the majority of open source software
+out there (most definitely including all of my projects :) as
+little-to-no documentation, and/or what there is, is hopelessly
+out-of-date. In contrast, this issue with Flaskr and LLVM is actually
+a case of the most-available documentation being TOO up-to-date.
+
+[[Talk about projects that get it right - Django, Read the Docs]]
+
+[[Related issue: how do you fix this?]]
+
+The people who notice these kinds of issues are typically people just
+wanting to use the project, not the people developing it. This is
+probelmatic though because the noticer's, by not being in the project
+probably have no opportunity to help fix this since often it involves
+things like, access to the servers etc.
