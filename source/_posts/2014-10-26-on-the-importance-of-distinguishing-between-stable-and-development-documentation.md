@@ -23,13 +23,26 @@ currently in development branch. This isn't a problem when no major
 changes have been made, but when there are major changes this becomes
 an issue.
 
-[[Talk about LLVM issues being similar]]
+Part of the reason that I'm writing this blog post is because last
+week, while I was going through the [LLVM] project's [tutorial] I ran
+into the exact same issue! But I didn't spot that this version
+mismatch was the issue until after I had found another workaround.
+
+[LLVM]: http://llvm.org
+[tutorial]: http://llvm.org/docs/tutorial/index.html
+
+Not to belabor the point, but basically the LLVM tutorial linked above
+is actually the version of the tutorial written for the upcoming 3.6
+release. Since there are several breaking changes to the API occurring
+in this release, when you have installed LLVM 3.5 the tutorial appears
+to be rather broken.
 
 This problem is sort of ironic as the majority of open source software
 out there (most definitely including all of my projects :) as
 little-to-no documentation, and/or what there is, is hopelessly
-out-of-date. In contrast, this issue with Flaskr and LLVM is actually
-a case of the most-available documentation being TOO up-to-date.
+out-of-date. In contrast, the issue that I had with both Flaskr and
+LLVM was actually a case of the most easily available documentation
+being TOO up-to-date.
 
 [[Talk about projects that get it right - Django, Read the Docs]]
 
