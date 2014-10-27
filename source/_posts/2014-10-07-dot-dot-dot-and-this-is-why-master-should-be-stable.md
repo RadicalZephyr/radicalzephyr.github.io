@@ -35,7 +35,7 @@ on the [Flaskr doc page][flaskr-github] on Github, a natural place to
 look when the ["actual" docs][Flaskr] don't mention anything about how
 to install or setup the damn thing.
 
-WWe spent nearly two and a half hours searching for the mythical
+We spent nearly two and a half hours searching for the mythical
 `flask` binary, to no avail.  Finally, after I inadvertently ran
 aacross this [flask issue][issue], it dawned on me that we might be
 having the same problem.  Well, that's not quite true.  In reality, I
@@ -44,7 +44,7 @@ could think of to get flaskr to run `python flaskr.py`.  Low and
 behold, it worked!!  Then, in retrospect, having seen that issue
 describing the disconnect between the docs for flaskr in the flask
 `master` branch and what the latest stable version was, I went and
-looked at the [last stable release docs][laststable] for flaskr, and
+looked at the [last stable release docs][laststable] for Flaskr, and
 there it was. Simple instructions to do the simple, straightforward
 thing.
 
