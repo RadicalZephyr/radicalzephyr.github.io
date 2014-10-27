@@ -106,8 +106,29 @@ the easiest (or only!) documentation to find for your project.
 
 ### How do we fix it?
 
-The people who notice these kinds of issues are typically people just
-wanting to use the project, not the people developing it. This is
-problematic though because the noticer's, by not being in the project
-probably have no opportunity to help fix this since often it involves
-things like, access to the servers etc.
+The ideal situation is for your documentation to be structured like
+Django's: multiple versions available, notifications when viewing the
+dev version. The good news is that this is much easier to achieve
+thany you might expect. [Read The Docs] makes it trivial to have this
+kind of setup for your open source project. In fact, Django actually
+uses Read The Docs for their own documentation. I highly recommend
+checking out their page and seeing just how easy it is to set up for
+your own projects. Of course, once you have this awesome system the
+only issue is actually writing all the awesome documentation to
+populate it...
+
+[Read The Docs]: https://readthedocs.org/
+
+### Other issues
+
+A primary problem with the Docs Mismatch issue is that the people who
+notice it are typically people just wanting to use the project, not
+the people developing it. This is especially problematic because these
+people are also the most easily discouraged from using a project.
+
+Another problem is that often - especially in older projects - fixing
+the Docs Mismatch issue will require either access to a server, or
+changes in a release deployment process or something similar. None of
+these things are possible for a beginner in a project to do. This
+means that the people the most motivated to fix the issue, are the
+least able to do anything about it.
