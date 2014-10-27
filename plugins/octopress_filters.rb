@@ -1,3 +1,4 @@
+# coding: utf-8
 #custom filters for Octopress
 require './plugins/backtick_code_block'
 require 'octopress-hooks'
@@ -139,4 +140,3 @@ module OctopressLiquidFilters
 
 end
 Liquid::Template.register_filter OctopressLiquidFilters
-
