@@ -45,6 +45,8 @@ out-of-date. In contrast, the issue that I had with both Flaskr and
 LLVM was actually a case of the most easily available documentation
 being TOO up-to-date.
 
+### How can we do better?
+
 Let's contrast these experiences with a project that gets it right:
 [Django]. First off, I just want to praise the Django project for
 their excellent documentation in general. There is a lot of it, and it
@@ -80,10 +82,32 @@ right hand corner that shows the current version of the docs that
 you're looking at, and has links to other recent versions of the
 documentation.  How cool is that!
 
-[[Related issue: how do you fix this?]]
+If you look at the links in that little floated element, you'll notice
+a non-numbered version is available `dev`. This is the documentation
+for the [current development head][djangodevdoc]. More importantly,
+notice that this is the equivalent of the documentation that was
+easiest for me to find when dealing with both LLVM and Flaskr. But
+with Django I had to specifically go looking for it. Why? Because most
+people don't want to read the docs for the development head.  And if
+they do, they know it!
+
+[djangdevdoc]: https://docs.djangoproject.com/en/dev/
+
+Django gets one more thing really right here. When you go to the dev
+docs page, they automatically add a float at the top of the screen, in
+an eye-catching color that effectively says: "These are the dev
+docs. Are you sure you want to be reading them? They're probably
+different."
+
+This last feature is really the key to avoiding the Docs Mismatch
+problem. The development docs are fairly rarely what people want to be
+reading when they first pick up a new project. So they shouldn't be
+the easiest (or only!) documentation to find for your project.
+
+### How do we fix it?
 
 The people who notice these kinds of issues are typically people just
 wanting to use the project, not the people developing it. This is
-probelmatic though because the noticer's, by not being in the project
+problematic though because the noticer's, by not being in the project
 probably have no opportunity to help fix this since often it involves
 things like, access to the servers etc.
