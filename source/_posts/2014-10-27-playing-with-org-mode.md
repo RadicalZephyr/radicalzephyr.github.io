@@ -118,4 +118,9 @@ tail -n+4 hello.org | $emacs --batch --eval "(progn (require 'org) (progn (condi
 ```
 
 Now the only thing that's left is to write a Jekyll plugin to do this
-invocation to produce the final output.
+invocation to produce the final output. This is what I came up with as
+a first attempt. Of course, it doesn't actually work for me, because
+of the dumb location of my emacs executable... Oh well, that's for
+tomorrow.
+
+{% include_code "Org Converter" lang:ruby ../plugins/org_converter.rb %}
