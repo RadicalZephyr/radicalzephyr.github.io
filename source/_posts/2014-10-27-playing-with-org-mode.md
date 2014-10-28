@@ -14,7 +14,6 @@ of Clojurescript written by those smart guys at
 
 [org-html-slideshow]: https://github.com/relevance/org-html-slideshow
 
-
 Basically, it lets you take an outline/document written in [Org-mode]
 (another really cool piece of software!) and put some small
 annotations in it to delimit your "slides" and then you have a
@@ -24,6 +23,8 @@ harder to explain in words than it is to observe, so here's the
 [org-mode document](/demos/example.org) that produced that page.
 
 [Org-mode]: http://orgmode.org/
+
+<!--more-->
 
 Now that is pretty neat. However, the workflow needed to create one of
 these is sort of a pain. From the documentation on the project page,
@@ -61,9 +62,35 @@ to write my presentations in Org-mode so I can utilize it.
 
 [Waldemar Quevedo]: https://github.com/wallyqs
 
+I won't attempt to explain Wally's setup, but he's got some [pretty]
+[cool] [stuff] going on. In essence though, he uses a ruby gem to
+parse the org syntax and transform it into markdown. As of this
+writing though, it doesn't support the tags feature that
+org-html-slideshow depends on for it's functionality.
+
+[pretty]: https://github.com/wallyqs/org-ruby
+[cool]: https://github.com/eggcaker/jekyll-org
+[stuff]: https://github.com/punchagan/org-hyde
+
+While showing Wally the slideshow thing got him excited to try and
+integrate it into his workflow, I started poking around and looking at
+how to integrate it into my site. The solution I decided on was to
+make `.org` files a generic member of the Jekyll source files. This
+means that they'll still use a YAML frontmatter to mark that they need
+to be transformed. This means that I need some way to transform a body
+of org text into just the html content that it represents. Normally
+when you generate an html page from org-mode, you get a complete html
+page, `html`, `body` tags and all. What I needed was a way to invoke
+the org->html transformation using the Elisp code in org-mode from
+Jekyll.
+
+With Wally's help, I was able to get this far towards that goal. This
+is the elisp that will continuously read from the minibuffer until an
+error occurs, and then transform that text using the org->html backend,
+and finally print out the generated html.
 
 
-``` elisp
+``` common-lisp
 (progn
   (require 'org)
   (progn
@@ -78,7 +105,17 @@ to write my presentations in Org-mode so I can utilize it.
        (message "%s" (buffer-string))))
 ```
 
+And this is how you invoke the transformation of a file from org to
+html. The `$emacs` is because I use [Emacs for Mac OSX] which means
+that my emacs executable is buried inside of a mac `.app` file/folder
+thing. Pipe a file into this script and if it's valid org syntax,
+you'll get the corresponding html.
 
-```
+[Emacs for Mac OSX]: http://emacsformacosx.com/
+
+``` bash
 tail -n+4 hello.org | $emacs --batch --eval "(progn (require 'org) (progn (condition-case nil (while t (insert (read-string \"\") \"\\n\")) (error nil)) (set-buffer (org-export-to-buffer 'html \"*Org HTML Export*\" nil nil nil t nil (lambda () t))) (message \"%s\" (buffer-string))))"
 ```
+
+Now the only thing that's left is to write a Jekyll plugin to do this
+invocation to produce the final output.
