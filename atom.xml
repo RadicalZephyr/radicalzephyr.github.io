@@ -4,7 +4,7 @@
   <title><![CDATA[Zephyrizing]]></title>
   <link href="http://www.zephyrizing.net/atom.xml" rel="self"/>
   <link href="http://www.zephyrizing.net/"/>
-  <updated>2014-10-28T01:03:34-04:00</updated>
+  <updated>2014-10-28T01:08:49-04:00</updated>
   <id>http://www.zephyrizing.net/</id>
   <author>
     <name><![CDATA[Geoff Shannon]]></name>
@@ -1026,9 +1026,9 @@ thing.</p>
   
   <entry>
     <title type="html"><![CDATA[Keybase Hacker News Q&A]]></title>
-    <link href="http://www.zephyrizing.net/blog/2014/06/12/keybase-hackernews-q&amp;a/"/>
+    <link href="http://www.zephyrizing.net/blog/2014/06/12/keybase-hackernews-q-and-a/"/>
     <updated>2014-06-12T00:00:00-04:00</updated>
-    <id>http://www.zephyrizing.net/blog/2014/06/12/keybase-hackernews-q&amp;a</id>
+    <id>http://www.zephyrizing.net/blog/2014/06/12/keybase-hackernews-q-and-a</id>
     <content type="html"><![CDATA[<p>I started using <a href="https://keybase.io">Keybase</a> sometime back in April. I&rsquo;ve been interested
 in doing crypto stuff for a long time, starting with using an SSH
 keypair instead of a password to access the WWU CS department&rsquo;s
@@ -1637,9 +1637,9 @@ users.</p></blockquote>
   
   <entry>
     <title type="html"><![CDATA[S & E Part One: The Single Story]]></title>
-    <link href="http://www.zephyrizing.net/blog/2014/05/22/s-&amp;-e-part-one:-the-single-story/"/>
+    <link href="http://www.zephyrizing.net/blog/2014/05/22/s-and-e-part-one:-the-single-story/"/>
     <updated>2014-05-22T23:00:00-04:00</updated>
-    <id>http://www.zephyrizing.net/blog/2014/05/22/s-&amp;-e-part-one:-the-single-story</id>
+    <id>http://www.zephyrizing.net/blog/2014/05/22/s-and-e-part-one:-the-single-story</id>
     <content type="html"><![CDATA[<h2>Beginnings</h2>
 
 <p>I have a story about myself and education.  That story goes like this.
