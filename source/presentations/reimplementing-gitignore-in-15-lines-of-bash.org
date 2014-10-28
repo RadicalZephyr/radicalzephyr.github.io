@@ -153,6 +153,6 @@ of which we are interested in.
 This is a dummy header that prevents the last one from being missed as
 a slide.
 
-#+OPTIONS: num:nil toc:nil tags:t
+#+OPTIONS: H:4 num:nil toc:nil tags:t
 
 #+TAGS: slide(s) note(n)
