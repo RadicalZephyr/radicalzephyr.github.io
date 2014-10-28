@@ -54,6 +54,8 @@ git repository printing out only files that have *not* been ignored.
 
 This seems like a useful way to break up the problem.
 
+** The Implementation
+
 #+begin_src
 {
     find . -type f -o -type d -name .git -prune
@@ -69,6 +71,44 @@ This seems like a useful way to break up the problem.
 
 } | sort | uniq -u | cut -c3-
 #+end_src
+
+** Wat?                                                               :slide:
+
+** The more readable version                                          :slide:
+
+#+begin_src
+{
+    # Print the list of all files, but don't recurse into the .git folder
+    find . -type f -o -type d -name .git -prune
+
+    # Print out all .hignore files a second time so we ignore them
+    find . -type f -name .hignore
+
+    # Concatenate a listing of all .hignore files, with the path to the
+    # ignore file it came from prefixed to each pattern
+    {
+        # Process all directories with a .hignore file
+        find -X . -type f -name .hignore | xargs -n1 dirname |
+        while read dir
+        do
+            # Prefix the contents of each .hignore file with the path
+            # to the file it came from
+            sed 's|^|'"$dir/"'|' "$dir"/.hignore
+        done
+
+        # And finally, print out all of the files that match each of the
+        # patterns from all .hignore files. Using find and the -path
+        # option allows us to respect the relative placement of each
+        # pattern in the directory hiearchy.
+    } | xargs -n1 find . -type d -name .git -prune -o -type f -path
+
+    # Now, sort and then print only the unique lines.  This works
+    # because anything that matched an ignored pattern was printed
+    # once by the first find, and then once by the ignore find, thus
+    # duplicating it. Also, remove the leading ./
+} | sort | uniq -u | cut -c3-
+#+end_src
+
 
 #+OPTIONS: num:nil toc:nil tags:t
 
