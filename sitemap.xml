@@ -92,24 +92,38 @@
   
   
   <url>
-    <loc>http://www.zephyrizing.net/blog/archives/</loc>
-    <lastmod>2014-10-28T01:08:49-04:00</lastmod>
+    <loc>http://www.zephyrizing.net/demos/example-plugin.html</loc>
+    <lastmod>2014-10-28T14:10:46-04:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
     <loc>http://www.zephyrizing.net/</loc>
-    <lastmod>2014-10-28T01:08:49-04:00</lastmod>
+    <lastmod>2014-10-28T14:10:46-04:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.zephyrizing.net/blog/archives/</loc>
+    <lastmod>2014-10-28T14:10:46-04:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.zephyrizing.net/presentations/reimplementing-gitignore-in-15-lines-of-bash.html</loc>
+    <lastmod>2014-10-28T14:10:46-04:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
   
   
   
   <url>
     <loc>http://www.zephyrizing.net/demos/example.html</loc>
-    <lastmod>2014-10-28T00:11:37Z</lastmod>
+    <lastmod>2014-10-28T13:46:25Z</lastmod>
     <priority>0.6</priority>
   </url>
   
