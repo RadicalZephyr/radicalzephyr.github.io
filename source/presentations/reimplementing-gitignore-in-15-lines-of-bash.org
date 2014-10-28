@@ -152,6 +152,10 @@ named =.git= (~-name .git~).
 Ignoring the .git folder is key because it contains many files, none
 of which we are interested in.
 
+*** The Strategy                                                      :slide:
+
+Now, we need to talk about what the general strategy for this is going
+to be.
 
 *** Dummy
 
