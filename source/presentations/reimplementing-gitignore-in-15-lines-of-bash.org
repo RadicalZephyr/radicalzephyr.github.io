@@ -1,0 +1,15 @@
+---
+layout: presentation
+title: Reimplementing .gitignore in 15 lines of bash
+---
+
+* What is .gitignore?
+
+* Why did I want it?
+
+* How is it implemented?
+
+
+#+OPTIONS: num:nil toc:nil tags:t
+
+#+TAGS: slide(s)
