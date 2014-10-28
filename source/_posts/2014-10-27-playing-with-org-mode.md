@@ -10,7 +10,7 @@ So, as a way to procrastinate on actually starting to write/practice
 my lightning talk for Thursday, I decided that I absolutely wanted to
 make a slide show using the [org-html-slideshow], a pretty neat piece
 of Clojurescript written by those smart guys at
-~~Relevance~~Cognitect.
+~~Relevance~~ Cognitect.
 
 [org-html-slideshow]: https://github.com/relevance/org-html-slideshow
 
@@ -62,11 +62,11 @@ to write my presentations in Org-mode so I can utilize it.
 
 [Waldemar Quevedo]: https://github.com/wallyqs
 
-I won't attempt to explain Wally's setup, but he's got some [pretty]
-[cool] [stuff] going on. In essence though, he uses a ruby gem to
-parse the org syntax and transform it into markdown. As of this
-writing though, it doesn't support the tags feature that
-org-html-slideshow depends on for it's functionality.
+I won't attempt to explain Wally's setup, but he's got some
+[pretty][pretty] [cool][cool] [stuff][stuff] going on. In essence
+though, he uses a ruby gem to parse the org syntax and transform it
+into markdown. As of this writing though, it doesn't support the tags
+feature that org-html-slideshow depends on for it's functionality.
 
 [pretty]: https://github.com/wallyqs/org-ruby
 [cool]: https://github.com/eggcaker/jekyll-org
