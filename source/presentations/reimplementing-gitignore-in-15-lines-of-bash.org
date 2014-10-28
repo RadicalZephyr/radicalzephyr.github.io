@@ -3,9 +3,36 @@ layout: presentation
 title: Reimplementing .gitignore in 15 lines of bash
 ---
 
-* What is .gitignore?
+* What is a .gitignore file                                           :slide:
 
-* Why did I want it?
+** A simple shell style syntax (globbing) for specifying files
+
+** Some examples:
+
+#+begin_src
+# Specific filenames
+.emacs.desktop
+.emacs.desktop.lock
+
+# Directories
+auto/
+
+# Wildcard Patterns
+*.gch
+*.beam
+*.com
+*.class
+
+... some others
+#+end_src
+
+To see more check out https://github.com/github/gitignore
+
+
+** Why did I want it?                                                 :slide:
+
+A project of mine called Hermit (https://github.com/RadicalZephyr/hermit)
+
 
 * How is it implemented?
 
