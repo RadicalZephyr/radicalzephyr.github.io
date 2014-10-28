@@ -31,8 +31,15 @@ To see more check out https://github.com/github/gitignore
 
 ** Why did I want it?                                                 :slide:
 
-A project of mine called Hermit (https://github.com/RadicalZephyr/hermit)
+*** A project of mine called Hermit
 
+- A dotfiles configuration management assistant
+- https://github.com/RadicalZephyr/hermit
+
+*** Linking Files                                                     :slide:
+
+- Need to be able to setup symbolic links
+- But it would be nice to be able to ignore (not link) certain files
 
 * How is it implemented?
 
@@ -109,6 +116,7 @@ This seems like a useful way to break up the problem.
 } | sort | uniq -u | cut -c3-
 #+end_src
 
+** Let's take that step by step
 
 #+OPTIONS: num:nil toc:nil tags:t
 
