@@ -45,7 +45,7 @@ To see more check out https://github.com/github/gitignore
 
 ** Back up and decompose the problem
 
-- git-ls-files: print out all non-ignored files
+- ~git-ls-files~: print out all non-ignored files
 - Okay, how do I implement *that*?
 
 *** Notes                                                              :note:
@@ -56,14 +56,14 @@ corresponding tree under a different root, let's transform this into
 something that's more approachable.
 
 My initial attempt to re-use git's implementation led me to find out
-about the command `git-ls-files` which basically does an `ls` on your
+about the command ~git-ls-files~ which basically does an ~ls~ on your
 git repository printing out only files that have *not* been ignored.
 
 This seems like a useful way to break up the problem.
 
 ** The Implementation
 
-#+begin_src
+#+begin_src sh
 {
     find . -type f -o -type d -name .git -prune
 
@@ -83,7 +83,7 @@ This seems like a useful way to break up the problem.
 
 ** The more readable version                                          :slide:
 
-#+begin_src
+#+begin_src sh
 {
     # Print the list of all files, but don't recurse into the .git folder
     find . -type f -o -type d -name .git -prune
