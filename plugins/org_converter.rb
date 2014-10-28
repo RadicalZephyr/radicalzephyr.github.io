@@ -9,7 +9,7 @@ module Jekyll
     safe false
     priority :low
 
-    emacs_org_html_cmd = "(progn (require 'org) (progn (condition-case nil (while t (insert (read-string \"\") \"\\n\")) (error nil)) (set-buffer (org-export-to-buffer 'html \"*Org HTML Export*\" nil nil nil t nil (lambda () t))) (message \"%s\" (buffer-string))))"
+    @@emacs_org_html_cmd = "(progn (require 'org) (progn (condition-case nil (while t (insert (read-string \"\") \"\\n\")) (error nil)) (set-buffer (org-export-to-buffer 'html \"*Org HTML Export*\" nil nil nil t nil (lambda () t))) (message \"%s\" (buffer-string))))"
 
     def matches(ext)
       ext =~ /^\.org$/i
@@ -30,7 +30,7 @@ module Jekyll
         puts "Could not find an emacs executable."
       else
         out, status = Open3.capture2("#{emacs_path} --batch --eval " +
-                                     "\"#{emacs_org_html_cmd}\"",
+                                     "\"#{@@emacs_org_html_cmd}\"",
                                      :stdin_data=>content)
         out unless status != 0
       end
