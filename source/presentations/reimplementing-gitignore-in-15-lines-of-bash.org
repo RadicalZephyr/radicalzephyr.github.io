@@ -36,6 +36,24 @@ A project of mine called Hermit (https://github.com/RadicalZephyr/hermit)
 
 * How is it implemented?
 
+** Back up and decompose the problem
+
+- git-ls-files: print out all non-ignored files
+- Okay, how do I implement *that*?
+
+*** Notes                                                              :note:
+
+First, let's decompose the problem a bit more. Instead of worrying
+about how to selectively link most files in a directory tree into the
+corresponding tree under a different root, let's transform this into
+something that's more approachable.
+
+My initial attempt to re-use git's implementation led me to find out
+about the command `git-ls-files` which basically does an `ls` on your
+git repository printing out only files that have *not* been ignored.
+
+This seems like a useful way to break up the problem.
+
 #+begin_src
 {
     find . -type f -o -type d -name .git -prune
@@ -54,4 +72,4 @@ A project of mine called Hermit (https://github.com/RadicalZephyr/hermit)
 
 #+OPTIONS: num:nil toc:nil tags:t
 
-#+TAGS: slide(s)
+#+TAGS: slide(s) note(n)
