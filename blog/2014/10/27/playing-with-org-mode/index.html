@@ -207,7 +207,86 @@ you&rsquo;ll get the corresponding html.</p>
 
 
 <p>Now the only thing that&rsquo;s left is to write a Jekyll plugin to do this
-invocation to produce the final output.</p>
+invocation to produce the final output. This is what I came up with as
+a first attempt. Of course, it doesn&rsquo;t actually work for me, because
+of the dumb location of my emacs executable&hellip; Oh well, that&rsquo;s for
+tomorrow.</p>
+
+<figure class='code'><figcaption><span>&#8220;Org Converter&#8221;  (org_converter.rb)</span> <a href='//../plugins/org_converter.rb'>download</a></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># A generator that uses a emacs invoked in batch mode to process</span>
+</span><span class='line'><span class="c1"># org-mode files into html</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;open3&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">module</span> <span class="nn">Jekyll</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">class</span> <span class="nc">OrgModeConverter</span> <span class="o">&lt;</span> <span class="no">Converter</span>
+</span><span class='line'>    <span class="n">safe</span> <span class="kp">false</span>
+</span><span class='line'>    <span class="n">priority</span> <span class="ss">:low</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">emacs_org_html_cmd</span> <span class="o">=</span> <span class="s2">&quot;(progn (require &#39;org) (progn (condition-case nil (while t (insert (read-string </span><span class="se">\&quot;\&quot;</span><span class="s2">) </span><span class="se">\&quot;\\</span><span class="s2">n</span><span class="se">\&quot;</span><span class="s2">)) (error nil)) (set-buffer (org-export-to-buffer &#39;html </span><span class="se">\&quot;</span><span class="s2">*Org HTML Export*</span><span class="se">\&quot;</span><span class="s2"> nil nil nil t nil (lambda () t))) (message </span><span class="se">\&quot;</span><span class="s2">%s</span><span class="se">\&quot;</span><span class="s2"> (buffer-string))))&quot;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">matches</span><span class="p">(</span><span class="n">ext</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">ext</span> <span class="o">=~</span> <span class="sr">/^\.org$/i</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">output_ext</span><span class="p">(</span><span class="n">ext</span><span class="p">)</span>
+</span><span class='line'>      <span class="s2">&quot;.html&quot;</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">convert</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">emacs_path</span> <span class="o">=</span> <span class="sb">`which emacs`</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">if</span> <span class="n">emacs_path</span><span class="o">.</span><span class="n">empty?</span>
+</span><span class='line'>        <span class="nb">puts</span> <span class="s2">&quot;Could not find an emacs executable.&quot;</span>
+</span><span class='line'>      <span class="k">else</span>
+</span><span class='line'>        <span class="n">out</span><span class="p">,</span> <span class="n">status</span> <span class="o">=</span> <span class="no">Open3</span><span class="o">.</span><span class="n">capture2</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="n">emacs_path</span><span class="si">}</span><span class="s2"> --batch --eval &quot;</span> <span class="o">+</span>
+</span><span class='line'>                                     <span class="s2">&quot;</span><span class="se">\&quot;</span><span class="si">#{</span><span class="n">emacs_org_html_cmd</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">,</span>
+</span><span class='line'>                                     <span class="ss">:stdin_data</span><span class="o">=&gt;</span><span class="n">content</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">out</span> <span class="k">unless</span> <span class="n">status</span> <span class="o">!=</span> <span class="mi">0</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 
