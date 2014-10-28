@@ -1,0 +1,375 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Playing With Org-mode - Zephyrizing</title>
+  <meta name="author" content="Geoff Shannon">
+
+  
+  <meta name="description" content="So, as a way to procrastinate on actually starting to write/practice
+my lightning talk for Thursday, I decided that I absolutely wanted to
+make a &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://www.zephyrizing.net/blog/2014/10/27/playing-with-org-mode">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Zephyrizing" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+</head>
+
+<body   >
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-43671921-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+  <header role="banner"><hgroup>
+  <h1><a href="/">Zephyrizing</a></h1>
+  
+    <h2>Thoughts on cast-iron seasoning, programming and everything&#8230;</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:www.zephyrizing.net" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Playing With Org-mode</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-10-27T18:30:05-04:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>27</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>6:30 pm</span></time>
+        
+           | <a href="#disqus_thread"
+             data-disqus-identifier="http://www.zephyrizing.net">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>So, as a way to procrastinate on actually starting to write/practice
+my lightning talk for Thursday, I decided that I absolutely wanted to
+make a slide show using the <a href="https://github.com/relevance/org-html-slideshow">org-html-slideshow</a>, a pretty neat piece
+of Clojurescript written by those smart guys at
+<del>Relevance</del> Cognitect.</p>
+
+<p>Basically, it lets you take an outline/document written in <a href="http://orgmode.org/">Org-mode</a>
+(another really cool piece of software!) and put some small
+annotations in it to delimit your &ldquo;slides&rdquo; and then you have a
+document that can be viewed as either a slideshow, or a web page. It&rsquo;s
+harder to explain in words than it is to observe, so here&rsquo;s the
+<a href="/demos/example.html">example page</a> from their github repo, and the
+<a href="/demos/example.org">org-mode document</a> that produced that page.</p>
+
+<!--more-->
+
+
+<p>Now that is pretty neat. However, the workflow needed to create one of
+these is sort of a pain. From the documentation on the project page,
+you&rsquo;re expected to create a one-off web site that has the contents of
+this production folder available and then manually generate the
+html document from the org-mode source. Ick.</p>
+
+<p>My blog is made with <a href="http://jekyllrb.com/">Jekyll</a>, which is a static site generator. None
+of my posts are actually written in html, instead I write them in
+<a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>, and then Jekyll handling converts the markdown into
+html. When it does this I can also cause it to be inserted into a page
+template (i.e. layout). The upshot is, I can create a static site but
+not have to duplicate all of the code to have a common set of header
+info, navigation toolbar, nifty sidebar etc. Because only the unique
+things are specified in each document, and the general boilerplate is
+automatically included for me by Jekyll.</p>
+
+<p>So if I&rsquo;m generating html from markdown automatically with Jekyll it
+feels sort of wrong to be generating html manually with an interactive
+emacs command and then committing this generated html into my git
+repo. It would be so much nicer if I could just get Jekyll to invoke
+emacs as the translator for turning <code>.org</code> files into <code>.html</code> files.</p>
+
+<p>Well, pursuing that line of thought today I worked with
+<a href="https://github.com/wallyqs">Waldemar Quevedo</a>. He showed me his incredible org-based workflow for
+everything (he also gave an awesome lightning talk on it the first
+week of Hacker School!). While it looks really cool, it&rsquo;s sort
+heavy-weight for what I want to do. Frankly, I&rsquo;m really comfortable
+writing markdown, so I&rsquo;ll probably continue to write most of my posts
+in it. But org-html-slideshow is exciting enough that I&rsquo;d be willing
+to write my presentations in Org-mode so I can utilize it.</p>
+
+<p>I won&rsquo;t attempt to explain Wally&rsquo;s setup, but he&rsquo;s got some
+<a href="https://github.com/wallyqs/org-ruby">pretty</a> <a href="https://github.com/eggcaker/jekyll-org">cool</a> <a href="https://github.com/punchagan/org-hyde">stuff</a> going on. In essence
+though, he uses a ruby gem to parse the org syntax and transform it
+into markdown. As of this writing though, it doesn&rsquo;t support the tags
+feature that org-html-slideshow depends on for it&rsquo;s functionality.</p>
+
+<p>While showing Wally the slideshow thing got him excited to try and
+integrate it into his workflow, I started poking around and looking at
+how to integrate it into my site. The solution I decided on was to
+make <code>.org</code> files a generic member of the Jekyll source files. This
+means that they&rsquo;ll still use a YAML frontmatter to mark that they need
+to be transformed. This means that I need some way to transform a body
+of org text into just the html content that it represents. Normally
+when you generate an html page from org-mode, you get a complete html
+page, <code>html</code>, <code>body</code> tags and all. What I needed was a way to invoke
+the org->html transformation using the Elisp code in org-mode from
+Jekyll.</p>
+
+<p>With Wally&rsquo;s help, I was able to get this far towards that goal. This
+is the elisp that will continuously read from the minibuffer until an
+error occurs, and then transform that text using the org->html backend,
+and finally print out the generated html.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='common-lisp'><span class='line'><span class="p">(</span><span class="k">progn</span>
+</span><span class='line'>  <span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;org</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">progn</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">condition-case</span> <span class="no">nil</span>
+</span><span class='line'>        <span class="p">(</span><span class="nv">while</span> <span class="no">t</span>
+</span><span class='line'>          <span class="p">(</span><span class="nv">insert</span> <span class="p">(</span><span class="nv">read-string</span> <span class="s">&quot;&quot;</span><span class="p">)</span> <span class="s">&quot;\n&quot;</span><span class="p">))</span>
+</span><span class='line'>      <span class="p">(</span><span class="nb">error</span> <span class="no">nil</span><span class="p">))</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">set-buffer</span>
+</span><span class='line'>     <span class="p">(</span><span class="nv">org-export-to-buffer</span> <span class="ss">&#39;html</span> <span class="s">&quot;*Org HTML Export*&quot;</span>
+</span><span class='line'>       <span class="no">nil</span> <span class="no">nil</span> <span class="no">nil</span> <span class="no">t</span> <span class="no">nil</span>
+</span><span class='line'>       <span class="p">(</span><span class="k">lambda</span> <span class="p">()</span> <span class="no">t</span><span class="p">)))</span>
+</span><span class='line'>       <span class="p">(</span><span class="nv">message</span> <span class="s">&quot;%s&quot;</span> <span class="p">(</span><span class="nv">buffer-string</span><span class="p">))))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And this is how you invoke the transformation of a file from org to
+html. The <code>$emacs</code> is because I use <a href="http://emacsformacosx.com/">Emacs for Mac OSX</a> which means
+that my emacs executable is buried inside of a mac <code>.app</code> file/folder
+thing. Pipe a file into this script and if it&rsquo;s valid org syntax,
+you&rsquo;ll get the corresponding html.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>tail -n+4 hello.org <span class="p">|</span> <span class="nv">$emacs</span> --batch --eval <span class="s2">&quot;(progn (require &#39;org) (progn (condition-case nil (while t (insert (read-string \&quot;\&quot;) \&quot;\\n\&quot;)) (error nil)) (set-buffer (org-export-to-buffer &#39;html \&quot;*Org HTML Export*\&quot; nil nil nil t nil (lambda () t))) (message \&quot;%s\&quot; (buffer-string))))&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now the only thing that&rsquo;s left is to write a Jekyll plugin to do this
+invocation to produce the final output.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Geoff Shannon</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2014-10-27T18:30:05-04:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>27</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>6:30 pm</span></time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://www.zephyrizing.net/blog/2014/10/27/playing-with-org-mode/" data-via="RadicalZephyr" data-counturl="http://www.zephyrizing.net/blog/2014/10/27/playing-with-org-mode/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/10/26/on-the-importance-of-distinguishing-between-stable-and-development-documentation/" title="Previous Post: On the Importance of Distinguishing Between Stable and Development Documentation">&laquo; On the Importance of Distinguishing Between Stable and Development Documentation</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/10/27/playing-with-org-mode/">Playing With Org-mode</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/10/26/on-the-importance-of-distinguishing-between-stable-and-development-documentation/">On the Importance of Distinguishing Between Stable and Development Documentation</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/10/14/adventures-with-clojure-macros/">Adventures With Clojure Macros</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/10/11/hacker-school-week-1-review/">Hacker School: Week 1 Review</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/10/07/dot-dot-dot-and-this-is-why-master-should-be-stable/">&#8230; And This Is Why Master Should Be Stable</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/RadicalZephyr">@RadicalZephyr</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'RadicalZephyr',
+            count: 7,
+            skip_forks: true,
+            to_skip: ["radicalzephyr.github.io","home","prelude","synapse-admin","old-site"],
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Geoff Shannon -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'zephyrizing';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://www.zephyrizing.net/blog/2014/10/27/playing-with-org-mode/';
+        var disqus_url = 'http://www.zephyrizing.net/blog/2014/10/27/playing-with-org-mode/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+<noscript>Please enable JavaScript to view
+  the <a href="http://disqus.com/?ref_noscript">comments powered by
+    Disqus.</a></noscript>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
