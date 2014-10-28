@@ -5,9 +5,11 @@ title: Reimplementing .gitignore in 12 lines of bash
 
 * What is a .gitignore file                                           :slide:
 
-** A simple shell style syntax (globbing) for specifying files
+- A plain text file
+- A simple syntax for specifying files
+ - (aka "globbing")
 
-** Some examples:
+** Some examples:                                                     :slide:
 
 #+begin_src
 # Specific filenames
@@ -31,24 +33,26 @@ To see more check out https://github.com/github/gitignore
 
 ** Why did I want it?                                                 :slide:
 
-*** A project of mine called Hermit
+Good question...
+
+*** A project of mine called Hermit                                   :slide:
 
 - A dotfiles configuration management assistant
 - https://github.com/RadicalZephyr/hermit
 
-*** Linking Files                                                     :slide:
+*** Linking Files (selectively)                                       :slide:
 
-- Need to be able to setup symbolic links
+- I needed to be able to setup symbolic links
 - But it would be nice to be able to ignore (not link) certain files
 
-* How is it implemented?
+* How is it implemented?                                              :slide:
 
-** Back up and decompose the problem
+** Back up and decompose the problem                                  :slide:
 
 - ~git-ls-files~: print out all non-ignored files
 - Okay, how do I implement *that*?
 
-*** Notes                                                              :note:
+*** Notes
 
 First, let's decompose the problem a bit more. Instead of worrying
 about how to selectively link most files in a directory tree into the
@@ -61,7 +65,7 @@ git repository printing out only files that have *not* been ignored.
 
 This seems like a useful way to break up the problem.
 
-** The Implementation
+** The Implementation                                                 :slide:
 
 #+begin_src sh
 {
@@ -79,9 +83,9 @@ This seems like a useful way to break up the problem.
 } | sort | uniq -u | cut -c3-
 #+end_src
 
-** Wat?                                                               :slide:
+*** Wat?                                                              :slide:
 
-** The more readable version                                          :slide:
+*** The more readable version                                         :slide:
 
 #+begin_src sh
 {
@@ -116,7 +120,7 @@ This seems like a useful way to break up the problem.
 } | sort | uniq -u | cut -c3-
 #+end_src
 
-** Let's take that step by step
+*** Let's take that step by step                                      :slide:
 
 #+OPTIONS: num:nil toc:nil tags:t
 
