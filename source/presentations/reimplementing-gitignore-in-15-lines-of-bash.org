@@ -45,14 +45,14 @@ Good question...
 - I needed to be able to setup symbolic links
 - But it would be nice to be able to ignore (not link) certain files
 
-* How is it implemented?                                              :slide:
+* How is it implemented?
 
-** Back up and decompose the problem                                  :slide:
+** First, decompose the problem                                       :slide:
 
 - ~git-ls-files~: print out all non-ignored files
 - Okay, how do I implement *that*?
 
-*** Notes
+*** Notes                                                              :note:
 
 First, let's decompose the problem a bit more. Instead of worrying
 about how to selectively link most files in a directory tree into the
