@@ -20,7 +20,11 @@ module Jekyll
     end
 
     def convert(content)
-      emacs_path = `which emacs`
+      emacs_path = if ENV.has_key?("EMACS")
+                     ENV["EMACS"]
+                   else
+                     `which emacs`
+                   end
 
       if emacs_path.empty?
         puts "Could not find an emacs executable."
