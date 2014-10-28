@@ -122,6 +122,37 @@ This seems like a useful way to break up the problem.
 
 *** Let's take that step by step                                      :slide:
 
+*** Some interesting syntax                                           :slide:
+
+First, what is this business with the curly braces?
+
+I've used it a bunch and nested the usages.  The short answer is it's
+a way to group the output of a group of commands.
+
+*** Print all the files (except .git/)
+
+~find . -type f~ -> This prints out all of the files in the directory
+tree rooted in the current directory.
+
+~-o -type -d -name .git -prune~ -> But, we ignore all files that are
+in a directory (~-type -d~) named =.git= (~-name .git~).
+
+#+BEGIN_SRC
+    # Print the list of all files, but don't recurse into the .git folder
+    find . -type f -o -type d -name .git -prune
+#+END_SRC
+
+**** Notes                                                             :note:
+
+Ignoring the .git folder is key because it contains many files, none
+of which we are interested in.
+
+
+*** Dummy
+
+This is a dummy header that prevents the last one from being missed as
+a slide.
+
 #+OPTIONS: num:nil toc:nil tags:t
 
 #+TAGS: slide(s) note(n)
