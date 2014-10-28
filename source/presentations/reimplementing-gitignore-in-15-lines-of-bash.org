@@ -11,7 +11,7 @@ title: Reimplementing .gitignore in 12 lines of bash
 
 ** Some examples:                                                     :slide:
 
-#+begin_src
+#+BEGIN_SRC
 # Specific filenames
 .emacs.desktop
 .emacs.desktop.lock
@@ -26,7 +26,7 @@ auto/
 *.class
 
 ... some others
-#+end_src
+#+END_SRC
 
 To see more check out https://github.com/github/gitignore
 
@@ -67,7 +67,7 @@ This seems like a useful way to break up the problem.
 
 ** The Implementation                                                 :slide:
 
-#+begin_src sh
+#+BEGIN_SRC sh
 {
     find . -type f -o -type d -name .git -prune
 
@@ -81,13 +81,13 @@ This seems like a useful way to break up the problem.
     } | xargs -n1 find . -type d -name .git -prune -o -type f -path
 
 } | sort | uniq -u | cut -c3-
-#+end_src
+#+END_SRC
 
 *** Wat?                                                              :slide:
 
 *** The more readable version                                         :slide:
 
-#+begin_src sh
+#+BEGIN_SRC sh
 {
     # Print the list of all files, but don't recurse into the .git folder
     find . -type f -o -type d -name .git -prune
@@ -118,7 +118,7 @@ This seems like a useful way to break up the problem.
     # once by the first find, and then once by the ignore find, thus
     # duplicating it. Also, remove the leading ./
 } | sort | uniq -u | cut -c3-
-#+end_src
+#+END_SRC
 
 *** Let's take that step by step                                      :slide:
 
