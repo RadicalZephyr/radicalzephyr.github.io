@@ -1,0 +1,3 @@
+[submodule "plugins/jekyll-org-converter"]
+	path = plugins/jekyll-org-converter
+	url = git@github.com:RadicalZephyr/jekyll-org-converter.git
