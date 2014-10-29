@@ -137,9 +137,9 @@ This seems like a useful way to break up the problem.
 
 **** Notes                                                             :note:
 
-- Five programs and one shell builtin
+- six programs and one shell builtin
 - find produces output from a command line
-
+- xargs is more complicated (we'll talk about it later)
 - sort, uniq, cut operate in "standard unix style" - read from stdin,
   write to stdout. Also called "filters"
 
