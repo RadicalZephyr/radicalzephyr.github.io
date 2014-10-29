@@ -129,6 +129,21 @@ First, what is this business with the curly braces?
 I've used it a bunch and nested the usages.  The short answer is it's
 a way to group the output of a group of commands.
 
+*** Important Commands                                                :slide:
+
+- ~find~  : list files matching specified criteria
+- ~xargs~ : build commands to be executed
+- ~sort~  : Sorts the sequence by some ordering (can be numerical,
+  lexicographic etc.)
+- ~uniq~  : Do operations relating to uniqueness
+- ~cut~   : Selectively reprint only a portion of each input line
+- ~read~  : Read one line from input and assign it to the name given
+
+**** Notes                                                             :note:
+
+Not sure what to put here...  Stuff I need to know/say about these
+commands
+
 *** Print all the files (except .git/)                                :slide:
 
 #+BEGIN_SRC
