@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>Reimplementing .gitignore in 15 lines of bash</title>
+<title>Reimplementing .gitignore in 12 lines of bash</title>
 <!-- 2014-10-27 Mon 16:36 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 
@@ -16,19 +16,318 @@
 <body>
 <div id="content">
 <div id="outline-container-sec-1" class="outline-2">
-<h2 id="sec-1">What is .gitignore?</h2>
+<h2 id="sec-1">What is a .gitignore file&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h2>
+<div class="outline-text-2" id="text-1">
+<ul class="org-ul">
+<li>A plain text file
+</li>
+<li>A simple syntax for specifying files
+<ul class="org-ul">
+<li>(aka &#8220;globbing&#8221;)
+</li>
+</ul>
+</li>
+</ul>
+</div>
+
+<div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1">Some examples:&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h3>
+<div class="outline-text-3" id="text-1-1">
+<pre class="example">
+# Specific filenames
+.emacs.desktop
+.emacs.desktop.lock
+
+# Directories
+auto/
+
+# Wildcard Patterns
+*.gch
+*.beam
+*.com
+*.class
+
+... some others
+</pre>
+
+<p>
+To see more check out <a href="https://github.com/github/gitignore">https://github.com/github/gitignore</a>
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2">Why did I want it?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+Good question&#x2026;
+</p>
+</div>
+
+<div id="outline-container-sec-1-2-1" class="outline-4">
+<h4 id="sec-1-2-1">A project of mine called Hermit&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h4>
+<div class="outline-text-4" id="text-1-2-1">
+<ul class="org-ul">
+<li>A dotfiles configuration management assistant
+</li>
+<li><a href="https://github.com/RadicalZephyr/hermit">https://github.com/RadicalZephyr/hermit</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2-2" class="outline-4">
+<h4 id="sec-1-2-2">Linking Files (selectively)&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h4>
+<div class="outline-text-4" id="text-1-2-2">
+<ul class="org-ul">
+<li>I needed to be able to setup symbolic links
+</li>
+<li>But it would be nice to be able to ignore (not link) certain files
+</li>
+</ul>
+</div>
+</div>
+</div>
 </div>
 
 <div id="outline-container-sec-2" class="outline-2">
-<h2 id="sec-2">Why did I want it?</h2>
+<h2 id="sec-2">How is it implemented?</h2>
+<div class="outline-text-2" id="text-2">
+</div><div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1">First, decompose the problem&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h3>
+<div class="outline-text-3" id="text-2-1">
+<ul class="org-ul">
+<li><code>git-ls-files</code>: print out all non-ignored files
+</li>
+<li>Okay, how do I implement <b>that</b>?
+</li>
+</ul>
 </div>
 
-<div id="outline-container-sec-3" class="outline-2">
-<h2 id="sec-3">How is it implemented?</h2>
-<div class="outline-text-2" id="text-3">
+<div id="outline-container-sec-2-1-1" class="outline-4">
+<h4 id="sec-2-1-1">Notes&#xa0;&#xa0;&#xa0;<span class="tag"><span class="note">note</span></span></h4>
+<div class="outline-text-4" id="text-2-1-1">
+<p>
+First, let&#8217;s decompose the problem a bit more. Instead of worrying
+about how to selectively link most files in a directory tree into the
+corresponding tree under a different root, let&#8217;s transform this into
+something that&#8217;s more approachable.
+</p>
+
+<p>
+My initial attempt to re-use git&#8217;s implementation led me to find out
+about the command <code>git-ls-files</code> which basically does an <code>ls</code> on your
+git repository printing out only files that have <b>not</b> been ignored.
+</p>
+
+<p>
+This seems like a useful way to break up the problem.
+</p>
+</div>
 </div>
 </div>
 
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2">The Implementation&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h3>
+<div class="outline-text-3" id="text-2-2">
+<div class="org-src-container">
+
+<pre class="src src-sh">{
+    find . -type f -o -type d -name .git -prune
+
+    find . -type f -name .hignore
+    {
+        find -X . -type f -name .hignore | xargs -n1 dirname |
+        <span style="font-weight: bold;">while </span><span style="font-weight: bold;">read</span> dir
+        <span style="font-weight: bold;">do</span>
+            sed <span style="font-style: italic;">'s|^|'"$dir/"'|'</span> <span style="font-style: italic;">"$dir"</span>/.hignore
+        <span style="font-weight: bold;">done</span>
+    } | xargs -n1 find . -type d -name .git -prune -o -type f -path
+
+} | sort | uniq -u | cut -c3-
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-2-2-1" class="outline-4">
+<h4 id="sec-2-2-1">Wat?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h4>
+</div>
+
+<div id="outline-container-sec-2-2-2" class="outline-4">
+<h4 id="sec-2-2-2">The more readable version&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h4>
+<div class="outline-text-4" id="text-2-2-2">
+<div class="org-src-container">
+
+<pre class="src src-sh">{
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Print the list of all files, but don't recurse into the .git folder</span>
+    find . -type f -o -type d -name .git -prune
+
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Print out all .hignore files a second time so we ignore them</span>
+    find . -type f -name .hignore
+
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Concatenate a listing of all .hignore files, with the path to the</span>
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">ignore file it came from prefixed to each pattern</span>
+    {
+        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Process all directories with a .hignore file</span>
+        find -X . -type f -name .hignore | xargs -n1 dirname |
+        <span style="font-weight: bold;">while </span><span style="font-weight: bold;">read</span> dir
+        <span style="font-weight: bold;">do</span>
+            <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Prefix the contents of each .hignore file with the path</span>
+            <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">to the file it came from</span>
+            sed <span style="font-style: italic;">'s|^|'"$dir/"'|'</span> <span style="font-style: italic;">"$dir"</span>/.hignore
+        <span style="font-weight: bold;">done</span>
+
+        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">And finally, print out all of the files that match each of the</span>
+        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">patterns from all .hignore files. Using find and the -path</span>
+        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">option allows us to respect the relative placement of each</span>
+        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">pattern in the directory hiearchy.</span>
+    } | xargs -n1 find . -type d -name .git -prune -o -type f -path
+
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Now, sort and then print only the unique lines.  This works</span>
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">because anything that matched an ignored pattern was printed</span>
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">once by the first find, and then once by the ignore find, thus</span>
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">duplicating it. Also, remove the leading ./</span>
+} | sort | uniq -u | cut -c3-
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-2-3" class="outline-4">
+<h4 id="sec-2-2-3">Let&#8217;s take that step by step&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h4>
+</div>
+
+<div id="outline-container-sec-2-2-4" class="outline-4">
+<h4 id="sec-2-2-4">All the Programs&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h4>
+<div class="outline-text-4" id="text-2-2-4">
+<ul class="org-ul">
+<li>Standard *nix filters
+<ul class="org-ul">
+<li><code>sort</code>  : Sorts the sequence by some ordering (can be numerical,
+lexicographic etc.)
+</li>
+<li><code>uniq</code>  : Do operations relating to uniqueness
+</li>
+<li><code>cut</code>   : Selectively reprint only a portion of each input line
+</li>
+</ul>
+</li>
+<li><code>find</code>    : list files matching specified criteria
+</li>
+<li><code>xargs</code>   : build commands to be executed
+</li>
+<li><code>dirname</code> : print all but the last element of the given path
+</li>
+<li><code>read</code>    : Read one line from input and assign it to the name given
+(shell builtin)
+</li>
+</ul>
+</div>
+
+<div id="outline-container-sec-2-2-4-1" class="outline-5">
+<h5 id="sec-2-2-4-1">Notes&#xa0;&#xa0;&#xa0;<span class="tag"><span class="note">note</span></span></h5>
+<div class="outline-text-5" id="text-2-2-4-1">
+<ul class="org-ul">
+<li>six programs and one shell builtin
+</li>
+<li>find produces output from a command line
+</li>
+<li>xargs is more complicated (we&#8217;ll talk about it later)
+</li>
+<li>sort, uniq, cut operate in &#8220;standard unix style&#8221; - read from stdin,
+write to stdout. Also called &#8220;filters&#8221;
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-2-5" class="outline-4">
+<h4 id="sec-2-2-5">Some interesting syntax&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h4>
+<div class="outline-text-4" id="text-2-2-5">
+<ul class="org-ul">
+<li>Curly braces
+<pre class="example">
+{
+  &lt;command1&gt;
+  &lt;command2&gt;
+  ...
+}
+</pre>
+</li>
+<li>piping into while loops
+<pre class="example">
+&lt;generate some output&gt; |
+while read &lt;var&gt;
+do
+  &lt;some stuff&gt;
+  ...
+done
+</pre>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-2-2-6" class="outline-4">
+<h4 id="sec-2-2-6">Print all the files (except .git/)&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h4>
+<div class="outline-text-4" id="text-2-2-6">
+<pre class="example">
+# Print the list of all files, but don't recurse into the .git folder
+find . -type f -o -type d -name .git -prune
+</pre>
+
+<p>
+Print out all of the files in the directory tree rooted in the current
+directory:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">find . -type f
+</pre>
+</div>
+
+<p>
+But, we ignore the subtree starting in the directory (<code>-type -d</code>)
+named <code>.git</code> (<code>-name .git</code>).
+</p>
+</div>
+
+
+<div id="outline-container-sec-2-2-6-1" class="outline-5">
+<h5 id="sec-2-2-6-1">Notes&#xa0;&#xa0;&#xa0;<span class="tag"><span class="note">note</span></span></h5>
+<div class="outline-text-5" id="text-2-2-6-1">
+<p>
+Ignoring the .git folder is key because it contains many files, none
+of which we are interested in.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-2-7" class="outline-4">
+<h4 id="sec-2-2-7">The Strategy&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h4>
+<div class="outline-text-4" id="text-2-2-7">
+<p>
+Now, we need to talk about what the general strategy for this is going
+to be.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-2-2-8" class="outline-4">
+<h4 id="sec-2-2-8">Dummy</h4>
+<div class="outline-text-4" id="text-2-2-8">
+<p>
+This is a dummy header that prevents the last one from being missed as
+a slide.
+</p>
+</div>
+</div>
+</div>
+</div>
 
 </div>
 <script type="text/javascript" src="/javascripts/org-html-slideshow.js"></script>

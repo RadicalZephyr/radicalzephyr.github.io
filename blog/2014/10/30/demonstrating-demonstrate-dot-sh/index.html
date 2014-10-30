@@ -5,13 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>LeJOS and Clojure - Zephyrizing</title>
+  <title>Demonstrating demonstrate.sh - Zephyrizing</title>
   <meta name="author" content="Geoff Shannon">
 
   
-  <meta name="description" content="This is a short followup to my first post about
-experimenting with the Lego EV3&rsquo;s and leJOS. Shortly
-after I wrote that post, I went on the &hellip;">
+  <meta name="description" content="So, in the course of trying to prepare a presentation for this
+Thursday (today!), I ended up creating a program called
+demonstrate.sh. Basically, it &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +20,7 @@ after I wrote that post, I went on the &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.zephyrizing.net/blog/2014/04/17/lejos-and-clojure">
+  <link rel="canonical" href="http://www.zephyrizing.net/blog/2014/10/30/demonstrating-demonstrate-dot-sh">
   <link href="/favicon.ico" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Zephyrizing" type="application/atom+xml">
@@ -78,7 +78,7 @@ after I wrote that post, I went on the &hellip;">
   
   <header>
     
-      <h1 class="entry-title">LeJOS and Clojure</h1>
+      <h1 class="entry-title">Demonstrating demonstrate.sh</h1>
     
     
       <p class="meta">
@@ -87,7 +87,7 @@ after I wrote that post, I went on the &hellip;">
 
 
 
-<time class='entry-date' datetime='2014-04-17T19:00:00-04:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>7:00 pm</span></time>
+<time class='entry-date' datetime='2014-10-30T16:33:34-04:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>30</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>4:33 pm</span></time>
         
            | <a href="#disqus_thread"
              data-disqus-identifier="http://www.zephyrizing.net">Comments</a>
@@ -97,54 +97,79 @@ after I wrote that post, I went on the &hellip;">
   </header>
 
 
-<div class="entry-content"><p>This is a short followup to my first post about
-<a href="/blog/2013/09/03/why-am-i-doing-this/">experimenting with the Lego EV3&rsquo;s</a> and <a href="http://lejos.org">leJOS</a>. Shortly
-after I wrote that post, I went on the Clojure IRC channel and talked
-to <a href="http://technomancy.us/">Phil Hagelberg</a> and some other helpful folks about my
-issues. They steered me away from attempting to install <a href="http://leiningen.org/">Leiningen</a> on
-the EV3 itself, which was a relief since I think that way lay
-madness. Instead, they suggested that I have a small launcher program
-that would just setup a REPL. Then I could run my robot-controlling
-Clojure code from there.</p>
+<div class="entry-content"><p>So, in the course of trying to prepare a presentation for this
+Thursday (today!), I ended up creating a program called
+<code>demonstrate.sh</code>. Basically, it lets you write a script, meant for an
+interpreter (like bash, python, irb, coffee etc.) and then execute it
+on demand.</p>
 
 <!--more-->
 
 
-<p>This advice led to the creation of <a href="https://github.com/RadicalZephyr/ev3-nrepl">ev3-nrepl</a>. It&rsquo;s basically a small
-skeleton Clojure project to provide the basis for running Clojure code
-on the EV3. It&rsquo;s a minimalist setup, so it should provide a good
-starting point for other people to continue experimenting. I tried to
-explain how to use it fairly clearly, as well as add all the links to
-the necessary documentation to get leJOS running on the EV3.</p>
+<p>What do I mean by &ldquo;on demand&rdquo;? Well, basically it invokes the
+interpreter and then reads the script file one line at a time. Then it
+prints out a fake prompt based on the interpreter you specified, and
+then it prints out the line of input it&rsquo;s processing.  When you hit
+enter, the script sends that line of input to the interpreter and it
+then prints its output to the screen. Oh, there&rsquo;s one little
+caveat. When <code>demonstrate.sh</code> prints the line of output, it prints it
+character by character with a small randomized delay. So it looks a
+bit like you&rsquo;re actually typing out the command.</p>
 
-<p>Unfortunately, despite this seemingly great start, I never ended up
-actually doing anything interesting with Clojure on the EV3. There are
-two related reasons for this. First, the robotics class I was in
-started having actual coding assignments (thanks to the fact that we
-could now run leJOS). Second, it turns out that leJOS is designed from
-an incredibly stateful and imperative point of view. This makes it
-very hard to develop clean Clojure code that makes use of their
-API. Specifically, leJOS makes the assumption that any code making use
-of it is going to start-up, do robot stuff, and then die. A Clojure
-REPL obviously breaks this assumption rather badly. As it turned out,
-this was the most painful when I was trying to figure out how to
-program and build my robot at the same time.</p>
+<p>That&rsquo;s it! It&rsquo;s a simple script, but it allows you to create and then
+run in a repeatable way a sequence of commands that you want to
+<em>demonstrate</em>.</p>
 
-<p>What I wanted to do was be able to open a Clojure REPL connect to it,
-and then leave it running for a long time. This is my normal modus
-operandi, but the EV3 makes it even more critical that this
-work. Because of the limited hardware, it takes several minutes for
-nrepl to actually boot up.</p>
+<p>There are some improvements I&rsquo;d like to add. The ability to
+recursively run demonstrate scripts inside of a demonstrate script
+would be awesome. Currently because I&rsquo;m doing everything in the
+simplest possible way, and the script is run in the background running
+demonstrate inside of a demonstrate script doesn&rsquo;t work very well. I&rsquo;m
+actually not entirely sure why it doesn&rsquo;t work, but the results are
+demonstrably not what I want.</p>
 
-<p>I think that using Clojure as a prototyping tool for building robots
-with the EV3 could be incredibly powerful. All of the
-<a href="http://www.infoq.com/presentations/Clojure-Java-Interop">arguments</a>
-for why Clojure is a great language for exploring Java API&rsquo;s are
-applicable to working with the EV3 API&rsquo;s. Possibly even more so, since
-there is something really, really cool about typing some commands at
-the REPL and having your robot start moving around and doing
-stuff. Unfortunately, because of the current architecture of leJOS and
-the limited processing power of the EV3&rsquo;s it&rsquo;s not quite there yet.</p>
+<p>It would also be nice to make it so that you can insert arbitrary
+commands to the interpreter, instead of only being able to run the
+commands in the script. This is a particularly key feature since if
+you just start another interpreter to run ad-hoc commands, you don&rsquo;t
+have the same environment. This isn&rsquo;t important if your script doesn&rsquo;t
+contain any side-effectful things, but I think that a lot of scripts
+will tend to.</p>
+
+<p>Finally, it would be really nice if the <code>demonstrate.sh</code> didn&rsquo;t need
+to fake the prompts for the interpreters. In an ideal world, those
+prompts would be transparently printed directly to the screen. I&rsquo;m
+sure there&rsquo;s a way to do it, but it probably isn&rsquo;t possible/easy in
+<code>bash</code>.</p>
+
+<p>When I talked to <a href="https://github.com/doy">Jesse</a> about this, he asked the critical question.
+Why not just record the output? My answer was essentially because I
+wanted to eventually be able to run arbitrary commands in addition to
+the script commands. This is sort of a weak answer, since it depends
+on a feature I haven&rsquo;t yet implemented!</p>
+
+<p>But there&rsquo;s another answer, that I discovered today when I was playing
+with the classic Unix utility <code>script</code> that does exactly what Jesse
+was talking about. The difference between recording an interaction
+with <code>script</code> and writing a demonstrate script is this. Recording with
+<code>script</code> is <em>still live coding</em>. This is especially true if you want
+to use the timing feature to play it back at the same speed that it
+happened at. In contrast, writing a <code>demonstrate</code> script is the same
+as writing any regular script for the interpreter you&rsquo;re
+targeting. You are totally offline, and you can write and edit the
+script directly, and then run it with demonstrate to make sure it does
+exactly what you want.</p>
+
+<p>From what I&rsquo;ve been told about the early days of programming, the
+difference between recording an interaction with <code>script</code> and writing
+a <code>demonstrate</code> script is approximately the same as the difference
+between writing programs on punch cards and writing programs in a text
+editor on a computer. If you mess up while punching the card, you have
+to start over from the beginning (barring awesome hacks
+<a href="https://twitter.com/francesc/status/521602168022118400">like this</a>).</p>
+
+<p>Yup, that&rsquo;s it. If you&rsquo;re interested, check it out
+<a href="https://github.com/RadicalZephyr/demonstrate.sh">on Github</a>. Pull requests welcome :)</p>
 </div>
 
 
@@ -160,21 +185,15 @@ the limited processing power of the EV3&rsquo;s it&rsquo;s not quite there yet.<
 
 
 
-<time class='entry-date' datetime='2014-04-17T19:00:00-04:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>7:00 pm</span></time>
+<time class='entry-date' datetime='2014-10-30T16:33:34-04:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>30</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>4:33 pm</span></time>
       
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/clojure/'>clojure</a>, <a class='category' href='/blog/categories/ev3/'>ev3</a>, <a class='category' href='/blog/categories/programming/'>programming</a>
-  
-</span>
 
 
     </p>
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://www.zephyrizing.net/blog/2014/04/17/lejos-and-clojure/" data-via="RadicalZephyr" data-counturl="http://www.zephyrizing.net/blog/2014/04/17/lejos-and-clojure/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://www.zephyrizing.net/blog/2014/10/30/demonstrating-demonstrate-dot-sh/" data-via="RadicalZephyr" data-counturl="http://www.zephyrizing.net/blog/2014/10/30/demonstrating-demonstrate-dot-sh/" >Tweet</a>
   
   
   
@@ -183,10 +202,8 @@ the limited processing power of the EV3&rsquo;s it&rsquo;s not quite there yet.<
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/10/31/leJOS-and-EV3/" title="Previous Post: Clojure, LeJOS and EV3">&laquo; Clojure, LeJOS and EV3</a>
+        <a class="basic-alignment left" href="/blog/2014/10/27/playing-with-org-mode/" title="Previous Post: Playing with Org-mode">&laquo; Playing with Org-mode</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/04/21/the-summary-and-evaluation-how-i-figured-out-why-i-went-to-college/" title="Next Post: The Summary and Evaluation - How I Figured Out Why I Went to College">The Summary and Evaluation - How I Figured Out Why I Went to College &raquo;</a>
       
     </p>
   </footer>
@@ -282,8 +299,8 @@ the limited processing power of the EV3&rsquo;s it&rsquo;s not quite there yet.<
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://www.zephyrizing.net/blog/2014/04/17/lejos-and-clojure/';
-        var disqus_url = 'http://www.zephyrizing.net/blog/2014/04/17/lejos-and-clojure/';
+        var disqus_identifier = 'http://www.zephyrizing.net/blog/2014/10/30/demonstrating-demonstrate-dot-sh/';
+        var disqus_url = 'http://www.zephyrizing.net/blog/2014/10/30/demonstrating-demonstrate-dot-sh/';
         var disqus_script = 'embed.js';
       
     (function () {

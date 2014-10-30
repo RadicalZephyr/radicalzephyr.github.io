@@ -4,7 +4,7 @@
   <title><![CDATA[Zephyrizing]]></title>
   <link href="http://www.zephyrizing.net/atom.xml" rel="self"/>
   <link href="http://www.zephyrizing.net/"/>
-  <updated>2014-10-28T14:10:46-04:00</updated>
+  <updated>2014-10-30T17:17:02-04:00</updated>
   <id>http://www.zephyrizing.net/</id>
   <author>
     <name><![CDATA[Geoff Shannon]]></name>
@@ -12,6 +12,87 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Demonstrating demonstrate.sh]]></title>
+    <link href="http://www.zephyrizing.net/blog/2014/10/30/demonstrating-demonstrate-dot-sh/"/>
+    <updated>2014-10-30T16:33:34-04:00</updated>
+    <id>http://www.zephyrizing.net/blog/2014/10/30/demonstrating-demonstrate-dot-sh</id>
+    <content type="html"><![CDATA[<p>So, in the course of trying to prepare a presentation for this
+Thursday (today!), I ended up creating a program called
+<code>demonstrate.sh</code>. Basically, it lets you write a script, meant for an
+interpreter (like bash, python, irb, coffee etc.) and then execute it
+on demand.</p>
+
+<!--more-->
+
+
+<p>What do I mean by &ldquo;on demand&rdquo;? Well, basically it invokes the
+interpreter and then reads the script file one line at a time. Then it
+prints out a fake prompt based on the interpreter you specified, and
+then it prints out the line of input it&rsquo;s processing.  When you hit
+enter, the script sends that line of input to the interpreter and it
+then prints its output to the screen. Oh, there&rsquo;s one little
+caveat. When <code>demonstrate.sh</code> prints the line of output, it prints it
+character by character with a small randomized delay. So it looks a
+bit like you&rsquo;re actually typing out the command.</p>
+
+<p>That&rsquo;s it! It&rsquo;s a simple script, but it allows you to create and then
+run in a repeatable way a sequence of commands that you want to
+<em>demonstrate</em>.</p>
+
+<p>There are some improvements I&rsquo;d like to add. The ability to
+recursively run demonstrate scripts inside of a demonstrate script
+would be awesome. Currently because I&rsquo;m doing everything in the
+simplest possible way, and the script is run in the background running
+demonstrate inside of a demonstrate script doesn&rsquo;t work very well. I&rsquo;m
+actually not entirely sure why it doesn&rsquo;t work, but the results are
+demonstrably not what I want.</p>
+
+<p>It would also be nice to make it so that you can insert arbitrary
+commands to the interpreter, instead of only being able to run the
+commands in the script. This is a particularly key feature since if
+you just start another interpreter to run ad-hoc commands, you don&rsquo;t
+have the same environment. This isn&rsquo;t important if your script doesn&rsquo;t
+contain any side-effectful things, but I think that a lot of scripts
+will tend to.</p>
+
+<p>Finally, it would be really nice if the <code>demonstrate.sh</code> didn&rsquo;t need
+to fake the prompts for the interpreters. In an ideal world, those
+prompts would be transparently printed directly to the screen. I&rsquo;m
+sure there&rsquo;s a way to do it, but it probably isn&rsquo;t possible/easy in
+<code>bash</code>.</p>
+
+<p>When I talked to <a href="https://github.com/doy">Jesse</a> about this, he asked the critical question.
+Why not just record the output? My answer was essentially because I
+wanted to eventually be able to run arbitrary commands in addition to
+the script commands. This is sort of a weak answer, since it depends
+on a feature I haven&rsquo;t yet implemented!</p>
+
+<p>But there&rsquo;s another answer, that I discovered today when I was playing
+with the classic Unix utility <code>script</code> that does exactly what Jesse
+was talking about. The difference between recording an interaction
+with <code>script</code> and writing a demonstrate script is this. Recording with
+<code>script</code> is <em>still live coding</em>. This is especially true if you want
+to use the timing feature to play it back at the same speed that it
+happened at. In contrast, writing a <code>demonstrate</code> script is the same
+as writing any regular script for the interpreter you&rsquo;re
+targeting. You are totally offline, and you can write and edit the
+script directly, and then run it with demonstrate to make sure it does
+exactly what you want.</p>
+
+<p>From what I&rsquo;ve been told about the early days of programming, the
+difference between recording an interaction with <code>script</code> and writing
+a <code>demonstrate</code> script is approximately the same as the difference
+between writing programs on punch cards and writing programs in a text
+editor on a computer. If you mess up while punching the card, you have
+to start over from the beginning (barring awesome hacks
+<a href="https://twitter.com/francesc/status/521602168022118400">like this</a>).</p>
+
+<p>Yup, that&rsquo;s it. If you&rsquo;re interested, check it out
+<a href="https://github.com/RadicalZephyr/demonstrate.sh">on Github</a>. Pull requests welcome :)</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Playing With Org-mode]]></title>
@@ -204,7 +285,7 @@ at the <a href="zephyrizing">git repository for this site</a>.</p>
 </span><span class='line'>    <span class="n">safe</span> <span class="kp">false</span>
 </span><span class='line'>    <span class="n">priority</span> <span class="ss">:low</span>
 </span><span class='line'>
-</span><span class='line'>    <span class="vc">@@emacs_org_html_cmd</span> <span class="o">=</span> <span class="s2">&quot;(progn (require (quote org)) (setq org-html-head-include-default-style nil) (setq org-html-head-include-scripts nil) (condition-case nil (while t (insert (read-string </span><span class="se">\&quot;\&quot;</span><span class="s2">) </span><span class="se">\&quot;\n\&quot;</span><span class="s2">)) (error nil)) (set-buffer (org-export-to-buffer (quote html) </span><span class="se">\&quot;</span><span class="s2">*Org HTML Export*</span><span class="se">\&quot;</span><span class="s2"> nil nil nil t nil (lambda nil t))) (message </span><span class="se">\&quot;</span><span class="s2">%s</span><span class="se">\&quot;</span><span class="s2"> (buffer-string)))&quot;</span>
+</span><span class='line'>    <span class="vc">@@emacs_org_html_cmd</span> <span class="o">=</span> <span class="s2">&quot;(progn (require (quote org)) (setq font-lock-mode t) (setq org-html-head-include-default-style nil) (setq org-html-head-include-scripts nil) (condition-case nil (while t (insert (read-string </span><span class="se">\&quot;\&quot;</span><span class="s2">) </span><span class="se">\&quot;\n\&quot;</span><span class="s2">)) (error nil)) (set-buffer (org-export-to-buffer (quote html) </span><span class="se">\&quot;</span><span class="s2">*Org HTML Export*</span><span class="se">\&quot;</span><span class="s2"> nil nil nil t nil (lambda nil t))) (send-string-to-terminal (buffer-string) nil))&quot;</span>
 </span><span class='line'>
 </span><span class='line'>    <span class="k">def</span> <span class="nf">matches</span><span class="p">(</span><span class="n">ext</span><span class="p">)</span>
 </span><span class='line'>      <span class="n">ext</span> <span class="o">=~</span> <span class="sr">/^\.org$/i</span>
@@ -224,9 +305,9 @@ at the <a href="zephyrizing">git repository for this site</a>.</p>
 </span><span class='line'>      <span class="k">if</span> <span class="n">emacs_path</span><span class="o">.</span><span class="n">empty?</span>
 </span><span class='line'>        <span class="nb">puts</span> <span class="s2">&quot;Could not find an emacs executable.&quot;</span>
 </span><span class='line'>      <span class="k">else</span>
-</span><span class='line'>        <span class="n">out</span><span class="p">,</span> <span class="n">status</span> <span class="o">=</span> <span class="no">Open3</span><span class="o">.</span><span class="n">capture2e</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="n">emacs_path</span><span class="si">}</span><span class="s2"> --batch --eval &quot;</span> <span class="o">+</span>
-</span><span class='line'>                                      <span class="s2">&quot;</span><span class="si">#{</span><span class="vc">@@emacs_org_html_cmd</span><span class="o">.</span><span class="n">inspect</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
-</span><span class='line'>                                      <span class="ss">:stdin_data</span><span class="o">=&gt;</span><span class="n">content</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">out</span><span class="p">,</span> <span class="n">status</span> <span class="o">=</span> <span class="no">Open3</span><span class="o">.</span><span class="n">capture2</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="n">emacs_path</span><span class="si">}</span><span class="s2"> --batch --eval &quot;</span> <span class="o">+</span>
+</span><span class='line'>                                     <span class="s2">&quot;</span><span class="si">#{</span><span class="vc">@@emacs_org_html_cmd</span><span class="o">.</span><span class="n">inspect</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+</span><span class='line'>                                     <span class="ss">:stdin_data</span><span class="o">=&gt;</span><span class="n">content</span><span class="p">)</span>
 </span><span class='line'>        <span class="n">out</span> <span class="k">unless</span> <span class="n">status</span> <span class="o">!=</span> <span class="mi">0</span>
 </span><span class='line'>      <span class="k">end</span>
 </span><span class='line'>

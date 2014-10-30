@@ -283,7 +283,7 @@ at the <a href="zephyrizing">git repository for this site</a>.</p>
 </span><span class='line'>    <span class="n">safe</span> <span class="kp">false</span>
 </span><span class='line'>    <span class="n">priority</span> <span class="ss">:low</span>
 </span><span class='line'>
-</span><span class='line'>    <span class="vc">@@emacs_org_html_cmd</span> <span class="o">=</span> <span class="s2">&quot;(progn (require (quote org)) (setq org-html-head-include-default-style nil) (setq org-html-head-include-scripts nil) (condition-case nil (while t (insert (read-string </span><span class="se">\&quot;\&quot;</span><span class="s2">) </span><span class="se">\&quot;\n\&quot;</span><span class="s2">)) (error nil)) (set-buffer (org-export-to-buffer (quote html) </span><span class="se">\&quot;</span><span class="s2">*Org HTML Export*</span><span class="se">\&quot;</span><span class="s2"> nil nil nil t nil (lambda nil t))) (message </span><span class="se">\&quot;</span><span class="s2">%s</span><span class="se">\&quot;</span><span class="s2"> (buffer-string)))&quot;</span>
+</span><span class='line'>    <span class="vc">@@emacs_org_html_cmd</span> <span class="o">=</span> <span class="s2">&quot;(progn (require (quote org)) (setq font-lock-mode t) (setq org-html-head-include-default-style nil) (setq org-html-head-include-scripts nil) (condition-case nil (while t (insert (read-string </span><span class="se">\&quot;\&quot;</span><span class="s2">) </span><span class="se">\&quot;\n\&quot;</span><span class="s2">)) (error nil)) (set-buffer (org-export-to-buffer (quote html) </span><span class="se">\&quot;</span><span class="s2">*Org HTML Export*</span><span class="se">\&quot;</span><span class="s2"> nil nil nil t nil (lambda nil t))) (send-string-to-terminal (buffer-string) nil))&quot;</span>
 </span><span class='line'>
 </span><span class='line'>    <span class="k">def</span> <span class="nf">matches</span><span class="p">(</span><span class="n">ext</span><span class="p">)</span>
 </span><span class='line'>      <span class="n">ext</span> <span class="o">=~</span> <span class="sr">/^\.org$/i</span>
@@ -303,9 +303,9 @@ at the <a href="zephyrizing">git repository for this site</a>.</p>
 </span><span class='line'>      <span class="k">if</span> <span class="n">emacs_path</span><span class="o">.</span><span class="n">empty?</span>
 </span><span class='line'>        <span class="nb">puts</span> <span class="s2">&quot;Could not find an emacs executable.&quot;</span>
 </span><span class='line'>      <span class="k">else</span>
-</span><span class='line'>        <span class="n">out</span><span class="p">,</span> <span class="n">status</span> <span class="o">=</span> <span class="no">Open3</span><span class="o">.</span><span class="n">capture2e</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="n">emacs_path</span><span class="si">}</span><span class="s2"> --batch --eval &quot;</span> <span class="o">+</span>
-</span><span class='line'>                                      <span class="s2">&quot;</span><span class="si">#{</span><span class="vc">@@emacs_org_html_cmd</span><span class="o">.</span><span class="n">inspect</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
-</span><span class='line'>                                      <span class="ss">:stdin_data</span><span class="o">=&gt;</span><span class="n">content</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">out</span><span class="p">,</span> <span class="n">status</span> <span class="o">=</span> <span class="no">Open3</span><span class="o">.</span><span class="n">capture2</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="n">emacs_path</span><span class="si">}</span><span class="s2"> --batch --eval &quot;</span> <span class="o">+</span>
+</span><span class='line'>                                     <span class="s2">&quot;</span><span class="si">#{</span><span class="vc">@@emacs_org_html_cmd</span><span class="o">.</span><span class="n">inspect</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+</span><span class='line'>                                     <span class="ss">:stdin_data</span><span class="o">=&gt;</span><span class="n">content</span><span class="p">)</span>
 </span><span class='line'>        <span class="n">out</span> <span class="k">unless</span> <span class="n">status</span> <span class="o">!=</span> <span class="mi">0</span>
 </span><span class='line'>      <span class="k">end</span>
 </span><span class='line'>
@@ -349,6 +349,8 @@ at the <a href="zephyrizing">git repository for this site</a>.</p>
         <a class="basic-alignment left" href="/blog/2014/10/26/on-the-importance-of-distinguishing-between-stable-and-development-documentation/" title="Previous Post: On the Importance of Distinguishing Between Stable and Development Documentation">&laquo; On the Importance of Distinguishing Between Stable and Development Documentation</a>
       
       
+        <a class="basic-alignment right" href="/blog/2014/10/30/demonstrating-demonstrate-dot-sh/" title="Next Post: Demonstrating demonstrate.sh">Demonstrating demonstrate.sh &raquo;</a>
+      
     </p>
   </footer>
 </article>
@@ -368,6 +370,10 @@ at the <a href="zephyrizing">git repository for this site</a>.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/10/30/demonstrating-demonstrate-dot-sh/">Demonstrating demonstrate.sh</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/10/27/playing-with-org-mode/">Playing With Org-mode</a>
       </li>
     
@@ -381,10 +387,6 @@ at the <a href="zephyrizing">git repository for this site</a>.</p>
     
       <li class="post">
         <a href="/blog/2014/10/11/hacker-school-week-1-review/">Hacker School: Week 1 Review</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/10/07/dot-dot-dot-and-this-is-why-master-should-be-stable/">&#8230; And This Is Why Master Should Be Stable</a>
       </li>
     
   </ul>
