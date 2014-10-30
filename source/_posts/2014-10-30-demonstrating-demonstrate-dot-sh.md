@@ -50,6 +50,26 @@ prompts would be transparently printed directly to the screen. I'm
 sure there's a way to do it, but it probably isn't possible/easy in
 `bash`.
 
+When I talked to [Jesse] about this, he asked the critical question.
+Why not just record the output? My answer was essentially because I
+wanted to eventually be able to run arbitrary commands in addition to
+the script commands. This is sort of a weak answer, since it depends
+on a feature I haven't yet implemented!
+
+[Jesse]: https://github.com/doy
+
+But there's another answer, that I discovered today when I was playing
+with the classic Unix utility `script` that does exactly what Jesse
+was talking about. The difference between recording an interaction
+with `script` and writing a demonstrate script is this. Recording with
+`script` is _still live coding_. This is especially true if you want
+to use the timing feature to play it back at the same speed that it
+happened at. In contrast, writing a `demonstrate` script is the same
+as writing any regular script for the interpreter you're
+targeting. You are totally offline, and you can write and edit the
+script directly, and then run it with demonstrate to make sure it does
+exactly what you want.
+
 Yup, that's it. If you're interested, check it out
 [on Github][demonstrate]. Pull requests welcome :)
 
