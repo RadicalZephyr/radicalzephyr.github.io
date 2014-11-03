@@ -70,6 +70,16 @@ targeting. You are totally offline, and you can write and edit the
 script directly, and then run it with demonstrate to make sure it does
 exactly what you want.
 
+From what I've been told about the early days of programming, the
+difference between recording an interaction with `script` and writing
+a `demonstrate` script is approximately the same as the difference
+between writing programs on punch cards and writing programs in a text
+editor on a computer. If you mess up while punching the card, you have
+to start over from the beginning (barring awesome hacks
+[like this][patch]).
+
+[patch]: https://twitter.com/francesc/status/521602168022118400
+
 Yup, that's it. If you're interested, check it out
 [on Github][demonstrate]. Pull requests welcome :)
 
