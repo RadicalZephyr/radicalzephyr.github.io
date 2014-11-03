@@ -40,3 +40,13 @@ title: Introduction to Bash Scripting
 ** Actual Scripting
 
 *** Loops and Conditionals
+
+** Developing Shell Scripts
+
+*** Incremental Build-up
+
+*** Guarding commands with echo
+
+*** ~set -e~ and ~set -x~
+
+*** Mindset
