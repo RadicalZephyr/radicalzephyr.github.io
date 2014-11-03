@@ -1,0 +1,36 @@
+---
+layout: presentation
+title: Introduction to Bash Scripting
+---
+
+* Also, how to use the command-line like a pro
+
+* Subjects
+
+** Basics
+
+*** Unix Tools Philosophy
+
+*** Library of Tools
+
+** Jobs of a shell
+
+*** Arguments processing
+
+*** Program look-up
+
+*** Expansions
+
+*** Exit Codes
+
+*** Implicit State
+
+**** Current User
+
+**** Current Directory
+
+**** Environment Variables
+
+** Actual Scripting
+
+*** Loops and Conditionals
