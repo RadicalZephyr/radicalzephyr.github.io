@@ -11,6 +11,12 @@ title: Introduction to Bash Scripting
 
 *** Unix Tools Philosophy
 
+**** Standard Input/Output
+
+**** Pipes
+
+**** Everything is a file
+
 *** Library of Tools
 
 ** Jobs of a shell
