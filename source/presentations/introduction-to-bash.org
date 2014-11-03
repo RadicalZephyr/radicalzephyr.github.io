@@ -3,7 +3,7 @@ layout: presentation
 title: Introduction to Bash Scripting
 ---
 
-* Also, how to use the command-line like a pro
+* A.K.A. - How To Use The Command-Line Like A Pro
 
 * Subjects
 
