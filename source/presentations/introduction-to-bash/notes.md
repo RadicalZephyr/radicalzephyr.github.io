@@ -21,3 +21,18 @@ bash "thinks" about the world. Same with argument processing and
 finding programs.  Then, the end of the talk transitions into the more
 experiential viewpoint of bash. How do you do the stuff, how do you
 end up with what you want.
+
+General ways to approach explaining things
+- An historical perspective
+- An org structure view
+- Experiential view
+
+
+Motivating examples:
+Good example for find etc. with ebooks and deeply nested folder
+
+
+- The Use/Mention distinction
+
+So, what kinds of use cases can I dream up for motivating bash stuff?
+Or can I find?

@@ -11,8 +11,6 @@ Particularly with concrete examples of what they should be able to do
 
 * A.K.A. - How To Use The Command-Line Like A Pro
 
-* Subjects
-
 ** Basics
 
 *** Unix Tools Philosophy
@@ -23,9 +21,15 @@ Particularly with concrete examples of what they should be able to do
 
 **** Everything is a (text) file
 
+- As opposed to office suites
+  - Binary file format (also proprietary)
+  - Need specialized code to read/write in the correct format
+  - Has "export" functions to transform it to different formats
+
 -Talk about the programs as the objects of consideration ... ?
 
--Maybe provide a contrast, like monolithic, GUI
+
+
 
 *** Library of Tools
 
@@ -34,14 +38,11 @@ large toolbox and potentially overwhelming.  Take away is that adding
 even one tool is a valuable outcome.
 
 ** Jobs of a shell
-- An historical perspective
-- An org structure view
-- Experiential view
 
 *** Arguments processing
 - don't depend on ~int main (argc, argv)~ find something more approachable
 - is this more advanced???
-- ROAD Warning sign basically (this can be hard)
+- Road sign warning basically (this can be hard)
 
 *** Program look-up
 
@@ -56,6 +57,7 @@ even one tool is a valuable outcome.
 **** Current Directory
 
 **** Environment Variables
+
 
 ** Actual Scripting
 
@@ -79,11 +81,11 @@ For demos, consider using common files like /usr/dict and /etc/passwd
 
 *** Mindset
 
-Talk about the gitignore thing.  Upfront data structure filtration
+Talk about the gitignore thing.  Upfront data structure creation
+(process all .hignore files, then check each filename against all
+patterns.  Obviously really bad in bash because no way to use a hash
+table or something to speed up the checks
 
-----
-
-Good example for find etc. with ebooks
-- The Use/Mention distinction
-
-Good book - "Making Software: What really works and why we believe it"
+But what about flipping it around? Instead, enumerate all files, then
+enumerate all files that match each pattern in a .hignore.  Then,
+filter the list of those files by the ones that only appear once.
