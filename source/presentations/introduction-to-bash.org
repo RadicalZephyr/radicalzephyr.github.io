@@ -3,6 +3,12 @@ layout: presentation
 title: Introduction to Bash Scripting
 ---
 
+Articulate a "floor" of what experience is required for this talk.
+Particularly with concrete examples of what they should be able to do
+(like you must have forked and merged with git)
+
+- Think about motivating use cases
+
 * A.K.A. - How To Use The Command-Line Like A Pro
 
 * Subjects
@@ -15,13 +21,27 @@ title: Introduction to Bash Scripting
 
 **** Pipes
 
-**** Everything is a file
+**** Everything is a (text) file
+
+-Talk about the programs as the objects of consideration ... ?
+
+-Maybe provide a contrast, like monolithic, GUI
 
 *** Library of Tools
 
+Focus on a few at a time.  Empahasize incremental learning.  It's a
+large toolbox and potentially overwhelming.  Take away is that adding
+even one tool is a valuable outcome.
+
 ** Jobs of a shell
+- An historical perspective
+- An org structure view
+- Experiential view
 
 *** Arguments processing
+- don't depend on ~int main (argc, argv)~ find something more approachable
+- is this more advanced???
+- ROAD Warning sign basically (this can be hard)
 
 *** Program look-up
 
@@ -41,12 +61,29 @@ title: Introduction to Bash Scripting
 
 *** Loops and Conditionals
 
+For demos, consider using common files like /usr/dict and /etc/passwd
+
+*** Common Idioms
+
 ** Developing Shell Scripts
 
 *** Incremental Build-up
+
+**** Avoid permanent effects,
+
+**** But learn how to setup test environments for doing destructive
 
 *** Guarding commands with echo
 
 *** ~set -e~ and ~set -x~
 
 *** Mindset
+
+Talk about the gitignore thing.  Upfront data structure filtration
+
+----
+
+Good example for find etc. with ebooks
+- The Use/Mention distinction
+
+Good book - "Making Software: What really works and why we believe it"
