@@ -62,14 +62,22 @@ But how does it make that list?
 
 Preventing processing from occurring
 
-- Road sign warning basically (this can be tricky and subtle)
+- This can be tricky and subtle
 
 
-*** Program look-up
+*** Program look-up/execution
 
 Search all paths in ~PATH~ variable, left-to-right order
 
 - Overriding default paths
+
+
+*** Exit Codes
+
+0 => success
+anything else => some kind of failure
+
+- not always clear what the meaning is
 
 
 *** Expansions
@@ -79,14 +87,6 @@ Search all paths in ~PATH~ variable, left-to-right order
   - Shell info, ~$$~ ~$?~
 - Variables (so many possibilities!!)
 - Sub-shells
-
-
-*** Exit Codes
-
-0 => success
-anything else => some kind of failure
-
-- not always clear what the meaning is
 
 
 *** Implicit State
