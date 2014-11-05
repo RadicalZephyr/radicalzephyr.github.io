@@ -125,6 +125,12 @@ For demos, consider using common files like /usr/dict and /etc/passwd
 
 *** Common Idioms
 
+http://www.billharlan.com/papers/Bourne_shell_idioms.html
+
+
+**** Argument processing
+
+
 ** Developing Shell Scripts
 
 *** Incremental Build-up
