@@ -9,6 +9,23 @@ title: Introduction to Bash Scripting
 
 *** Unix Tools Philosophy
 
+- The paradigm of this world
+
+**** Everything is a (text) file
+
+- As opposed to office suites
+  - Binary file format (also proprietary)
+  - Need specialized code to read/write in the correct format
+  - Has "export" functions to transform it to different formats
+
+
+**** Arguments
+
+- Two types
+  - Switches (i.e. ~-c~ or ~--count~)
+  - Other
+
+
 **** Standard Input/Output/Error
 
 Three streams. One for input, two for output.
@@ -20,23 +37,6 @@ Three streams. One for input, two for output.
 
 Shorthand for hooking the output of one program to the input of
 another
-
-
-**** Everything is a (text) file
-
-- As opposed to office suites
-  - Binary file format (also proprietary)
-  - Need specialized code to read/write in the correct format
-  - Has "export" functions to transform it to different formats
-
--Talk about the programs as the objects of consideration ... ?
-
-
-**** Arguments
-
-- Two types
-  - Switches (i.e. ~-c~ or ~--count~)
-  - Other
 
 
 ***** Conventional Switches
