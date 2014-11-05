@@ -38,6 +38,23 @@ another
 -Talk about the programs as the objects of consideration ... ?
 
 
+**** Arguments
+
+- Two types
+  - Switches (i.e. ~-c~ or ~--count~)
+  - Other
+
+
+***** Conventional Switches
+
+- Short and long switches
+- ~-v~ / ~--version~ - program version
+- ~-h~ / ~--help~ - help!
+- ~--~ - end of switches
+
+There are MANY exceptions!!
+
+
 *** Library of Tools
 
 Focus on a few at a time.  Empahasize incremental learning.  It's a
