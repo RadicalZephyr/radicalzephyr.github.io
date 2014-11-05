@@ -15,9 +15,18 @@ Particularly with concrete examples of what they should be able to do
 
 *** Unix Tools Philosophy
 
-**** Standard Input/Output
+**** Standard Input/Output/Error
+
+Three streams. One for input, two for output.
+- All programs have these.
+- That doesn't mean they're always different!
+
 
 **** Pipes
+
+Shorthand for hooking the output of one program to the input of
+another
+
 
 **** Everything is a (text) file
 
@@ -29,34 +38,72 @@ Particularly with concrete examples of what they should be able to do
 -Talk about the programs as the objects of consideration ... ?
 
 
-
-
 *** Library of Tools
 
 Focus on a few at a time.  Empahasize incremental learning.  It's a
 large toolbox and potentially overwhelming.  Take away is that adding
 even one tool is a valuable outcome.
 
+
 ** Jobs of a shell
 
 *** Arguments processing
-- don't depend on ~int main (argc, argv)~ find something more approachable
-- is this more advanced???
-- Road sign warning basically (this can be hard)
+
+Who is familiar with processing command-line arguments?
+
+All command line programs get arguments in this format:
+
+A list of: ~program name arg1 arg2 arg3~
+
+But how does it make that list?
+
+
+**** Quoting
+
+Preventing processing from occurring
+
+- Road sign warning basically (this can be tricky and subtle)
+
 
 *** Program look-up
 
+Search all paths in ~PATH~ variable, left-to-right order
+
+- Overriding default paths
+
+
 *** Expansions
 
+- Special variables
+  - Arguments, ~$0~-~$9~, ~$#~, ~$@~
+  - Shell info, ~$$~ ~$?~
+- Variables (so many possibilities!!)
+- Sub-shells
+
+
 *** Exit Codes
+
+0 => success
+anything else => some kind of failure
+
+- not always clear what the meaning is
+
 
 *** Implicit State
 
 **** Current User
 
+- ~$UID~, ~$USER~
+
+
 **** Current Directory
 
+- ~$PWD~, ~pwd~, ~cd~
+
+
 **** Environment Variables
+
+- ~env~
 
 
 ** Actual Scripting
@@ -71,7 +118,7 @@ For demos, consider using common files like /usr/dict and /etc/passwd
 
 *** Incremental Build-up
 
-**** Avoid permanent effects,
+**** Avoid permanent effects
 
 **** But learn how to setup test environments for doing destructive
 
