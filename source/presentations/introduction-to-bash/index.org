@@ -3,12 +3,6 @@ layout: presentation
 title: Introduction to Bash Scripting
 ---
 
-Articulate a "floor" of what experience is required for this talk.
-Particularly with concrete examples of what they should be able to do
-(like you must have forked and merged with git)
-
-- Think about motivating use cases
-
 * A.K.A. - How To Use The Command-Line Like A Pro
 
 ** Basics

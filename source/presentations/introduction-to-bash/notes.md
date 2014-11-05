@@ -1,5 +1,12 @@
 Things! Stuff! Words!
 
+Articulate a "floor" of what experience is required for this talk.
+Particularly with concrete examples of what they should be able to do
+(like you must have forked and merged with git)
+
+- Think about motivating use cases
+
+
 Okay, interesting things to think about. What is the base-level of
 experience required for participation in this talk? That raises the
 question of what kind of talk I want to give.
