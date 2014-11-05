@@ -133,6 +133,8 @@ http://www.billharlan.com/papers/Bourne_shell_idioms.html
 
 ** Developing Shell Scripts
 
+*** Man pages!!
+
 *** Incremental Build-up
 
 **** Avoid permanent effects
