@@ -13,10 +13,21 @@ title: Introduction to Bash Scripting
 
 **** Everything is a (text) file
 
+- Very file-oriented
+
 - As opposed to office suites
   - Binary file format (also proprietary)
   - Need specialized code to read/write in the correct format
   - Has "export" functions to transform it to different formats
+
+
+**** Library of Tools
+
+Focus on a few at a time.  Empahasize incremental learning.  It's a
+large toolbox and potentially overwhelming.  Take away is that adding
+even one tool is a valuable outcome.
+
+- show a web page here of list of many different unix tools
 
 
 **** Arguments
@@ -27,6 +38,10 @@ title: Introduction to Bash Scripting
 
 
 **** Standard Input/Output/Error
+
+Most standard unix tools except to receive on stdin
+
+After processing they put the changed text to stdout
 
 Three streams. One for input, two for output.
 - All programs have these.
@@ -49,14 +64,36 @@ another
 There are MANY exceptions!!
 
 
-*** Library of Tools
+**** Environment
 
-Focus on a few at a time.  Empahasize incremental learning.  It's a
-large toolbox and potentially overwhelming.  Take away is that adding
-even one tool is a valuable outcome.
+Show the ~env~ command
 
 
 ** Jobs of a shell
+
+High-level
+- Expansions
+- Argument splitting
+- Setup environment
+- Find/execute program
+- Cleanup
+
+*** Expansions
+
+- file "globs"
+- Special variables
+  - Arguments, ~$0~-~$9~, ~$#~, ~$@~
+  - Shell info, ~$$~ ~$!~ ~$?~
+- Variables (so many possibilities!!)
+  - Controlling variable expansion ${} etc.
+- Sub-shells
+
+**** Notes
+
+Do many demonstrations here!!
+
+Have a script that demonstrates how argument expansion works
+
 
 *** Arguments processing
 
@@ -68,12 +105,17 @@ A list of: ~program name arg1 arg2 arg3~
 
 But how does it make that list?
 
-
 **** Quoting
 
 Preventing processing from occurring
 
 - This can be tricky and subtle
+
+
+
+*** Setup environment
+
+- Input/output redirection
 
 
 *** Program look-up/execution
@@ -91,16 +133,7 @@ anything else => some kind of failure
 - not always clear what the meaning is
 
 
-*** Expansions
-
-- Special variables
-  - Arguments, ~$0~-~$9~, ~$#~, ~$@~
-  - Shell info, ~$$~ ~$?~
-- Variables (so many possibilities!!)
-- Sub-shells
-
-
-*** Implicit State
+*** Implicit State - this is not so important
 
 **** Current User
 
@@ -121,7 +154,31 @@ anything else => some kind of failure
 
 *** Loops and Conditionals
 
+**** if
+
+Runs a program, and checks the exit code
+
+Show how ~[~ is a program also called ~test~
+
+
+**** loops
+
+- while: similar in concept to if
+  - Show a standard counter style while loop
+  - Show a more exotic bash type while loop (using which to figure out
+    what path element an executable lives in)
+- for: very different.  More reminiscent of python
+  - does expansions, doesn't run commands
+
+**** Notes
+
 For demos, consider using common files like /usr/dict and /etc/passwd
+
+*** Cool examples
+
+I have none...
+
+Mine my github, the LDP pages, my provel scripts
 
 *** Common Idioms
 
@@ -135,15 +192,34 @@ http://www.billharlan.com/papers/Bourne_shell_idioms.html
 
 *** Man pages!!
 
+Reading them is sort of an art
+
+
 *** Incremental Build-up
+
+Show an example i.e. trying to extract info from /etc/passwd
 
 **** Avoid permanent effects
 
+
 **** But learn how to setup test environments for doing destructive
+
 
 *** Guarding commands with echo
 
 *** ~set -e~ and ~set -x~
+
+Really powerful options
+
+**** -e "most important line in any bash script"
+
+Default behavior
+
+
+**** -x "almost as good a debugger"
+
+Display everything!!
+
 
 *** Mindset
 
