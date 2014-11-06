@@ -5,13 +5,16 @@ title: Introduction to Bash Scripting
 
 * A.K.A. - How To Use The Command-Line Like A Pro
 
-** Basics
+** Unix Tools Philosophy                                              :slide:
 
-*** Unix Tools Philosophy                                             :slide:
+- Text and Files
+- Library of composable tools
+- Arguments
+- Standard Input/Output/Error
+- Pipes
+- The Environment
 
-- The paradigm of this world
-
-**** Everything is a (text) file                                      :slide:
+*** Everything is a (text) file                                       :slide:
 
 - Very file-oriented
 
@@ -21,7 +24,7 @@ title: Introduction to Bash Scripting
   - Has "export" functions to transform it to different formats
 
 
-**** Library of Tools                                                 :slide:
+*** Library of Tools                                                  :slide:
 
 Focus on a few at a time.  Empahasize incremental learning.  It's a
 large toolbox and potentially overwhelming.  Take away is that adding
@@ -30,24 +33,22 @@ even one tool is a valuable outcome.
 - show a web page here of list of many different unix tools
 
 
-**** Arguments                                                        :slide:
+*** Arguments                                                         :slide:
 
 - Two types
   - Switches (i.e. ~-c~ or ~--count~)
   - Other
 
-
-**** Conventional Switches                                            :slide:
-
-- Short and long switches
-- ~-v~ / ~--version~ - program version
-- ~-h~ / ~--help~ - help!
-- ~--~ - end of switches
+- Conventional Switches                                               :slide:
+  - Short and long switches
+  - ~-v~ / ~--version~ - program version
+  - ~-h~ / ~--help~ - help!
+  - ~--~ - end of switches
 
 There are MANY exceptions!!
 
 
-**** Standard Input/Output/Error                                      :slide:
+*** Standard Input/Output/Error                                       :slide:
 
 Most standard unix tools except to receive on stdin
 
@@ -58,17 +59,17 @@ Three streams. One for input, two for output.
 - That doesn't mean they're always different!
 
 
-**** Pipes                                                            :slide:
+*** Pipes                                                             :slide:
 
 Shorthand for hooking the output of one program to the input of
 another
 
 
-**** Environment                                                      :slide:
+*** The Environment                                                   :slide:
 
 Convenient place to store information
 
-***** Notes
+**** Notes
 Show the ~env~ command
 
 
@@ -179,11 +180,13 @@ Show how ~[~ is a program also called ~test~
 
 For demos, consider using common files like /usr/dict and /etc/passwd
 
+
 *** Cool examples
 
 I have none...
 
 Mine my github, the LDP pages, my provel scripts
+
 
 *** Common Idioms
 
