@@ -7,16 +7,17 @@ title: Introduction to Bash Scripting
 
 ** Unix Tools Philosophy                                              :slide:
 
-- Text and Files
+- Files and plain-text
 - Library of composable tools
 - Arguments
 - Standard Input/Output/Error
 - Pipes
 - The Environment
 
-*** Everything is a (text) file                                       :slide:
+*** Everything is a (plain-text) file                                 :slide:
 
 - Very file-oriented
+- Characters are characters
 
 - As opposed to office suites
   - Binary file format (also proprietary)
