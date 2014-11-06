@@ -80,6 +80,8 @@ arguments, but in their absence it defaults to read stdin, write stdout
 Shorthand for hooking the output of one program to the input of
 another
 
+There's more to it though...
+
 **** Notes                                                             :note:
 
 Demonstrate tr as very similar to cat, but takes no file arguments
@@ -89,6 +91,14 @@ So how do we feed it files as input? Pipe from cat!
 This demonstrates pretty well the composable toolkit idea, and
 DRY-ness of program logic.  Cat knows how to open files and
 filenames.  So pretty much very few other programs need to.
+
+Also, pull performance:
+
+This is a good example though: what does find . -type f -name 'a*' do
+normally?
+
+Why does the pipe run so much quicker?!?!?!
+
 
 
 *** The Environment                                                   :slide:
