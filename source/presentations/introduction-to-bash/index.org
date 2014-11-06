@@ -156,7 +156,15 @@ Preventing processing from occurring
 *** Setup environment                                                 :slide:
 
 - Input/output redirection
+- Temporary variable setting
 
+**** Notes                                                             :note:
+
+Redux the git commit editor thing with temporary variable
+
+Use cat to copy a file, use diff to show they're the same
+
+Append some lines to the end of the new one
 
 *** Program look-up/execution                                         :slide:
 
@@ -164,13 +172,26 @@ Search all paths in ~PATH~ variable, left-to-right order
 
 - Overriding default paths
 
+**** Notes                                                             :note:
+
+Show adding a directory to PATH and then executing that file from
+somewhere else
+
 
 *** Exit Codes                                                        :slide:
 
 0 => success
 anything else => some kind of failure
 
-- not always clear what the meaning is
+- not always clear what the meaning is for non-zero codes
+
+**** Notes                                                             :note:
+
+Redo the diff thing, then show that the exit code changes
+
+diff defines no differences as success, and different as failure
+
+git commit -a.  If no commit happens, then 1, else 0
 
 
 *** Implicit State - this is not so important
