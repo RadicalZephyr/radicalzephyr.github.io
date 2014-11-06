@@ -7,11 +7,11 @@ title: Introduction to Bash Scripting
 
 ** Basics
 
-*** Unix Tools Philosophy
+*** Unix Tools Philosophy                                             :slide:
 
 - The paradigm of this world
 
-**** Everything is a (text) file
+**** Everything is a (text) file                                      :slide:
 
 - Very file-oriented
 
@@ -21,7 +21,7 @@ title: Introduction to Bash Scripting
   - Has "export" functions to transform it to different formats
 
 
-**** Library of Tools
+**** Library of Tools                                                 :slide:
 
 Focus on a few at a time.  Empahasize incremental learning.  It's a
 large toolbox and potentially overwhelming.  Take away is that adding
@@ -30,14 +30,24 @@ even one tool is a valuable outcome.
 - show a web page here of list of many different unix tools
 
 
-**** Arguments
+**** Arguments                                                        :slide:
 
 - Two types
   - Switches (i.e. ~-c~ or ~--count~)
   - Other
 
 
-**** Standard Input/Output/Error
+**** Conventional Switches                                            :slide:
+
+- Short and long switches
+- ~-v~ / ~--version~ - program version
+- ~-h~ / ~--help~ - help!
+- ~--~ - end of switches
+
+There are MANY exceptions!!
+
+
+**** Standard Input/Output/Error                                      :slide:
 
 Most standard unix tools except to receive on stdin
 
@@ -48,28 +58,21 @@ Three streams. One for input, two for output.
 - That doesn't mean they're always different!
 
 
-**** Pipes
+**** Pipes                                                            :slide:
 
 Shorthand for hooking the output of one program to the input of
 another
 
 
-***** Conventional Switches
+**** Environment                                                      :slide:
 
-- Short and long switches
-- ~-v~ / ~--version~ - program version
-- ~-h~ / ~--help~ - help!
-- ~--~ - end of switches
+Convenient place to store information
 
-There are MANY exceptions!!
-
-
-**** Environment
-
+***** Notes
 Show the ~env~ command
 
 
-** Jobs of a shell
+** Jobs of a shell                                                    :slide:
 
 High-level
 - Expansions
@@ -78,7 +81,7 @@ High-level
 - Find/execute program
 - Cleanup
 
-*** Expansions
+*** Expansions                                                        :slide:
 
 - file "globs"
 - Special variables
@@ -88,14 +91,14 @@ High-level
   - Controlling variable expansion ${} etc.
 - Sub-shells
 
-**** Notes
+**** Notes                                                             :note:
 
 Do many demonstrations here!!
 
 Have a script that demonstrates how argument expansion works
 
 
-*** Arguments processing
+*** Arguments processing                                              :slide:
 
 Who is familiar with processing command-line arguments?
 
@@ -105,27 +108,26 @@ A list of: ~program name arg1 arg2 arg3~
 
 But how does it make that list?
 
-**** Quoting
+**** Quoting                                                          :slide:
 
 Preventing processing from occurring
 
 - This can be tricky and subtle
 
 
-
-*** Setup environment
+*** Setup environment                                                 :slide:
 
 - Input/output redirection
 
 
-*** Program look-up/execution
+*** Program look-up/execution                                         :slide:
 
 Search all paths in ~PATH~ variable, left-to-right order
 
 - Overriding default paths
 
 
-*** Exit Codes
+*** Exit Codes                                                        :slide:
 
 0 => success
 anything else => some kind of failure
@@ -150,18 +152,21 @@ anything else => some kind of failure
 - ~env~
 
 
-** Actual Scripting
+** Actual Scripting                                                   :slide:
 
-*** Loops and Conditionals
+*** Loops and Conditionals                                            :slide:
 
-**** if
+These are similar to most programming languages but subtly different.
+
+
+**** if                                                               :slide:
 
 Runs a program, and checks the exit code
 
 Show how ~[~ is a program also called ~test~
 
 
-**** loops
+**** loops                                                            :slide:
 
 - while: similar in concept to if
   - Show a standard counter style while loop
@@ -170,7 +175,7 @@ Show how ~[~ is a program also called ~test~
 - for: very different.  More reminiscent of python
   - does expansions, doesn't run commands
 
-**** Notes
+**** Notes                                                             :note:
 
 For demos, consider using common files like /usr/dict and /etc/passwd
 
@@ -190,24 +195,28 @@ http://www.billharlan.com/papers/Bourne_shell_idioms.html
 
 ** Developing Shell Scripts
 
-*** Man pages!!
+*** Man pages!!                                                       :slide:
 
 Reading them is sort of an art
 
 
-*** Incremental Build-up
+*** Incremental Build-up                                              :slide:
 
-Show an example i.e. trying to extract info from /etc/passwd
+- Avoid permanent effects
+- But learn how to setup test environments for doing destructive stuff
 
-**** Avoid permanent effects
+**** Notes                                                             :note:
+
+Show the example of trying to figure out how many discrete shell
+scripts
 
 
-**** But learn how to setup test environments for doing destructive
+*** Guarding commands with echo                                       :slide:
+
+Very simple, very effective
 
 
-*** Guarding commands with echo
-
-*** ~set -e~ and ~set -x~
+*** ~set -e~ and ~set -x~                                             :slide:
 
 Really powerful options
 
@@ -221,7 +230,7 @@ Default behavior
 Display everything!!
 
 
-*** Mindset
+*** Mindset                                                           :slide:
 
 Talk about the gitignore thing.  Upfront data structure creation
 (process all .hignore files, then check each filename against all
@@ -231,3 +240,10 @@ table or something to speed up the checks
 But what about flipping it around? Instead, enumerate all files, then
 enumerate all files that match each pattern in a .hignore.  Then,
 filter the list of those files by the ones that only appear once.
+
+
+*** Dummy                                                             :slide:
+
+#+OPTIONS: H:4 num:nil toc:nil tags:t
+
+#+TAGS: slide(s) note(n)
