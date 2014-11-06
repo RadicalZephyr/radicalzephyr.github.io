@@ -276,6 +276,12 @@ scripts
 
 Very simple, very effective
 
+**** Notes                                                             :note:
+
+find all files pipe to xargs echo
+
+find . -type f -name 'a*' | head | xargs -n1 echo
+
 
 *** ~set -e~ and ~set -x~                                             :slide:
 
