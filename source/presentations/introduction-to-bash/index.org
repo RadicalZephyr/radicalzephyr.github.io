@@ -27,11 +27,15 @@ title: Introduction to Bash Scripting
 
 *** Library of Tools                                                  :slide:
 
+Check it out:
+
+https://en.wikipedia.org/wiki/List_of_Unix_commands
+
+**** Notes                                                             :note:
+
 Focus on a few at a time.  Empahasize incremental learning.  It's a
 large toolbox and potentially overwhelming.  Take away is that adding
 even one tool is a valuable outcome.
-
-- show a web page here of list of many different unix tools
 
 
 *** Arguments                                                         :slide:
@@ -48,6 +52,12 @@ even one tool is a valuable outcome.
 
 There are MANY exceptions!!
 
+**** Notes                                                             :note:
+
+For instance, ruby supports -v and --version
+git only supports --version
+java requires -version!!!
+
 
 *** Standard Input/Output/Error                                       :slide:
 
@@ -59,19 +69,45 @@ Three streams. One for input, two for output.
 - All programs have these.
 - That doesn't mean they're always different!
 
+**** Notes                                                             :note:
+
+Demonstrate cat as prototypical of stdin stdout pattern. It takes
+arguments, but in their absence it defaults to read stdin, write stdout
+
 
 *** Pipes                                                             :slide:
 
 Shorthand for hooking the output of one program to the input of
 another
 
+**** Notes                                                             :note:
+
+Demonstrate tr as very similar to cat, but takes no file arguments
+
+So how do we feed it files as input? Pipe from cat!
+
+This demonstrates pretty well the composable toolkit idea, and
+DRY-ness of program logic.  Cat knows how to open files and
+filenames.  So pretty much very few other programs need to.
+
 
 *** The Environment                                                   :slide:
 
-Convenient place to store information
+- Convenient place to store information
+- Lots of interesting stuff is there already
+- Many commands take cues from environment variables
 
 **** Notes
-Show the ~env~ command
+
+- Show the ~env~ command
+
+- Use EDITOR variable and git commit as an example
+
+(USE A REAL SHELL!!) Go to hermit, delete runtests, then commit it no
+message
+
+First time, should open a buffer in zile, then nano, then vi
+Don't write commit messages
 
 
 ** Jobs of a shell                                                    :slide:
