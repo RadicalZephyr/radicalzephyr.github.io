@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Getting Started with LLVM on OS X"
+title: "Getting Started with LLVM on OS&nbsp;X"
 date: 2014-11-19 03:31:00 -0500
 comments: true
 categories:
@@ -144,4 +144,11 @@ compilation helped, but I also restarted Vagrant VM and gave it a full
 2GB of memory which helped a lot.
 
 Once the install finished though CMake was able to find it
-immediately.
+immediately. As pointed out earlier, the code is up on Github. I was
+surprised to discover that there is no Vagrant VM that exists for
+doing LLVM development, so that's going to go on my list of
+projects. Ideally, that **won't** involve building LLVM from source in
+the provisioning stage, because of the computational issues with
+VM's. It might be an interesting excuse to learn how to build .deb
+packages and make a PPA with a CMake that properly installs the
+`FindLLVM.cmake` files...
