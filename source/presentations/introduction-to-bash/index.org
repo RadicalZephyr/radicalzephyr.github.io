@@ -3,6 +3,11 @@ layout: presentation
 title: Introduction to Bash Scripting
 ---
 
+A short introduction to using the command line, and particularly Bash
+in more powerful ways.
+
+<!--more-->
+
 * A.K.A. - How To Use The Command-Line Like A Pro
 
 ** Unix Tools Philosophy                                              :slide:

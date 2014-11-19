@@ -3,7 +3,7 @@ layout: default
 ---
 
 <div class="blog-index">
-  {% assign index = false %}
+  {% assign presentations = true %}
   {% for page in site.pages %}
     {% if page.layout == "presentation" and page.title %}
       {% assign content = page.content %}

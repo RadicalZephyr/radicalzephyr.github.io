@@ -3,6 +3,11 @@ layout: presentation
 title: Reimplementing .gitignore in 12 lines of bash
 ---
 
+An overview of how I reimplemented most of the functionality of a
+`.gitignore` file in a small amount of bash.
+
+<!--more-->
+
 * What is a .gitignore file                                           :slide:
 
 - A plain text file

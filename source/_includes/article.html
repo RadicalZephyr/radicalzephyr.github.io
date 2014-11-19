@@ -16,7 +16,7 @@
     {% endunless %}
   </header>
 {% endunless %}
-{% if index %}
+{% if index or presentations %}
   <div class="entry-content">{{ content | excerpt }}</div>
   {% capture excerpted %}{{ content | has_excerpt }}{% endcapture %}
   {% if excerpted == 'true' %}
