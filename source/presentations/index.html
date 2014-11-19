@@ -1,0 +1,24 @@
+---
+layout: default
+---
+
+<div class="blog-index">
+  {% assign index = false %}
+  {% for page in site.pages %}
+    {% if page.layout == "presentation" and page.title %}
+      {% assign content = page.content %}
+      <article>
+        {% include article.html %}
+      </article>
+    {% endif %}
+  {% endfor %}
+
+
+</div>
+<aside class="sidebar">
+  {% if site.blog_index_asides.size %}
+    {% include_array blog_index_asides %}
+  {% else %}
+    {% include_array default_asides %}
+  {% endif %}
+</aside>
