@@ -109,35 +109,42 @@
   
   <url>
     <loc>http://www.zephyrizing.net/demos/example-plugin.html</loc>
-    <lastmod>2014-11-19T10:46:40-05:00</lastmod>
+    <lastmod>2014-11-19T12:52:01-05:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.zephyrizing.net/blog/archives/</loc>
+    <lastmod>2014-11-19T12:52:01-05:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.zephyrizing.net/presentations/</loc>
+    <lastmod>2014-11-19T12:52:01-05:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
     <loc>http://www.zephyrizing.net/</loc>
-    <lastmod>2014-11-19T10:46:40-05:00</lastmod>
+    <lastmod>2014-11-19T12:52:01-05:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   
   <url>
-    <loc>http://www.zephyrizing.net/blog/archives/</loc>
-    <lastmod>2014-11-19T10:46:40-05:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
     <loc>http://www.zephyrizing.net/presentations/introduction-to-bash/</loc>
-    <lastmod>2014-11-19T10:46:40-05:00</lastmod>
+    <lastmod>2014-11-19T12:52:01-05:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
     <loc>http://www.zephyrizing.net/presentations/reimplementing-gitignore-in-15-lines-of-bash/</loc>
-    <lastmod>2014-11-19T10:46:40-05:00</lastmod>
+    <lastmod>2014-11-19T12:52:01-05:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
