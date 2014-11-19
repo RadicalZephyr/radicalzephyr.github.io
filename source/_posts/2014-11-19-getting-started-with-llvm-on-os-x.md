@@ -68,7 +68,7 @@ since 3.5 has been officially released it would be considered the
 stable version. However, when you install LLVM 3.5 via `apt` (with
 `sudo apt-get install llvm-3.5`) the binaries don't seem to end up
 getting installed on a path location. Or rather, they are on path, but
-the names are all suffixed with `3.5`.
+the names are all suffixed with `-3.5`.
 
 [LLVM]: http://llvm.org/releases
 
