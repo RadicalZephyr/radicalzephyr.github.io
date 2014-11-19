@@ -33,3 +33,15 @@ install LLVM via `brew install llvm`:
 
 
 <!!!!!!!!!!!!put in stuff about homebrew!!!!!!!!!!!!!!!!>
+
+<general outline>
+Talk about successfully setting up LLVM development with Vagrant VM
+
+Key points:
+
+- debian repo's bad/old
+- CMake findlibrary support doesn't really work (from .debs)
+- Need to build from source to get that support
+- I needed to run build multiple times because of memory errors (and
+  increase VM memory)
+- But then CMake worked like a charm.  Sort of... Clang didn't build properly
