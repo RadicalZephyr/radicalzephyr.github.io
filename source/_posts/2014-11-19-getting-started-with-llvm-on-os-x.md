@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Getting Started with LLVM and OCaml"
+title: "Getting Started with LLVM on OS X"
 date: 2014-11-19 03:31:00 -0500
 comments: true
 categories:
