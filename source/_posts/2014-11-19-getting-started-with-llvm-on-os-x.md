@@ -45,3 +45,19 @@ Key points:
 - I needed to run build multiple times because of memory errors (and
   increase VM memory)
 - But then CMake worked like a charm.  Sort of... Clang didn't build properly
+
+
+Also, write another blog post about getting setup with LLVM and
+OCaml.  Because that's another story.
+
+Key points there:
+
+- went through the same process (Vagrant VM, automated shell script
+setup, build from scratch thoughts...)
+- Looked at some errors, seems like opam *expects* to be dealing with homebrew!!
+- Well shoot, why not try native!
+- `brew install llvm`
+- `opam install llvm`
+- llvmutop thing, then `#require "llvm"` or whatever and voila!
+
+TL;DR much easier.
