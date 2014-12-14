@@ -47,3 +47,21 @@ So I gave it a shot. I cleaned out and re-installed my LLVM installation
 with `brew rm llvm && brew install llvm`. And then I simply ran `opam
 install llvm`. As far as I remember (it was a couple weeks ago now ;),
 everything went off without a hitch.
+
+<How was I able to validate the installation? Looked at Kaleidoscope
+tutorial?>
+
+Finally, I wanted to be able to use the top-level to explore the LLVM
+API, but that didn't appear to work right away. After some googling, I
+found an answer on Stack Overflow (of course!) that said I had to
+compile a custom version of utop with the LLVM libraries linked in.
+
+I did that <describe it!! got to refigure out how I did that though>,
+and then was able to get the wonderful utop completion stuff to work
+with the totally unfamiliar LLVM bindings in OCaml.
+
+Of course, then I needed to implement a [language to actually compile
+with LLVM][ocaml-postfix]. And of course I still haven't actually done
+anything with LLVM...
+
+[ocaml-postfix]: https://github.com/RadicalZephyr/postfix-ocaml
