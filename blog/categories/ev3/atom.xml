@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ev3 | Zephyrizing]]></title>
   <link href="http://www.zephyrizing.net/blog/categories/ev3/atom.xml" rel="self"/>
   <link href="http://www.zephyrizing.net/"/>
-  <updated>2014-11-19T12:52:01-05:00</updated>
+  <updated>2014-12-14T02:13:44-05:00</updated>
   <id>http://www.zephyrizing.net/</id>
   <author>
     <name><![CDATA[Geoff Shannon]]></name>
@@ -20,7 +20,7 @@
     <id>http://www.zephyrizing.net/blog/2014/04/17/lejos-and-clojure</id>
     <content type="html"><![CDATA[This is a short followup to my first post about
 [experimenting with the Lego EV3's](
-/blog/2013/09/03/why-am-i-doing-this/) and [leJOS]. Shortly
+/blog/2013/10/31/leJOS-and-EV3/) and [leJOS]. Shortly
 after I wrote that post, I went on the Clojure IRC channel and talked
 to [Phil Hagelberg][technomancy] and some other helpful folks about my
 issues. They steered me away from attempting to install [Leiningen] on
