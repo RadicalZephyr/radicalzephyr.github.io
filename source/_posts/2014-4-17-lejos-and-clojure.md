@@ -8,7 +8,7 @@ categories: [Programming, EV3, Clojure]
 
 This is a short followup to my first post about
 [experimenting with the Lego EV3's](
-{% post_url 2013-09-03-why-am-i-doing-this %}) and [leJOS]. Shortly
+{% post_url 2013-10-31-leJOS-and-EV3 %}) and [leJOS]. Shortly
 after I wrote that post, I went on the Clojure IRC channel and talked
 to [Phil Hagelberg][technomancy] and some other helpful folks about my
 issues. They steered me away from attempting to install [Leiningen] on
