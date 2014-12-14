@@ -3,7 +3,7 @@ layout: post
 title: "Getting Started with LLVM on OS&nbsp;X"
 date: 2014-11-19 03:31:00 -0500
 comments: true
-categories:
+categories: [LLVM, Vagrant]
 ---
 
 A few weeks ago, I decided that one of the things I wanted to tackle
