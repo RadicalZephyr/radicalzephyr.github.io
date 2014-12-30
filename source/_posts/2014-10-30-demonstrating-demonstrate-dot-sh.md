@@ -6,6 +6,14 @@ comments: true
 categories:
 ---
 
+_Edit 2014/12/30: I ended up rewriting demonstrate in [several][demosh]
+[different][demooc] languages, but the implementation that I like the
+best is in [python][demopy]._
+
+[demosh]: https://github.com/RadicalZephyr/demonstrate.sh
+[demooc]: https://github.com/RadicalZephyr/demonstrate
+[demopy]: https://github.com/RadicalZephyr/demonstrate.py
+
 So, in the course of trying to prepare a presentation for this
 Thursday (today!), I ended up creating a program called
 `demonstrate.sh`. Basically, it lets you write a script, meant for an
