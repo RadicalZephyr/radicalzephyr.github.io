@@ -8,14 +8,7 @@ categories:
 
 So, this is the second day of my second week of [Hacker School]. I'm
 finally starting to feel like I'm getting into the
-groove. etc. etc. about stuff I've been working on SICP, LLVM tut,
-then on and off back to clojure stuff.  (aside about how good it is to
-be able to move between different types of personal projects, gumption
-etc.)
-
-[Hacker School]: https://www.hackerschool.com/
-
-<!--more-->
+groove.
 
 So I tackled [DCPL] in Clojure once again. I found two sort of scary
 things. One, although my code was in a git repo, it wasn't pushed to
@@ -23,7 +16,11 @@ Github. Two, there was a big hairy macro that had apparently replaced
 the core of my postfix program, but it wasn't checked in!!! Bad past
 Geoff, very bad, no good software practices...
 
+[Hacker School]: https://www.hackerschool.com/
 [DCPL]: http://mitpress.mit.edu/books/design-concepts-programming-languages
+
+<!--more-->
+
 
 Anyhow, so I cleaned things up, and pushed up to Github (it's
 [here][postfix-code] FYI), and then I started playing with that macro
