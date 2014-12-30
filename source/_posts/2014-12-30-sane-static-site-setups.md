@@ -27,7 +27,7 @@ vanilla [Jekyll][] or not using Jekyll at all.
 This isn't a tutorial about how to set up and use any particular
 static site generator.  There are [quite][Jekyll] [a][Pelican] [few][] [out][]
 [there][], and [they][] [all][] seem to be quite good. So pick one and
-get your blog setup.  You should be comfortable generating the content
+get your site setup.  You should be comfortable generating the content
 of your site before worrying about what I'm describing in this post.
 
 [Pelican]: http://docs.getpelican.com/en/3.5.0/
@@ -40,17 +40,17 @@ of your site before worrying about what I'm describing in this post.
 One of the best and worst things about using a static site generator (SSG)
 is that the source for the site is fundamentally a separate thing from
 the actual files that compose the site itself. The good news is that
-the generated files are, well, generated and given the source for a
+the generated files are, well, generated. Given the source for a
 site you can always regenerate the presentation files.
 
 So clearly we want to keep the source for our site under version
 control. If you're using Github Pages then git is a natural
 choice. But Github Pages also requires that the generated content of
-your site be in a git repository. This leads to an un-intuitive
-setup.  Because the source and published files don't actually share a
-common history, it seems like they need to be stored in separate git
-repositories.  There is a fundamental relationship between the files
-however that dictates that organizationally they should always be
+your site be in a git repository. This leads to an un-intuitive setup.
+Because the source and published files don't actually share a common
+history, it seems like they need to be stored in separate git
+repositories.  However, there is a fundamental relationship between
+the files that dictates that organizationally they should always be
 found together.
 
 Luckily for us, git is flexible enough to allow us to achieve both
@@ -58,7 +58,8 @@ these seemingly conflicting goals. Since the usual workflow for a git
 repository simply involves `git init` and then edit, `add`,
 `commit` cycles, it's less well known that a git repository can
 actually contain multiple independent "head" commits. Don't worry if
-that doesn't totally make sense right now, we'll come back to it.
+that doesn't totally make sense. The important thing is that we can
+store two separate revision histories in the same git repository.
 
 So, you have the source for a static site, and you've maybe written
 some dummy (or real!) content for it and generated the site at least
