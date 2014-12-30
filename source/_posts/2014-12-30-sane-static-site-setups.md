@@ -25,12 +25,12 @@ vanilla [Jekyll][] or not using Jekyll at all.
 <!--more-->
 
 This isn't a tutorial about how to set up and use any particular
-static site generator.  There are [quite][Jekyll] [a][] [few][] [out][]
+static site generator.  There are [quite][Jekyll] [a][Pelican] [few][] [out][]
 [there][], and [they][] [all][] seem to be quite good. So pick one and
 get your blog setup.  You should be comfortable generating the content
 of your site before worrying about what I'm describing in this post.
 
-[a]: http://docs.getpelican.com/en/3.5.0/
+[Pelican]: http://docs.getpelican.com/en/3.5.0/
 [few]: http://wintersmith.io/
 [out]: https://github.com/greghendershott/frog
 [there]: https://github.com/taylorchu/baker
@@ -95,4 +95,33 @@ git push output master:source
 ```
 
 Basically, what we're doing is setting one repository as a remote of
-the other, and then pushing the content to new branch there.
+the other, and then pushing the content to new branch there.  Now the
+`output` repository contains both the source and output files in
+separate git branches. Pushing all the branches of this to a hosting
+site means you have a complete backup of your site.
+
+Now, the process of updating your site is a little more complicated
+than the general Github Pages workflow of edit, commit and push since
+you need to generate the site yourself.
+
+First, edit your site's content files.  Commit as necessary for your
+peace of mind. Once you're satisfied with how the content looks
+(you've been previewing and generating the site right?), it's time to
+commit the new content to the output branch, and then push it to your
+hosting location.
+
+That's basically it. It's a simple structure, but it's not totally
+straightforward of how to get it set up, and it's also a bit more work
+to maintain. Of course there are some interesting tools out there to
+help with this process. [Octopress 2.0][] tries to setup this
+structure automatically for you, and provides a Rakefile for helping
+to automate a lot of the normal tasks like site generation, previewing
+and even deployment. [Pelican][] offers to generate a Makefile and/or
+a fabfile for doing the same sorts of things. Pelican also makes use
+of the really neat [GHP-Import][] project to simplify the deploying
+process.
+
+[Octopress 2.0]: http://octopress.org/
+[GHP-Import]: https://github.com/davisp/ghp-import
+
+Now go forth and blog!
