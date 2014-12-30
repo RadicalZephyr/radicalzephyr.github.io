@@ -4,7 +4,7 @@
   <title><![CDATA[Zephyrizing]]></title>
   <link href="http://www.zephyrizing.net/atom.xml" rel="self"/>
   <link href="http://www.zephyrizing.net/"/>
-  <updated>2014-12-14T02:35:22-05:00</updated>
+  <updated>2014-12-30T16:07:17-07:00</updated>
   <id>http://www.zephyrizing.net/</id>
   <author>
     <name><![CDATA[Geoff Shannon]]></name>
@@ -14,10 +14,130 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Sane Static Site Setups]]></title>
+    <link href="http://www.zephyrizing.net/blog/2014/12/30/sane-static-site-setups/"/>
+    <updated>2014-12-30T13:44:37-07:00</updated>
+    <id>http://www.zephyrizing.net/blog/2014/12/30/sane-static-site-setups</id>
+    <content type="html"><![CDATA[<p>During the last week of Hacker School I helped <a href="http://lmontopo.github.io/">Leta</a> sort out
+some issues she had with her blog setup and restore everything to
+sanity. It was a lot of fun and the setup is pretty straightforward so
+I thought I&rsquo;d do a short write-up on what we did and why.</p>
+
+<p>To be clear, this blog post is about solving the particular problem of
+how to organize a statically generated site/blog. The particulars I&rsquo;m
+going to discuss are for when you host the site on <a href="https://pages.github.com/">Github Pages</a>
+but you need to generate the site locally because you&rsquo;re not using
+vanilla <a href="http://jekyllrb.com/">Jekyll</a> or not using Jekyll at all.</p>
+
+<!--more-->
+
+
+<p>This isn&rsquo;t a tutorial about how to set up and use any particular
+static site generator.  There are <a href="http://jekyllrb.com/">quite</a> <a href="http://docs.getpelican.com/en/3.5.0/">a</a> <a href="http://wintersmith.io/">few</a> <a href="https://github.com/greghendershott/frog">out</a>
+<a href="https://github.com/taylorchu/baker">there</a>, and <a href="https://github.com/hugoduncan/cl-blog-generator">they</a> <a href="https://staticsitegenerators.net/">all</a> seem to be quite good. So pick one and
+get your site setup.  You should be comfortable generating the content
+of your site before worrying about what I&rsquo;m describing in this post.</p>
+
+<p>One of the best and worst things about using a static site generator (SSG)
+is that the source for the site is fundamentally a separate thing from
+the actual files that compose the site itself. The good news is that
+the generated files are, well, generated. Given the source for a
+site you can always regenerate the presentation files.</p>
+
+<p>So clearly we want to keep the source for our site under version
+control. If you&rsquo;re using Github Pages then git is a natural
+choice. But Github Pages also requires that the generated content of
+your site be in a git repository. This leads to an un-intuitive setup.
+Because the source and published files don&rsquo;t actually share a common
+history, it seems like they need to be stored in separate git
+repositories.  However, there is a fundamental relationship between
+the files that dictates that organizationally they should always be
+found together.</p>
+
+<p>Luckily for us, git is flexible enough to allow us to achieve both
+these seemingly conflicting goals. Since the usual workflow for a git
+repository simply involves <code>git init</code> and then edit, <code>add</code>,
+<code>commit</code> cycles, it&rsquo;s less well known that a git repository can
+actually contain multiple independent &ldquo;head&rdquo; commits. Don&rsquo;t worry if
+that doesn&rsquo;t totally make sense. The important thing is that we can
+store two separate revision histories in the same git repository.</p>
+
+<p>So, you have the source for a static site, and you&rsquo;ve maybe written
+some dummy (or real!) content for it and generated the site at least
+once. Now, we want to make sure that we have a setup that will help us
+preserve all of your hard work on making an awesome website.</p>
+
+<p>The first thing we need to do is to make sure we have git repositories
+in both the source and output directories by running <code>git init</code> in
+both of them separately. Since most SSG&rsquo;s by default use a structure
+where the output folder is a subdirectory of the source folder, make
+sure that you have an entry in your gitignore file so that the output
+isn&rsquo;t committed into the source repository. At this point we should
+have two git repo&rsquo;s, one that <em>only</em> has the site source content
+(including any files need by your SSG) and one that <em>only</em> has the
+generated version of your site.</p>
+
+<p>Now for the magic trick of combining the repositories. Let&rsquo;s say we
+have this folder structure:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>- website/
+</span><span class='line'> - .git/  # Git folder for source files
+</span><span class='line'> - ...    # Lots of awesome content files
+</span><span class='line'> - output/
+</span><span class='line'>  - .git/ # Git folder for output files
+</span><span class='line'>  - ...   # The actual generated content files</span></code></pre></td></tr></table></div></figure>
+
+
+<p>At a shell prompt in the directory <code>website</code>, you can run:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git remote add output output/
+</span><span class='line'>git push output master:source</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Basically, what we&rsquo;re doing is setting one repository as a remote of
+the other, and then pushing the content to new branch there.  Now the
+<code>output</code> repository contains both the source and output files in
+separate git branches. Pushing all the branches of this to a hosting
+site means you have a complete backup of your site.</p>
+
+<p>Now, the process of updating your site is a little more complicated
+than the general Github Pages workflow of edit, commit and push since
+you need to generate the site yourself.</p>
+
+<p>First, edit your site&rsquo;s content files.  Commit as necessary for your
+peace of mind. Once you&rsquo;re satisfied with how the content looks
+(you&rsquo;ve been previewing and generating the site right?), it&rsquo;s time to
+commit the new content to the output branch, and then push it to your
+hosting location.</p>
+
+<p>That&rsquo;s basically it. It&rsquo;s a simple structure, but it&rsquo;s not totally
+straightforward of how to get it set up, and it&rsquo;s also a bit more work
+to maintain. Of course there are some interesting tools out there to
+help with this process. <a href="http://octopress.org/">Octopress 2.0</a> tries to setup this
+structure automatically for you, and provides a Rakefile for helping
+to automate a lot of the normal tasks like site generation, previewing
+and even deployment. <a href="http://docs.getpelican.com/en/3.5.0/">Pelican</a> offers to generate a Makefile and/or
+a fabfile for doing the same sorts of things. Pelican also makes use
+of the really neat <a href="https://github.com/davisp/ghp-import">GHP-Import</a> project to simplify the deploying
+process.</p>
+
+<p>Now go forth and blog!</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Getting Started With LLVM and OCaml on OS&nbsp;X]]></title>
-    <link href="http://www.zephyrizing.net/blog/2014/12/14/getting-started-with-llvm-and-ocaml-on-os-x/"/>
-    <updated>2014-12-14T01:15:16-05:00</updated>
-    <id>http://www.zephyrizing.net/blog/2014/12/14/getting-started-with-llvm-and-ocaml-on-os-x</id>
+    <link href="http://www.zephyrizing.net/blog/2014/12/13/getting-started-with-llvm-and-ocaml-on-os-x/"/>
+    <updated>2014-12-13T23:15:16-07:00</updated>
+    <id>http://www.zephyrizing.net/blog/2014/12/13/getting-started-with-llvm-and-ocaml-on-os-x</id>
     <content type="html"><![CDATA[<p>I <a href="http://www.zephyrizing.net/blog/2014/11/19/getting-started-with-llvm-on-os-x/">wrote recently</a> about my (second) experience trying to
 get started using LLVM on my Macbook. Shortly after that, I became
 interested in combining my interest in LLVM with my interest OCaml. As
@@ -78,7 +198,7 @@ anything with LLVM&hellip;</p>
   <entry>
     <title type="html"><![CDATA[Getting Started With LLVM on OS&nbsp;X]]></title>
     <link href="http://www.zephyrizing.net/blog/2014/11/19/getting-started-with-llvm-on-os-x/"/>
-    <updated>2014-11-19T03:31:00-05:00</updated>
+    <updated>2014-11-19T01:31:00-07:00</updated>
     <id>http://www.zephyrizing.net/blog/2014/11/19/getting-started-with-llvm-on-os-x</id>
     <content type="html"><![CDATA[<p>A few weeks ago, I decided that one of the things I wanted to tackle
 during my time at Hacker School was getting familiar with the LLVM
@@ -209,9 +329,13 @@ packages and make a PPA with a CMake that properly installs the
   <entry>
     <title type="html"><![CDATA[Demonstrating demonstrate.sh]]></title>
     <link href="http://www.zephyrizing.net/blog/2014/10/30/demonstrating-demonstrate-dot-sh/"/>
-    <updated>2014-10-30T16:33:34-04:00</updated>
+    <updated>2014-10-30T14:33:34-06:00</updated>
     <id>http://www.zephyrizing.net/blog/2014/10/30/demonstrating-demonstrate-dot-sh</id>
-    <content type="html"><![CDATA[<p>So, in the course of trying to prepare a presentation for this
+    <content type="html"><![CDATA[<p><em>Edit 2014/12/30: I ended up rewriting demonstrate in <a href="https://github.com/RadicalZephyr/demonstrate.sh">several</a>
+<a href="https://github.com/RadicalZephyr/demonstrate">different</a> languages, but the implementation that I like the
+best is in <a href="https://github.com/RadicalZephyr/demonstrate.py">python</a>.</em></p>
+
+<p>So, in the course of trying to prepare a presentation for this
 Thursday (today!), I ended up creating a program called
 <code>demonstrate.sh</code>. Basically, it lets you write a script, meant for an
 interpreter (like bash, python, irb, coffee etc.) and then execute it
@@ -290,7 +414,7 @@ to start over from the beginning (barring awesome hacks
   <entry>
     <title type="html"><![CDATA[Playing With Org-mode]]></title>
     <link href="http://www.zephyrizing.net/blog/2014/10/27/playing-with-org-mode/"/>
-    <updated>2014-10-27T18:30:05-04:00</updated>
+    <updated>2014-10-27T16:30:05-06:00</updated>
     <id>http://www.zephyrizing.net/blog/2014/10/27/playing-with-org-mode</id>
     <content type="html"><![CDATA[<p>So, as a way to procrastinate on actually starting to write/practice
 my lightning talk for Thursday, I decided that I absolutely wanted to
@@ -515,7 +639,7 @@ at the <a href="zephyrizing">git repository for this site</a>.</p>
   <entry>
     <title type="html"><![CDATA[On the Importance of Distinguishing Between Stable and Development Documentation]]></title>
     <link href="http://www.zephyrizing.net/blog/2014/10/26/on-the-importance-of-distinguishing-between-stable-and-development-documentation/"/>
-    <updated>2014-10-26T23:10:04-04:00</updated>
+    <updated>2014-10-26T21:10:04-06:00</updated>
     <id>http://www.zephyrizing.net/blog/2014/10/26/on-the-importance-of-distinguishing-between-stable-and-development-documentation</id>
     <content type="html"><![CDATA[<p>A few weeks ago I wrote about <a href="http://www.zephyrizing.net/blog/2014/10/07/dot-dot-dot-and-this-is-why-master-should-be-stable/">Why Master Should Be Stable</a>. I
 spent most of that post explaining what had actually happened to me,
@@ -637,7 +761,7 @@ least able to do anything about it.</p>
   <entry>
     <title type="html"><![CDATA[Adventures With Clojure Macros]]></title>
     <link href="http://www.zephyrizing.net/blog/2014/10/14/adventures-with-clojure-macros/"/>
-    <updated>2014-10-14T19:20:56-04:00</updated>
+    <updated>2014-10-14T17:20:56-06:00</updated>
     <id>http://www.zephyrizing.net/blog/2014/10/14/adventures-with-clojure-macros</id>
     <content type="html"><![CDATA[<p>So, this is the second day of my second week of <a href="https://www.hackerschool.com/">Hacker School</a>. I&rsquo;m
 finally starting to feel like I&rsquo;m getting into the
@@ -1122,7 +1246,7 @@ REPL from <code>lein repl</code> in my home directory.</p>
   <entry>
     <title type="html"><![CDATA[Hacker School: Week 1 Review]]></title>
     <link href="http://www.zephyrizing.net/blog/2014/10/11/hacker-school-week-1-review/"/>
-    <updated>2014-10-11T04:48:52-04:00</updated>
+    <updated>2014-10-11T02:48:52-06:00</updated>
     <id>http://www.zephyrizing.net/blog/2014/10/11/hacker-school-week-1-review</id>
     <content type="html"><![CDATA[<p>So, I can&rsquo;t sleep, and it&rsquo;s the end of my first week at
 <a href="https://www.hackerschool.com/">Hacker School</a>, so I thought I&rsquo;d do some reflecting on what I did,
@@ -1277,7 +1401,7 @@ terrified of starting that project.</p>
   <entry>
     <title type="html"><![CDATA[... And This Is Why Master Should Be Stable]]></title>
     <link href="http://www.zephyrizing.net/blog/2014/10/07/dot-dot-dot-and-this-is-why-master-should-be-stable/"/>
-    <updated>2014-10-07T13:28:48-04:00</updated>
+    <updated>2014-10-07T11:28:48-06:00</updated>
     <id>http://www.zephyrizing.net/blog/2014/10/07/dot-dot-dot-and-this-is-why-master-should-be-stable</id>
     <content type="html"><![CDATA[<p>Second day at Hacker School.  I spent the morning doing two things:</p>
 
@@ -1327,9 +1451,9 @@ thing.</p>
   
   <entry>
     <title type="html"><![CDATA[Keybase Hacker News Q&A]]></title>
-    <link href="http://www.zephyrizing.net/blog/2014/06/12/keybase-hackernews-q-and-a/"/>
-    <updated>2014-06-12T00:00:00-04:00</updated>
-    <id>http://www.zephyrizing.net/blog/2014/06/12/keybase-hackernews-q-and-a</id>
+    <link href="http://www.zephyrizing.net/blog/2014/06/11/keybase-hackernews-q-and-a/"/>
+    <updated>2014-06-11T22:00:00-06:00</updated>
+    <id>http://www.zephyrizing.net/blog/2014/06/11/keybase-hackernews-q-and-a</id>
     <content type="html"><![CDATA[<p>I started using <a href="https://keybase.io">Keybase</a> sometime back in April. I&rsquo;ve been interested
 in doing crypto stuff for a long time, starting with using an SSH
 keypair instead of a password to access the WWU CS department&rsquo;s
@@ -1939,7 +2063,7 @@ users.</p></blockquote>
   <entry>
     <title type="html"><![CDATA[S & E Part One: The Single Story]]></title>
     <link href="http://www.zephyrizing.net/blog/2014/05/22/s-and-e-part-one:-the-single-story/"/>
-    <updated>2014-05-22T23:00:00-04:00</updated>
+    <updated>2014-05-22T21:00:00-06:00</updated>
     <id>http://www.zephyrizing.net/blog/2014/05/22/s-and-e-part-one:-the-single-story</id>
     <content type="html"><![CDATA[<h2>Beginnings</h2>
 
@@ -2074,7 +2198,7 @@ that comes from accomplishment has been key.</p>
   <entry>
     <title type="html"><![CDATA[The Summary and Evaluation - How I Figured Out Why I Went to College]]></title>
     <link href="http://www.zephyrizing.net/blog/2014/04/21/the-summary-and-evaluation-how-i-figured-out-why-i-went-to-college/"/>
-    <updated>2014-04-21T21:00:00-04:00</updated>
+    <updated>2014-04-21T19:00:00-06:00</updated>
     <id>http://www.zephyrizing.net/blog/2014/04/21/the-summary-and-evaluation-how-i-figured-out-why-i-went-to-college</id>
     <content type="html"><![CDATA[<p>So. I am a Fairhaven student. I&rsquo;m also a Computer Science major. These
 are two discrete descriptions of my academic life. Both are integral
@@ -2118,7 +2242,7 @@ it. You&rsquo;re welcome to tag along.</p>
   <entry>
     <title type="html"><![CDATA[LeJOS and Clojure]]></title>
     <link href="http://www.zephyrizing.net/blog/2014/04/17/lejos-and-clojure/"/>
-    <updated>2014-04-17T19:00:00-04:00</updated>
+    <updated>2014-04-17T17:00:00-06:00</updated>
     <id>http://www.zephyrizing.net/blog/2014/04/17/lejos-and-clojure</id>
     <content type="html"><![CDATA[<p>This is a short followup to my first post about
 <a href="http://www.zephyrizing.net/blog/2013/10/31/leJOS-and-EV3/">experimenting with the Lego EV3&rsquo;s</a> and <a href="http://lejos.org">leJOS</a>. Shortly
@@ -2174,7 +2298,7 @@ the limited processing power of the EV3&rsquo;s it&rsquo;s not quite there yet.<
   <entry>
     <title type="html"><![CDATA[Clojure, LeJOS and EV3]]></title>
     <link href="http://www.zephyrizing.net/blog/2013/10/31/leJOS-and-EV3/"/>
-    <updated>2013-10-31T22:00:00-04:00</updated>
+    <updated>2013-10-31T20:00:00-06:00</updated>
     <id>http://www.zephyrizing.net/blog/2013/10/31/leJOS-and-EV3</id>
     <content type="html"><![CDATA[<p>I&rsquo;ve had the opportunity in the last couple weeks to start playing
 with a Lego Mindstorms EV3.  Since this hardware is such a new release
@@ -2223,7 +2347,7 @@ install and use leiningen.</p>
   <entry>
     <title type="html"><![CDATA[Why Am I Doing This?]]></title>
     <link href="http://www.zephyrizing.net/blog/2013/09/03/why-am-i-doing-this/"/>
-    <updated>2013-09-03T04:00:00-04:00</updated>
+    <updated>2013-09-03T02:00:00-06:00</updated>
     <id>http://www.zephyrizing.net/blog/2013/09/03/why-am-i-doing-this</id>
     <content type="html"><![CDATA[<p>It&rsquo;s weird, but I feel like I&rsquo;ve been peer pressured into starting
 this blog.  Not that anyone has ever said &ldquo;Geoff, you really need to

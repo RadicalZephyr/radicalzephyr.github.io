@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Java | Zephyrizing]]></title>
   <link href="http://www.zephyrizing.net/blog/categories/java/atom.xml" rel="self"/>
   <link href="http://www.zephyrizing.net/"/>
-  <updated>2014-12-14T02:35:22-05:00</updated>
+  <updated>2014-12-30T16:07:17-07:00</updated>
   <id>http://www.zephyrizing.net/</id>
   <author>
     <name><![CDATA[Geoff Shannon]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Clojure, LeJOS and EV3]]></title>
     <link href="http://www.zephyrizing.net/blog/2013/10/31/leJOS-and-EV3/"/>
-    <updated>2013-10-31T22:00:00-04:00</updated>
+    <updated>2013-10-31T20:00:00-06:00</updated>
     <id>http://www.zephyrizing.net/blog/2013/10/31/leJOS-and-EV3</id>
     <content type="html"><![CDATA[I've had the opportunity in the last couple weeks to start playing
 with a Lego Mindstorms EV3.  Since this hardware is such a new release

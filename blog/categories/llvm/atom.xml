@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Llvm | Zephyrizing]]></title>
   <link href="http://www.zephyrizing.net/blog/categories/llvm/atom.xml" rel="self"/>
   <link href="http://www.zephyrizing.net/"/>
-  <updated>2014-12-14T02:35:22-05:00</updated>
+  <updated>2014-12-30T16:07:17-07:00</updated>
   <id>http://www.zephyrizing.net/</id>
   <author>
     <name><![CDATA[Geoff Shannon]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Getting Started With LLVM and OCaml on OS&nbsp;X]]></title>
-    <link href="http://www.zephyrizing.net/blog/2014/12/14/getting-started-with-llvm-and-ocaml-on-os-x/"/>
-    <updated>2014-12-14T01:15:16-05:00</updated>
-    <id>http://www.zephyrizing.net/blog/2014/12/14/getting-started-with-llvm-and-ocaml-on-os-x</id>
+    <link href="http://www.zephyrizing.net/blog/2014/12/13/getting-started-with-llvm-and-ocaml-on-os-x/"/>
+    <updated>2014-12-13T23:15:16-07:00</updated>
+    <id>http://www.zephyrizing.net/blog/2014/12/13/getting-started-with-llvm-and-ocaml-on-os-x</id>
     <content type="html"><![CDATA[I [wrote recently][llvm-mac] about my (second) experience trying to
 get started using LLVM on my Macbook. Shortly after that, I became
 interested in combining my interest in LLVM with my interest OCaml. As
@@ -83,7 +83,7 @@ anything with LLVM&#8230;
   <entry>
     <title type="html"><![CDATA[Getting Started With LLVM on OS&nbsp;X]]></title>
     <link href="http://www.zephyrizing.net/blog/2014/11/19/getting-started-with-llvm-on-os-x/"/>
-    <updated>2014-11-19T03:31:00-05:00</updated>
+    <updated>2014-11-19T01:31:00-07:00</updated>
     <id>http://www.zephyrizing.net/blog/2014/11/19/getting-started-with-llvm-on-os-x</id>
     <content type="html"><![CDATA[A few weeks ago, I decided that one of the things I wanted to tackle
 during my time at Hacker School was getting familiar with the LLVM
