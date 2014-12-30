@@ -14,7 +14,7 @@ So I tackled [DCPL] in Clojure once again. I found two sort of scary
 things. One, although my code was in a git repo, it wasn't pushed to
 Github. Two, there was a big hairy macro that had apparently replaced
 the core of my postfix program, but it wasn't checked in!!! Bad past
-Geoff, very bad, no good software practices...
+Geoff. Very bad, no good software practices...
 
 [Hacker School]: https://www.hackerschool.com/
 [DCPL]: http://mitpress.mit.edu/books/design-concepts-programming-languages
