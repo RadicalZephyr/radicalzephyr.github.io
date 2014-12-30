@@ -23,3 +23,76 @@ vanilla [Jekyll][] or not using Jekyll at all.
 [Jekyll]: http://jekyllrb.com/
 
 <!--more-->
+
+This isn't a tutorial about how to set up and use any particular
+static site generator.  There are [quite][Jekyll] [a][] [few][] [out][]
+[there][], and [they][] [all][] seem to be quite good. So pick one and
+get your blog setup.  You should be comfortable generating the content
+of your site before worrying about what I'm describing in this post.
+
+[a]: http://docs.getpelican.com/en/3.5.0/
+[few]: http://wintersmith.io/
+[out]: https://github.com/greghendershott/frog
+[there]: https://github.com/taylorchu/baker
+[they]: https://github.com/hugoduncan/cl-blog-generator
+[all]: https://staticsitegenerators.net/
+
+One of the best and worst things about using a static site generator (SSG)
+is that the source for the site is fundamentally a separate thing from
+the actual files that compose the site itself. The good news is that
+the generated files are, well, generated and given the source for a
+site you can always regenerate the presentation files.
+
+So clearly we want to keep the source for our site under version
+control. If you're using Github Pages then git is a natural
+choice. But Github Pages also requires that the generated content of
+your site be in a git repository. This leads to an un-intuitive
+setup.  Because the source and published files don't actually share a
+common history, it seems like they need to be stored in separate git
+repositories.  There is a fundamental relationship between the files
+however that dictates that organizationally they should always be
+found together.
+
+Luckily for us, git is flexible enough to allow us to achieve both
+these seemingly conflicting goals. Since the usual workflow for a git
+repository simply involves `git init` and then edit, `add`,
+`commit` cycles, it's less well known that a git repository can
+actually contain multiple independent "head" commits. Don't worry if
+that doesn't totally make sense right now, we'll come back to it.
+
+So, you have the source for a static site, and you've maybe written
+some dummy (or real!) content for it and generated the site at least
+once. Now, we want to make sure that we have a setup that will help us
+preserve all of your hard work on making an awesome website.
+
+The first thing we need to do is to make sure we have git repositories
+in both the source and output directories by running `git init` in
+both of them separately. Since most SSG's by default use a structure
+where the output folder is a subdirectory of the source folder, make
+sure that you have an entry in your gitignore file so that the output
+isn't committed into the source repository. At this point we should
+have two git repo's, one that _only_ has the site source content
+(including any files need by your SSG) and one that _only_ has the
+generated version of your site.
+
+Now for the magic trick of combining the repositories. Let's say we
+have this folder structure:
+
+```
+- website/
+ - .git/  # Git folder for source files
+ - ...    # Lots of awesome content files
+ - output/
+  - .git/ # Git folder for output files
+  - ...   # The actual generated content files
+```
+
+At a shell prompt in the directory `website`, you can run:
+
+```
+git remote add output output/
+git push output master:source
+```
+
+Basically, what we're doing is setting one repository as a remote of
+the other, and then pushing the content to new branch there.
