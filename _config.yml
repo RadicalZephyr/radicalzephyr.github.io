@@ -71,7 +71,8 @@ github_repo_count: 7
 github_show_profile_link: true
 github_skip_forks: true
 github_skip_repos_list: [radicalzephyr.github.io, home,
-                         prelude, synapse-admin, old-site]
+                         prelude, .emacs.d, emacs,
+                         synapse-admin, old-site]
 
 # Twitter
 twitter_user: RadicalZephyr
