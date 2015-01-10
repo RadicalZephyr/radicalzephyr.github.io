@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "S & E Part One: The Single Story"
-date: 2014-5-22 19:00:00 -0800
+date: 2014-4-26 19:00:00 -0800
 comments: true
 categories: [Personal, S&E]
 ---
