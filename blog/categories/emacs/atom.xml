@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Emacs | Zephyrizing]]></title>
+  <link href="http://www.zephyrizing.net/blog/categories/emacs/atom.xml" rel="self"/>
+  <link href="http://www.zephyrizing.net/"/>
+  <updated>2015-01-09T17:34:30-08:00</updated>
+  <id>http://www.zephyrizing.net/</id>
+  <author>
+    <name><![CDATA[Geoff Shannon]]></name>
+    <email><![CDATA[geoffpshannon@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Playing With Org-mode]]></title>
+    <link href="http://www.zephyrizing.net/blog/2014/10/27/playing-with-org-mode/"/>
+    <updated>2014-10-27T15:30:05-07:00</updated>
+    <id>http://www.zephyrizing.net/blog/2014/10/27/playing-with-org-mode</id>
+    <content type="html"><![CDATA[So, as a way to procrastinate on actually starting to write/practice
+my lightning talk for Thursday, I decided that I absolutely wanted to
+make a slide show using the [org-html-slideshow], a pretty neat piece
+of Clojurescript written by those smart guys at
+~~Relevance~~ Cognitect.
+
+[org-html-slideshow]: https://github.com/relevance/org-html-slideshow
+
+Basically, it lets you take an outline/document written in [Org-mode]
+(another really cool piece of software!) and put some small
+annotations in it to delimit your "slides" and then you have a
+document that can be viewed as either a slideshow, or a web page. It's
+harder to explain in words than it is to observe, so here's the
+[example page](/demos/example.html) from their github repo, and the
+[org-mode document](/demos/example.org) that produced that page.
+
+[Org-mode]: http://orgmode.org/
+
+<!--more-->
+
+Now that is pretty neat. However, the workflow needed to create one of
+these is sort of a pain. From the documentation on the project page,
+you&#8217;re expected to create a one-off web site that has the contents of
+this production folder available and then manually generate the
+html document from the org-mode source. Ick.
+
+My blog is made with [Jekyll], which is a static site generator. None
+of my posts are actually written in html, instead I write them in
+[Markdown], and then Jekyll handling converts the markdown into
+html. When it does this I can also cause it to be inserted into a page
+template (i.e. layout). The upshot is, I can create a static site but
+not have to duplicate all of the code to have a common set of header
+info, navigation toolbar, nifty sidebar etc. Because only the unique
+things are specified in each document, and the general boilerplate is
+automatically included for me by Jekyll.
+
+So if I&#8217;m generating html from markdown automatically with Jekyll it
+feels sort of wrong to be generating html manually with an interactive
+emacs command and then committing this generated html into my git
+repo. It would be so much nicer if I could just get Jekyll to invoke
+emacs as the translator for turning `.org` files into `.html` files.
+
+[Jekyll]: http://jekyllrb.com/
+[Markdown]: http://daringfireball.net/projects/markdown/syntax
+
+Well, pursuing that line of thought today I worked with
+[Waldemar Quevedo]. He showed me his incredible org-based workflow for
+everything (he also gave an awesome lightning talk on it the first
+week of Hacker School!). While it looks really cool, it&#8217;s sort
+heavy-weight for what I want to do. Frankly, I&#8217;m really comfortable
+writing markdown, so I&#8217;ll probably continue to write most of my posts
+in it. But org-html-slideshow is exciting enough that I&#8217;d be willing
+to write my presentations in Org-mode so I can utilize it.
+
+[Waldemar Quevedo]: https://github.com/wallyqs
+
+I won&#8217;t attempt to explain Wally&#8217;s setup, but he&#8217;s got some
+[pretty][pretty] [cool][cool] [stuff][stuff] going on. In essence
+though, he uses a ruby gem to parse the org syntax and transform it
+into markdown. As of this writing though, it doesn&#8217;t support the tags
+feature that org-html-slideshow depends on for it&#8217;s functionality.
+
+[pretty]: https://github.com/wallyqs/org-ruby
+[cool]: https://github.com/eggcaker/jekyll-org
+[stuff]: https://github.com/punchagan/org-hyde
+
+While showing Wally the slideshow thing got him excited to try and
+integrate it into his workflow, I started poking around and looking at
+how to integrate it into my site. The solution I decided on was to
+make `.org` files a generic member of the Jekyll source files. This
+means that they&#8217;ll still use a YAML frontmatter to mark that they need
+to be transformed. This means that I need some way to transform a body
+of org text into just the html content that it represents. Normally
+when you generate an html page from org-mode, you get a complete html
+page, `html`, `body` tags and all. What I needed was a way to invoke
+the org->html transformation using the Elisp code in org-mode from
+Jekyll.
+
+With Wally&#8217;s help, I was able to get this far towards that goal. This
+is the elisp that will continuously read from the minibuffer until an
+error occurs, and then transform that text using the org->html backend,
+and finally print out the generated html.
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='common-lisp'><span class='line'><span class="p">(</span><span class="k">progn</span>
+</span><span class='line'>  <span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;org</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">progn</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">condition-case</span> <span class="no">nil</span>
+</span><span class='line'>        <span class="p">(</span><span class="nv">while</span> <span class="no">t</span>
+</span><span class='line'>          <span class="p">(</span><span class="nv">insert</span> <span class="p">(</span><span class="nv">read-string</span> <span class="s">&quot;&quot;</span><span class="p">)</span> <span class="s">&quot;\n&quot;</span><span class="p">))</span>
+</span><span class='line'>      <span class="p">(</span><span class="nb">error</span> <span class="no">nil</span><span class="p">))</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">set-buffer</span>
+</span><span class='line'>     <span class="p">(</span><span class="nv">org-export-to-buffer</span> <span class="ss">&#39;html</span> <span class="s">&quot;*Org HTML Export*&quot;</span>
+</span><span class='line'>       <span class="no">nil</span> <span class="no">nil</span> <span class="no">nil</span> <span class="no">t</span> <span class="no">nil</span>
+</span><span class='line'>       <span class="p">(</span><span class="k">lambda</span> <span class="p">()</span> <span class="no">t</span><span class="p">)))</span>
+</span><span class='line'>       <span class="p">(</span><span class="nv">message</span> <span class="s">&quot;%s&quot;</span> <span class="p">(</span><span class="nv">buffer-string</span><span class="p">))))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+And this is how you invoke the transformation of a file from org to
+html. The `$emacs` is because I use [Emacs for Mac OSX] which means
+that my emacs executable is buried inside of a mac `.app` file/folder
+thing. Pipe a file into this script and if it&#8217;s valid org syntax,
+you&#8217;ll get the corresponding html.
+
+[Emacs for Mac OSX]: http://emacsformacosx.com/
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>tail -n+4 hello.org <span class="p">|</span> <span class="nv">$emacs</span> --batch --eval <span class="s2">&quot;(progn (require &#39;org) (progn (condition-case nil (while t (insert (read-string \&quot;\&quot;) \&quot;\\n\&quot;)) (error nil)) (set-buffer (org-export-to-buffer &#39;html \&quot;*Org HTML Export*\&quot; nil nil nil t nil (lambda () t))) (message \&quot;%s\&quot; (buffer-string))))&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+Now the only thing that&#8217;s left is to write a Jekyll plugin to do this
+invocation to produce the final output. ~~This is what I came up with
+as a first attempt. Of course, it doesn&#8217;t actually work for me,
+because of the dumb location of my emacs executable&#8230; Oh well, that&#8217;s
+for tomorrow.~~
+
+__Edit 10/28__: So I spent the first half of today fixing this up.
+Turned out to be more involved than I suspected. I had to evolve the
+emacs lisp command enough that I actually made a separate git repo for
+it. I fixed the problem of locating a proper emacs binary by deferring
+to an appropriately named environment variable. I originally
+implemented this shortcut by letting the user specify the location of
+emacs in their `_config.yml`. But then I realized, this is not a
+configuration that happens per-site, it&#8217;s per machine so the site
+config file is totally inappropriate. It&#8217;s kind of annoying though
+since if I forget to specify this environment variable then my site
+generation won&#8217;t work&#8230;
+
+Anyhow, it works and as proof I made a version of the example
+presentation that is [generated by my plugin][example-plugin], not by
+hand. You don&#8217;t have to take my word for it, but you will have to look
+at the [git repository for this site](zephyrizing).
+
+[example-plugin]: /demos/example-plugin.html
+[zephyrizing]: https://github.com/RadicalZephyr/radicalzephyr.github.io/tree/master/demos
+
+And here is the final code for my org-mode plugin generator:
+
+<figure class='code'><figcaption><span>&#8220;Org Converter&#8221;  (org_converter.rb)</span> <a href='//../plugins/org_converter.rb'>download</a></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># A generator that uses a emacs invoked in batch mode to process</span>
+</span><span class='line'><span class="c1"># org-mode files into html</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;open3&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">module</span> <span class="nn">Jekyll</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">class</span> <span class="nc">OrgModeConverter</span> <span class="o">&lt;</span> <span class="no">Converter</span>
+</span><span class='line'>    <span class="n">safe</span> <span class="kp">false</span>
+</span><span class='line'>    <span class="n">priority</span> <span class="ss">:low</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="vc">@@emacs_org_html_cmd</span> <span class="o">=</span> <span class="s2">&quot;(progn (require (quote org)) (setq font-lock-mode t) (setq org-html-head-include-default-style nil) (setq org-html-head-include-scripts nil) (condition-case nil (while t (insert (read-string </span><span class="se">\&quot;\&quot;</span><span class="s2">) </span><span class="se">\&quot;\n\&quot;</span><span class="s2">)) (error nil)) (set-buffer (org-export-to-buffer (quote html) </span><span class="se">\&quot;</span><span class="s2">*Org HTML Export*</span><span class="se">\&quot;</span><span class="s2"> nil nil nil t nil (lambda nil t))) (send-string-to-terminal (buffer-string) nil))&quot;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">matches</span><span class="p">(</span><span class="n">ext</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">ext</span> <span class="o">=~</span> <span class="sr">/^\.org$/i</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">output_ext</span><span class="p">(</span><span class="n">ext</span><span class="p">)</span>
+</span><span class='line'>      <span class="s2">&quot;.html&quot;</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">convert</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">emacs_path</span> <span class="o">=</span> <span class="k">if</span> <span class="no">ENV</span><span class="o">.</span><span class="n">has_key?</span><span class="p">(</span><span class="s2">&quot;EMACS&quot;</span><span class="p">)</span>
+</span><span class='line'>                     <span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;EMACS&quot;</span><span class="o">]</span>
+</span><span class='line'>                   <span class="k">else</span>
+</span><span class='line'>                     <span class="sb">`which emacs`</span>
+</span><span class='line'>                   <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">if</span> <span class="n">emacs_path</span><span class="o">.</span><span class="n">empty?</span>
+</span><span class='line'>        <span class="nb">puts</span> <span class="s2">&quot;Could not find an emacs executable.&quot;</span>
+</span><span class='line'>      <span class="k">else</span>
+</span><span class='line'>        <span class="n">out</span><span class="p">,</span> <span class="n">status</span> <span class="o">=</span> <span class="no">Open3</span><span class="o">.</span><span class="n">capture2</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="n">emacs_path</span><span class="si">}</span><span class="s2"> --batch --eval &quot;</span> <span class="o">+</span>
+</span><span class='line'>                                     <span class="s2">&quot;</span><span class="si">#{</span><span class="vc">@@emacs_org_html_cmd</span><span class="o">.</span><span class="n">inspect</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+</span><span class='line'>                                     <span class="ss">:stdin_data</span><span class="o">=&gt;</span><span class="n">content</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">out</span> <span class="k">unless</span> <span class="n">status</span> <span class="o">!=</span> <span class="mi">0</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+]]></content>
+  </entry>
+  
+</feed>
