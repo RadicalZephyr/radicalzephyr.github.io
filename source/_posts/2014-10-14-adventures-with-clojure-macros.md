@@ -3,7 +3,7 @@ layout: post
 title: "Adventures with Clojure macros"
 date: 2014-10-14 19:20:56 -0400
 comments: true
-categories:
+categories: [clojure, oops, macros]
 ---
 
 So, this is the second day of my second week of [Hacker School]. I'm

@@ -3,7 +3,7 @@ layout: post
 title: "Demonstrating demonstrate.sh"
 date: 2014-10-30 16:33:34 -0400
 comments: true
-categories:
+categories: [python, bash, live-coding]
 ---
 
 _Edit 2014/12/30: I ended up rewriting demonstrate in [several][demosh]

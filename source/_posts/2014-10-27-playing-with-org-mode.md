@@ -3,7 +3,7 @@ layout: post
 title: "Playing with Org-mode"
 date: 2014-10-27 18:30:05 -0400
 comments: true
-categories:
+categories: [emacs, org-mode]
 ---
 
 So, as a way to procrastinate on actually starting to write/practice

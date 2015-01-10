@@ -3,7 +3,7 @@ layout: post
 title: "On the Importance of Distinguishing Between Stable and Development Documentation"
 date: 2014-10-26 23:10:04 -0400
 comments: true
-categories:
+categories: [documentation]
 ---
 
 A few weeks ago I wrote about [Why Master Should Be Stable][stable]. I
@@ -39,8 +39,8 @@ in this release, when you have installed LLVM 3.5 the tutorial appears
 to be rather broken.
 
 This problem is sort of ironic as the majority of open source software
-out there (most definitely including all of my projects :) as
-little-to-no documentation, and/or what there is, is hopelessly
+out there (most definitely including all of my projects :) have
+little-to-no documentation, or what there is, is hopelessly
 out-of-date. In contrast, the issue that I had with both Flaskr and
 LLVM was actually a case of the most easily available documentation
 being TOO up-to-date.

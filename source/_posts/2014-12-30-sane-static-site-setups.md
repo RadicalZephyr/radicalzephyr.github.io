@@ -3,7 +3,7 @@ layout: post
 title: "Sane Static Site Setups"
 date: 2014-12-30 13:44:37 -0700
 comments: true
-categories: Blog
+categories: [web]
 ---
 
 During the last week of Hacker School I helped [Leta][] sort out
