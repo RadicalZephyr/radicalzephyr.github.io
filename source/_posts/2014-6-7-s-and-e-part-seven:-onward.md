@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Onward"
-date: 2014-6-3 19:00:00 -0800
+date: 2014-6-7 19:00:00 -0800
 comments: true
 categories: [Personal, S&E]
 ---
