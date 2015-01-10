@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Gap Yearg"
+title: "Gap Year"
 date: 2014-5-10 19:00:00 -0800
 comments: true
 categories: [Personal, S&E]
