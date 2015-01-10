@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Vagrant | Zephyrizing]]></title>
   <link href="http://www.zephyrizing.net/blog/categories/vagrant/atom.xml" rel="self"/>
   <link href="http://www.zephyrizing.net/"/>
-  <updated>2015-01-02T00:35:45-07:00</updated>
+  <updated>2015-01-09T17:19:25-08:00</updated>
   <id>http://www.zephyrizing.net/</id>
   <author>
     <name><![CDATA[Geoff Shannon]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Getting Started With LLVM on OS&nbsp;X]]></title>
     <link href="http://www.zephyrizing.net/blog/2014/11/19/getting-started-with-llvm-on-os-x/"/>
-    <updated>2014-11-19T01:31:00-07:00</updated>
+    <updated>2014-11-19T00:31:00-08:00</updated>
     <id>http://www.zephyrizing.net/blog/2014/11/19/getting-started-with-llvm-on-os-x</id>
     <content type="html"><![CDATA[A few weeks ago, I decided that one of the things I wanted to tackle
 during my time at Hacker School was getting familiar with the LLVM

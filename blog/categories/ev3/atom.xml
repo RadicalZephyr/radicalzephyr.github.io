@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ev3 | Zephyrizing]]></title>
   <link href="http://www.zephyrizing.net/blog/categories/ev3/atom.xml" rel="self"/>
   <link href="http://www.zephyrizing.net/"/>
-  <updated>2015-01-02T00:35:45-07:00</updated>
+  <updated>2015-01-09T17:19:25-08:00</updated>
   <id>http://www.zephyrizing.net/</id>
   <author>
     <name><![CDATA[Geoff Shannon]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[LeJOS and Clojure]]></title>
     <link href="http://www.zephyrizing.net/blog/2014/04/17/lejos-and-clojure/"/>
-    <updated>2014-04-17T17:00:00-06:00</updated>
+    <updated>2014-04-17T16:00:00-07:00</updated>
     <id>http://www.zephyrizing.net/blog/2014/04/17/lejos-and-clojure</id>
     <content type="html"><![CDATA[This is a short followup to my first post about
 [experimenting with the Lego EV3's](
@@ -77,7 +77,7 @@ the limited processing power of the EV3&#8217;s it&#8217;s not quite there yet.
   <entry>
     <title type="html"><![CDATA[Clojure, LeJOS and EV3]]></title>
     <link href="http://www.zephyrizing.net/blog/2013/10/31/leJOS-and-EV3/"/>
-    <updated>2013-10-31T20:00:00-06:00</updated>
+    <updated>2013-10-31T19:00:00-07:00</updated>
     <id>http://www.zephyrizing.net/blog/2013/10/31/leJOS-and-EV3</id>
     <content type="html"><![CDATA[I've had the opportunity in the last couple weeks to start playing
 with a Lego Mindstorms EV3.  Since this hardware is such a new release

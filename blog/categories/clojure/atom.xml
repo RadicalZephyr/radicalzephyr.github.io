@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Clojure | Zephyrizing]]></title>
   <link href="http://www.zephyrizing.net/blog/categories/clojure/atom.xml" rel="self"/>
   <link href="http://www.zephyrizing.net/"/>
-  <updated>2015-01-02T00:35:45-07:00</updated>
+  <updated>2015-01-09T17:19:25-08:00</updated>
   <id>http://www.zephyrizing.net/</id>
   <author>
     <name><![CDATA[Geoff Shannon]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[LeJOS and Clojure]]></title>
     <link href="http://www.zephyrizing.net/blog/2014/04/17/lejos-and-clojure/"/>
-    <updated>2014-04-17T17:00:00-06:00</updated>
+    <updated>2014-04-17T16:00:00-07:00</updated>
     <id>http://www.zephyrizing.net/blog/2014/04/17/lejos-and-clojure</id>
     <content type="html"><![CDATA[This is a short followup to my first post about
 [experimenting with the Lego EV3's](
