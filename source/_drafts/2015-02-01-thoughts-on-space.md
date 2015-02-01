@@ -82,6 +82,10 @@ Random anecdotes I could throw in:
 
 - How much work one can get done when you only sleep for 3-4 hours a
   night. How histamines are a great stimulant
+- In-depth description of what allergies feel like, from my
+  rudimentary understanding of the actual processes. Especially WRT
+  how it *feels* like an auto-immune disease.
+- What having hookworms burrow into your arm feels like
 
 Where I'm going with this...
 Allergies suck
