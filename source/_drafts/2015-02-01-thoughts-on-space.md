@@ -106,6 +106,13 @@ Random anecdotes I could throw in:
 - How allergy attacks work in terms of ramp-up and ramp-down, and
   especially how that interacts with sleeping and getting allergies
   while asleep.
+- The difficulty of how opaque what I'm allergic to is. Sometimes it's
+  obvious, sometimes there's no clue. How random theorizing is
+  necessary and also incredibly frustrating.
+- The importance of learning to trust your nose when dealing with
+  allergies and needing to be paranoid.
+
+
 
 Where I'm going with this...
 Allergies suck
