@@ -39,8 +39,25 @@ would give me a few hours of normalcy.
 
 In fact, my allergies got so much better that I stopped really
 thinking about them. I no longer considered myself to be an "allergic
-person."
+person." Then, around my second or third year at college, my allergies
+started coming back in force.
 
+There's a long story in there about how at the time I was living in a
+group house that had a cat, and then I ended up leaving that house to
+move in with my girlfriend Mirami who also had a cat. This may sound
+crazy from someone who has self-described as "allergic to cats," but
+like I said, I didn't really consider my allergies to be a critical
+factor in my life. The next few years saw my allergies rather
+thoroughly reassert themselves as a dominant factor in many of my
+decisions.
+
+When I moved in with Mirami and her cat, Jimmy Jazz, I ended up
+getting allergies on a very regular basis. We quickly tried to
+determine boundaries that would help stabilize things, but even
+banning the cat from the bedroom and requiring Mirami to wash her
+hands and face before coming to bed didn't prevent me from waking up
+in the middle of the night most nights with a red, runny, itchy
+nose. Needless to say it was a bit of a rough period.
 
 The final kicker Pandora threw in was that by the time my ten years of
 protection was up, "they" would hopefully have developed a more
