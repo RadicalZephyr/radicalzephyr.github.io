@@ -78,6 +78,17 @@ This company, Auto-Immune Therapies had made a business out of
 actually selling kits for infecting yourself with hookworms or
 whipworms to aid in treating various auto-immune diseases.
 
+Long story short, I ended up infecting myself with hookworms, and I've
+had them for the last few years.
+
+One of the things that I've found about having allergies: it's
+incredibly important for me to be able to control at least one space
+pretty much totally so I can keep it as close to allergen free as
+possible. This is difficult, but definitely doable, and over the years
+out of necessity I have gotten pretty good at the aggregate of habits
+and rituals needed to keep a space fit for my habitation.
+
+
 Random anecdotes I could throw in:
 
 - How much work one can get done when you only sleep for 3-4 hours a
@@ -86,6 +97,8 @@ Random anecdotes I could throw in:
   rudimentary understanding of the actual processes. Especially WRT
   how it *feels* like an auto-immune disease.
 - What having hookworms burrow into your arm feels like
+
+
 
 Where I'm going with this...
 Allergies suck
