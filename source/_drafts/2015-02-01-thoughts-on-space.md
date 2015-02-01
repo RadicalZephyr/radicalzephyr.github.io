@@ -63,3 +63,19 @@ The final kicker Pandora threw in was that by the time my ten years of
 protection was up, "they" would hopefully have developed a more
 effective treatment for allergies. Unlike the rest of her predictions,
 that turns out not to have panned out quite as she hoped.
+
+
+
+
+Random anecdotes I could throw in:
+
+- How much work one can get done when you only sleep for 3-4 hours a
+  night. How histamines are a great stimulant
+
+Where I'm going with this...
+Allergies suck
+Cathartic to write about it a bit
+distracting
+
+I don't know.  I had a point, about how my allergies have been driving
+me to make a lot of decisions lately.
