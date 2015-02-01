@@ -1,15 +1,10 @@
 ---
 layout: post
-title: "Thoughts on Space"
+title: "Rubbing your nose considered harmful"
 date: 2015-02-01 04:24:53 -0800
 comments: true
 categories:
 ---
-
-This post is going to be something of a pity party, so if those bother
-you feel free to skip it.
-
-<!--more-->
 
 I've always known that I needed "my own space.' I always attributed
 that to my general level of introversion. But recently it's becoming
@@ -18,6 +13,8 @@ allergies. As my doctor said to me after looking at my blood test
 results "[I] was born to have allergies." When I was younger it was
 primarily cats, dust mites and grass pollen that I was allergic
 to. Oh, and rabbits.  Rabbits in a big way.
+
+<!--more-->
 
 For about five years I got allergy shots. As I recall it, my allergist
 at the time (who has the wonderful first name "Pandora") laid it out
