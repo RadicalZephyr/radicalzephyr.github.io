@@ -97,8 +97,11 @@ Random anecdotes I could throw in:
   rudimentary understanding of the actual processes. Especially WRT
   how it *feels* like an auto-immune disease.
 - What having hookworms burrow into your arm feels like
-
-
+- How "corporate" or public business places are awesome for me. Always
+  very clean and rarely have pets allowed.
+- How allergy attacks work in terms of ramp-up and ramp-down, and
+  especially how that interacts with sleeping and getting allergies
+  while asleep.
 
 Where I'm going with this...
 Allergies suck
