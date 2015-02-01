@@ -64,8 +64,19 @@ protection was up, "they" would hopefully have developed a more
 effective treatment for allergies. Unlike the rest of her predictions,
 that turns out not to have panned out quite as she hoped.
 
+In retrospect I should have dealt with the allergies more
+seriously. After not very thoroughly surveying the options available
+to me at the time, I ended up finding (through my sister) a company
+started by an English man who if anything had had worse allergies than
+I did. He ended up intentionally infecting himself with human
+hookworms, the gory details of which process I will spare you. If
+you're interested look him up, his name is Jasper Lawrence and the
+idea of intentially infecting yourself with various semi-benign
+parasites is called "helminthic therapy."
 
-
+This company, Auto-Immune Therapies had made a business out of
+actually selling kits for infecting yourself with hookworms or
+whipworms to aid in treating various auto-immune diseases.
 
 Random anecdotes I could throw in:
 
