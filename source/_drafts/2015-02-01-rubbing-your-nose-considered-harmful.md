@@ -108,7 +108,18 @@ Random anecdotes I could throw in:
   necessary and also incredibly frustrating.
 - The importance of learning to trust your nose when dealing with
   allergies and needing to be paranoid.
-
+- The frustration and despair of needing and wanting to go back to bed
+  after waking up with allergies, but also desperately not wanting to
+  get activated again. The ultimate strategy of taking benadryl to get
+  a roughly guaranteed four hours of sleep.
+- The frustration of being terrified of moving something that's
+  potentially allergen-containing because that will release it into
+  the air.
+- The need to have a sanctuary environment, especially one where I can
+  sleep.
+- The need to control the environment of the sanctuary completely,
+  because the consequences are either not sleeping or ruining the
+  sanctuary.
 
 
 Where I'm going with this...
@@ -118,3 +129,8 @@ distracting
 
 I don't know.  I had a point, about how my allergies have been driving
 me to make a lot of decisions lately.
+
+I could start an allergies blog. Write about all my experiences with
+dealing with allergies, the different strategies and treatments I've
+tried. Good place to write about using nettles/other herbs
+(eyebright!!) for histamine management.
