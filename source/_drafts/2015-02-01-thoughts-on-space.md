@@ -84,9 +84,13 @@ had them for the last few years.
 One of the things that I've found about having allergies: it's
 incredibly important for me to be able to control at least one space
 pretty much totally so I can keep it as close to allergen free as
-possible. This is difficult, but definitely doable, and over the years
+possible. That way when all else fails - and it usually does - I can
+always retreat back to my sanctuary to recover from an allergy attack.
+
+This is difficult, but definitely doable, and over the years
 out of necessity I have gotten pretty good at the aggregate of habits
 and rituals needed to keep a space fit for my habitation.
+
 
 
 Random anecdotes I could throw in:
