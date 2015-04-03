@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Programming | Zephyrizing]]></title>
   <link href="http://www.zephyrizing.net/blog/categories/programming/atom.xml" rel="self"/>
   <link href="http://www.zephyrizing.net/"/>
-  <updated>2015-01-09T17:34:30-08:00</updated>
+  <updated>2015-04-02T23:39:43-05:00</updated>
   <id>http://www.zephyrizing.net/</id>
   <author>
     <name><![CDATA[Geoff Shannon]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[... And This Is Why Master Should Be Stable]]></title>
     <link href="http://www.zephyrizing.net/blog/2014/10/07/dot-dot-dot-and-this-is-why-master-should-be-stable/"/>
-    <updated>2014-10-07T10:28:48-07:00</updated>
+    <updated>2014-10-07T12:28:48-05:00</updated>
     <id>http://www.zephyrizing.net/blog/2014/10/07/dot-dot-dot-and-this-is-why-master-should-be-stable</id>
     <content type="html"><![CDATA[Second day at Hacker School.  I spent the morning doing two things:
 
@@ -70,7 +70,7 @@ thing.
   <entry>
     <title type="html"><![CDATA[Keybase Hacker News Q&A]]></title>
     <link href="http://www.zephyrizing.net/blog/2014/06/11/keybase-hackernews-q-and-a/"/>
-    <updated>2014-06-11T21:00:00-07:00</updated>
+    <updated>2014-06-11T23:00:00-05:00</updated>
     <id>http://www.zephyrizing.net/blog/2014/06/11/keybase-hackernews-q-and-a</id>
     <content type="html"><![CDATA[I started using [Keybase] sometime back in April. I've been interested
 in doing crypto stuff for a long time, starting with using an SSH
@@ -643,7 +643,7 @@ ado:
   <entry>
     <title type="html"><![CDATA[LeJOS and Clojure]]></title>
     <link href="http://www.zephyrizing.net/blog/2014/04/17/lejos-and-clojure/"/>
-    <updated>2014-04-17T16:00:00-07:00</updated>
+    <updated>2014-04-17T18:00:00-05:00</updated>
     <id>http://www.zephyrizing.net/blog/2014/04/17/lejos-and-clojure</id>
     <content type="html"><![CDATA[This is a short followup to my first post about
 [experimenting with the Lego EV3's](
@@ -704,7 +704,7 @@ the limited processing power of the EV3&#8217;s it&#8217;s not quite there yet.
   <entry>
     <title type="html"><![CDATA[Clojure, LeJOS and EV3]]></title>
     <link href="http://www.zephyrizing.net/blog/2013/10/31/leJOS-and-EV3/"/>
-    <updated>2013-10-31T19:00:00-07:00</updated>
+    <updated>2013-10-31T21:00:00-05:00</updated>
     <id>http://www.zephyrizing.net/blog/2013/10/31/leJOS-and-EV3</id>
     <content type="html"><![CDATA[I've had the opportunity in the last couple weeks to start playing
 with a Lego Mindstorms EV3.  Since this hardware is such a new release

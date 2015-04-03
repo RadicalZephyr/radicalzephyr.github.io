@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Live-coding | Zephyrizing]]></title>
   <link href="http://www.zephyrizing.net/blog/categories/live-coding/atom.xml" rel="self"/>
   <link href="http://www.zephyrizing.net/"/>
-  <updated>2015-01-09T17:34:30-08:00</updated>
+  <updated>2015-04-02T23:39:43-05:00</updated>
   <id>http://www.zephyrizing.net/</id>
   <author>
     <name><![CDATA[Geoff Shannon]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Demonstrating demonstrate.sh]]></title>
     <link href="http://www.zephyrizing.net/blog/2014/10/30/demonstrating-demonstrate-dot-sh/"/>
-    <updated>2014-10-30T13:33:34-07:00</updated>
+    <updated>2014-10-30T15:33:34-05:00</updated>
     <id>http://www.zephyrizing.net/blog/2014/10/30/demonstrating-demonstrate-dot-sh</id>
     <content type="html"><![CDATA[_Edit 2014/12/30: I ended up rewriting demonstrate in [several][demosh]
 [different][demooc] languages, but the implementation that I like the

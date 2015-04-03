@@ -1,231 +1,191 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  
-  
+  <url>
+    <loc>http://www.zephyrizing.net/blog/2015/04/02/two-days-in/</loc>
+    <lastmod>2015-04-02T23:34:05-05:00</lastmod>
+  </url>
   <url>
     <loc>http://www.zephyrizing.net/blog/2014/12/30/sane-static-site-setups/</loc>
-    
-    <lastmod>2014-12-30T12:44:37-08:00</lastmod>
-    
-    <priority>0.8</priority>
+    <lastmod>2014-12-30T14:44:37-06:00</lastmod>
   </url>
-  
   <url>
-    <loc>http://www.zephyrizing.net/blog/2014/12/13/getting-started-with-llvm-and-ocaml-on-os-x/</loc>
-    
-    <lastmod>2014-12-13T22:15:16-08:00</lastmod>
-    
-    <priority>0.8</priority>
+    <loc>http://www.zephyrizing.net/blog/2014/12/14/getting-started-with-llvm-and-ocaml-on-os-x/</loc>
+    <lastmod>2014-12-14T00:15:16-06:00</lastmod>
   </url>
-  
   <url>
     <loc>http://www.zephyrizing.net/blog/2014/11/19/getting-started-with-llvm-on-os-x/</loc>
-    
-    <lastmod>2014-11-19T00:31:00-08:00</lastmod>
-    
-    <priority>0.8</priority>
+    <lastmod>2014-11-19T02:31:00-06:00</lastmod>
   </url>
-  
   <url>
     <loc>http://www.zephyrizing.net/blog/2014/10/30/demonstrating-demonstrate-dot-sh/</loc>
-    
-    <lastmod>2014-10-30T13:33:34-07:00</lastmod>
-    
-    <priority>0.8</priority>
+    <lastmod>2014-10-30T15:33:34-05:00</lastmod>
   </url>
-  
   <url>
     <loc>http://www.zephyrizing.net/blog/2014/10/27/playing-with-org-mode/</loc>
-    
-    <lastmod>2014-10-27T15:30:05-07:00</lastmod>
-    
-    <priority>0.8</priority>
+    <lastmod>2014-10-27T17:30:05-05:00</lastmod>
   </url>
-  
   <url>
     <loc>http://www.zephyrizing.net/blog/2014/10/26/on-the-importance-of-distinguishing-between-stable-and-development-documentation/</loc>
-    
-    <lastmod>2014-10-26T20:10:04-07:00</lastmod>
-    
-    <priority>0.8</priority>
+    <lastmod>2014-10-26T22:10:04-05:00</lastmod>
   </url>
-  
   <url>
     <loc>http://www.zephyrizing.net/blog/2014/10/14/adventures-with-clojure-macros/</loc>
-    
-    <lastmod>2014-10-14T16:20:56-07:00</lastmod>
-    
-    <priority>0.8</priority>
+    <lastmod>2014-10-14T18:20:56-05:00</lastmod>
   </url>
-  
   <url>
     <loc>http://www.zephyrizing.net/blog/2014/10/11/hacker-school-week-1-review/</loc>
-    
-    <lastmod>2014-10-11T01:48:52-07:00</lastmod>
-    
-    <priority>0.8</priority>
+    <lastmod>2014-10-11T03:48:52-05:00</lastmod>
   </url>
-  
   <url>
     <loc>http://www.zephyrizing.net/blog/2014/10/07/dot-dot-dot-and-this-is-why-master-should-be-stable/</loc>
-    
-    <lastmod>2014-10-07T10:28:48-07:00</lastmod>
-    
-    <priority>0.8</priority>
+    <lastmod>2014-10-07T12:28:48-05:00</lastmod>
   </url>
-  
   <url>
     <loc>http://www.zephyrizing.net/blog/2014/06/11/keybase-hackernews-q-and-a/</loc>
-    
-    <lastmod>2014-06-11T21:00:00-07:00</lastmod>
-    
-    <priority>0.8</priority>
+    <lastmod>2014-06-11T23:00:00-05:00</lastmod>
   </url>
-  
   <url>
     <loc>http://www.zephyrizing.net/blog/2014/06/07/s-and-e-part-seven:-onward/</loc>
-    
-    <lastmod>2014-06-07T20:00:00-07:00</lastmod>
-    
-    <priority>0.8</priority>
+    <lastmod>2014-06-07T22:00:00-05:00</lastmod>
   </url>
-  
   <url>
     <loc>http://www.zephyrizing.net/blog/2014/06/03/s-and-e-part-six:-waiting/</loc>
-    
-    <lastmod>2014-06-03T20:00:00-07:00</lastmod>
-    
-    <priority>0.8</priority>
+    <lastmod>2014-06-03T22:00:00-05:00</lastmod>
   </url>
-  
   <url>
     <loc>http://www.zephyrizing.net/blog/2014/05/14/s-and-e-part-five:-first-contact/</loc>
-    
-    <lastmod>2014-05-14T20:00:00-07:00</lastmod>
-    
-    <priority>0.8</priority>
+    <lastmod>2014-05-14T22:00:00-05:00</lastmod>
   </url>
-  
   <url>
     <loc>http://www.zephyrizing.net/blog/2014/05/10/s-and-e-part-four:-gap-year/</loc>
-    
-    <lastmod>2014-05-10T20:00:00-07:00</lastmod>
-    
-    <priority>0.8</priority>
+    <lastmod>2014-05-10T22:00:00-05:00</lastmod>
   </url>
-  
   <url>
     <loc>http://www.zephyrizing.net/blog/2014/05/06/s-and-e-part-three:-the-teenage-liberation-handbook/</loc>
-    
-    <lastmod>2014-05-06T20:00:00-07:00</lastmod>
-    
-    <priority>0.8</priority>
+    <lastmod>2014-05-06T22:00:00-05:00</lastmod>
   </url>
-  
   <url>
     <loc>http://www.zephyrizing.net/blog/2014/05/01/s-and-e-part-two:-gumption/</loc>
-    
-    <lastmod>2014-05-01T20:00:00-07:00</lastmod>
-    
-    <priority>0.8</priority>
+    <lastmod>2014-05-01T22:00:00-05:00</lastmod>
   </url>
-  
   <url>
     <loc>http://www.zephyrizing.net/blog/2014/04/26/s-and-e-part-one:-the-single-story/</loc>
-    
-    <lastmod>2014-04-26T20:00:00-07:00</lastmod>
-    
-    <priority>0.8</priority>
+    <lastmod>2014-04-26T22:00:00-05:00</lastmod>
   </url>
-  
   <url>
     <loc>http://www.zephyrizing.net/blog/2014/04/21/the-summary-and-evaluation-how-i-figured-out-why-i-went-to-college/</loc>
-    
-    <lastmod>2014-04-21T18:00:00-07:00</lastmod>
-    
-    <priority>0.8</priority>
+    <lastmod>2014-04-21T20:00:00-05:00</lastmod>
   </url>
-  
   <url>
     <loc>http://www.zephyrizing.net/blog/2014/04/17/lejos-and-clojure/</loc>
-    
-    <lastmod>2014-04-17T16:00:00-07:00</lastmod>
-    
-    <priority>0.8</priority>
+    <lastmod>2014-04-17T18:00:00-05:00</lastmod>
   </url>
-  
   <url>
     <loc>http://www.zephyrizing.net/blog/2013/10/31/leJOS-and-EV3/</loc>
-    
-    <lastmod>2013-10-31T19:00:00-07:00</lastmod>
-    
-    <priority>0.8</priority>
+    <lastmod>2013-10-31T21:00:00-05:00</lastmod>
   </url>
-  
   <url>
     <loc>http://www.zephyrizing.net/blog/2013/09/03/why-am-i-doing-this/</loc>
-    
-    <lastmod>2013-09-03T01:00:00-07:00</lastmod>
-    
-    <priority>0.8</priority>
+    <lastmod>2013-09-03T03:00:00-05:00</lastmod>
   </url>
-  
-  
   <url>
     <loc>http://www.zephyrizing.net/demos/example-plugin.html</loc>
-    <lastmod>2015-01-09T17:34:30-08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
   </url>
-  
   <url>
     <loc>http://www.zephyrizing.net/</loc>
-    <lastmod>2015-01-09T17:34:30-08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
   </url>
-  
   <url>
     <loc>http://www.zephyrizing.net/presentations/</loc>
-    <lastmod>2015-01-09T17:34:30-08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
   </url>
-  
   <url>
     <loc>http://www.zephyrizing.net/blog/archives/</loc>
-    <lastmod>2015-01-09T17:34:30-08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
   </url>
-  
   <url>
     <loc>http://www.zephyrizing.net/about/</loc>
-    <lastmod>2015-01-09T17:34:30-08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
   </url>
-  
   <url>
     <loc>http://www.zephyrizing.net/presentations/introduction-to-bash/</loc>
-    <lastmod>2015-01-09T17:34:30-08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
   </url>
-  
   <url>
     <loc>http://www.zephyrizing.net/presentations/reimplementing-gitignore-in-15-lines-of-bash/</loc>
-    <lastmod>2015-01-09T17:34:30-08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
   </url>
-  
-  
-  
+  <url>
+    <loc>http://www.zephyrizing.net/blog/categories/meta/</loc>
+  </url>
+  <url>
+    <loc>http://www.zephyrizing.net/blog/categories/programming/</loc>
+  </url>
+  <url>
+    <loc>http://www.zephyrizing.net/blog/categories/ev3/</loc>
+  </url>
+  <url>
+    <loc>http://www.zephyrizing.net/blog/categories/java/</loc>
+  </url>
+  <url>
+    <loc>http://www.zephyrizing.net/blog/categories/clojure/</loc>
+  </url>
+  <url>
+    <loc>http://www.zephyrizing.net/blog/categories/personal/</loc>
+  </url>
+  <url>
+    <loc>http://www.zephyrizing.net/blog/categories/s-and-e/</loc>
+  </url>
+  <url>
+    <loc>http://www.zephyrizing.net/blog/categories/psa/</loc>
+  </url>
+  <url>
+    <loc>http://www.zephyrizing.net/blog/categories/keybase/</loc>
+  </url>
+  <url>
+    <loc>http://www.zephyrizing.net/blog/categories/rant/</loc>
+  </url>
+  <url>
+    <loc>http://www.zephyrizing.net/blog/categories/troubleshooting/</loc>
+  </url>
+  <url>
+    <loc>http://www.zephyrizing.net/blog/categories/hacker-school/</loc>
+  </url>
+  <url>
+    <loc>http://www.zephyrizing.net/blog/categories/oops/</loc>
+  </url>
+  <url>
+    <loc>http://www.zephyrizing.net/blog/categories/macros/</loc>
+  </url>
+  <url>
+    <loc>http://www.zephyrizing.net/blog/categories/documentation/</loc>
+  </url>
+  <url>
+    <loc>http://www.zephyrizing.net/blog/categories/emacs/</loc>
+  </url>
+  <url>
+    <loc>http://www.zephyrizing.net/blog/categories/org-mode/</loc>
+  </url>
+  <url>
+    <loc>http://www.zephyrizing.net/blog/categories/python/</loc>
+  </url>
+  <url>
+    <loc>http://www.zephyrizing.net/blog/categories/bash/</loc>
+  </url>
+  <url>
+    <loc>http://www.zephyrizing.net/blog/categories/live-coding/</loc>
+  </url>
+  <url>
+    <loc>http://www.zephyrizing.net/blog/categories/llvm/</loc>
+  </url>
+  <url>
+    <loc>http://www.zephyrizing.net/blog/categories/vagrant/</loc>
+  </url>
+  <url>
+    <loc>http://www.zephyrizing.net/blog/categories/ocaml/</loc>
+  </url>
+  <url>
+    <loc>http://www.zephyrizing.net/blog/categories/homebrew/</loc>
+  </url>
+  <url>
+    <loc>http://www.zephyrizing.net/blog/categories/web/</loc>
+  </url>
   <url>
     <loc>http://www.zephyrizing.net/demos/example.html</loc>
-    <lastmod>2014-10-28T10:46:25Z</lastmod>
-    <priority>0.6</priority>
+    <lastmod>2015-02-01T08:04:20-06:00</lastmod>
   </url>
-  
 </urlset>

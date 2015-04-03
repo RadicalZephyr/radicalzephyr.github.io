@@ -4,7 +4,7 @@
   <title><![CDATA[Zephyrizing]]></title>
   <link href="http://www.zephyrizing.net/atom.xml" rel="self"/>
   <link href="http://www.zephyrizing.net/"/>
-  <updated>2015-01-09T17:34:30-08:00</updated>
+  <updated>2015-04-02T23:39:43-05:00</updated>
   <id>http://www.zephyrizing.net/</id>
   <author>
     <name><![CDATA[Geoff Shannon]]></name>
@@ -14,9 +14,87 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Two Days In]]></title>
+    <link href="http://www.zephyrizing.net/blog/2015/04/02/two-days-in/"/>
+    <updated>2015-04-02T23:34:05-05:00</updated>
+    <id>http://www.zephyrizing.net/blog/2015/04/02/two-days-in</id>
+    <content type="html"><![CDATA[<p>It&rsquo;s only been two days and already a lot has happened, so it seemed
+like time for an update.  Oh, BTW since I haven&rsquo;t mentioned it on my
+blog before, I just moved to Chicago to work at <a href="http://8thlight.com/">8th Light</a>.</p>
+
+<p>I arrived in Chicago on Tuesday afternoon/evening and had an
+uneventful time finding my Airbnb in Edgewater on the north side of
+Chicago.  I spent the evening searching house listings on Craigslist
+and Zillow, and sending emails trying to schedule viewings for the
+next few days.</p>
+
+<!--more-->
+
+
+<p>Wednesday, and today I spent looking at different units.  Wednesday
+was mostly sort of disappointing, especially in the kitchen
+department.  But there was one unit that had a good location, and very
+nice amenities and layout; except for the kitchen was long and narrow
+and sort of awkward looking.</p>
+
+<p>Today started out looking like more of the same, until my 3rd and 4th
+viewings.  The 3rd place I looked at was right across the street from
+the best one from Wednesday, except it was two bedrooms, and a much
+more reasonable kitchen for only slightly more money.  This seemed
+like a clear win, and I very excitedly applied for it immediately
+after I left.</p>
+
+<p>I kept my final appointment of the day mostly out of politeness and
+curiosity.  I really had no expectations for it, since the pictures in
+the Craigslist ad had been sort of iffy.  But walking into the space I
+was pretty blown away.</p>
+
+<p>This is what I wrote about it after seeing it (admittedly, several
+hours after seeing it). The TL;DR is that it&rsquo;s really quite awesome.</p>
+
+<blockquote><p>Beautiful high ceilings with gorgeous detail work.  Several built-in
+pieces of furniture including a floor to ceiling hutch in the dining
+room/kitchen with a glass paneled portion and a lower area with
+several full-width drawers.  There is also a built-in dresser in the
+bedroom closet (which is large and walk-in, and has shelves REALLY
+high).</p>
+
+<p>The living room area is large and has great windows and light, with an
+alcove-ish area perfect for a desk/work area.  It’s on the third floor
+of a house where each level is a unit (called a “three-flat”).</p>
+
+<p>The owner lives in the ground floor, another couple in the middle.
+there is an attic above me with some possibility of storing some stuff
+there.  Two entrances, front and back.  Front has an interior
+staircase with a landing at the top, perfect for shoe/coat storage.</p>
+
+<p>The bedroom is a very nice size (not too big, not too small) and it
+has fewer windows so it’s not incredibly bright.  Yet still has a
+reasonable amount of light so it’s not cave-like.</p>
+
+<p>The biggest downside is the kitchen which has some awkwardness to the
+layout (counter space is separated from the range by the fridge, and
+the sink is on a different wall altogether.  But the sink is awesome
+old pewter with a built-in dish drying area (slanted and grooved and
+with a lip).  No dishwasher.  But plenty of room for a dining room
+table, and there is room next to the range to put an extra
+tall-cutting board or general end-table.  And the cabinets in the
+kitchen have interior shelves (not on top of the cabinet!) that go to
+the limit of what I can reach.</p>
+
+<p>The bathroom is also quite small, with a claw foot tub/shower (which
+probably needs a special/double shower curtain setup.  But it is
+gorgeous with some really amazing Turkish tiles in the walls.</p></blockquote>
+
+<p>So that&rsquo;s pretty exciting. I guess I&rsquo;ve found my new place to live.
+Now what do I do until I start at 8th Light in two weeks?</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Sane Static Site Setups]]></title>
     <link href="http://www.zephyrizing.net/blog/2014/12/30/sane-static-site-setups/"/>
-    <updated>2014-12-30T12:44:37-08:00</updated>
+    <updated>2014-12-30T14:44:37-06:00</updated>
     <id>http://www.zephyrizing.net/blog/2014/12/30/sane-static-site-setups</id>
     <content type="html"><![CDATA[<p>During the last week of Hacker School I helped <a href="http://lmontopo.github.io/">Leta</a> sort out
 some issues she had with her blog setup and restore everything to
@@ -135,9 +213,9 @@ process.</p>
   
   <entry>
     <title type="html"><![CDATA[Getting Started With LLVM and OCaml on OS&nbsp;X]]></title>
-    <link href="http://www.zephyrizing.net/blog/2014/12/13/getting-started-with-llvm-and-ocaml-on-os-x/"/>
-    <updated>2014-12-13T22:15:16-08:00</updated>
-    <id>http://www.zephyrizing.net/blog/2014/12/13/getting-started-with-llvm-and-ocaml-on-os-x</id>
+    <link href="http://www.zephyrizing.net/blog/2014/12/14/getting-started-with-llvm-and-ocaml-on-os-x/"/>
+    <updated>2014-12-14T00:15:16-06:00</updated>
+    <id>http://www.zephyrizing.net/blog/2014/12/14/getting-started-with-llvm-and-ocaml-on-os-x</id>
     <content type="html"><![CDATA[<p>I <a href="http://www.zephyrizing.net/blog/2014/11/19/getting-started-with-llvm-on-os-x/">wrote recently</a> about my (second) experience trying to
 get started using LLVM on my Macbook. Shortly after that, I became
 interested in combining my interest in LLVM with my interest OCaml. As
@@ -198,7 +276,7 @@ anything with LLVM&hellip;</p>
   <entry>
     <title type="html"><![CDATA[Getting Started With LLVM on OS&nbsp;X]]></title>
     <link href="http://www.zephyrizing.net/blog/2014/11/19/getting-started-with-llvm-on-os-x/"/>
-    <updated>2014-11-19T00:31:00-08:00</updated>
+    <updated>2014-11-19T02:31:00-06:00</updated>
     <id>http://www.zephyrizing.net/blog/2014/11/19/getting-started-with-llvm-on-os-x</id>
     <content type="html"><![CDATA[<p>A few weeks ago, I decided that one of the things I wanted to tackle
 during my time at Hacker School was getting familiar with the LLVM
@@ -329,7 +407,7 @@ packages and make a PPA with a CMake that properly installs the
   <entry>
     <title type="html"><![CDATA[Demonstrating demonstrate.sh]]></title>
     <link href="http://www.zephyrizing.net/blog/2014/10/30/demonstrating-demonstrate-dot-sh/"/>
-    <updated>2014-10-30T13:33:34-07:00</updated>
+    <updated>2014-10-30T15:33:34-05:00</updated>
     <id>http://www.zephyrizing.net/blog/2014/10/30/demonstrating-demonstrate-dot-sh</id>
     <content type="html"><![CDATA[<p><em>Edit 2014/12/30: I ended up rewriting demonstrate in <a href="https://github.com/RadicalZephyr/demonstrate.sh">several</a>
 <a href="https://github.com/RadicalZephyr/demonstrate">different</a> languages, but the implementation that I like the
@@ -414,7 +492,7 @@ to start over from the beginning (barring awesome hacks
   <entry>
     <title type="html"><![CDATA[Playing With Org-mode]]></title>
     <link href="http://www.zephyrizing.net/blog/2014/10/27/playing-with-org-mode/"/>
-    <updated>2014-10-27T15:30:05-07:00</updated>
+    <updated>2014-10-27T17:30:05-05:00</updated>
     <id>http://www.zephyrizing.net/blog/2014/10/27/playing-with-org-mode</id>
     <content type="html"><![CDATA[<p>So, as a way to procrastinate on actually starting to write/practice
 my lightning talk for Thursday, I decided that I absolutely wanted to
@@ -639,7 +717,7 @@ at the <a href="zephyrizing">git repository for this site</a>.</p>
   <entry>
     <title type="html"><![CDATA[On the Importance of Distinguishing Between Stable and Development Documentation]]></title>
     <link href="http://www.zephyrizing.net/blog/2014/10/26/on-the-importance-of-distinguishing-between-stable-and-development-documentation/"/>
-    <updated>2014-10-26T20:10:04-07:00</updated>
+    <updated>2014-10-26T22:10:04-05:00</updated>
     <id>http://www.zephyrizing.net/blog/2014/10/26/on-the-importance-of-distinguishing-between-stable-and-development-documentation</id>
     <content type="html"><![CDATA[<p>A few weeks ago I wrote about <a href="http://www.zephyrizing.net/blog/2014/10/07/dot-dot-dot-and-this-is-why-master-should-be-stable/">Why Master Should Be Stable</a>. I
 spent most of that post explaining what had actually happened to me,
@@ -761,7 +839,7 @@ least able to do anything about it.</p>
   <entry>
     <title type="html"><![CDATA[Adventures With Clojure Macros]]></title>
     <link href="http://www.zephyrizing.net/blog/2014/10/14/adventures-with-clojure-macros/"/>
-    <updated>2014-10-14T16:20:56-07:00</updated>
+    <updated>2014-10-14T18:20:56-05:00</updated>
     <id>http://www.zephyrizing.net/blog/2014/10/14/adventures-with-clojure-macros</id>
     <content type="html"><![CDATA[<p>So, this is the second day of my second week of <a href="https://www.hackerschool.com/">Hacker School</a>. I&rsquo;m
 finally starting to feel like I&rsquo;m getting into the
@@ -1243,7 +1321,7 @@ REPL from <code>lein repl</code> in my home directory.</p>
   <entry>
     <title type="html"><![CDATA[Hacker School: Week 1 Review]]></title>
     <link href="http://www.zephyrizing.net/blog/2014/10/11/hacker-school-week-1-review/"/>
-    <updated>2014-10-11T01:48:52-07:00</updated>
+    <updated>2014-10-11T03:48:52-05:00</updated>
     <id>http://www.zephyrizing.net/blog/2014/10/11/hacker-school-week-1-review</id>
     <content type="html"><![CDATA[<p>So, I can&rsquo;t sleep, and it&rsquo;s the end of my first week at
 <a href="https://www.hackerschool.com/">Hacker School</a>, so I thought I&rsquo;d do some reflecting on what I did,
@@ -1398,7 +1476,7 @@ terrified of starting that project.</p>
   <entry>
     <title type="html"><![CDATA[... And This Is Why Master Should Be Stable]]></title>
     <link href="http://www.zephyrizing.net/blog/2014/10/07/dot-dot-dot-and-this-is-why-master-should-be-stable/"/>
-    <updated>2014-10-07T10:28:48-07:00</updated>
+    <updated>2014-10-07T12:28:48-05:00</updated>
     <id>http://www.zephyrizing.net/blog/2014/10/07/dot-dot-dot-and-this-is-why-master-should-be-stable</id>
     <content type="html"><![CDATA[<p>Second day at Hacker School.  I spent the morning doing two things:</p>
 
@@ -1449,7 +1527,7 @@ thing.</p>
   <entry>
     <title type="html"><![CDATA[Keybase Hacker News Q&A]]></title>
     <link href="http://www.zephyrizing.net/blog/2014/06/11/keybase-hackernews-q-and-a/"/>
-    <updated>2014-06-11T21:00:00-07:00</updated>
+    <updated>2014-06-11T23:00:00-05:00</updated>
     <id>http://www.zephyrizing.net/blog/2014/06/11/keybase-hackernews-q-and-a</id>
     <content type="html"><![CDATA[<p>I started using <a href="https://keybase.io">Keybase</a> sometime back in April. I&rsquo;ve been interested
 in doing crypto stuff for a long time, starting with using an SSH
@@ -2060,7 +2138,7 @@ users.</p></blockquote>
   <entry>
     <title type="html"><![CDATA[Onward]]></title>
     <link href="http://www.zephyrizing.net/blog/2014/06/07/s-and-e-part-seven:-onward/"/>
-    <updated>2014-06-07T20:00:00-07:00</updated>
+    <updated>2014-06-07T22:00:00-05:00</updated>
     <id>http://www.zephyrizing.net/blog/2014/06/07/s-and-e-part-seven:-onward</id>
     <content type="html"><![CDATA[<p>The path to my graduation has been a long one. For almost a year now
 different people have been asking me what I&rsquo;m going to do once I
@@ -2328,7 +2406,7 @@ section had a leading &ldquo;0.&rdquo;</sub></p>
   <entry>
     <title type="html"><![CDATA[Waiting]]></title>
     <link href="http://www.zephyrizing.net/blog/2014/06/03/s-and-e-part-six:-waiting/"/>
-    <updated>2014-06-03T20:00:00-07:00</updated>
+    <updated>2014-06-03T22:00:00-05:00</updated>
     <id>http://www.zephyrizing.net/blog/2014/06/03/s-and-e-part-six:-waiting</id>
     <content type="html"><![CDATA[<p>When I read, I immerse myself in the words. Reading has always been
 an escape for me. I would used to sit for hours in my mother&rsquo;s house
@@ -2469,7 +2547,7 @@ waiting at some point.</p>
   <entry>
     <title type="html"><![CDATA[First Contact]]></title>
     <link href="http://www.zephyrizing.net/blog/2014/05/14/s-and-e-part-five:-first-contact/"/>
-    <updated>2014-05-14T20:00:00-07:00</updated>
+    <updated>2014-05-14T22:00:00-05:00</updated>
     <id>http://www.zephyrizing.net/blog/2014/05/14/s-and-e-part-five:-first-contact</id>
     <content type="html"><![CDATA[<p>At the time, I was infatuated with a particular video game. This game
 was called Neverwinter Nights and it was a sword-and-sorcery adventure
@@ -2595,7 +2673,7 @@ responsibility.</p>
   <entry>
     <title type="html"><![CDATA[Gap Year]]></title>
     <link href="http://www.zephyrizing.net/blog/2014/05/10/s-and-e-part-four:-gap-year/"/>
-    <updated>2014-05-10T20:00:00-07:00</updated>
+    <updated>2014-05-10T22:00:00-05:00</updated>
     <id>http://www.zephyrizing.net/blog/2014/05/10/s-and-e-part-four:-gap-year</id>
     <content type="html"><![CDATA[<p>So I followed through and took one year off from school. A &ldquo;Gap Year&rdquo;
 as it is somewhat euphemistically referred to. I spent some time
@@ -2738,7 +2816,7 @@ Western in 2008. It really started six years earlier, when I was 14.</p>
   <entry>
     <title type="html"><![CDATA[The Teenage Liberation Handbook]]></title>
     <link href="http://www.zephyrizing.net/blog/2014/05/06/s-and-e-part-three:-the-teenage-liberation-handbook/"/>
-    <updated>2014-05-06T20:00:00-07:00</updated>
+    <updated>2014-05-06T22:00:00-05:00</updated>
     <id>http://www.zephyrizing.net/blog/2014/05/06/s-and-e-part-three:-the-teenage-liberation-handbook</id>
     <content type="html"><![CDATA[<p>The book that has had the greatest impact on my educational journey is
 <em>The Teenage Liberation Handbook: How to Quit School and Get a Real
@@ -2849,7 +2927,7 @@ about education.</p>
   <entry>
     <title type="html"><![CDATA[Gumption]]></title>
     <link href="http://www.zephyrizing.net/blog/2014/05/01/s-and-e-part-two:-gumption/"/>
-    <updated>2014-05-01T20:00:00-07:00</updated>
+    <updated>2014-05-01T22:00:00-05:00</updated>
     <id>http://www.zephyrizing.net/blog/2014/05/01/s-and-e-part-two:-gumption</id>
     <content type="html"><![CDATA[<p>My understanding of the concept of personal power - or as I now call
 it &ldquo;gumption&rdquo; - comes in large part from Robert Pirsig&rsquo;s <em>Zen and the
@@ -2967,7 +3045,7 @@ many excellent teachers. And of course, so many books.</p>
   <entry>
     <title type="html"><![CDATA[The Single Story]]></title>
     <link href="http://www.zephyrizing.net/blog/2014/04/26/s-and-e-part-one:-the-single-story/"/>
-    <updated>2014-04-26T20:00:00-07:00</updated>
+    <updated>2014-04-26T22:00:00-05:00</updated>
     <id>http://www.zephyrizing.net/blog/2014/04/26/s-and-e-part-one:-the-single-story</id>
     <content type="html"><![CDATA[<h2>Beginnings</h2>
 
@@ -3102,7 +3180,7 @@ that comes from accomplishment has been key.</p>
   <entry>
     <title type="html"><![CDATA[The Summary and Evaluation - How I Figured Out Why I Went to College]]></title>
     <link href="http://www.zephyrizing.net/blog/2014/04/21/the-summary-and-evaluation-how-i-figured-out-why-i-went-to-college/"/>
-    <updated>2014-04-21T18:00:00-07:00</updated>
+    <updated>2014-04-21T20:00:00-05:00</updated>
     <id>http://www.zephyrizing.net/blog/2014/04/21/the-summary-and-evaluation-how-i-figured-out-why-i-went-to-college</id>
     <content type="html"><![CDATA[<p>So. I am a Fairhaven student. I&rsquo;m also a Computer Science major. These
 are two discrete descriptions of my academic life. Both are integral
@@ -3146,7 +3224,7 @@ it. You&rsquo;re welcome to tag along.</p>
   <entry>
     <title type="html"><![CDATA[LeJOS and Clojure]]></title>
     <link href="http://www.zephyrizing.net/blog/2014/04/17/lejos-and-clojure/"/>
-    <updated>2014-04-17T16:00:00-07:00</updated>
+    <updated>2014-04-17T18:00:00-05:00</updated>
     <id>http://www.zephyrizing.net/blog/2014/04/17/lejos-and-clojure</id>
     <content type="html"><![CDATA[<p>This is a short followup to my first post about
 <a href="http://www.zephyrizing.net/blog/2013/10/31/leJOS-and-EV3/">experimenting with the Lego EV3&rsquo;s</a> and <a href="http://lejos.org">leJOS</a>. Shortly
@@ -3196,55 +3274,6 @@ there is something really, really cool about typing some commands at
 the REPL and having your robot start moving around and doing
 stuff. Unfortunately, because of the current architecture of leJOS and
 the limited processing power of the EV3&rsquo;s it&rsquo;s not quite there yet.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Clojure, LeJOS and EV3]]></title>
-    <link href="http://www.zephyrizing.net/blog/2013/10/31/leJOS-and-EV3/"/>
-    <updated>2013-10-31T19:00:00-07:00</updated>
-    <id>http://www.zephyrizing.net/blog/2013/10/31/leJOS-and-EV3</id>
-    <content type="html"><![CDATA[<p>I&rsquo;ve had the opportunity in the last couple weeks to start playing
-with a Lego Mindstorms EV3.  Since this hardware is such a new release
-though, most of the normal contenders in the robot programming scene
-(namely, RobotC) haven&rsquo;t had time to update their offerings to work
-with it.</p>
-
-<p>Enter <a href="http://lejos.org">LeJOS</a>.  Apparently the maintainer of the LeJOS project
-got early access to the developer documentation and other necessary
-infos, so he&rsquo;s been able to develop a setup for allowing people to
-program their EV3 using Java.</p>
-
-<!--more-->
-
-
-<p>It&rsquo;s a really elegant solution actually.  Since the EV3 already runs a
-full linux kernel, he just modified the base Legos linux image.  You
-then partition a microSD card and write this image to it.  Now you can
-boot the EV3 from the microSD card and ssh into it over either WiFi
-(if you have an external USB wifi adapter that&rsquo;s compatible), or over
-USB (a more recent feature).</p>
-
-<p>My next goal is to get a clojure projet running on the ev3.  There are
-two approaches that I could take.  First, I could try AOT compiling my
-clojure source and then shipping just the uberjar to the EV3.  This
-seems the most straightforward.  However, following this plan I almost
-immediately ran into a stumbling block.  The LeJOS java library cannot
-be compiled using Leiningen when not on the EV3.</p>
-
-<p>Apparently this is because something about the clojure compilation
-process actually loads the EV3 classes into the JVM.  This causes the
-static initializers to be run.  And the static initializers look for
-specific files in the /dev directory to try and do their thing.</p>
-
-<p>Obviously, when you&rsquo;re not on an EV3 these files don&rsquo;t exist.</p>
-
-<p>So the second way of doing things would be to attempt to install
-leiningen on the EV3 itself.  I see a lot of potential problems with
-this, first and foremost being how do I do it without a direct
-connection to the internet?  Secondly, the linux installation is very
-minimal, and might not actually contain all the necessary tools to
-install and use leiningen.</p>
 ]]></content>
   </entry>
   

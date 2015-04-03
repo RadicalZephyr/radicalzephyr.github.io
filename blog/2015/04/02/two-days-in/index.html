@@ -5,13 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Getting Started With LLVM and OCaml on OS&nbsp;X - Zephyrizing</title>
+  <title>Two Days In - Zephyrizing</title>
   <meta name="author" content="Geoff Shannon">
 
   
-  <meta name="description" content="I wrote recently about my (second) experience trying to
-get started using LLVM on my Macbook. Shortly after that, I became
-interested in combining my &hellip;">
+  <meta name="description" content="It&rsquo;s only been two days and already a lot has happened, so it seemed
+like time for an update. Oh, BTW since I haven&rsquo;t mentioned it on my &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +19,7 @@ interested in combining my &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.zephyrizing.net/blog/2014/12/13/getting-started-with-llvm-and-ocaml-on-os-x">
+  <link rel="canonical" href="http://www.zephyrizing.net/blog/2015/04/02/two-days-in">
   <link rel="icon" href="/favicon.ico">
   <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
   <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
@@ -97,7 +96,7 @@ interested in combining my &hellip;">
 
   <header>
     
-      <h1 class="entry-title">Getting Started With LLVM and OCaml on OS&nbsp;X</h1>
+      <h1 class="entry-title">Two Days In</h1>
     
     
       <p class="meta">
@@ -106,7 +105,7 @@ interested in combining my &hellip;">
 
 
 
-<time class='entry-date' datetime='2014-12-13T22:15:16-08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>13</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>10:15 pm</span></time>
+<time class='entry-date' datetime='2015-04-02T23:34:05-05:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>2</span><span class='date-suffix'>nd</span>, <span class='date-year'>2015</span></span> <span class='time'>11:34 pm</span></time>
         
            | <a href="#disqus_thread"
              data-disqus-identifier="http://www.zephyrizing.net">Comments</a>
@@ -116,60 +115,76 @@ interested in combining my &hellip;">
   </header>
 
 
-<div class="entry-content"><p>I <a href="/blog/2014/11/19/getting-started-with-llvm-on-os-x/">wrote recently</a> about my (second) experience trying to
-get started using LLVM on my Macbook. Shortly after that, I became
-interested in combining my interest in LLVM with my interest OCaml. As
-it turns out, this was a much easier task than I anticipated.</p>
+<div class="entry-content"><p>It&rsquo;s only been two days and already a lot has happened, so it seemed
+like time for an update.  Oh, BTW since I haven&rsquo;t mentioned it on my
+blog before, I just moved to Chicago to work at <a href="http://8thlight.com/">8th Light</a>.</p>
+
+<p>I arrived in Chicago on Tuesday afternoon/evening and had an
+uneventful time finding my Airbnb in Edgewater on the north side of
+Chicago.  I spent the evening searching house listings on Craigslist
+and Zillow, and sending emails trying to schedule viewings for the
+next few days.</p>
 
 <!--more-->
 
 
-<p>Since my whole experiment with Vagrant was so successful for using
-the C++ LLVM libraries, I immediately started doing the same thing for
-my OCaml experiments. I created a <code>Vagrantfile</code> and started trying to
-write a bash script to correctly provision an Ubuntu instance with the
-requirements for the OCaml LLVM bindings.</p>
+<p>Wednesday, and today I spent looking at different units.  Wednesday
+was mostly sort of disappointing, especially in the kitchen
+department.  But there was one unit that had a good location, and very
+nice amenities and layout; except for the kitchen was long and narrow
+and sort of awkward looking.</p>
 
-<p>I was stalled fairly quickly by the fact that the version of
-[OPAM][opam] in the Ubuntu apt repositories is somewhat old.  Old
-enough that it doesn&rsquo;t want to talk to the official OPAM servers for
-package updates. So I futzed and fiddled a bit, and looked around for
-alternate ways to install OCaml.</p>
+<p>Today started out looking like more of the same, until my 3rd and 4th
+viewings.  The 3rd place I looked at was right across the street from
+the best one from Wednesday, except it was two bedrooms, and a much
+more reasonable kitchen for only slightly more money.  This seemed
+like a clear win, and I very excitedly applied for it immediately
+after I left.</p>
 
-<p>Eventually I got it figured out, and started trying to install the
-OCaml bindings for LLVM. It didn&rsquo;t go well. The compilation of the
-llvm opam package errored almost immediately. But while I was looking
-through the error messages, I noticed something interesting. The
-errors were related to nonexistent paths, and the paths that the
-package was expecting all started with <code>/usr/local/Cellar</code>. For the
-non brew-savvy, this is the default location that <a href="http://brew.sh/">Homebrew</a>
-uses for all it&rsquo;s installations.</p>
+<p>I kept my final appointment of the day mostly out of politeness and
+curiosity.  I really had no expectations for it, since the pictures in
+the Craigslist ad had been sort of iffy.  But walking into the space I
+was pretty blown away.</p>
 
-<p>I knew that homebrew had an LLVM package because of my C++
-meanderings. The error messages from OPAM on Ubuntu made me think that
-the OCaml LLVM package was actually expecting to be run on a Mac, or
-at least to work with a <code>brew install</code>ed LLVM.</p>
+<p>This is what I wrote about it after seeing it (admittedly, several
+hours after seeing it). The TL;DR is that it&rsquo;s really quite awesome.</p>
 
-<p>So I gave it a shot. I cleaned out and re-installed my LLVM installation
-with <code>brew rm llvm &amp;&amp; brew install llvm</code>. And then I simply ran <code>opam
-install llvm</code>. As far as I remember (it was a couple weeks ago now ;),
-everything went off without a hitch.</p>
+<blockquote><p>Beautiful high ceilings with gorgeous detail work.  Several built-in
+pieces of furniture including a floor to ceiling hutch in the dining
+room/kitchen with a glass paneled portion and a lower area with
+several full-width drawers.  There is also a built-in dresser in the
+bedroom closet (which is large and walk-in, and has shelves REALLY
+high).</p>
 
-<p><How was I able to validate the installation? Looked at Kaleidoscope
-tutorial?></p>
+<p>The living room area is large and has great windows and light, with an
+alcove-ish area perfect for a desk/work area.  It’s on the third floor
+of a house where each level is a unit (called a “three-flat”).</p>
 
-<p>Finally, I wanted to be able to use the top-level to explore the LLVM
-API, but that didn&rsquo;t appear to work right away. After some googling, I
-found an answer on Stack Overflow (of course!) that said I had to
-compile a custom version of utop with the LLVM libraries linked in.</p>
+<p>The owner lives in the ground floor, another couple in the middle.
+there is an attic above me with some possibility of storing some stuff
+there.  Two entrances, front and back.  Front has an interior
+staircase with a landing at the top, perfect for shoe/coat storage.</p>
 
-<p>I did that <describe it!! got to refigure out how I did that though>,
-and then was able to get the wonderful utop completion stuff to work
-with the totally unfamiliar LLVM bindings in OCaml.</p>
+<p>The bedroom is a very nice size (not too big, not too small) and it
+has fewer windows so it’s not incredibly bright.  Yet still has a
+reasonable amount of light so it’s not cave-like.</p>
 
-<p>Of course, then I needed to implement a <a href="https://github.com/RadicalZephyr/postfix-ocaml">language to actually compile
-with LLVM</a>. And of course I still haven&rsquo;t actually done
-anything with LLVM&hellip;</p>
+<p>The biggest downside is the kitchen which has some awkwardness to the
+layout (counter space is separated from the range by the fridge, and
+the sink is on a different wall altogether.  But the sink is awesome
+old pewter with a built-in dish drying area (slanted and grooved and
+with a lip).  No dishwasher.  But plenty of room for a dining room
+table, and there is room next to the range to put an extra
+tall-cutting board or general end-table.  And the cabinets in the
+kitchen have interior shelves (not on top of the cabinet!) that go to
+the limit of what I can reach.</p>
+
+<p>The bathroom is also quite small, with a claw foot tub/shower (which
+probably needs a special/double shower curtain setup.  But it is
+gorgeous with some really amazing Turkish tiles in the walls.</p></blockquote>
+
+<p>So that&rsquo;s pretty exciting. I guess I&rsquo;ve found my new place to live.
+Now what do I do until I start at 8th Light in two weeks?</p>
 </div>
 
 
@@ -185,21 +200,15 @@ anything with LLVM&hellip;</p>
 
 
 
-<time class='entry-date' datetime='2014-12-13T22:15:16-08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>13</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>10:15 pm</span></time>
+<time class='entry-date' datetime='2015-04-02T23:34:05-05:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>2</span><span class='date-suffix'>nd</span>, <span class='date-year'>2015</span></span> <span class='time'>11:34 pm</span></time>
       
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/homebrew/'>homebrew</a>, <a class='category' href='/blog/categories/llvm/'>llvm</a>, <a class='category' href='/blog/categories/ocaml/'>ocaml</a>
-  
-</span>
 
 
     </p>
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://www.zephyrizing.net/blog/2014/12/13/getting-started-with-llvm-and-ocaml-on-os-x/" data-via="RadicalZephyr" data-counturl="http://www.zephyrizing.net/blog/2014/12/13/getting-started-with-llvm-and-ocaml-on-os-x/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://www.zephyrizing.net/blog/2015/04/02/two-days-in/" data-via="RadicalZephyr" data-counturl="http://www.zephyrizing.net/blog/2015/04/02/two-days-in/" >Tweet</a>
   
   
   
@@ -208,10 +217,8 @@ anything with LLVM&hellip;</p>
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/11/19/getting-started-with-llvm-on-os-x/" title="Previous Post: Getting Started with LLVM on OS&nbsp;X">&laquo; Getting Started with LLVM on OS&nbsp;X</a>
+        <a class="basic-alignment left" href="/blog/2014/12/30/sane-static-site-setups/" title="Previous Post: Sane Static Site Setups">&laquo; Sane Static Site Setups</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/12/30/sane-static-site-setups/" title="Next Post: Sane Static Site Setups">Sane Static Site Setups &raquo;</a>
       
     </p>
   </footer>
@@ -232,11 +239,15 @@ anything with LLVM&hellip;</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/04/02/two-days-in/">Two Days In</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/12/30/sane-static-site-setups/">Sane Static Site Setups</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2014/12/13/getting-started-with-llvm-and-ocaml-on-os-x/">Getting Started With LLVM and OCaml on OS&nbsp;X</a>
+        <a href="/blog/2014/12/14/getting-started-with-llvm-and-ocaml-on-os-x/">Getting Started With LLVM and OCaml on OS&nbsp;X</a>
       </li>
     
       <li class="post">
@@ -245,10 +256,6 @@ anything with LLVM&hellip;</p>
     
       <li class="post">
         <a href="/blog/2014/10/30/demonstrating-demonstrate-dot-sh/">Demonstrating demonstrate.sh</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/10/27/playing-with-org-mode/">Playing With Org-mode</a>
       </li>
     
   </ul>
@@ -307,8 +314,8 @@ anything with LLVM&hellip;</p>
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://www.zephyrizing.net/blog/2014/12/13/getting-started-with-llvm-and-ocaml-on-os-x/';
-        var disqus_url = 'http://www.zephyrizing.net/blog/2014/12/13/getting-started-with-llvm-and-ocaml-on-os-x/';
+        var disqus_identifier = 'http://www.zephyrizing.net/blog/2015/04/02/two-days-in/';
+        var disqus_url = 'http://www.zephyrizing.net/blog/2015/04/02/two-days-in/';
         var disqus_script = 'embed.js';
       
     (function () {
