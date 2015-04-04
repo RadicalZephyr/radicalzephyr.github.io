@@ -20,3 +20,24 @@ Clojurescript project.
 [cljs]: http://clojure.org/clojurescript
 
 <!--more-->
+
+Since I've been interested in Clojurescript for a while, and even
+toyed with it a few times, I came into this project with at least a
+fair idea of what was out there. I knew about Om, and new basically
+how the Clojurescript compilation process worked. I also am vaguely
+comfortable with setting up a basic Clojure web app using [Ring][ring]
+and [Compojure][compojure].
+
+[ring]: https://github.com/ring-clojure/ring
+[compojure]: https://github.com/weavejester/compojure
+
+I was also aware that there had been significant advances in the
+Clojurescript workflow in the past few years. Most importantly I knew
+about an apparently awesome Leiningen project template for
+Clojure/Clojurescript web apps called [Chestnut][chestnut]. However,
+the times that I had tried to get up and running with Chestnut
+previously I was totally overwhelmed by the amount of unfamiliar
+code/configuration that it produced. Quite frankly, it seemed
+excessive.
+
+[chestnut]: https://github.com/plexus/chestnut
