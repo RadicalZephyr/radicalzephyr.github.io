@@ -3,7 +3,7 @@ layout: post
 title: "Two Days In"
 date: 2015-04-02 23:34:05 -0500
 comments: true
-categories:
+categories: Personal
 ---
 
 It's only been two days and already a lot has happened, so it seemed
