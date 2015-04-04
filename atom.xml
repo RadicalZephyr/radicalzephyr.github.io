@@ -4,7 +4,7 @@
   <title><![CDATA[Zephyrizing]]></title>
   <link href="http://www.zephyrizing.net/atom.xml" rel="self"/>
   <link href="http://www.zephyrizing.net/"/>
-  <updated>2015-04-02T23:39:43-05:00</updated>
+  <updated>2015-04-04T14:25:44-05:00</updated>
   <id>http://www.zephyrizing.net/</id>
   <author>
     <name><![CDATA[Geoff Shannon]]></name>
@@ -12,6 +12,137 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Shaving the Clojurescript Yak(s)]]></title>
+    <link href="http://www.zephyrizing.net/blog/2015/04/04/shaving-the-clojurescript-yaks/"/>
+    <updated>2015-04-04T13:08:18-05:00</updated>
+    <id>http://www.zephyrizing.net/blog/2015/04/04/shaving-the-clojurescript-yaks</id>
+    <content type="html"><![CDATA[<p>About a week ago I got fed up with a <a href="http://mangafox.me/">terrible website</a> that
+had comics on it I wanted to read.  So I decided to write a little web
+app to make the reading experience more pleasant. Since I&rsquo;m an avid
+<a href="http://clojure.org/">Clojurian</a>, I&rsquo;ve been interested in checking out
+<a href="http://clojure.org/clojurescript">Clojurescript</a> for doing web development, and in particular
+exploring the wonderful new world of React.js wrappers available in
+Clojurescript. This is the story of how I learned to setup a
+Clojurescript project.</p>
+
+<!--more-->
+
+
+<p>Since I&rsquo;ve been interested in Clojurescript for a while, and even
+toyed with it a few times, I came into this project with at least a
+fair idea of what was out there. I knew about Om, and new basically
+how the Clojurescript compilation process worked. I also am vaguely
+comfortable with setting up a basic Clojure web app using <a href="https://github.com/ring-clojure/ring">Ring</a>
+and <a href="https://github.com/weavejester/compojure">Compojure</a>.</p>
+
+<p>I was also aware that there had been significant advances in the
+Clojurescript workflow in the past few years. Most importantly I knew
+about an apparently awesome Leiningen project template for
+Clojure/Clojurescript web apps called <a href="https://github.com/plexus/chestnut">Chestnut</a>. However,
+the times that I had tried to get up and running with Chestnut
+previously I was totally overwhelmed by the amount of unfamiliar
+code/configuration that it produced. Quite frankly, it seemed
+excessive, and quickly led to me giving up on whatever
+project-of-the-moment had inspired me.</p>
+
+<p>So! This time, I determined to not start with Chestnut, and instead
+build up slowly from the basic Lein app template that I was already
+familiar with. And so commenced roughly five full days of mostly
+yak-shaving. I&rsquo;m not going to try and recount it all here; just the
+highlights will be more than enough.</p>
+
+<h2>How I Shaved My Yak</h2>
+
+<p>I started with off with a very vanilla <code>lein new app
+comic-reader</code>. From there, I copied the basic dependencies for a
+jetty/ring/compojure web app from my <a href="https://github.com/RadicalZephyr/url-shortener">url-shortener</a>
+project. I made some basic routes to make sure everything was working
+correctly.</p>
+
+<p>Next came adding Clojurescript into the project. This meant setuping
+the <code>project.clj</code> to point to where the <code>*.cljs</code> files would live, and
+then configuring the Clojurescript compiler.  Basic Clojurescript
+compilation with <a href="https://github.com/emezeske/lein-cljsbuild">lein-cljsbuild</a> is not totally trivial to
+configure, especially since there are now many different options to
+the Clojurescript compiler and many resources on the web have
+older/outdated configuration examples, and typically no explanation
+whatsoever of why they have it configured they way they do. But
+overall it wasn&rsquo;t too tough. It helped significantly that I could
+again copy setups I had previously found to work.</p>
+
+<p>At this point, I was sick of shaving Yaks for a moment so I went and
+learned how to use <a href="https://github.com/cgrand/enlive">Enlive</a> for doing
+<a href="https://github.com/swannodette/enlive-tutorial#an-introduction-to-enlive">web scraping</a>! Then, feeling refreshed, I went back to the
+Yak.</p>
+
+<p>I knew that I wanted the awesome <a href="https://github.com/bhauman/lein-figwheel">Figwheel</a> plugin for an awesome
+(mostly) reload-less Clojurescript experience. Again, Figwheel comes
+with a Lein template that I didn&rsquo;t use directly. Instead, I made an
+extra copy and then used it as a reference for when my configuration
+based on reading the documentation didn&rsquo;t work.</p>
+
+<p>Next step was adding in Om, and making a basic page setup
+there. Again, nothing incredibly hard. I mostly just followed the
+tutorial and everything came together fairly quickly. Only maybe an
+hour of struggling and cursing at my computer. Then, I decided that I
+wanted to build a single-page application (SPA). So I started looking
+at libraries like <a href="https://github.com/gf3/secretary">Secretary</a> and
+<a href="https://github.com/r0man/sablono">Sablono</a>. Eventually, after reading several blog posts and
+pages of documentation, I decided that I actually wanted to use
+<a href="https://github.com/reagent-project/reagent">Reagent</a> instead of Om. Luckily I hadn&rsquo;t written much actual
+code before I came to that decision.</p>
+
+<p>After playing with Reagent for a while, I started having difficulty
+with thinking about how to use it as the basis for a SPA, especially
+with in-browser routing happening, and changing the history token so
+that different app states would be bookmark-able. (N.B. I&rsquo;ve minimized
+the explanation of this considerably. I spent a good chunk of time
+wrestling with getting history integration working with Reagent before
+realizing that Reagent&rsquo;s flow didn&rsquo;t make any damn sense to me.)</p>
+
+<p>Back to the Google! After quite a lot of searching, sleeping, reading,
+and searching again I found <a href="https://github.com/Day8/re-frame">re-frame</a> and it&rsquo;s epic
+manifesto. After reading the whole damn thing (and all of the
+&ldquo;read-this-first&rdquo; links), I decided that I would switch from vanilla
+Reagent to re-frame. Again, thank goodness I hadn&rsquo;t really written any
+significant code that was tightly coupled to reagent.</p>
+
+<p>At this point, most everything worked pretty nicely, but there was
+some significant ugliness about. I had my Figwheel configuration
+inline in the same file as my main site code, and the clojurescript
+configurations for production and dev were getting quite messy. After
+incrementally gaining experience with most of the gaggle of
+technologies that Chestnut uses, I felt prepared to tackle their
+template again. So I started using it as a reference to enhance my own
+configuration.</p>
+
+<p>In particular, I started doing this when I wanted to deploy my app to
+Heroku. It turns out that there are a whole raft of things that where
+wrong with my configuration from Heroku&rsquo;s point of view. But after
+about two hours of compare/edit/deploy cycles, I finally managed to
+deploy my app to Heroku.</p>
+
+<h2>Wrapping Up</h2>
+
+<p>To sum it all up, while this was in some ways a very frustrating
+exercise (especially at times during the process!), overall it was
+also a really excellent learning experience. Too often I try and
+approach too many new things all at once. This often leads quickly to
+getting overwhelmed by all the new-ness, and then often giving
+up. It&rsquo;s not a great pattern.</p>
+
+<p>The longer that I practice programming, the more firmly I come to
+believe that incremental, evolutions of projects and knowledge are
+fundamentally more approachable, sustainable and, quite simply, more
+fun!</p>
+
+<p>Now I&rsquo;m feeling sort of pumped to do an &ldquo;Annotated Chestnut&rdquo;
+walkthrough of what all the various configurations in Chestnut are
+doing, and why they are useful and cool.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Two Days In]]></title>
@@ -3218,62 +3349,6 @@ most surprising of all is that not only do I have a lot to say. I
 actually have a story to tell. I still don&rsquo;t quite know the whole of
 that story.  But bit by bit, I&rsquo;m figuring it out. Excavating
 it. You&rsquo;re welcome to tag along.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[LeJOS and Clojure]]></title>
-    <link href="http://www.zephyrizing.net/blog/2014/04/17/lejos-and-clojure/"/>
-    <updated>2014-04-17T18:00:00-05:00</updated>
-    <id>http://www.zephyrizing.net/blog/2014/04/17/lejos-and-clojure</id>
-    <content type="html"><![CDATA[<p>This is a short followup to my first post about
-<a href="http://www.zephyrizing.net/blog/2013/10/31/leJOS-and-EV3/">experimenting with the Lego EV3&rsquo;s</a> and <a href="http://lejos.org">leJOS</a>. Shortly
-after I wrote that post, I went on the Clojure IRC channel and talked
-to <a href="http://technomancy.us/">Phil Hagelberg</a> and some other helpful folks about my
-issues. They steered me away from attempting to install <a href="http://leiningen.org/">Leiningen</a> on
-the EV3 itself, which was a relief since I think that way lay
-madness. Instead, they suggested that I have a small launcher program
-that would just setup a REPL. Then I could run my robot-controlling
-Clojure code from there.</p>
-
-<!--more-->
-
-
-<p>This advice led to the creation of <a href="https://github.com/RadicalZephyr/ev3-nrepl">ev3-nrepl</a>. It&rsquo;s basically a small
-skeleton Clojure project to provide the basis for running Clojure code
-on the EV3. It&rsquo;s a minimalist setup, so it should provide a good
-starting point for other people to continue experimenting. I tried to
-explain how to use it fairly clearly, as well as add all the links to
-the necessary documentation to get leJOS running on the EV3.</p>
-
-<p>Unfortunately, despite this seemingly great start, I never ended up
-actually doing anything interesting with Clojure on the EV3. There are
-two related reasons for this. First, the robotics class I was in
-started having actual coding assignments (thanks to the fact that we
-could now run leJOS). Second, it turns out that leJOS is designed from
-an incredibly stateful and imperative point of view. This makes it
-very hard to develop clean Clojure code that makes use of their
-API. Specifically, leJOS makes the assumption that any code making use
-of it is going to start-up, do robot stuff, and then die. A Clojure
-REPL obviously breaks this assumption rather badly. As it turned out,
-this was the most painful when I was trying to figure out how to
-program and build my robot at the same time.</p>
-
-<p>What I wanted to do was be able to open a Clojure REPL connect to it,
-and then leave it running for a long time. This is my normal modus
-operandi, but the EV3 makes it even more critical that this
-work. Because of the limited hardware, it takes several minutes for
-nrepl to actually boot up.</p>
-
-<p>I think that using Clojure as a prototyping tool for building robots
-with the EV3 could be incredibly powerful. All of the
-<a href="http://www.infoq.com/presentations/Clojure-Java-Interop">arguments</a>
-for why Clojure is a great language for exploring Java API&rsquo;s are
-applicable to working with the EV3 API&rsquo;s. Possibly even more so, since
-there is something really, really cool about typing some commands at
-the REPL and having your robot start moving around and doing
-stuff. Unfortunately, because of the current architecture of leJOS and
-the limited processing power of the EV3&rsquo;s it&rsquo;s not quite there yet.</p>
 ]]></content>
   </entry>
   

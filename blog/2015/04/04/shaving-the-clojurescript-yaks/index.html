@@ -1,0 +1,412 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Shaving the Clojurescript Yak(s) - Zephyrizing</title>
+  <meta name="author" content="Geoff Shannon">
+
+  
+  <meta name="description" content="About a week ago I got fed up with a terrible website that
+had comics on it I wanted to read. So I decided to write a little web
+app to make the &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://www.zephyrizing.net/blog/2015/04/04/shaving-the-clojurescript-yaks">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+  <link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
+  <link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160">
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Zephyrizing" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+</head>
+
+<body   >
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-43671921-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+  <header role="banner"><hgroup>
+  <h1><a href="/">Zephyrizing</a></h1>
+  
+    <h2>Thoughts on cast-iron seasoning, programming and everything&#8230;</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:www.zephyrizing.net" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/about">About</a></li>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/presentations">Presentations</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+
+  <header>
+    
+      <h1 class="entry-title">Shaving the Clojurescript Yak(s)</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-04-04T13:08:18-05:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>4</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>1:08 pm</span></time>
+        
+           | <a href="#disqus_thread"
+             data-disqus-identifier="http://www.zephyrizing.net">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>About a week ago I got fed up with a <a href="http://mangafox.me/">terrible website</a> that
+had comics on it I wanted to read.  So I decided to write a little web
+app to make the reading experience more pleasant. Since I&rsquo;m an avid
+<a href="http://clojure.org/">Clojurian</a>, I&rsquo;ve been interested in checking out
+<a href="http://clojure.org/clojurescript">Clojurescript</a> for doing web development, and in particular
+exploring the wonderful new world of React.js wrappers available in
+Clojurescript. This is the story of how I learned to setup a
+Clojurescript project.</p>
+
+<!--more-->
+
+
+<p>Since I&rsquo;ve been interested in Clojurescript for a while, and even
+toyed with it a few times, I came into this project with at least a
+fair idea of what was out there. I knew about Om, and new basically
+how the Clojurescript compilation process worked. I also am vaguely
+comfortable with setting up a basic Clojure web app using <a href="https://github.com/ring-clojure/ring">Ring</a>
+and <a href="https://github.com/weavejester/compojure">Compojure</a>.</p>
+
+<p>I was also aware that there had been significant advances in the
+Clojurescript workflow in the past few years. Most importantly I knew
+about an apparently awesome Leiningen project template for
+Clojure/Clojurescript web apps called <a href="https://github.com/plexus/chestnut">Chestnut</a>. However,
+the times that I had tried to get up and running with Chestnut
+previously I was totally overwhelmed by the amount of unfamiliar
+code/configuration that it produced. Quite frankly, it seemed
+excessive, and quickly led to me giving up on whatever
+project-of-the-moment had inspired me.</p>
+
+<p>So! This time, I determined to not start with Chestnut, and instead
+build up slowly from the basic Lein app template that I was already
+familiar with. And so commenced roughly five full days of mostly
+yak-shaving. I&rsquo;m not going to try and recount it all here; just the
+highlights will be more than enough.</p>
+
+<h2>How I Shaved My Yak</h2>
+
+<p>I started with off with a very vanilla <code>lein new app
+comic-reader</code>. From there, I copied the basic dependencies for a
+jetty/ring/compojure web app from my <a href="https://github.com/RadicalZephyr/url-shortener">url-shortener</a>
+project. I made some basic routes to make sure everything was working
+correctly.</p>
+
+<p>Next came adding Clojurescript into the project. This meant setuping
+the <code>project.clj</code> to point to where the <code>*.cljs</code> files would live, and
+then configuring the Clojurescript compiler.  Basic Clojurescript
+compilation with <a href="https://github.com/emezeske/lein-cljsbuild">lein-cljsbuild</a> is not totally trivial to
+configure, especially since there are now many different options to
+the Clojurescript compiler and many resources on the web have
+older/outdated configuration examples, and typically no explanation
+whatsoever of why they have it configured they way they do. But
+overall it wasn&rsquo;t too tough. It helped significantly that I could
+again copy setups I had previously found to work.</p>
+
+<p>At this point, I was sick of shaving Yaks for a moment so I went and
+learned how to use <a href="https://github.com/cgrand/enlive">Enlive</a> for doing
+<a href="https://github.com/swannodette/enlive-tutorial#an-introduction-to-enlive">web scraping</a>! Then, feeling refreshed, I went back to the
+Yak.</p>
+
+<p>I knew that I wanted the awesome <a href="https://github.com/bhauman/lein-figwheel">Figwheel</a> plugin for an awesome
+(mostly) reload-less Clojurescript experience. Again, Figwheel comes
+with a Lein template that I didn&rsquo;t use directly. Instead, I made an
+extra copy and then used it as a reference for when my configuration
+based on reading the documentation didn&rsquo;t work.</p>
+
+<p>Next step was adding in Om, and making a basic page setup
+there. Again, nothing incredibly hard. I mostly just followed the
+tutorial and everything came together fairly quickly. Only maybe an
+hour of struggling and cursing at my computer. Then, I decided that I
+wanted to build a single-page application (SPA). So I started looking
+at libraries like <a href="https://github.com/gf3/secretary">Secretary</a> and
+<a href="https://github.com/r0man/sablono">Sablono</a>. Eventually, after reading several blog posts and
+pages of documentation, I decided that I actually wanted to use
+<a href="https://github.com/reagent-project/reagent">Reagent</a> instead of Om. Luckily I hadn&rsquo;t written much actual
+code before I came to that decision.</p>
+
+<p>After playing with Reagent for a while, I started having difficulty
+with thinking about how to use it as the basis for a SPA, especially
+with in-browser routing happening, and changing the history token so
+that different app states would be bookmark-able. (N.B. I&rsquo;ve minimized
+the explanation of this considerably. I spent a good chunk of time
+wrestling with getting history integration working with Reagent before
+realizing that Reagent&rsquo;s flow didn&rsquo;t make any damn sense to me.)</p>
+
+<p>Back to the Google! After quite a lot of searching, sleeping, reading,
+and searching again I found <a href="https://github.com/Day8/re-frame">re-frame</a> and it&rsquo;s epic
+manifesto. After reading the whole damn thing (and all of the
+&ldquo;read-this-first&rdquo; links), I decided that I would switch from vanilla
+Reagent to re-frame. Again, thank goodness I hadn&rsquo;t really written any
+significant code that was tightly coupled to reagent.</p>
+
+<p>At this point, most everything worked pretty nicely, but there was
+some significant ugliness about. I had my Figwheel configuration
+inline in the same file as my main site code, and the clojurescript
+configurations for production and dev were getting quite messy. After
+incrementally gaining experience with most of the gaggle of
+technologies that Chestnut uses, I felt prepared to tackle their
+template again. So I started using it as a reference to enhance my own
+configuration.</p>
+
+<p>In particular, I started doing this when I wanted to deploy my app to
+Heroku. It turns out that there are a whole raft of things that where
+wrong with my configuration from Heroku&rsquo;s point of view. But after
+about two hours of compare/edit/deploy cycles, I finally managed to
+deploy my app to Heroku.</p>
+
+<h2>Wrapping Up</h2>
+
+<p>To sum it all up, while this was in some ways a very frustrating
+exercise (especially at times during the process!), overall it was
+also a really excellent learning experience. Too often I try and
+approach too many new things all at once. This often leads quickly to
+getting overwhelmed by all the new-ness, and then often giving
+up. It&rsquo;s not a great pattern.</p>
+
+<p>The longer that I practice programming, the more firmly I come to
+believe that incremental, evolutions of projects and knowledge are
+fundamentally more approachable, sustainable and, quite simply, more
+fun!</p>
+
+<p>Now I&rsquo;m feeling sort of pumped to do an &ldquo;Annotated Chestnut&rdquo;
+walkthrough of what all the various configurations in Chestnut are
+doing, and why they are useful and cool.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Geoff Shannon</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2015-04-04T13:08:18-05:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>4</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>1:08 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/clojure/'>clojure</a>, <a class='category' href='/blog/categories/clojurescript/'>clojurescript</a>, <a class='category' href='/blog/categories/yak-shaving/'>yak-shaving</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://www.zephyrizing.net/blog/2015/04/04/shaving-the-clojurescript-yaks/" data-via="RadicalZephyr" data-counturl="http://www.zephyrizing.net/blog/2015/04/04/shaving-the-clojurescript-yaks/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2015/04/02/two-days-in/" title="Previous Post: Two Days In">&laquo; Two Days In</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/04/04/shaving-the-clojurescript-yaks/">Shaving the Clojurescript Yak(s)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/04/02/two-days-in/">Two Days In</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/12/30/sane-static-site-setups/">Sane Static Site Setups</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/12/14/getting-started-with-llvm-and-ocaml-on-os-x/">Getting Started With LLVM and OCaml on OS&nbsp;X</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/11/19/getting-started-with-llvm-on-os-x/">Getting Started With LLVM on OS&nbsp;X</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/RadicalZephyr">@RadicalZephyr</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'RadicalZephyr',
+            count: 7,
+            skip_forks: true,
+            to_skip: ["radicalzephyr.github.io","home","prelude",".emacs.d","emacs","synapse-admin","old-site"],
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Geoff Shannon -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'zephyrizing';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://www.zephyrizing.net/blog/2015/04/04/shaving-the-clojurescript-yaks/';
+        var disqus_url = 'http://www.zephyrizing.net/blog/2015/04/04/shaving-the-clojurescript-yaks/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+<noscript>Please enable JavaScript to view
+  the <a href="http://disqus.com/?ref_noscript">comments powered by
+    Disqus.</a></noscript>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
