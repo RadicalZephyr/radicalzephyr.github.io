@@ -134,3 +134,21 @@ Heroku. It turns out that there are a whole raft of things that where
 wrong with my configuration from Heroku's point of view. But after
 about two hours of compare/edit/deploy cycles, I finally managed to
 deploy my app to Heroku.
+
+## Wrapping Up
+
+To sum it all up, while this was in some ways a very frustrating
+exercise (especially at times during the process!), overall it was
+also a really excellent learning experience. Too often I try and
+approach too many new things all at once. This often leads quickly to
+getting overwhelmed by all the new-ness, and then often giving
+up. It's not a great pattern.
+
+The longer that I practice programming, the more firmly I come to
+believe that incremental, evolutions of projects and knowledge are
+fundamentally more approachable, sustainable and, quite simply, more
+fun!
+
+Now I'm feeling sort of pumped to do an "Annotated Chestnut"
+walkthrough of what all the various configurations in Chestnut are
+doing, and why they are useful and cool.
