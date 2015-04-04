@@ -49,6 +49,8 @@ familiar with. And so commenced roughly five full days of mostly
 yak-shaving. I'm not going to try and recount it all here; just the
 highlights will be more than enough.
 
+## How I Shaved My Yak
+
 I started with off with a very vanilla `lein new app
 comic-reader`. From there, I copied the basic dependencies for a
 jetty/ring/compojure web app from my [url-shortener][shorturl]
@@ -88,9 +90,47 @@ based on reading the documentation didn't work.
 
 Next step was adding in Om, and making a basic page setup
 there. Again, nothing incredibly hard. I mostly just followed the
-tutorial and everything came together fairly quickly. Only maybe an hour
-of struggling and cursing at my computer. Then, I decided that I
+tutorial and everything came together fairly quickly. Only maybe an
+hour of struggling and cursing at my computer. Then, I decided that I
 wanted to build a single-page application (SPA). So I started looking
-at libraries like [Secretary][secretary]
+at libraries like [Secretary][secretary] and
+[Sablono][sablono]. Eventually, after reading several blog posts and
+pages of documentation, I decided that I actually wanted to use
+[Reagent][reagent] instead of Om. Luckily I hadn't written much actual
+code before I came to that decision.
 
 [secretary]: https://github.com/gf3/secretary
+[sablono]: https://github.com/r0man/sablono
+[reagent]: https://github.com/reagent-project/reagent
+
+After playing with Reagent for a while, I started having difficulty
+with thinking about how to use it as the basis for a SPA, especially
+with in-browser routing happening, and changing the history token so
+that different app states would be bookmark-able. (N.B. I've minimized
+the explanation of this considerably. I spent a good chunk of time
+wrestling with getting history integration working with Reagent before
+realizing that Reagent's flow didn't make any damn sense to me.)
+
+Back to the Google! After quite a lot of searching, sleeping, reading,
+and searching again I found [re-frame][re-frame] and it's epic
+manifesto. After reading the whole damn thing (and all of the
+"read-this-first" links), I decided that I would switch from vanilla
+Reagent to re-frame. Again, thank goodness I hadn't really written any
+significant code that was tightly coupled to reagent.
+
+[re-frame]: https://github.com/Day8/re-frame
+
+At this point, most everything worked pretty nicely, but there was
+some significant ugliness about. I had my Figwheel configuration
+inline in the same file as my main site code, and the clojurescript
+configurations for production and dev were getting quite messy. After
+incrementally gaining experience with most of the gaggle of
+technologies that Chestnut uses, I felt prepared to tackle their
+template again. So I started using it as a reference to enhance my own
+configuration.
+
+In particular, I started doing this when I wanted to deploy my app to
+Heroku. It turns out that there are a whole raft of things that where
+wrong with my configuration from Heroku's point of view. But after
+about two hours of compare/edit/deploy cycles, I finally managed to
+deploy my app to Heroku.
