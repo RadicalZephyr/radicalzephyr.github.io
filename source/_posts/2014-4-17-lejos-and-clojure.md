@@ -7,8 +7,7 @@ categories: [Programming, EV3, Clojure]
 ---
 
 This is a short followup to my first post about
-[experimenting with the Lego EV3's](
-{% post_url 2013-10-31-leJOS-and-EV3 %}) and [leJOS]. Shortly
+[experimenting with the Lego EV3's][lego-ev3] and [leJOS]. Shortly
 after I wrote that post, I went on the Clojure IRC channel and talked
 to [Phil Hagelberg][technomancy] and some other helpful folks about my
 issues. They steered me away from attempting to install [Leiningen] on
@@ -16,6 +15,8 @@ the EV3 itself, which was a relief since I think that way lay
 madness. Instead, they suggested that I have a small launcher program
 that would just setup a REPL. Then I could run my robot-controlling
 Clojure code from there.
+
+[lego-ev3]: {% post_url 2013-10-31-leJOS-and-EV3 %}
 
 <!--more-->
 
