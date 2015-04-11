@@ -190,3 +190,21 @@ version. However, this makes it a moving target.  Every time you bump
 your version number you would have to update the Procfile to stay in
 sync. This way, the uberjar always has one name and the Procfile never
 needs to change.
+
+Finally, we have the basic cljs build configuration:
+
+```
+  :cljsbuild {:builds {:app {:source-paths ["src/cljs"]
+                             :compiler {:output-to     "resources/public/js/app.js"
+                                        :output-dir    "resources/public/js/out"
+                                        :source-map    "resources/public/js/out.js.map"
+                                        :preamble      ["react/react.min.js"]
+                                        :optimizations :none
+                                        :pretty-print  true}}}}
+```
+
+This is remarkably similar to the configuration from the
+[lein-cljsbuild none example project][none-example], and a standard
+setup to enable source-maps.
+
+[none-example]: https://github.com/emezeske/lein-cljsbuild/blob/1.0.5/example-projects/none/project.clj
