@@ -25,3 +25,31 @@ the files as I talk about them.
 [yaks]: {% post_url 2015-04-04-shaving-the-clojurescript-yaks %}
 
 <!--more-->
+
+Let's start by looking at the base directory.
+
+```
+# Directories
+- resources
+- src
+- env
+
+# Files
+- LICENSE
+- README.md
+- code_of_conduct.md
+- project.clj
+- Procfile
+- system.properties
+```
+
+If you're familiar with Clojure development at all, this should look
+very familiar to you. But there a few unusual things: the `Procfile`
+and `system.properties` files, and the `env` folder.  The `Procfile`
+is a file for letting [Heroku][hero] know how to run your app, and the
+contents of it are explained well in the
+[Heroku guide to getting started with Clojure][clj-get-started].
+
+[hero]: https://www.heroku.com/
+[clj-get-started]:
+https://devcenter.heroku.com/articles/getting-started-with-clojure#define-a-procfile
