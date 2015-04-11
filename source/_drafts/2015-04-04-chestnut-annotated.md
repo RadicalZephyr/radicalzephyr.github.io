@@ -53,3 +53,51 @@ contents of it are explained well in the
 [hero]: https://www.heroku.com/
 [clj-get-started]:
 https://devcenter.heroku.com/articles/getting-started-with-clojure#define-a-procfile
+
+If we use the awesome [tree][tree] program to visualize some of these
+directories we can see some interesting stuff. First, `src` looks
+pretty standard for Clojure, with the addition of a second tree for
+cljs files.
+
+```
+src
+├── clj
+│   └── tour
+│       └── server.clj
+└── cljs
+    └── tour
+        └── core.cljs
+```
+
+The same is true of the `test` folder. But what's really interesting
+is what is in that new `env` folder.
+
+```
+env
+├── dev
+│   ├── clj
+│   │   └── tour
+│   │       └── dev.clj
+│   └── cljs
+│       └── tour
+│           └── main.cljs
+├── prod
+│   ├── clj
+│   │   └── tour
+│   │       └── dev.clj
+│   └── cljs
+│       └── tour
+│           └── main.cljs
+└── test
+    ├── js
+    │   ├── polyfill.js
+    │   └── unit-test.js
+    └── unit-test.html
+```
+
+What we see is that there are three top-level directories underneath
+`env`, and below each of these we see what looks like normal Clojure
+and Clojurescript source trees. Veeery, interesting.
+
+Now let's jump and take a look at the `project.clj`. This is where the
+heart of the action is.
