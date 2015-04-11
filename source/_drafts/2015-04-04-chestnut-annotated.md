@@ -100,4 +100,22 @@ What we see is that there are three top-level directories underneath
 and Clojurescript source trees. Veeery, interesting.
 
 Now let's jump and take a look at the `project.clj`. This is where the
-heart of the action is.
+heart of the action is. The first is boring normal project meta-data,
+and we're going to skip it. The next section is interesting though.
+
+```clojure
+  :source-paths ["src/clj"]
+  :repl-options {:timeout 200000} ;; Defaults to 30000 (30 seconds)
+
+  :test-paths ["spec/clj"]
+```
+
+The `:repl-options` is straightforward. It just increases the timeout
+when launching a REPL. Presumably this is because Chestnut REPL's are
+so filled with awesome that they take longer to load ;) The `*-paths`
+options are simple too.  They just override the default place that
+Leiningen looks for Clojure source and test files by default.
+
+> N.B. The version of Chestnut I generated this with actually has a
+> bug, since it generated "spec/clj" as the test path, but no "spec"
+> folder.
