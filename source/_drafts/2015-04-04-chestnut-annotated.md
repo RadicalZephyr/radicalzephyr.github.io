@@ -168,13 +168,25 @@ Finally we have the [Environ][environ] library, and it's associated
 > Environ is a Clojure library for managing environment settings from
 > a number of different sources.
 
+[environ]: https://github.com/weavejester/environ#environ
+
 However, it is also the basis for a lot of the really neat things that
 Chestnut does.
 
-[environ]: https://github.com/weavejester/environ#environ
+Next up, we have some more basic configuration stuff.
 
 ```
   :min-lein-version "2.5.0"
 
   :uberjar-name "tour.jar"
 ```
+
+These two settings are specifically to help with deployment to Heroku
+which looks for the `:min-lein-version` key to determine what version
+of lein to build your app with. Chestnut also changes the uberjar name
+so that the Procfile can specify a specific filename. Normally, the
+uberjar name is derived from the project name and the current
+version. However, this makes it a moving target.  Every time you bump
+your version number you would have to update the Procfile to stay in
+sync. This way, the uberjar always has one name and the Procfile never
+needs to change.
