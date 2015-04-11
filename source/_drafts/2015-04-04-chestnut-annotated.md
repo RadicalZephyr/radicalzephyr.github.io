@@ -119,3 +119,62 @@ Leiningen looks for Clojure source and test files by default.
 > N.B. The version of Chestnut I generated this with actually has a
 > bug, since it generated "spec/clj" as the test path, but no "spec"
 > folder.
+
+Next come the dependencies and plugins needed by this project.
+
+```
+  :dependencies [[org.clojure/clojure "1.6.0"]
+                 [org.clojure/clojurescript "0.0-2511" :scope "provided"]
+                 [ring "1.3.2"]
+                 [ring/ring-defaults "0.1.3"]
+                 [compojure "1.3.1"]
+                 [enlive "1.1.5"]
+                 [om "0.8.0-rc1"]
+                 [environ "1.0.0"]]
+
+  :plugins [[lein-cljsbuild "1.0.3"]
+            [lein-environ "1.0.0"]]
+```
+
+Clojure and Clojurescript are obviously necessary, and when you're
+using Clojurescript with Leiningen, you probably want the
+[lein-cljsbuild][cljsbuild] plugin for compiling your
+Clojurescript. [Ring][ring] is the standard Clojure web application's
+library. [Ring-defaults][ring-def] is a library for providing standard
+configurations of [Ring middleware][ring-mid].  [Compojure][compojure]
+is a routing library built on top of Ring.
+
+> I'm not quite sure why the Clojurescript dependency is marked as
+> `provided`...
+
+[ring]: https://github.com/ring-clojure/ring#ring
+[ring-def]: https://github.com/ring-clojure/ring-defaults#ring-defaults
+[ring-mid]: https://github.com/ring-clojure/ring/wiki/Concepts#middleware
+[compojure]: https://github.com/weavejester/compojure#compojure
+
+[Enlive][enlive] is a "a selector-based (à la CSS) templating library
+for Clojure." Very cool stuff, and wildly useful for many other HTML
+processing/producing/consuming tasks than just templating.
+Unfortunately very under-documented. [Om][om] is the only
+Clojurescript specific dependency in the list, but it's a pretty cool
+one. It's a Clojurescript interface to Facebook's React.js library.
+
+[enlive]: https://github.com/cgrand/enlive#enlive-
+[om]: https://github.com/omcljs/om#om
+
+Finally we have the [Environ][environ] library, and it's associated
+`lein-environ` plugin. As their README says:
+
+> Environ is a Clojure library for managing environment settings from
+> a number of different sources.
+
+However, it is also the basis for a lot of the really neat things that
+Chestnut does.
+
+[environ]: https://github.com/weavejester/environ#environ
+
+```
+  :min-lein-version "2.5.0"
+
+  :uberjar-name "tour.jar"
+```
