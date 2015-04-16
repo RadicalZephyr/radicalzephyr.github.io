@@ -63,14 +63,15 @@ be a thin wrapper on top of the IO class that already exists in Ruby!
 So I went back to implementing my game class, and used mocks to
 replace an instance of an IO class.
 
+From there I got into a very nice flow. Even the tricky nature of
+testing the main game loop didn't seem overly difficult in my mind. By
+the end of the day I had gotten to the point where I couldn't really
+think of any more functionality that would be needed to play an actual
+game at the command line.
 
-THings!! I wanted to make some comments about how doing the Kata's, I
-noticed... What!!!!! SHit, what did I ontice? It was interesting, and
-important and made me feel like I was "getting" TDD much better...
+When I wired up the class to finally actually test it from end to end
+and try to play a game, there were some unexpected problems. But the
+basic logical structure of the game was pretty much entirely
+correct. And I knew it would be, because of the tests that I wrote.
 
-Other notes -- TDD is about a philosophy in a lot of ways. And the
-importance of what I read about OOD isn't just some principles
-etc. It's that the principles are all focused around an idea. That
-idea is that software changes; the requirements for software
-changes. They both need to do so frequently, and so one of the things
-we should design for in our software architecture is change.
+Very cool.
