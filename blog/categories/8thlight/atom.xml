@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 8thlight | Zephyrizing]]></title>
   <link href="http://www.zephyrizing.net/blog/categories/8thlight/atom.xml" rel="self"/>
   <link href="http://www.zephyrizing.net/"/>
-  <updated>2015-04-16T18:50:58-05:00</updated>
+  <updated>2015-04-16T18:52:00-05:00</updated>
   <id>http://www.zephyrizing.net/</id>
   <author>
     <name><![CDATA[Geoff Shannon]]></name>
@@ -18,10 +18,9 @@
     <link href="http://www.zephyrizing.net/blog/2015/04/14/learning-tdd/"/>
     <updated>2015-04-14T14:37:34-05:00</updated>
     <id>http://www.zephyrizing.net/blog/2015/04/14/learning-tdd</id>
-    <content type="html"><![CDATA[This is my second day at 8th Light and I've been working on writing an
+    <content type="html"><![CDATA[This is my first week at 8th Light and I've been working on writing an
 object-oriented Tic Tac Toe program.  This would be no big deal for
-typically, even though I'm doing it in a language I'm unfamiliar
-with.
+typically, even though I'm doing it in a language I'm unfamiliar with.
 
 Except! I'm trying to very rigorously drive the development with
 tests.
