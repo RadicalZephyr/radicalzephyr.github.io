@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Programming | Zephyrizing]]></title>
   <link href="http://www.zephyrizing.net/blog/categories/programming/atom.xml" rel="self"/>
   <link href="http://www.zephyrizing.net/"/>
-  <updated>2015-04-04T14:25:44-05:00</updated>
+  <updated>2015-04-16T18:50:58-05:00</updated>
   <id>http://www.zephyrizing.net/</id>
   <author>
     <name><![CDATA[Geoff Shannon]]></name>
@@ -646,8 +646,7 @@ ado:
     <updated>2014-04-17T18:00:00-05:00</updated>
     <id>http://www.zephyrizing.net/blog/2014/04/17/lejos-and-clojure</id>
     <content type="html"><![CDATA[This is a short followup to my first post about
-[experimenting with the Lego EV3's](
-/blog/2013/10/31/leJOS-and-EV3/) and [leJOS]. Shortly
+[experimenting with the Lego EV3's][lego-ev3] and [leJOS]. Shortly
 after I wrote that post, I went on the Clojure IRC channel and talked
 to [Phil Hagelberg][technomancy] and some other helpful folks about my
 issues. They steered me away from attempting to install [Leiningen] on
@@ -655,6 +654,8 @@ the EV3 itself, which was a relief since I think that way lay
 madness. Instead, they suggested that I have a small launcher program
 that would just setup a REPL. Then I could run my robot-controlling
 Clojure code from there.
+
+[lego-ev3]: /blog/2013/10/31/leJOS-and-EV3/
 
 <!--more-->
 

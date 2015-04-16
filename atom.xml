@@ -4,7 +4,7 @@
   <title><![CDATA[Zephyrizing]]></title>
   <link href="http://www.zephyrizing.net/atom.xml" rel="self"/>
   <link href="http://www.zephyrizing.net/"/>
-  <updated>2015-04-04T14:25:44-05:00</updated>
+  <updated>2015-04-16T18:50:58-05:00</updated>
   <id>http://www.zephyrizing.net/</id>
   <author>
     <name><![CDATA[Geoff Shannon]]></name>
@@ -12,6 +12,84 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Learning TDD]]></title>
+    <link href="http://www.zephyrizing.net/blog/2015/04/14/learning-tdd/"/>
+    <updated>2015-04-14T14:37:34-05:00</updated>
+    <id>http://www.zephyrizing.net/blog/2015/04/14/learning-tdd</id>
+    <content type="html"><![CDATA[<p>This is my second day at 8th Light and I&rsquo;ve been working on writing an
+object-oriented Tic Tac Toe program.  This would be no big deal for
+typically, even though I&rsquo;m doing it in a language I&rsquo;m unfamiliar
+with.</p>
+
+<p>Except! I&rsquo;m trying to very rigorously drive the development with
+tests.</p>
+
+<!--more-->
+
+
+<p>This is a fairly new experience for me. I mean, sure, when I first
+read about TDD a while ago, I got really interested and excited about
+it. I played with it a little bit, and tried to do some small stuff in
+it. But I quickly got overwhelmed with the difficulty of &ldquo;How do you
+even get started?&rdquo;</p>
+
+<p>Monday, I made very minimal progress. I felt stuck not really sure
+where to begin, and what to do. I ended up by basically writing tests
+for a simple Board data class where I could make marks, and then see
+that the marks were actually set. This felt highly unimpressive as the
+output of my first day.</p>
+
+<p>Tuesday and Wednesday I made some more progress. The thing that helped
+for most was certainly reaching out for guidance from my mentors. I
+had a good conversation with Brian. Despite it&rsquo;s somewhat brief and
+vague nature it actually was very helpful. And I did some pairing with
+Zach that really helped on the Ruby comfortability front. Just seeing
+how someone who knows how to use Ruby approaches things made me feel
+more confident and grounded in the language.</p>
+
+<p>I also did quite a bit of Googling and reading about Ruby concepts and
+paradigms. There wasn&rsquo;t anything really specific that I was looking
+for, I was just trying to absorb some of the context of the community
+by seeing what is talked about and the sorts of code snippets that are
+out there. To an outside observer this probably seemed mostly like
+procrastinating. To be fair, I sort of judged it that way myself.</p>
+
+<p>The thing is though, in all my professional software development work,
+I&rsquo;ve noticed that whenever I end up procrastinating and sort of
+&ldquo;working around&rdquo; a difficulty I&rsquo;m having a peculiar thing happens. If
+I try to force myself to face it head on and work at it, nothing
+really good comes out of it. Often I just end up feeling stuck and
+then I&rsquo;m really unproductive, just staring at the keyboard.</p>
+
+<p>But I find if I just relax into the procrastination, and try to stay
+working on related things, that eventually everything sort of gels in
+my mind, and then when I come back to the &ldquo;hard&rdquo; thing I&rsquo;m usually
+able to make some useful headway.</p>
+
+<p>Today was that day for TDD in Ruby; I felt like everything sort of
+came together. I came into work determined not to &ldquo;procrastinate&rdquo; like
+I did for much of yesterday. I started off by starting to test drive a
+Console or display class. But I quickly realized that this would just
+be a thin wrapper on top of the IO class that already exists in Ruby!
+So I went back to implementing my game class, and used mocks to
+replace an instance of an IO class.</p>
+
+<p>From there I got into a very nice flow. Even the tricky nature of
+testing the main game loop didn&rsquo;t seem overly difficult in my mind. By
+the end of the day I had gotten to the point where I couldn&rsquo;t really
+think of any more functionality that would be needed to play an actual
+game at the command line.</p>
+
+<p>When I wired up the class to finally actually test it from end to end
+and try to play a game, there were some unexpected problems. But the
+basic logical structure of the game was pretty much entirely
+correct. And I knew it would be, because of the tests that I wrote.</p>
+
+<p>Very cool.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Shaving the Clojurescript Yak(s)]]></title>
@@ -3305,50 +3383,6 @@ heading off the <em>reductio ad absurdum</em> that since everything is so
 difficult, you might as well give up now.  In my journey towards
 becoming a better student and a better learner, the personal power
 that comes from accomplishment has been key.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[The Summary and Evaluation - How I Figured Out Why I Went to College]]></title>
-    <link href="http://www.zephyrizing.net/blog/2014/04/21/the-summary-and-evaluation-how-i-figured-out-why-i-went-to-college/"/>
-    <updated>2014-04-21T20:00:00-05:00</updated>
-    <id>http://www.zephyrizing.net/blog/2014/04/21/the-summary-and-evaluation-how-i-figured-out-why-i-went-to-college</id>
-    <content type="html"><![CDATA[<p>So. I am a Fairhaven student. I&rsquo;m also a Computer Science major. These
-are two discrete descriptions of my academic life. Both are integral
-parts of the story that I have been creating my whole life. But in
-isolation, they imply very disparate things about me.</p>
-
-<!--more-->
-
-
-<p>For most of my time at Western I have tried to keep these parts of
-myself separate. Compartmentalized. This final year, and particularly
-these last two quarters that has not been an option. Because of my
-somewhat lackadaisical approach to planning my first few years my
-schedule has been practically dictated to me. One of the consequences
-of this has been having to intermix my main campus self, with my
-Fairhaven self. This has been rewarding but difficult.</p>
-
-<p>As a Fairhaven student, I <em>must</em> take the Advanced Seminar during my
-final quarter. And in the Advanced Seminar everyone writes what is
-known as their <em>Summary and Evaluation</em>. I had heard of this document -
-I&rsquo;ve had quite a few friends graduate from Fairhaven while I knew
-them - but I really knew nothing about it.</p>
-
-<p>What I&rsquo;m discovering is that it really is almost anything that we want
-it to be. The loose sort of overall prompt is to tell whatever story
-we want to about our life and education to this point. To help us on
-begin that journey, we&rsquo;ve been writing a series of short reflections
-on a variety of suggested topics. But like so much at Fairhaven it
-really is ultimately left to us to choose our direction.</p>
-
-<p>I knew I had strong feelings about education.  Particularly about my
-own. What I didn&rsquo;t quite realize was how much I had to say about both
-my own education, and how it relates to Education in general. Perhaps
-most surprising of all is that not only do I have a lot to say. I
-actually have a story to tell. I still don&rsquo;t quite know the whole of
-that story.  But bit by bit, I&rsquo;m figuring it out. Excavating
-it. You&rsquo;re welcome to tag along.</p>
 ]]></content>
   </entry>
   
