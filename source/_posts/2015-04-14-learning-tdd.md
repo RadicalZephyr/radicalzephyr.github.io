@@ -6,10 +6,9 @@ comments: true
 categories: [Testing, TDD, 8thLight]
 ---
 
-This is my second day at 8th Light and I've been working on writing an
+This is my first week at 8th Light and I've been working on writing an
 object-oriented Tic Tac Toe program.  This would be no big deal for
-typically, even though I'm doing it in a language I'm unfamiliar
-with.
+typically, even though I'm doing it in a language I'm unfamiliar with.
 
 Except! I'm trying to very rigorously drive the development with
 tests.
