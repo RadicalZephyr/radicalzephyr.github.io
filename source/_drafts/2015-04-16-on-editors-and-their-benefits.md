@@ -12,9 +12,9 @@ So that makes it nearly eight years now. I like to think that I've
 gotten reasonably competent with it, and somewhat more importantly, I
 have customized my emacs to fit my mind like a glove.
 
-I also touch type. But, I use the Dvorak key layout. These two things
-combine with the training I've done to make it so that I can write
-programs at a speed close to how fast I can conceive it. This is
+I also touch type, but I use the Dvorak keyboard layout. These two
+things combine with the training I've done to make it so that I can
+write programs at a speed close to how fast I can conceive it. This is
 important, not because it means I can code faster than other people,
 but because it means I can get the thoughts out of my head fast enough
 that they don't slip away.
@@ -57,6 +57,8 @@ commands that I use I know only by their location on the
 keyboard. Given that I type in Dvorak and the keys are labeled in
 QWERTY this means that the actual character I'm pressing is pretty
 opaque.
+
+* * *
 
 I have a couple of questions that I want to explore in this post. One
 of those is this: When is proficiency/familiarity with a tool more
