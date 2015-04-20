@@ -214,3 +214,22 @@ repository. Your partner then pulls down the latest code and starts
 working on their machine. This is certainly a bit more work than just
 handing off the keyboard, so it may not be suitable to very rapid
 hand-offs. But I haven't found it to be overly onerous so far.
+
+Another solution would be for me to maintain some skill at QWERTY and
+Vim specifically for facilitating pairing. While more work for me
+personally, it has the benefit of not requiring a new pairing
+workflow. But this idea worries me a bit.
+
+The human brain is [amazingly flexible][neuroplas]. My favorite
+personal example of this is related to video games and how we control
+them. Every first-person style game has at least one key setting in
+the control options: whether the way you look upwards is by moving the
+mouse or tilting the control stick upwards (usually known as "default"
+or "normal"), or whether this mapping is "inverted" i.e. tilting up
+looks down and tilting down looks up. My best friend and I have played
+a lot of Halo together in our day. For a long time one of our favorite
+pastimes was playing through Halo 2 levels on Legendary difficulty,
+often with skulls active. Here's the thing though: he plays default,
+and I play inverted.
+
+[neuroplas]: https://en.wikipedia.org/wiki/Neuroplasticity
