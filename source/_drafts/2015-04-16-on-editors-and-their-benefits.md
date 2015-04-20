@@ -87,10 +87,35 @@ process. A significant portion of it was focused on getting your
 Eclipse installation setup correctly, with all the right plugins and
 such.
 
+Being totally in love with Emacs at that time, I determined that I was
+going to figure out how to setup Emacs as a kick-ass Java editing
+environment. My mentor was grudgingly amenable to this plan of
+action. I struggled with that problem for a few days, until my mentor
+came back and strongly suggested that I use Eclipse. His rationale was
+essentially that this was the tool that the whole team had
+standardized on. Since no one else really used the command line tools
+to build or test the product I would be largely on my own in getting
+things to work.
 
-Talk about using Eclipse at Sage instead of Emacs. Difficulty of
-getting setup with the project without eclipse etc. Deficiency of
-Eclipse as a tool from my (very biased) perspective.
+I gave in, and learned to use Eclipse. I made it bearable by
+installing a plugin that simulated Emacs key bindings. I learned there
+were some nice things about Eclipse - the automatic versioning, the
+Java refactoring tools. But I also found it to generally be a vastly
+inferior tool. While Eclipse has an extensive ecosystem of plugins and
+add-ons, installing them is a nightmare of clicking through GUI menus
+and needing to restart possibly several times. It is also highly
+customizable, with good support for key maps and visual
+modifications. However, neither your personally installed add-ins nor
+your configurations can be saved in a reasonable way, and there is (as
+far as I know) no way to automate the setup process. So every time you
+move to a new development machine, you need to go through the same
+process. Or, more likely, go through a very *similar* process, and
+end up with a subtly different dev environment.
+
+But I did get the benefit of being able to get the advice of the other
+devs on the team when something wasn't working with my build. This
+turned out to be critical since the process of getting a working (and
+repeatable) build of their software was a highly non-trivial one.
 
 
 Stuff and things. About the struggle of liking emacs and things,
