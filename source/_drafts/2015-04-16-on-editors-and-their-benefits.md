@@ -260,3 +260,23 @@ to play with default look controls.
 Back to keyboard layouts and editors. In short, I'm concerned that an
 attempt to learn how to use QWERTY again and to memorize Vim keyboard
 shortcuts will seriously undermine my ability to use Emacs effectively.
+
+On the other hand, maybe this is just what I need. I'm also currently
+trying to learn how to do Test Driven Development (TDD) and I'm
+finding that a lot of the thought-habits I have around programming are
+actually detrimental to doing TDD. Maybe breaking out of my
+comfortable Emacs environment and using a new keyboard layout will
+help me get into a totally new frame of mind and let me TDD more
+effectively.
+
+I think there is another reason to embrace the idea of learning a new
+set of tools at this time though. A large part of the reason that I
+wanted to do this apprenticeship with 8th Light was to learn. Learning
+from others always requires some humility; at the very least you have
+to be able to admit that there are things that you do not know. This
+is difficult for me. But possibly, intentionally cultivating
+[Shoshin][shoshin] or "beginner's mind" regarding my most basic level
+of programming - how I edit my source code - will help me do it at all
+levels.
+
+[shoshin]: https://en.wikipedia.org/wiki/Shoshin
