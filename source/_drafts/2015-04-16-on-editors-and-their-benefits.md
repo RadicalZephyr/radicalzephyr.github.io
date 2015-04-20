@@ -19,6 +19,34 @@ important, not because it means I can code faster than other people,
 but because it means I can get the thoughts out of my head fast enough
 that they don't slip away.
 
+This was brought into sharp relief for me a few days ago when I did
+some pairing with my mentor Zach. Zach uses the standard QWERTY
+layout, and he also uses Vim.
+
+<!--more-->
+
+It seems that the accepted wisdom about pair programming is that it
+works best when two people share the same computer, and swap control
+of the keyboard back and forth. Some sources even recommend having to
+sets of keyboard/mouse to even further lower the barrier to
+switching. In the spirit of being open to trying new things I
+acquiesced to Zach's implicit expectation that I would use his
+computer with QWERTY and Vim.
+
+It's been a long time since I've seriously attempted to use
+QWERTY. When I first taught myself to touch-type in Dvorak I tried to
+maintain some of proficiency with QWERTY since it is ubiquitous. But I
+soon discovered that it was hard to keep both locations for keys in
+muscle memory at the same time. And that's really where efficient
+touch typing requires that knowledge to reside. When you have to
+consult your memory for the location of key, you've already lost a lot
+of your speed.
+
+Luckily for me, I could keep on typing QWERTY as I always had; that
+is, by looking at the keyboard constantly and lifting my fingers high
+enough off the keyboard that I could see the letters.
+
+
 
 
 Stuff and things. About the struggle of liking emacs and things,
@@ -54,8 +82,6 @@ watching and introspecting ourselves about our potential
 prejudices seems like the way to avoiding being prejudiced in all
 things. Sometimes it's easier to start with the relatively
 inconsequential thing.
-
-<!--more-->
 
 connect with Brett victor's preciousness and fragility of ideas.
 Maybe, proficiency in a tool becomes more important when it
