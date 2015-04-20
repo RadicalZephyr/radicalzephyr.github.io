@@ -70,9 +70,9 @@ the team you're working on can be pretty important. Or maybe there is
 another tool that has much more powerful or focused facilities for the
 task/language/domain. Or to reverse that, possibly your tool of choice
 simply lacks something that a lot of other tools support. Finally, I
-think a really important consideration is simply whether you are
-holding on to your tool of choice out of habit and the comfort it
-provides. Let's look at some examples of each of these.
+think a really important consideration is whether you are holding on
+to your tool(s) of choice out of habit and the comfort they provide.
+Let's look at some examples of each of these.
 
 A few years ago I was hired as an intern at Sage Bionetworks, a small
 tech/biology start-up in Seattle. They happen to be an all Java shop,
@@ -185,7 +185,7 @@ easy customization, up to and including remapping every key on your
 keyboard to do something different. More importantly, that philosophy
 of customization is embedded in the Emacs community.
 
-
+* * *
 
 To some degree the seemingly simple choice of learning to type in
 Dvorak was a very important decision for my life as a programmer. It
