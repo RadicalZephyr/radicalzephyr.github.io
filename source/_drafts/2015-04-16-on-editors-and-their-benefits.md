@@ -58,8 +58,39 @@ keyboard. Given that I type in Dvorak and the keys are labeled in
 QWERTY this means that the actual character I'm pressing is pretty
 opaque.
 
+I have a couple of questions that I want to explore in this post. One
+of those is this: When is proficiency/familiarity with a tool more
+important than other considerations?
+
+First let's look a bit at what those other considerations might
+be. The first one that comes to mind is that using the same tools as
+the team you're working on can be pretty important. Or maybe there is
+another tool that has much more powerful or focused facilities for the
+task/language/domain. Or to reverse that, possibly your tool of choice
+simply lacks something that a lot of other tools support. Finally, I
+think a really important consideration is simply whether you are
+holding on to your tool of choice out of habit and the comfort it
+provides. Let's look at some examples of each of these.
+
+A few years ago I was hired as an intern at Sage Bionetworks, a small
+tech/biology start-up in Seattle. They happen to be an all Java shop,
+and the standard editing environment there is Eclipse. At the time, I
+was much less familiar with Emacs, I had never even opened Eclipse and
+I didn't know any Java.
+
+I spent my first few days getting through the administrative details
+of starting a new job. But pretty quickly I got to the point where I
+needed to setup my new computer for doing development on the Sage web
+platform. They had a wiki, with several different pages on the
+bootstrapping process for the various different aspects of the
+process. A significant portion of it was focused on getting your
+Eclipse installation setup correctly, with all the right plugins and
+such.
 
 
+Talk about using Eclipse at Sage instead of Emacs. Difficulty of
+getting setup with the project without eclipse etc. Deficiency of
+Eclipse as a tool from my (very biased) perspective.
 
 
 Stuff and things. About the struggle of liking emacs and things,
