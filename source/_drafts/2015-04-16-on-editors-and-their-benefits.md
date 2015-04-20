@@ -190,4 +190,13 @@ of customization is embedded in the Emacs community.
 To some degree the seemingly simple choice of learning to type in
 Dvorak was a very important decision for my life as a programmer. It
 cut off certain possibilities like learning to use Vim, and presents
-certain challenges for pair programming.
+certain challenges for pair programming. Particularly in the quick
+back-and-forth style where two people use the same computer. I have
+also found that using Emacs appears to be the less common of the two,
+and this is also limiting and isolating to some degree.
+
+On the other hand, I *like* using Emacs and typing in Dvorak feels
+good to my fingers. So I'm a little bit stuck. I want to be agreeable
+and able to collaborate and pair program with others easily. But I
+also really like the tools that I use. They fit me. I fit them. So
+what do I do?
