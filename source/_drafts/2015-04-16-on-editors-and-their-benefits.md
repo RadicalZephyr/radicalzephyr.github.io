@@ -173,8 +173,17 @@ mnemonic for telling which key does what. The physical arrangement of
 the keys under QWERTY help to tell at least the left (h) from right
 (n). Knowledge of up and down probably comes only with practice.
 
-
-
+I struggled with Vim for a few days, trying to learn how I could remap
+the movement keys to the same location under Dvorak as they are in
+QWERTY. But I was unable to find an easy solution and the prospect of
+the cascading key remappings was enough to drive me to look at Emacs.
+By contrast with Vim most of the keys in Emacs have some kind of
+mnemonic association. Moving forward a character is `ctrl f` and back
+is `ctrl b`. Down one line is `ctrl n` and up is `ctrl p` for next and
+previous. Not only that, but part of the very philosophy of Emacs is
+easy customization, up to and including remapping every key on your
+keyboard to do something different. More importantly, that philosophy
+of customization is embedded in the Emacs community.
 
 
 Stuff and things. About the struggle of liking emacs and things,
