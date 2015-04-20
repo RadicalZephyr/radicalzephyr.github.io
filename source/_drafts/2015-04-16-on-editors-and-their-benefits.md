@@ -27,7 +27,7 @@ layout, and he also uses Vim.
 
 It seems that the accepted wisdom about pair programming is that it
 works best when two people share the same computer, and swap control
-of the keyboard back and forth. Some sources even recommend having to
+of the keyboard back and forth. Some sources even recommend having two
 sets of keyboard/mouse to even further lower the barrier to
 switching. In the spirit of being open to trying new things I
 acquiesced to Zach's implicit expectation that I would use his
