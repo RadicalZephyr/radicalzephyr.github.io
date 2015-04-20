@@ -119,6 +119,63 @@ devs on the team when something wasn't working with my build. This
 turned out to be critical since the process of getting a working (and
 repeatable) build of their software was a highly non-trivial one.
 
+* * *
+
+When I was working with Zach last week and ended up using Vim with
+QWERTY, he said something to me that reminded of my mentor's words at
+Sage. He said that a lot of people at 8th Light use Vim, and that if I
+want to do a lot of pairing with people it will probably be to my
+benefit to learn how to use Vim at least a little bit.
+
+This makes more sense in an environment where pairing is actively
+practiced, but the general idea behind it is basically the prospect of
+being able to sit down at someone else's computer and use it for
+development at a reasonable level. I'm not sure that I agree with this
+philosophy though.
+
+* * *
+
+Another place where being able to use any given computer is key is as
+a sysadmin. My college's CS department started participating in a
+national competition during my second year, the Collegiate Cyber
+Defense Competition or CCDC. The competition itself basically places
+several teams of students in the role of a new system administration
+team for some large corporation. The system is potentially in disarray
+after a poorly documented transition from a previous team and the
+students task is to secure the systems while maintaining a given level
+of availability for one or more different services (such as email,
+databases, servers, etc.).
+
+I was very interested in participating in the club that was preparing
+for the competition because they were learning both defensive and
+offensive computer security skills. But I found it difficult to work
+in the context of system's administration because I couldn't have my
+environment setup just how I wanted it. Particularly during the
+competition itself, there would be no time to try and install Emacs
+(which is both large in footprint and memory usage and requires a ton
+of dependencies), or switch the terminal at the computer I was using
+to use Dvorak. Thus I found that two choices I had made years before
+had effectively precluded my participation in the CCDC.
+
+Interestingly, my choice to learn the Dvorak layout is actually what
+pushed me into learning Emacs. I had just gotten to the point of
+actual touch-typing with Dvorak when I decided it was time to switch
+from using PythonWin to a "real programmer's editor." Based on what I
+had been reading on the internet, that choice seemed clear: it had to
+be Vim.
+
+But I was stalled almost immediately. Vim uses hjkl for text
+navigation, so you don't need to move your hand to the arrow keys.
+This is convenient for usage under QWERTY. All four keys are on the
+home row and are easily accessible without stretching to your right
+hand. But on Dvorak they are all over the keyboard, and there is no
+mnemonic for telling which key does what. The physical arrangement of
+the keys under QWERTY help to tell at least the left (h) from right
+(n). Knowledge of up and down probably comes only with practice.
+
+
+
+
 
 Stuff and things. About the struggle of liking emacs and things,
 Dvorak being really hard.  Being excited about 8th Light,
