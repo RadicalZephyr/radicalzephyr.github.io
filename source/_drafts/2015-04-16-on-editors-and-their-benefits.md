@@ -233,3 +233,30 @@ often with skulls active. Here's the thing though: he plays default,
 and I play inverted.
 
 [neuroplas]: https://en.wikipedia.org/wiki/Neuroplasticity
+
+Under most circumstances this doesn't matter. If we're playing
+cooperatively it doesn't matter because we both have our own
+controller and thus our own setting. It only becomes an issue when we
+are handing a controller back and forth. But boy is it a problem
+then. Invariably we both forget to switch and there ensues a brief
+period of confusion and panic when the game character doesn't respond
+as our brain is wired to think it should. What's really fascinating
+though is how quickly my brain responds to different stimulus.
+
+I've been playing games on inverted for years, possibly decades at
+this point. As such you would think that my brain is very much
+hardwired to expect that when I tilt the stick up, the view will move
+down. And this is true. But sometimes, for one reason or another I'll
+end up playing for a short time on the default setting. What happens
+is remarkable and incredibly frustrating. If I focus on trying to
+remember that up means up and down means down, I can usually get to a
+level that is usable - at least when I pay full attention. But as
+soon as something intense happens like a bad guy jumping out from
+behind a bush, my reflexes revert to inverted settings. Even more
+interestingly though, when I then inevitably switch my control scheme
+back to inverted I am unable to fully shed the tendency towards trying
+to play with default look controls.
+
+Back to keyboard layouts and editors. In short, I'm concerned that an
+attempt to learn how to use QWERTY again and to memorize Vim keyboard
+shortcuts will seriously undermine my ability to use Emacs effectively.
