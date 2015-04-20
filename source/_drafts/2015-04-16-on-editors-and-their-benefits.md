@@ -201,14 +201,16 @@ and able to collaborate and pair program with others easily. But I
 also really like the tools that I use. They fit me. I fit them. So
 what do I do?
 
-One possibility is using more tools to overcome some of the
+One possibility is to use more tools to overcome some of my
 difficulties with pairing. Specifically, using a lightweight version
 control system (like git) and a free code hosting site (like, say,
 Github) you can arrange a style of pairing where two people work on
 the same code, but each using their own device and tools and
 setup. Pairing is the same during the actual coding process with
-whatever Driver/Navigator dynamic you want to use. The difference
-comes when you swap. Instead of simply sliding the keyboard across to
-your partner, you commit, and push to your central repository. Your
-partner then pulls down the latest code and starts working on their
-machine.
+whatever Driver/Navigator or other dynamic you want to use. The
+difference comes when you swap. Instead of simply sliding the keyboard
+across to your partner, you commit, and push to your central
+repository. Your partner then pulls down the latest code and starts
+working on their machine. This is certainly a bit more work than just
+handing off the keyboard, so it may not be suitable to very rapid
+hand-offs. But I haven't found it to be overly onerous so far.
