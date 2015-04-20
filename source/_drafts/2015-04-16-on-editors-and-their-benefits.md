@@ -6,6 +6,21 @@ comments: true
 categories: [Emacs, Vim, Social, Brains]
 ---
 
+I've been using Emacs for about as long as I've been programming.
+
+So that makes it nearly eight years now. I like to think that I've
+gotten reasonably competent with it, and somewhat more importantly, I
+have customized my emacs to fit my mind like a glove.
+
+I also touch type. But, I use the Dvorak key layout. These two things
+combine with the training I've done to make it so that I can write
+programs at a speed close to how fast I can conceive it. This is
+important, not because it means I can code faster than other people,
+but because it means I can get the thoughts out of my head fast enough
+that they don't slip away.
+
+
+
 Stuff and things. About the struggle of liking emacs and things,
 Dvorak being really hard.  Being excited about 8th Light,
 etc. but having an issue reconciling the two. Curiosity about
