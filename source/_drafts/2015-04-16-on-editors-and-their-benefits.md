@@ -279,4 +279,7 @@ is difficult for me. But possibly, intentionally cultivating
 of programming - how I edit my source code - will help me do it at all
 levels.
 
+> In the beginner's mind there are many possibilities, in the expert's
+> mind there are few. - Shunryu Suzuki
+
 [shoshin]: https://en.wikipedia.org/wiki/Shoshin
