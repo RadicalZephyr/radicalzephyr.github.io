@@ -46,6 +46,19 @@ Luckily for me, I could keep on typing QWERTY as I always had; that
 is, by looking at the keyboard constantly and lifting my fingers high
 enough off the keyboard that I could see the letters.
 
+Muscle memory is important to my usage of Emacs too, and it builds
+heavily on my Dvorak muscle memory. Emacs has a (deserved) reputation
+for having a somewhat absurd number of key bindings. Trying to
+remember them directly would be a monumental task. Instead, the most
+commonly used key bindings migrate quickly from the realm of conscious
+thought to muscle memory. I didn't even notice this happening until I
+started trying to teach a friend of mine to use Emacs. Some of the
+commands that I use I know only by their location on the
+keyboard. Given that I type in Dvorak and the keys are labeled in
+QWERTY this means that the actual character I'm pressing is pretty
+opaque.
+
+
 
 
 
