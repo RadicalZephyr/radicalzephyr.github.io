@@ -186,6 +186,13 @@ keyboard to do something different. More importantly, that philosophy
 of customization is embedded in the Emacs community.
 
 
+
+To some degree the seemingly simple choice of learning to type in
+Dvorak was a very important decision for my life as a programmer. It
+cut off certain possibilities like learning to use Vim, and presents
+certain challenges for pair programming.
+
+
 Stuff and things. About the struggle of liking emacs and things,
 Dvorak being really hard.  Being excited about 8th Light,
 etc. but having an issue reconciling the two. Curiosity about
