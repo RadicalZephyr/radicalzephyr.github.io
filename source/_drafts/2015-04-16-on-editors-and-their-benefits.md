@@ -60,3 +60,18 @@ paradigm, the way that I need to with TDD it might be
 fundamentally easier to do when I'm not in the familiar
 environment of Emacs and Dvorak. Mental ruts are definitely a
 real phenomenon.
+
+
+This is also all related to humility. Specifically, the humility of
+being a beginner. But it's not just humility that you get out of being
+a beginner, you also get the chance to be the one who doesn't
+know. This is hard for me. Really hard. I've spent most of my life
+avoiding situations where I didn't know things, and when I found
+myself in them despite my efforts, I usually resort to not saying
+anything as a way of hiding the fact that I don't know.
+
+It was, in a lot of ways, a big thing for me to pair program with Zach
+on his computer, using a QWERTY layout and vim as the editor. One of
+the hardest parts about it though, was that it was unacknowledged that
+this was hard. And that I have a belief, however valid or not, that
+most vim users would not be willing to do the same thing.
