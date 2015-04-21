@@ -15,6 +15,677 @@
 </head>
 <body>
 <div id="content">
+<p>
+A short introduction to using the command line, and particularly Bash
+in more powerful ways.
+</p>
+
+<p>
+&lt;!&#x2013;more&#x2013;&gt;
+</p>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">A.K.A. - How To Use The Command-Line Like A Pro</h2>
+<div class="outline-text-2" id="text-1">
+</div><div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1">Unix Tools Philosophy&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h3>
+<div class="outline-text-3" id="text-1-1">
+<ul class="org-ul">
+<li>Files and plain-text
+</li>
+<li>Library of composable tools
+</li>
+<li>Arguments
+</li>
+<li>Standard Input/Output/Error
+</li>
+<li>Pipes
+</li>
+<li>The Environment
+</li>
+</ul>
+</div>
+
+<div id="outline-container-sec-1-1-1" class="outline-4">
+<h4 id="sec-1-1-1">Everything is a (plain-text) file&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h4>
+<div class="outline-text-4" id="text-1-1-1">
+<ul class="org-ul">
+<li>Very file-oriented
+</li>
+<li>Characters are characters
+</li>
+
+<li>As opposed to office suites
+<ul class="org-ul">
+<li>Binary file format (also proprietary)
+</li>
+<li>Need specialized code to read/write in the correct format
+</li>
+<li>Has &#8220;export&#8221; functions to transform it to different formats
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-sec-1-1-2" class="outline-4">
+<h4 id="sec-1-1-2">Library of Tools&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h4>
+<div class="outline-text-4" id="text-1-1-2">
+<p>
+Check it out:
+</p>
+
+<p>
+<a href="https://en.wikipedia.org/wiki/List_of_Unix_commands">https://en.wikipedia.org/wiki/List_of_Unix_commands</a>
+</p>
+</div>
+
+<div id="outline-container-sec-1-1-2-1" class="outline-5">
+<h5 id="sec-1-1-2-1">Notes&#xa0;&#xa0;&#xa0;<span class="tag"><span class="note">note</span></span></h5>
+<div class="outline-text-5" id="text-1-1-2-1">
+<p>
+Focus on a few at a time.  Empahasize incremental learning.  It&#8217;s a
+large toolbox and potentially overwhelming.  Take away is that adding
+even one tool is a valuable outcome.
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-1-1-3" class="outline-4">
+<h4 id="sec-1-1-3">Arguments&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h4>
+<div class="outline-text-4" id="text-1-1-3">
+<ul class="org-ul">
+<li>Two types
+<ul class="org-ul">
+<li>Switches (i.e. <code>-c</code> or <code>--count</code>)
+</li>
+<li>Other
+</li>
+</ul>
+</li>
+
+<li>Conventional Switches                                               :slide:
+<ul class="org-ul">
+<li>Short and long switches
+</li>
+<li><code>-v</code> / <code>--version</code> - program version
+</li>
+<li><code>-h</code> / <code>--help</code> - help!
+</li>
+<li><code>--</code> - end of switches
+</li>
+</ul>
+</li>
+</ul>
+
+<p>
+There are MANY exceptions!!
+</p>
+</div>
+
+<div id="outline-container-sec-1-1-3-1" class="outline-5">
+<h5 id="sec-1-1-3-1">Notes&#xa0;&#xa0;&#xa0;<span class="tag"><span class="note">note</span></span></h5>
+<div class="outline-text-5" id="text-1-1-3-1">
+<p>
+For instance, ruby supports -v and &#x2013;version
+git only supports &#x2013;version
+java requires -version!!!
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-1-1-4" class="outline-4">
+<h4 id="sec-1-1-4">Standard Input/Output/Error&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h4>
+<div class="outline-text-4" id="text-1-1-4">
+<p>
+Most standard unix tools except to receive on stdin
+</p>
+
+<p>
+After processing they put the changed text to stdout
+</p>
+
+<p>
+Three streams. One for input, two for output.
+</p>
+<ul class="org-ul">
+<li>All programs have these.
+</li>
+<li>That doesn&#8217;t mean they&#8217;re always different!
+</li>
+</ul>
+</div>
+
+<div id="outline-container-sec-1-1-4-1" class="outline-5">
+<h5 id="sec-1-1-4-1">Notes&#xa0;&#xa0;&#xa0;<span class="tag"><span class="note">note</span></span></h5>
+<div class="outline-text-5" id="text-1-1-4-1">
+<p>
+Demonstrate cat as prototypical of stdin stdout pattern. It takes
+arguments, but in their absence it defaults to read stdin, write stdout
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-1-1-5" class="outline-4">
+<h4 id="sec-1-1-5">Pipes&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h4>
+<div class="outline-text-4" id="text-1-1-5">
+<p>
+Shorthand for hooking the output of one program to the input of
+another
+</p>
+
+<p>
+There&#8217;s more to it though&#x2026;
+</p>
+</div>
+
+<div id="outline-container-sec-1-1-5-1" class="outline-5">
+<h5 id="sec-1-1-5-1">Notes&#xa0;&#xa0;&#xa0;<span class="tag"><span class="note">note</span></span></h5>
+<div class="outline-text-5" id="text-1-1-5-1">
+<p>
+Demonstrate tr as very similar to cat, but takes no file arguments
+</p>
+
+<p>
+So how do we feed it files as input? Pipe from cat!
+</p>
+
+<p>
+This demonstrates pretty well the composable toolkit idea, and
+DRY-ness of program logic.  Cat knows how to open files and
+filenames.  So pretty much very few other programs need to.
+</p>
+
+<p>
+Also, pull performance:
+</p>
+
+<p>
+This is a good example though: what does find . -type f -name &#8216;a*&#8217; do
+normally?
+</p>
+
+<p>
+Why does the pipe run so much quicker?!?!?!
+</p>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-sec-1-1-6" class="outline-4">
+<h4 id="sec-1-1-6">The Environment&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h4>
+<div class="outline-text-4" id="text-1-1-6">
+<ul class="org-ul">
+<li>Convenient place to store information
+</li>
+<li>Lots of interesting stuff is there already
+</li>
+<li>Many commands take cues from environment variables
+</li>
+</ul>
+</div>
+
+<div id="outline-container-sec-1-1-6-1" class="outline-5">
+<h5 id="sec-1-1-6-1">Notes</h5>
+<div class="outline-text-5" id="text-1-1-6-1">
+<ul class="org-ul">
+<li>Show the <code>env</code> command
+</li>
+
+<li>Use EDITOR variable and git commit as an example
+</li>
+</ul>
+
+<p>
+(USE A REAL SHELL!!) Go to hermit, delete runtests, then commit it no
+message
+</p>
+
+<p>
+First time, should open a buffer in zile, then nano, then vi
+Don&#8217;t write commit messages
+</p>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2">Jobs of a shell&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+High-level
+</p>
+<ul class="org-ul">
+<li>Expansions
+</li>
+<li>Argument splitting
+</li>
+<li>Setup environment
+</li>
+<li>Find/execute program
+</li>
+<li>Cleanup
+</li>
+</ul>
+</div>
+
+<div id="outline-container-sec-1-2-1" class="outline-4">
+<h4 id="sec-1-2-1">Expansions&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h4>
+<div class="outline-text-4" id="text-1-2-1">
+<ul class="org-ul">
+<li>file &#8220;globs&#8221;
+</li>
+<li>Special variables
+<ul class="org-ul">
+<li>Arguments, <code>$0</code>-~$9~, <code>$#</code>, <code>$@</code>
+</li>
+<li>Shell info, <code>$$</code> <code>$!</code> <code>$?</code>
+</li>
+</ul>
+</li>
+<li>Variables (so many possibilities!!)
+<ul class="org-ul">
+<li>Controlling variable expansion ${} etc.
+</li>
+</ul>
+</li>
+<li>Sub-shells
+</li>
+</ul>
+</div>
+
+<div id="outline-container-sec-1-2-1-1" class="outline-5">
+<h5 id="sec-1-2-1-1">Notes&#xa0;&#xa0;&#xa0;<span class="tag"><span class="note">note</span></span></h5>
+<div class="outline-text-5" id="text-1-2-1-1">
+<p>
+Do many demonstrations here!!
+</p>
+
+<p>
+Have a script that demonstrates how argument expansion works
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-1-2-2" class="outline-4">
+<h4 id="sec-1-2-2">Arguments processing&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h4>
+<div class="outline-text-4" id="text-1-2-2">
+<p>
+Who is familiar with processing command-line arguments?
+</p>
+
+<p>
+All command line programs get arguments in this format:
+</p>
+
+<p>
+A list of: <code>program name arg1 arg2 arg3</code>
+</p>
+
+<p>
+But how does it make that list?
+</p>
+</div>
+
+<div id="outline-container-sec-1-2-2-1" class="outline-5">
+<h5 id="sec-1-2-2-1">Quoting&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h5>
+<div class="outline-text-5" id="text-1-2-2-1">
+<p>
+Preventing processing from occurring
+</p>
+
+<ul class="org-ul">
+<li>This can be tricky and subtle
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-1-2-3" class="outline-4">
+<h4 id="sec-1-2-3">Setup environment&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h4>
+<div class="outline-text-4" id="text-1-2-3">
+<ul class="org-ul">
+<li>Input/output redirection
+</li>
+<li>Temporary variable setting
+</li>
+</ul>
+</div>
+
+<div id="outline-container-sec-1-2-3-1" class="outline-5">
+<h5 id="sec-1-2-3-1">Notes&#xa0;&#xa0;&#xa0;<span class="tag"><span class="note">note</span></span></h5>
+<div class="outline-text-5" id="text-1-2-3-1">
+<p>
+Redux the git commit editor thing with temporary variable
+</p>
+
+<p>
+Use cat to copy a file, use diff to show they&#8217;re the same
+</p>
+
+<p>
+Append some lines to the end of the new one
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2-4" class="outline-4">
+<h4 id="sec-1-2-4">Program look-up/execution&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h4>
+<div class="outline-text-4" id="text-1-2-4">
+<p>
+Search all paths in <code>PATH</code> variable, left-to-right order
+</p>
+
+<ul class="org-ul">
+<li>Overriding default paths
+</li>
+</ul>
+</div>
+
+<div id="outline-container-sec-1-2-4-1" class="outline-5">
+<h5 id="sec-1-2-4-1">Notes&#xa0;&#xa0;&#xa0;<span class="tag"><span class="note">note</span></span></h5>
+<div class="outline-text-5" id="text-1-2-4-1">
+<p>
+Show adding a directory to PATH and then executing that file from
+somewhere else
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-1-2-5" class="outline-4">
+<h4 id="sec-1-2-5">Exit Codes&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h4>
+<div class="outline-text-4" id="text-1-2-5">
+<p>
+0 =&gt; success
+anything else =&gt; some kind of failure
+</p>
+
+<ul class="org-ul">
+<li>not always clear what the meaning is for non-zero codes
+</li>
+</ul>
+</div>
+
+<div id="outline-container-sec-1-2-5-1" class="outline-5">
+<h5 id="sec-1-2-5-1">Notes&#xa0;&#xa0;&#xa0;<span class="tag"><span class="note">note</span></span></h5>
+<div class="outline-text-5" id="text-1-2-5-1">
+<p>
+Redo the diff thing, then show that the exit code changes
+</p>
+
+<p>
+diff defines no differences as success, and different as failure
+</p>
+
+<p>
+git commit -a.  If no commit happens, then 1, else 0
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-1-2-6" class="outline-4">
+<h4 id="sec-1-2-6">Implicit State - this is not so important</h4>
+<div class="outline-text-4" id="text-1-2-6">
+</div><div id="outline-container-sec-1-2-6-1" class="outline-5">
+<h5 id="sec-1-2-6-1">Current User</h5>
+<div class="outline-text-5" id="text-1-2-6-1">
+<ul class="org-ul">
+<li><code>$UID</code>, <code>$USER</code>
+</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-sec-1-2-6-2" class="outline-5">
+<h5 id="sec-1-2-6-2">Current Directory</h5>
+<div class="outline-text-5" id="text-1-2-6-2">
+<ul class="org-ul">
+<li><code>$PWD</code>, <code>pwd</code>, <code>cd</code>
+</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-sec-1-2-6-3" class="outline-5">
+<h5 id="sec-1-2-6-3">Environment Variables</h5>
+<div class="outline-text-5" id="text-1-2-6-3">
+<ul class="org-ul">
+<li><code>env</code>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3">Actual Scripting&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h3>
+<div class="outline-text-3" id="text-1-3">
+</div><div id="outline-container-sec-1-3-1" class="outline-4">
+<h4 id="sec-1-3-1">Loops and Conditionals&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h4>
+<div class="outline-text-4" id="text-1-3-1">
+<p>
+These are similar to most programming languages but subtly different.
+</p>
+</div>
+
+
+<div id="outline-container-sec-1-3-1-1" class="outline-5">
+<h5 id="sec-1-3-1-1">if&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h5>
+<div class="outline-text-5" id="text-1-3-1-1">
+<p>
+Runs a program, and checks the exit code
+</p>
+
+<p>
+Show how <code>[</code> is a program also called <code>test</code>
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-sec-1-3-1-2" class="outline-5">
+<h5 id="sec-1-3-1-2">loops&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h5>
+<div class="outline-text-5" id="text-1-3-1-2">
+<ul class="org-ul">
+<li>while: similar in concept to if
+<ul class="org-ul">
+<li>Show a standard counter style while loop
+</li>
+<li>Show a more exotic bash type while loop (using which to figure out
+what path element an executable lives in)
+</li>
+</ul>
+</li>
+<li>for: very different.  More reminiscent of python
+<ul class="org-ul">
+<li>does expansions, doesn&#8217;t run commands
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-3-1-3" class="outline-5">
+<h5 id="sec-1-3-1-3">Notes&#xa0;&#xa0;&#xa0;<span class="tag"><span class="note">note</span></span></h5>
+<div class="outline-text-5" id="text-1-3-1-3">
+<p>
+For demos, consider using common files like /usr/dict and /etc/passwd
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-1-3-2" class="outline-4">
+<h4 id="sec-1-3-2">Cool examples</h4>
+<div class="outline-text-4" id="text-1-3-2">
+<p>
+I have none&#x2026;
+</p>
+
+<p>
+Mine my github, the LDP pages, my provel scripts
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-sec-1-3-3" class="outline-4">
+<h4 id="sec-1-3-3">Common Idioms</h4>
+<div class="outline-text-4" id="text-1-3-3">
+<p>
+<a href="http://www.billharlan.com/papers/Bourne_shell_idioms.html">http://www.billharlan.com/papers/Bourne_shell_idioms.html</a>
+</p>
+</div>
+
+
+<div id="outline-container-sec-1-3-3-1" class="outline-5">
+<h5 id="sec-1-3-3-1">Argument processing</h5>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4">Developing Shell Scripts</h3>
+<div class="outline-text-3" id="text-1-4">
+</div><div id="outline-container-sec-1-4-1" class="outline-4">
+<h4 id="sec-1-4-1">Man pages!!&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h4>
+<div class="outline-text-4" id="text-1-4-1">
+<p>
+Reading them is sort of an art
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-sec-1-4-2" class="outline-4">
+<h4 id="sec-1-4-2">Incremental Build-up&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h4>
+<div class="outline-text-4" id="text-1-4-2">
+<ul class="org-ul">
+<li>Avoid permanent effects
+</li>
+<li>But learn how to setup test environments for doing destructive stuff
+</li>
+</ul>
+</div>
+
+<div id="outline-container-sec-1-4-2-1" class="outline-5">
+<h5 id="sec-1-4-2-1">Notes&#xa0;&#xa0;&#xa0;<span class="tag"><span class="note">note</span></span></h5>
+<div class="outline-text-5" id="text-1-4-2-1">
+<p>
+Show the example of trying to figure out how many discrete shell
+scripts
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-1-4-3" class="outline-4">
+<h4 id="sec-1-4-3">Guarding commands with echo&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h4>
+<div class="outline-text-4" id="text-1-4-3">
+<p>
+Very simple, very effective
+</p>
+</div>
+
+<div id="outline-container-sec-1-4-3-1" class="outline-5">
+<h5 id="sec-1-4-3-1">Notes&#xa0;&#xa0;&#xa0;<span class="tag"><span class="note">note</span></span></h5>
+<div class="outline-text-5" id="text-1-4-3-1">
+<p>
+find all files pipe to xargs echo
+</p>
+
+<p>
+find . -type f -name &#8216;a*&#8217; | head | xargs -n1 echo
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-1-4-4" class="outline-4">
+<h4 id="sec-1-4-4"><code>set -e</code> and <code>set -x</code>&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h4>
+<div class="outline-text-4" id="text-1-4-4">
+<p>
+Really powerful options
+</p>
+</div>
+
+<div id="outline-container-sec-1-4-4-1" class="outline-5">
+<h5 id="sec-1-4-4-1">-e &#8220;most important line in any bash script&#8221;</h5>
+<div class="outline-text-5" id="text-1-4-4-1">
+<p>
+Default behavior
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-sec-1-4-4-2" class="outline-5">
+<h5 id="sec-1-4-4-2">-x &#8220;almost as good a debugger&#8221;</h5>
+<div class="outline-text-5" id="text-1-4-4-2">
+<p>
+Display everything!!
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-1-4-5" class="outline-4">
+<h4 id="sec-1-4-5">Mindset&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h4>
+<div class="outline-text-4" id="text-1-4-5">
+<p>
+Talk about the gitignore thing.  Upfront data structure creation
+(process all .hignore files, then check each filename against all
+patterns.  Obviously really bad in bash because no way to use a hash
+table or something to speed up the checks
+</p>
+
+<p>
+But what about flipping it around? Instead, enumerate all files, then
+enumerate all files that match each pattern in a .hignore.  Then,
+filter the list of those files by the ones that only appear once.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-sec-1-4-6" class="outline-4">
+<h4 id="sec-1-4-6">Dummy&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h4>
+<div class="outline-text-4" id="text-1-4-6">
+</div>
+</div>
+</div>
+</div>
 
 </div>
 <script type="text/javascript" src="/javascripts/org-html-slideshow.js"></script>
