@@ -97,25 +97,28 @@
     <lastmod>2013-09-03T03:00:00-05:00</lastmod>
   </url>
   <url>
-    <loc>http://www.zephyrizing.net/demos/example-plugin.html</loc>
-  </url>
-  <url>
     <loc>http://www.zephyrizing.net/</loc>
-  </url>
-  <url>
-    <loc>http://www.zephyrizing.net/presentations/</loc>
   </url>
   <url>
     <loc>http://www.zephyrizing.net/blog/archives/</loc>
   </url>
   <url>
+    <loc>http://www.zephyrizing.net/presentations/</loc>
+  </url>
+  <url>
+    <loc>http://www.zephyrizing.net/projects/</loc>
+  </url>
+  <url>
     <loc>http://www.zephyrizing.net/about/</loc>
+  </url>
+  <url>
+    <loc>http://www.zephyrizing.net/presentations/reimplementing-gitignore-in-15-lines-of-bash/</loc>
   </url>
   <url>
     <loc>http://www.zephyrizing.net/presentations/introduction-to-bash/</loc>
   </url>
   <url>
-    <loc>http://www.zephyrizing.net/presentations/reimplementing-gitignore-in-15-lines-of-bash/</loc>
+    <loc>http://www.zephyrizing.net/8thlight/weeklies/one.html</loc>
   </url>
   <url>
     <loc>http://www.zephyrizing.net/blog/categories/meta/</loc>
@@ -212,9 +215,5 @@
   </url>
   <url>
     <loc>http://www.zephyrizing.net/posts/3/</loc>
-  </url>
-  <url>
-    <loc>http://www.zephyrizing.net/demos/example.html</loc>
-    <lastmod>2015-02-01T08:04:20-06:00</lastmod>
   </url>
 </urlset>
