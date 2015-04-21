@@ -6,36 +6,35 @@ comments: true
 categories: [Emacs, Vim, Social, Brains]
 ---
 
-I've been using Emacs for about as long as I've been programming.
-
-So that makes it nearly eight years now. I like to think that I've
-gotten reasonably competent with it, and somewhat more importantly, I
-have customized my emacs to fit my mind like a glove.
+I've been using Emacs for about as long as I've been programming. So
+that makes it nearly eight years now. I like to think that I've gotten
+reasonably competent with it, and somewhat more importantly, I have
+customized my emacs to fit my mind like a glove.
 
 I also touch type, but I use the Dvorak keyboard layout. These two
-things combine with the training I've done to make it so that I can
-write programs at a speed close to how fast I can conceive it. This is
-important, not because it means I can code faster than other people,
-but because it means I can get the thoughts out of my head fast enough
-that they don't slip away.
+things combine to make it so that I can write programs at a speed
+close to how fast I can conceive them. This is important, not because
+it means I can code faster than other people, but because it means I
+can get the thoughts out of my head fast enough that they don't slip
+away.
 
 This was brought into sharp relief for me a few days ago when I did
-some pairing with my mentor Zach. Zach uses the standard QWERTY
-layout, and he also uses Vim.
+some pairing with my mentor Zach using his computer. You see, Zach
+uses the standard QWERTY layout, and he also uses Vim.
 
 <!--more-->
 
 It seems that the accepted wisdom about pair programming is that it
 works best when two people share the same computer, and swap control
 of the keyboard back and forth. Some sources even recommend having two
-sets of keyboard/mouse to even further lower the barrier to
-switching. In the spirit of being open to trying new things I
-acquiesced to Zach's implicit expectation that I would use his
-computer with QWERTY and Vim.
+sets of keyboard/mouse to lower the barrier to switching even further.
+In the spirit of being open to trying new things I acquiesced to
+Zach's implicit expectation that I would use his computer with QWERTY
+and Vim.
 
 It's been a long time since I've seriously attempted to use
 QWERTY. When I first taught myself to touch-type in Dvorak I tried to
-maintain some of proficiency with QWERTY since it is ubiquitous. But I
+maintain some proficiency with QWERTY since it is ubiquitous. But I
 soon discovered that it was hard to keep both locations for keys in
 muscle memory at the same time. And that's really where efficient
 touch typing requires that knowledge to reside. When you have to
@@ -53,16 +52,14 @@ remember them directly would be a monumental task. Instead, the most
 commonly used key bindings migrate quickly from the realm of conscious
 thought to muscle memory. I didn't even notice this happening until I
 started trying to teach a friend of mine to use Emacs. Some of the
-commands that I use I know only by their location on the
-keyboard. Given that I type in Dvorak and the keys are labeled in
-QWERTY this means that the actual character I'm pressing is pretty
-opaque.
+commands that I use, I know only by their location on the keyboard.
+Given that I type in Dvorak and the keys are labeled in QWERTY this
+means that the actual character I'm pressing is pretty opaque.
 
 * * *
 
-I have a couple of questions that I want to explore in this post. One
-of those is this: When is proficiency/familiarity with a tool more
-important than other considerations?
+When is proficiency or familiarity with a tool more important than
+other considerations?
 
 First let's look a bit at what those other considerations might
 be. The first one that comes to mind is that using the same tools as
@@ -75,7 +72,7 @@ to your tool(s) of choice out of habit and the comfort they provide.
 Let's look at some examples of each of these.
 
 A few years ago I was hired as an intern at Sage Bionetworks, a small
-tech/biology start-up in Seattle. They happen to be an all Java shop,
+bio-tech start-up in Seattle. They happen to be an all Java shop,
 and the standard editing environment there is Eclipse. At the time, I
 was much less familiar with Emacs, I had never even opened Eclipse and
 I didn't know any Java.
@@ -119,8 +116,6 @@ devs on the team when something wasn't working with my build. This
 turned out to be critical since the process of getting a working (and
 repeatable) build of their software was a highly non-trivial one.
 
-* * *
-
 When I was working with Zach last week and ended up using Vim with
 QWERTY, he said something to me that reminded of my mentor's words at
 Sage. He said that a lot of people at 8th Light use Vim, and that if I
@@ -133,10 +128,8 @@ being able to sit down at someone else's computer and use it for
 development at a reasonable level. I'm not sure that I agree with this
 philosophy though.
 
-* * *
-
-Another place where being able to use any given computer is key is as
-a sysadmin. My college's CS department started participating in a
+One place where being able to use any given computer is key is as a
+sysadmin. My college's CS department started participating in a
 national competition during my second year, the Collegiate Cyber
 Defense Competition or CCDC. The competition itself basically places
 several teams of students in the role of a new system administration
@@ -154,8 +147,8 @@ environment setup just how I wanted it. Particularly during the
 competition itself, there would be no time to try and install Emacs
 (which is both large in footprint and memory usage and requires a ton
 of dependencies), or switch the terminal at the computer I was using
-to use Dvorak. Thus I found that two choices I had made years before
-had effectively precluded my participation in the CCDC.
+to Dvorak. Thus I found that two choices I had made years before had
+effectively precluded my participation in the CCDC.
 
 Interestingly, my choice to learn the Dvorak layout is actually what
 pushed me into learning Emacs. I had just gotten to the point of
@@ -164,20 +157,19 @@ from using PythonWin to a "real programmer's editor." Based on what I
 had been reading on the internet, that choice seemed clear: it had to
 be Vim.
 
-But I was stalled almost immediately. Vim uses hjkl for text
-navigation, so you don't need to move your hand to the arrow keys.
-This is convenient for usage under QWERTY. All four keys are on the
-home row and are easily accessible without stretching to your right
-hand. But on Dvorak they are all over the keyboard, and there is no
-mnemonic for telling which key does what. The physical arrangement of
-the keys under QWERTY help to tell at least the left (h) from right
-(n). Knowledge of up and down probably comes only with practice.
+But I was stalled almost immediately. Vim uses the letters 'h', 'j',
+'k', and 'l' for text navigation, so you don't need to move your hand
+to the arrow keys.  This is convenient for usage under QWERTY, all
+four keys are on the home row and are easily accessible - without
+stretching - to your right hand. But on Dvorak they are all over the
+keyboard, and there is no mnemonic for telling which key does
+what.
 
 I struggled with Vim for a few days, trying to learn how I could remap
 the movement keys to the same location under Dvorak as they are in
-QWERTY. But I was unable to find an easy solution and the prospect of
-the cascading key remappings was enough to drive me to look at Emacs.
-By contrast with Vim most of the keys in Emacs have some kind of
+QWERTY. But I was unable to find a solution and the prospect of the
+cascading key remappings was enough to drive me to look at Emacs.  By
+contrast with Vim, most of the keys in Emacs have some kind of
 mnemonic association. Moving forward a character is `ctrl f` and back
 is `ctrl b`. Down one line is `ctrl n` and up is `ctrl p` for next and
 previous. Not only that, but part of the very philosophy of Emacs is
@@ -185,20 +177,18 @@ easy customization, up to and including remapping every key on your
 keyboard to do something different. More importantly, that philosophy
 of customization is embedded in the Emacs community.
 
-* * *
-
-To some degree the seemingly simple choice of learning to type in
-Dvorak was a very important decision for my life as a programmer. It
-cut off certain possibilities like learning to use Vim, and presents
-certain challenges for pair programming. Particularly in the quick
+The seemingly simple choice of learning to type in Dvorak turned out
+to be a key decision in my life as a programmer. It cut off certain
+possibilities like learning to use Vim, and presents certain
+challenges for pair programming, particularly in the quick
 back-and-forth style where two people use the same computer. I have
 also found that using Emacs appears to be the less common of the two,
 and this is also limiting and isolating to some degree.
 
-On the other hand, I *like* using Emacs and typing in Dvorak feels
-good to my fingers. So I'm a little bit stuck. I want to be agreeable
-and able to collaborate and pair program with others easily. But I
-also really like the tools that I use. They fit me. I fit them. So
+Here's the thing though, I *like* using Emacs; and typing in Dvorak
+feels good to my fingers. So I'm a little bit stuck. I want to be
+agreeable and able to collaborate and pair program with others
+easily. But I also really like the tools that I use. They fit me. So
 what do I do?
 
 One possibility is to use more tools to overcome some of my
@@ -238,10 +228,11 @@ Under most circumstances this doesn't matter. If we're playing
 cooperatively it doesn't matter because we both have our own
 controller and thus our own setting. It only becomes an issue when we
 are handing a controller back and forth. But boy is it a problem
-then. Invariably we both forget to switch and there ensues a brief
-period of confusion and panic when the game character doesn't respond
-as our brain is wired to think it should. What's really fascinating
-though is how quickly my brain responds to different stimulus.
+then. Invariably we both forget to switch back at the hand-off and
+there ensues a brief period of confusion and panic when the game
+character doesn't respond as our brain is wired to think it
+should. What's really fascinating though is how quickly my brain
+starts to retrain itself.
 
 I've been playing games on inverted for years, possibly decades at
 this point. As such you would think that my brain is very much
@@ -250,12 +241,12 @@ down. And this is true. But sometimes, for one reason or another I'll
 end up playing for a short time on the default setting. What happens
 is remarkable and incredibly frustrating. If I focus on trying to
 remember that up means up and down means down, I can usually get to a
-level that is usable - at least when I pay full attention. But as
-soon as something intense happens like a bad guy jumping out from
-behind a bush, my reflexes revert to inverted settings. Even more
-interestingly though, when I then inevitably switch my control scheme
-back to inverted I am unable to fully shed the tendency towards trying
-to play with default look controls.
+level that is usable - at least when I pay full attention. But as soon
+as something intense happens like a bad guy jumping out from behind a
+bush, my reflexes revert to inverted settings. Even more interestingly
+though, when I inevitably switch my control scheme back to inverted I
+am unable to fully shed the tendency towards trying to play with
+default look controls.
 
 Back to keyboard layouts and editors. In short, I'm concerned that an
 attempt to learn how to use QWERTY again and to memorize Vim keyboard
