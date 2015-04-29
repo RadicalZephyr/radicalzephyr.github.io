@@ -102,6 +102,53 @@ look-ahead detect most forks that it could create, somehow it actually
 was able to produce the correct fork-blocking behavior in the first
 four cases that I came up with.
 
+I was suspicious though, and so I crafted some devious fork tests that
+were designed to expose the flaw in my simple algorithm. Eventually I
+did that and it became clear that something more powerful was
+needed. At this point, thinking about the simplest way to do things
+produced no clear results. I was already doing a minimal look-ahead
+and the analysis was insufficient. It seemed that the next step would
+have to be going to a minimax algorithm. Here's basically what my
+simple algorithm was at this point:
+
+```ruby
+      def score(node)
+        get_wins(node.indexed_attack_sets).count
+      end
+
+      def find_forks(board)
+        scores = board.empty_spaces.map do |index|
+          node = board.speculative_move("X", index)
+          [index, score(node)]
+        end
+
+        scores.max_by { |i, s| s }.first
+      end
+
+      def get_move(board)
+        attacks = board.indexed_attack_sets
+        win   = get_wins(attacks).first
+        block = get_blocks(attacks).first
+
+        win or block or find_forks(board)
+      end
+```
+
+I tried to do get to minimax in several ways. First off, I actually
+ended up using the [negamax] algorithm because it's simpler to code
+because it takes advantage of the zero-sum property of
+Tic-Tac-Toe. Initially, I tried to replace my whole algorithm with
+negamax right off the bat. This did not work out well. Things got
+complicated and many tests were failing. So I backed out and treated
+negamax as a small refactoring. Specifically I treated it as a
+refactoring of the `find_forks` function. This worked quite well, and
+suddenly all of the forks tests were passing. I then incrementally
+expanded it until negamax was the only thing being used for deciding
+which moves to make.
+
+[negamax]: https://en.wikipedia.org/wiki/Negamax
+
+
 ## Clojure TDD
 
 I also spent some time pairing with both Emmanuel and Kristen on some
