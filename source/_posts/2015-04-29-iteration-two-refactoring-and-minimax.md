@@ -185,4 +185,38 @@ produced a custom lazy sequence. This was necessary because of the
 need to repeat certain elements from the stream.
 
 But what I'm realizing now is that I think it's difficult to test
-drive recursive solutions.
+drive recursive solutions. But maybe I'm just doing it wrong. Often
+when I write recursive functions I don't bother to write just the base
+case first. I typically will just jump straight in and write both
+parts at once. But now that I think about it, testing the base case of
+a recursive algorithm would be really natural in TDD. You just have to
+start at the simplest case.
+
+Another thought that occurred to me about why TDD in Clojure is
+harder. In Ruby or Java I have read about different design patterns
+and there are established refactorings for manipulating class-based OO
+code. So when I'm doing TDD in those languages I know the patterns of
+it. Not patterns in the design patterns sense, but the flows of code
+configurations you might say. Specifically, I'm familiar with the
+intermediate stages and I can imagine them.
+
+But the way I write functional code is somewhat different. Most of the
+time, I experiment with a small piece of code in the REPL, until I've
+produced the result I want, then I wrap it up into a function. This
+process can proceed top-down where I conceive of the top-level
+function first and then create the necessary pieces to make that
+happen; or it can go bottom-up where I think about little pieces of
+functionality in the domain I'm considering, and then start composing
+those pieces to make more complex things.
+
+In both of these styles of development, there isn't always working
+code at all times though. In particular, the interesting sort of
+high level behaviors often don't work until the whole thing comes
+together at the end.
+
+So I think I need at least two things before I can do TDD in Clojure
+more effectively. I need to learn the patterns of Clojure code better,
+and get more familiar with how it can be molded and changed from
+simple and ill-factored to cleaner and well-factored. And second, I
+need to adjust to the paradigm shift of thinking about code tests
+first in a functional context.
