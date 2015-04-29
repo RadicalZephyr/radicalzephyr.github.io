@@ -57,6 +57,53 @@ playing it again from the beginning. So I had to write a reset method.
 [pry]: http://pryrepl.org/
 [byebug]: https://github.com/deivid-rodriguez/pry-byebug
 
+On Tuesday I spent most of the day test driving my way to a perfect
+AI. This was an interesting experience since it was the first time
+I've had a really clear idea of where I wanted to go with the code
+while doing TDD. For the most part I've been trying to stick to the
+letter of the acronym and let the tests lead me to the code
+organization they want.
+
+But the [minimax] algorithm is well known and an established way to do
+the game state-space search that is required for a perfect Tic-Tac-Toe
+AI. So how does one test drive that? Apparently I am most definitely
+not alone in asking this question as both my mentors were expecting
+it, and my fellow apprentice working on Tic-Tac-Toe (Ari) also spent
+time last week puzzling over it.
+
+[minimax]: https://en.wikipedia.org/wiki/Minimax
+
+I worried about it briefly at the start of the day, but then I quickly
+adopted the outlook that I've found to be most successful with TDD;
+don't think too much about the future. Instead, I focused on the
+fundamentals. What's the simplest case an AI needs to deal with. I
+turned to the Wikipedia page on Tic-Tac-Toe and it's bullet list of
+how to be a perfect player. The most important rule is that an AI
+should win immediately when it can. If that's not possible it should
+block an opponent from winning.
+
+These two situations are very easy to detect. It only takes a slight
+modification to the code pattern used for detecting if someone has
+already won, and no future board states need to be taken into
+account. This approach got me moving forwards, which is often the
+hardest part.
+
+Once I had some momentum I kept going by then considering simple fork
+creation, the next most important move type. After pondering how this
+might work, I hit upon a simple solution. A fork is just a move that
+results in a board where you have two possible ways to win! This was
+attractive to me for several reasons. First, it was a (relatively
+small) step towards searching the state-space of the game. By looking
+one move ahead I felt I was moving in the direction of minimax. And it
+was simple enough that it felt doable in a single TDD step.
+
+This worked shockingly well. Not only did my very simple fork
+look-ahead detect most forks that it could create, somehow it actually
+was able to produce the correct fork-blocking behavior in the first
+four cases that I came up with.
+
+## Clojure TDD
+
 I also spent some time pairing with both Emmanuel and Kristen on some
 Clojure katas, the bowling game and coin changer respectively. This
 was really fascinating for a couple of reasons. I consider myself
