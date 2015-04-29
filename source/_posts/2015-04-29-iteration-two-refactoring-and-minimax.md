@@ -59,4 +59,36 @@ playing it again from the beginning. So I had to write a reset method.
 
 I also spent some time pairing with both Emmanuel and Kristen on some
 Clojure katas, the bowling game and coin changer respectively. This
-was really fascinating for a couple of reasons.
+was really fascinating for a couple of reasons. I consider myself
+reasonably competent with Clojure. But I am almost totally unfamiliar
+with trying to do TDD in Clojure.
+
+The pairing that I did with both my fellow apprentices was in the
+Ping-Pong style (mostly), where one of us wrote a test and the other
+tried to make it pass. What was fascinating to me was that the
+incremental development approach that this enforces pushed me towards
+writing very non-idiomatic, highly stateful Clojure code.
+
+After attempting the coin changer with Kristen, I was starting to
+doubt my Clojure-chops and so I tried to TDD it out on my own. I ended
+up arriving at a more satisfactory solution that used a stream model
+of discrete state transformations. So a cleaner stateful solution.
+
+I ended up talking about this with Emmanuel after our pairing session,
+and he showed me a blog post and a screencast about doing the bowling
+kata in Clojure. Both people ended up with similar solutions, which
+basically involved the insight that a frame in bowling is only two
+rolls when no strikes or spares are involved. In retrospect, this
+seems sort of obvious, since a frame can't be scored until all of it's
+rolls have occurred. But combining this with actually duplicating some
+of the numbers from the stream of pin-counts is what leads to an
+elegant Clojure solution.
+
+Besides this key realization, I think I was also missing a critical
+tool in my Clojure toolbox: custom lazy sequences. Both solutions
+Emmanuel had found on the web ended up constructing a function that
+produced a custom lazy sequence. This was necessary because of the
+need to repeat certain elements from the stream.
+
+But what I'm realizing now is that I think it's difficult to test
+drive recursive solutions.
