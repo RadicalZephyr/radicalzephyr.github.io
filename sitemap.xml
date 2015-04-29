@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://www.zephyrizing.net/blog/2015/04/29/iteration-two-refactoring-and-minimax/</loc>
+    <lastmod>2015-04-29T09:50:55-05:00</lastmod>
+  </url>
+  <url>
     <loc>http://www.zephyrizing.net/blog/2015/04/16/on-editors-and-their-benefits/</loc>
     <lastmod>2015-04-16T00:58:26-05:00</lastmod>
   </url>
@@ -125,6 +129,9 @@
     <loc>http://www.zephyrizing.net/8thlight/weeklies/one.html</loc>
   </url>
   <url>
+    <loc>http://www.zephyrizing.net/8thlight/weeklies/two.html</loc>
+  </url>
+  <url>
     <loc>http://www.zephyrizing.net/blog/categories/meta/</loc>
   </url>
   <url>
@@ -224,9 +231,6 @@
     <loc>http://www.zephyrizing.net/blog/categories/brains/</loc>
   </url>
   <url>
-    <loc>http://www.zephyrizing.net/posts/2/</loc>
-  </url>
-  <url>
-    <loc>http://www.zephyrizing.net/posts/3/</loc>
+    <loc>http://www.zephyrizing.net/blog/categories/apprenticeship/</loc>
   </url>
 </urlset>

@@ -4,7 +4,7 @@
   <title><![CDATA[Zephyrizing]]></title>
   <link href="http://www.zephyrizing.net/atom.xml" rel="self"/>
   <link href="http://www.zephyrizing.net/"/>
-  <updated>2015-04-20T22:35:22-05:00</updated>
+  <updated>2015-04-29T11:14:12-05:00</updated>
   <id>http://www.zephyrizing.net/</id>
   <author>
     <name><![CDATA[Geoff Shannon]]></name>
@@ -12,6 +12,241 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Iteration Two: Refactoring and Minimax]]></title>
+    <link href="http://www.zephyrizing.net/blog/2015/04/29/iteration-two-refactoring-and-minimax/"/>
+    <updated>2015-04-29T09:50:55-05:00</updated>
+    <id>http://www.zephyrizing.net/blog/2015/04/29/iteration-two-refactoring-and-minimax</id>
+    <content type="html"><![CDATA[<p>I&rsquo;m just about finished with my second iteration as an apprentice at
+8th Light. Where my first iteration centered a lot around reading and
+learning how TDD and Ruby work, this week I focused more on coding. I
+spent most of my time just implementing the several stories of my
+iteration: some minor (but important!) output tweaks, implementing a
+play again loop, and adding two AI&rsquo;s to the game. I also did quite a
+bit of refactoring and general code cleanup.</p>
+
+<!--more-->
+
+
+<p>I spent several hours figuring out the mechanics of doing an extract
+class refactoring, and then realizing that I had extracted the class
+the wrong way and so the &ldquo;container&rdquo; class was the one being held by
+it&rsquo;s containee.  It turned out to be very awkward to try to invert
+this relationship so I backed out the change and extracted the other
+class so that the container/containee relationship was correct. I
+consulted Martin Fowler&rsquo;s <em>Refactoring</em> book heavily here. It&rsquo;s really
+neat how the mechanical steps he describes are actually an incredibly
+useful guide.</p>
+
+<p>I noticed an interesting thing while I was refactoring. I was changing
+the code so much that I started losing track of what was actually
+going on. At some point, my brain just sort of gave up on trying to
+hold the whole application in my head. This was an interesting
+experience because usually I can hold more complexity in my head than
+this Tic Tac Toe game currently has. I think this is part of the trend
+I noticed that in general, when doing TDD I feel less need to hold a
+lot of the complexity in my mind at once.</p>
+
+<p>The slightly scary flip-side of that was that because I was doing
+extract class refactorings and moving methods and such, I also ended
+up moving tests around and modifying the tests a lot to keep them
+working. Mucking around with them seriously decreased my confidence in
+them, and thus in my confidence in the system as a whole. Clearly I
+need to think more about how the test modification process goes along
+with refactoring.</p>
+
+<p>Another piece of functionality that took me surprisingly long to
+implement was the play again functionality. The interesting part of
+that process was that I wrote tests, and then wrote an implementation
+that I thought was correct. The tests failed in a confusing manner and
+so I assumed that the tests were incorrect. After poking around for
+quite a while, firing up the debugger (<a href="http://pryrepl.org/">Pry</a> and <a href="https://github.com/deivid-rodriguez/pry-byebug">byebug</a> are
+awesome!) I eventually discovered that the test was correct, and it
+was even failing exactly correctly. I had simply forgotten to take
+into account that once a game has been completed, one can&rsquo;t just start
+playing it again from the beginning. So I had to write a reset method.</p>
+
+<p>On Tuesday I spent most of the day test driving my way to a perfect
+AI. This was an interesting experience since it was the first time
+I&rsquo;ve had a really clear idea of where I wanted to go with the code
+while doing TDD. For the most part I&rsquo;ve been trying to stick to the
+letter of the acronym and let the tests lead me to the code
+organization they want.</p>
+
+<p>But the <a href="https://en.wikipedia.org/wiki/Minimax">minimax</a> algorithm is well known and an established way to do
+the game state-space search that is required for a perfect Tic-Tac-Toe
+AI. So how does one test drive that? Apparently I am most definitely
+not alone in asking this question as both my mentors were expecting
+it, and my fellow apprentice working on Tic-Tac-Toe (Ari) also spent
+time last week puzzling over it.</p>
+
+<p>I worried about it briefly at the start of the day, but then I quickly
+adopted the outlook that I&rsquo;ve found to be most successful with TDD;
+don&rsquo;t think too much about the future. Instead, I focused on the
+fundamentals. What&rsquo;s the simplest case an AI needs to deal with. I
+turned to the Wikipedia page on Tic-Tac-Toe and it&rsquo;s bullet list of
+how to be a perfect player. The most important rule is that an AI
+should win immediately when it can. If that&rsquo;s not possible it should
+block an opponent from winning.</p>
+
+<p>These two situations are very easy to detect. It only takes a slight
+modification to the code pattern used for detecting if someone has
+already won, and no future board states need to be taken into
+account. This approach got me moving forwards, which is often the
+hardest part.</p>
+
+<p>Once I had some momentum I kept going by then considering simple fork
+creation, the next most important move type. After pondering how this
+might work, I hit upon a simple solution. A fork is just a move that
+results in a board where you have two possible ways to win! This was
+attractive to me for several reasons. First, it was a (relatively
+small) step towards searching the state-space of the game. By looking
+one move ahead I felt I was moving in the direction of minimax. And it
+was simple enough that it felt doable in a single TDD step.</p>
+
+<p>This worked shockingly well. Not only did my very simple fork
+look-ahead detect most forks that it could create, somehow it actually
+was able to produce the correct fork-blocking behavior in the first
+four cases that I came up with.</p>
+
+<p>I was suspicious though, and so I crafted some devious fork tests that
+were designed to expose the flaw in my simple algorithm. Eventually I
+did that and it became clear that something more powerful was
+needed. At this point, thinking about the simplest way to do things
+produced no clear results. I was already doing a minimal look-ahead
+and the analysis was insufficient. It seemed that the next step would
+have to be going to a minimax algorithm. Here&rsquo;s basically what my
+simple algorithm was at this point:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="k">def</span> <span class="nf">score</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">get_wins</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">indexed_attack_sets</span><span class="p">)</span><span class="o">.</span><span class="n">count</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">find_forks</span><span class="p">(</span><span class="n">board</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">scores</span> <span class="o">=</span> <span class="n">board</span><span class="o">.</span><span class="n">empty_spaces</span><span class="o">.</span><span class="n">map</span> <span class="k">do</span> <span class="o">|</span><span class="n">index</span><span class="o">|</span>
+</span><span class='line'>      <span class="n">node</span> <span class="o">=</span> <span class="n">board</span><span class="o">.</span><span class="n">speculative_move</span><span class="p">(</span><span class="s2">&quot;X&quot;</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
+</span><span class='line'>      <span class="o">[</span><span class="n">index</span><span class="p">,</span> <span class="n">score</span><span class="p">(</span><span class="n">node</span><span class="p">)</span><span class="o">]</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">scores</span><span class="o">.</span><span class="n">max_by</span> <span class="p">{</span> <span class="o">|</span><span class="n">i</span><span class="p">,</span> <span class="n">s</span><span class="o">|</span> <span class="n">s</span> <span class="p">}</span><span class="o">.</span><span class="n">first</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">get_move</span><span class="p">(</span><span class="n">board</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">attacks</span> <span class="o">=</span> <span class="n">board</span><span class="o">.</span><span class="n">indexed_attack_sets</span>
+</span><span class='line'>    <span class="n">win</span>   <span class="o">=</span> <span class="n">get_wins</span><span class="p">(</span><span class="n">attacks</span><span class="p">)</span><span class="o">.</span><span class="n">first</span>
+</span><span class='line'>    <span class="n">block</span> <span class="o">=</span> <span class="n">get_blocks</span><span class="p">(</span><span class="n">attacks</span><span class="p">)</span><span class="o">.</span><span class="n">first</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">win</span> <span class="ow">or</span> <span class="n">block</span> <span class="ow">or</span> <span class="n">find_forks</span><span class="p">(</span><span class="n">board</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I tried to do get to minimax in several ways. First off, I actually
+ended up using the <a href="https://en.wikipedia.org/wiki/Negamax">negamax</a> algorithm because it&rsquo;s simpler to code
+because it takes advantage of the zero-sum property of
+Tic-Tac-Toe. Initially, I tried to replace my whole algorithm with
+negamax right off the bat. This did not work out well. Things got
+complicated and many tests were failing. So I backed out and treated
+negamax as a small refactoring. Specifically I treated it as a
+refactoring of the <code>find_forks</code> function. This worked quite well, and
+suddenly all of the forks tests were passing. I then incrementally
+expanded it until negamax was the only thing being used for deciding
+which moves to make.</p>
+
+<h2>Clojure TDD</h2>
+
+<p>I also spent some time pairing with both Emmanuel and Kristen on some
+Clojure katas, the bowling game and coin changer respectively. This
+was really fascinating for a couple of reasons. I consider myself
+reasonably competent with Clojure. But I am almost totally unfamiliar
+with trying to do TDD in Clojure.</p>
+
+<p>The pairing that I did with both my fellow apprentices was in the
+Ping-Pong style (mostly), where one of us wrote a test and the other
+tried to make it pass. What was fascinating to me was that the
+incremental development approach that this enforces pushed me towards
+writing very non-idiomatic, highly stateful Clojure code.</p>
+
+<p>After attempting the coin changer with Kristen, I was starting to
+doubt my Clojure-chops and so I tried to TDD it out on my own. I ended
+up arriving at a more satisfactory solution that used a stream model
+of discrete state transformations. So a cleaner stateful solution.</p>
+
+<p>I ended up talking about this with Emmanuel after our pairing session,
+and he showed me a blog post and a screencast about doing the bowling
+kata in Clojure. Both people ended up with similar solutions, which
+basically involved the insight that a frame in bowling is only two
+rolls when no strikes or spares are involved. In retrospect, this
+seems sort of obvious, since a frame can&rsquo;t be scored until all of it&rsquo;s
+rolls have occurred. But combining this with actually duplicating some
+of the numbers from the stream of pin-counts is what leads to an
+elegant Clojure solution.</p>
+
+<p>Besides this key realization, I think I was also missing a critical
+tool in my Clojure toolbox: custom lazy sequences. Both solutions
+Emmanuel had found on the web ended up constructing a function that
+produced a custom lazy sequence. This was necessary because of the
+need to repeat certain elements from the stream.</p>
+
+<p>But what I&rsquo;m realizing now is that I think it&rsquo;s difficult to test
+drive recursive solutions. But maybe I&rsquo;m just doing it wrong. Often
+when I write recursive functions I don&rsquo;t bother to write just the base
+case first. I typically will just jump straight in and write both
+parts at once. But now that I think about it, testing the base case of
+a recursive algorithm would be really natural in TDD. You just have to
+start at the simplest case.</p>
+
+<p>Another thought that occurred to me about why TDD in Clojure is
+harder. In Ruby or Java I have read about different design patterns
+and there are established refactorings for manipulating class-based OO
+code. So when I&rsquo;m doing TDD in those languages I know the patterns of
+it. Not patterns in the design patterns sense, but the flows of code
+configurations you might say. Specifically, I&rsquo;m familiar with the
+intermediate stages and I can imagine them.</p>
+
+<p>But the way I write functional code is somewhat different. Most of the
+time, I experiment with a small piece of code in the REPL, until I&rsquo;ve
+produced the result I want, then I wrap it up into a function. This
+process can proceed top-down where I conceive of the top-level
+function first and then create the necessary pieces to make that
+happen; or it can go bottom-up where I think about little pieces of
+functionality in the domain I&rsquo;m considering, and then start composing
+those pieces to make more complex things.</p>
+
+<p>In both of these styles of development, there isn&rsquo;t always working
+code at all times though. In particular, the interesting sort of
+high level behaviors often don&rsquo;t work until the whole thing comes
+together at the end.</p>
+
+<p>So I think I need at least two things before I can do TDD in Clojure
+more effectively. I need to learn the patterns of Clojure code better,
+and get more familiar with how it can be molded and changed from
+simple and ill-factored to cleaner and well-factored. And second, I
+need to adjust to the paradigm shift of thinking about code tests
+first in a functional context.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[On Editors and Their Benefits]]></title>
@@ -3402,124 +3637,6 @@ school and resisting the forms that it imposed. I realized that if I
 was going to go to college, I needed to do it on my own terms, and I
 needed to leave behind some of the baggage that I had accumulated
 about education.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Gumption]]></title>
-    <link href="http://www.zephyrizing.net/blog/2014/05/01/s-and-e-part-two:-gumption/"/>
-    <updated>2014-05-01T22:00:00-05:00</updated>
-    <id>http://www.zephyrizing.net/blog/2014/05/01/s-and-e-part-two:-gumption</id>
-    <content type="html"><![CDATA[<p>My understanding of the concept of personal power - or as I now call
-it &ldquo;gumption&rdquo; - comes in large part from Robert Pirsig&rsquo;s <em>Zen and the
-Art of Motorcycle Maintenance</em>. In that book, there is a section where
-he discusses the &ldquo;gumption traps that [he has] known.&rdquo; There, he
-describes many of his thoughts about the idea of gumption. The best
-way to understand gumption would be to go read Pirsig&rsquo;s book. Failing
-that, let me offer a few select passages.</p>
-
-<!--more-->
-
-
-<blockquote><p>&ldquo;I like the word &#8220;gumption&rdquo; because it&rsquo;s so homely and so forlorn and
-out of style it looks as if it needs a friend and isn&rsquo;t likely to
-reject anyone who comes along. It&rsquo;s an old Scottish word, once used
-a lot by pioneers, but which, like &ldquo;kin,&rdquo; seems to have dropped out
-of use. I like it also because it describes exactly what happens to
-someone who connects with Quality. He gets filled with gumption.&#8221;</p></blockquote>
-
-<p>I can&rsquo;t take the time to delve into what Pirsig means by Quality. For
-that you really will have to read the book. But I love this passage
-because it gets at the heart of Pirsig&rsquo;s - and my own - usage of
-gumption without trying to rigorously define it. Another passage. Keep
-in mind, I&rsquo;m not trying to explain gumption, so much as give you a
-feeling for it.</p>
-
-<blockquote><p>&ldquo;The gumption-filling process occurs when one is quiet long enough
-to see and hear and feel the real universe, not just one&rsquo;s own stale
-opinions about it. But it&rsquo;s nothing exotic. That&rsquo;s why I like the
-word.&rdquo;</p></blockquote>
-
-<p>Gumption is a fascinating subject to me. It encompasses the idea of
-motivation, but it also goes farther. When you enter into the idea of
-gumption, you also enter a conversation about how to recognize and
-sustain it in yourself. It provides a qualitative description for an
-emotional/psychic phenomenon. Most importantly, thinking about the
-concept of gumption and about gumption traps allowed me to start
-thinking of how I can live in a way that avoids them. It also allowed
-and encouraged me to start thinking about how I could build
-gumption. As Robert Pirsig says: &ldquo;Gumption is the psychic gasoline
-that keeps the whole thing going.&rdquo;</p>
-
-<p>Gumption is, at it&rsquo;s best, a mind-hack. I&rsquo;m using hack here in the
-sense that it is used by the website Lifehacker, which is in the
-tradition of the great computer hacker&rsquo;s described by the programmer
-and author Eric Scott Raymond. In essence, this means a clever trick;
-an unexpected way of doing things that has greater Quality. By
-leveraging the ideas of gumption I can hack my own mind to work in
-ways that are more aligned with how I really want to be in the
-world. This idea actually goes back to one of my favorite proverb&rsquo;s.</p>
-
-<blockquote><p>&ldquo;If you begin to understand what you are without trying to change
-it, then what you are undergoes a transformation.&rdquo; &ndash;Jiddu Krishnamurti</p></blockquote>
-
-<p>I first ran across this quote when I was probably 13. Young, and
-highly impressionable, but this piece of wisdom has stuck with me and
-shaped my life ever since then. Because of it, when I use the idea of
-gumption to try and make myself more productive, I go about it in a
-very particular way.</p>
-
-<p>One of the most powerful gumption hacks that I have found is
-cleaning. This is related to a conversation I had a long time ago with
-one of my mother&rsquo;s friends. I was washing the dishes, and complaining
-about it. He asked me &ldquo;Why are you doing the dishes?&rdquo; I was confused,
-and told him I was doing the dishes because I had to. He responded,
-clarifying:</p>
-
-<p>&ldquo;No, I mean are you doing the dishes so that the dishes will be done?
-Or are you doing the dishes to do the dishes?&rdquo;</p>
-
-<p>This started a spirited and engaging conversation that did an
-admirable job of distracting me from noticing that I was still washing
-dishes. I&rsquo;m not sure that I understood it at the time, but what he was
-talking about was essentially mindfulness and presence.</p>
-
-<p>By &ldquo;doing the dishes so that the dishes will be done&rdquo; I was mentally
-residing in the future where the dishes were already done. This caused
-me to have impatience. This produced a troubled state of mind. To put
-it in the language of gumption, seeing washing dishes as a task to be
-completed caused them to be a gumption sink.</p>
-
-<p>Today though, I use dish-washing as a way to build gumption. When I&rsquo;m
-facing a large homework task, or an overwhelming project I go and I
-wash dishes for a time. It&rsquo;s a sort of meditation for me, engaging my
-body, inhabiting it in a mindful way. It strengthens my sense of
-control over my life, and helps prepare me to start working on things
-that are otherwise too hard to approach. As I&rsquo;ve continued this
-practice over the years I&rsquo;ve found something interesting: my base
-level of gumption has increased. Because of this, the difficulty of
-tasks that I can approach unaided has increased dramatically.</p>
-
-<p>A really remarkable example of this was my final quarter at Western. I
-had a 17 credit schedule, the most intense load I had ever taken. On
-top of that, three of the four classes I was enrolled in had large
-projects with long due dates and the fourth had a large amount of
-daily work. This combination of assignments has long been one of my
-weak points; I don&rsquo;t plan long term well, and I also don&rsquo;t work well
-under extreme pressure. The daily work always seems to be of greater
-urgency because of the nearer deadlines.  But the large projects
-always demand more time than I tend to predict. My desire to do
-everything well then leads me to work frantically as soon as I realize
-I don&rsquo;t have as much time as I need.  Then at a certain point I simply
-can&rsquo;t work at all because the tension is too great. Looking back, it
-is clear to me that I simply could not have handled that kind of
-workload when I was a freshman in college. It&rsquo;s not clear that I could
-have dealt with it even two years previously. However, my final
-quarter went much better in many ways than my first quarter.</p>
-
-<p>It took a long time for me to get to that point. Many other things
-have contributed to my mindset. Conversations with fascinating people,
-many excellent teachers. And of course, so many books.</p>
 ]]></content>
   </entry>
   

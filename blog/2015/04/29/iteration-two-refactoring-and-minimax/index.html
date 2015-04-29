@@ -1,0 +1,515 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Iteration Two: Refactoring and Minimax - Zephyrizing</title>
+  <meta name="author" content="Geoff Shannon">
+
+  
+  <meta name="description" content="I&rsquo;m just about finished with my second iteration as an apprentice at
+8th Light. Where my first iteration centered a lot around reading and &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://www.zephyrizing.net/blog/2015/04/29/iteration-two-refactoring-and-minimax">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+  <link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
+  <link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160">
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Zephyrizing" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+</head>
+
+<body   >
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-43671921-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+  <header role="banner"><hgroup>
+  <h1><a href="/">Zephyrizing</a></h1>
+  
+    <h2>Thoughts on cast-iron seasoning, programming and everything&#8230;</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:www.zephyrizing.net" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/about">About</a></li>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/presentations">Presentations</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+
+  <header>
+    
+      <h1 class="entry-title">Iteration Two: Refactoring and Minimax</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-04-29T09:50:55-05:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>9:50 am</span></time>
+        
+           | <a href="#disqus_thread"
+             data-disqus-identifier="http://www.zephyrizing.net">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>I&rsquo;m just about finished with my second iteration as an apprentice at
+8th Light. Where my first iteration centered a lot around reading and
+learning how TDD and Ruby work, this week I focused more on coding. I
+spent most of my time just implementing the several stories of my
+iteration: some minor (but important!) output tweaks, implementing a
+play again loop, and adding two AI&rsquo;s to the game. I also did quite a
+bit of refactoring and general code cleanup.</p>
+
+<!--more-->
+
+
+<p>I spent several hours figuring out the mechanics of doing an extract
+class refactoring, and then realizing that I had extracted the class
+the wrong way and so the &ldquo;container&rdquo; class was the one being held by
+it&rsquo;s containee.  It turned out to be very awkward to try to invert
+this relationship so I backed out the change and extracted the other
+class so that the container/containee relationship was correct. I
+consulted Martin Fowler&rsquo;s <em>Refactoring</em> book heavily here. It&rsquo;s really
+neat how the mechanical steps he describes are actually an incredibly
+useful guide.</p>
+
+<p>I noticed an interesting thing while I was refactoring. I was changing
+the code so much that I started losing track of what was actually
+going on. At some point, my brain just sort of gave up on trying to
+hold the whole application in my head. This was an interesting
+experience because usually I can hold more complexity in my head than
+this Tic Tac Toe game currently has. I think this is part of the trend
+I noticed that in general, when doing TDD I feel less need to hold a
+lot of the complexity in my mind at once.</p>
+
+<p>The slightly scary flip-side of that was that because I was doing
+extract class refactorings and moving methods and such, I also ended
+up moving tests around and modifying the tests a lot to keep them
+working. Mucking around with them seriously decreased my confidence in
+them, and thus in my confidence in the system as a whole. Clearly I
+need to think more about how the test modification process goes along
+with refactoring.</p>
+
+<p>Another piece of functionality that took me surprisingly long to
+implement was the play again functionality. The interesting part of
+that process was that I wrote tests, and then wrote an implementation
+that I thought was correct. The tests failed in a confusing manner and
+so I assumed that the tests were incorrect. After poking around for
+quite a while, firing up the debugger (<a href="http://pryrepl.org/">Pry</a> and <a href="https://github.com/deivid-rodriguez/pry-byebug">byebug</a> are
+awesome!) I eventually discovered that the test was correct, and it
+was even failing exactly correctly. I had simply forgotten to take
+into account that once a game has been completed, one can&rsquo;t just start
+playing it again from the beginning. So I had to write a reset method.</p>
+
+<p>On Tuesday I spent most of the day test driving my way to a perfect
+AI. This was an interesting experience since it was the first time
+I&rsquo;ve had a really clear idea of where I wanted to go with the code
+while doing TDD. For the most part I&rsquo;ve been trying to stick to the
+letter of the acronym and let the tests lead me to the code
+organization they want.</p>
+
+<p>But the <a href="https://en.wikipedia.org/wiki/Minimax">minimax</a> algorithm is well known and an established way to do
+the game state-space search that is required for a perfect Tic-Tac-Toe
+AI. So how does one test drive that? Apparently I am most definitely
+not alone in asking this question as both my mentors were expecting
+it, and my fellow apprentice working on Tic-Tac-Toe (Ari) also spent
+time last week puzzling over it.</p>
+
+<p>I worried about it briefly at the start of the day, but then I quickly
+adopted the outlook that I&rsquo;ve found to be most successful with TDD;
+don&rsquo;t think too much about the future. Instead, I focused on the
+fundamentals. What&rsquo;s the simplest case an AI needs to deal with. I
+turned to the Wikipedia page on Tic-Tac-Toe and it&rsquo;s bullet list of
+how to be a perfect player. The most important rule is that an AI
+should win immediately when it can. If that&rsquo;s not possible it should
+block an opponent from winning.</p>
+
+<p>These two situations are very easy to detect. It only takes a slight
+modification to the code pattern used for detecting if someone has
+already won, and no future board states need to be taken into
+account. This approach got me moving forwards, which is often the
+hardest part.</p>
+
+<p>Once I had some momentum I kept going by then considering simple fork
+creation, the next most important move type. After pondering how this
+might work, I hit upon a simple solution. A fork is just a move that
+results in a board where you have two possible ways to win! This was
+attractive to me for several reasons. First, it was a (relatively
+small) step towards searching the state-space of the game. By looking
+one move ahead I felt I was moving in the direction of minimax. And it
+was simple enough that it felt doable in a single TDD step.</p>
+
+<p>This worked shockingly well. Not only did my very simple fork
+look-ahead detect most forks that it could create, somehow it actually
+was able to produce the correct fork-blocking behavior in the first
+four cases that I came up with.</p>
+
+<p>I was suspicious though, and so I crafted some devious fork tests that
+were designed to expose the flaw in my simple algorithm. Eventually I
+did that and it became clear that something more powerful was
+needed. At this point, thinking about the simplest way to do things
+produced no clear results. I was already doing a minimal look-ahead
+and the analysis was insufficient. It seemed that the next step would
+have to be going to a minimax algorithm. Here&rsquo;s basically what my
+simple algorithm was at this point:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="k">def</span> <span class="nf">score</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">get_wins</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">indexed_attack_sets</span><span class="p">)</span><span class="o">.</span><span class="n">count</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">find_forks</span><span class="p">(</span><span class="n">board</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">scores</span> <span class="o">=</span> <span class="n">board</span><span class="o">.</span><span class="n">empty_spaces</span><span class="o">.</span><span class="n">map</span> <span class="k">do</span> <span class="o">|</span><span class="n">index</span><span class="o">|</span>
+</span><span class='line'>      <span class="n">node</span> <span class="o">=</span> <span class="n">board</span><span class="o">.</span><span class="n">speculative_move</span><span class="p">(</span><span class="s2">&quot;X&quot;</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
+</span><span class='line'>      <span class="o">[</span><span class="n">index</span><span class="p">,</span> <span class="n">score</span><span class="p">(</span><span class="n">node</span><span class="p">)</span><span class="o">]</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">scores</span><span class="o">.</span><span class="n">max_by</span> <span class="p">{</span> <span class="o">|</span><span class="n">i</span><span class="p">,</span> <span class="n">s</span><span class="o">|</span> <span class="n">s</span> <span class="p">}</span><span class="o">.</span><span class="n">first</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">get_move</span><span class="p">(</span><span class="n">board</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">attacks</span> <span class="o">=</span> <span class="n">board</span><span class="o">.</span><span class="n">indexed_attack_sets</span>
+</span><span class='line'>    <span class="n">win</span>   <span class="o">=</span> <span class="n">get_wins</span><span class="p">(</span><span class="n">attacks</span><span class="p">)</span><span class="o">.</span><span class="n">first</span>
+</span><span class='line'>    <span class="n">block</span> <span class="o">=</span> <span class="n">get_blocks</span><span class="p">(</span><span class="n">attacks</span><span class="p">)</span><span class="o">.</span><span class="n">first</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">win</span> <span class="ow">or</span> <span class="n">block</span> <span class="ow">or</span> <span class="n">find_forks</span><span class="p">(</span><span class="n">board</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I tried to do get to minimax in several ways. First off, I actually
+ended up using the <a href="https://en.wikipedia.org/wiki/Negamax">negamax</a> algorithm because it&rsquo;s simpler to code
+because it takes advantage of the zero-sum property of
+Tic-Tac-Toe. Initially, I tried to replace my whole algorithm with
+negamax right off the bat. This did not work out well. Things got
+complicated and many tests were failing. So I backed out and treated
+negamax as a small refactoring. Specifically I treated it as a
+refactoring of the <code>find_forks</code> function. This worked quite well, and
+suddenly all of the forks tests were passing. I then incrementally
+expanded it until negamax was the only thing being used for deciding
+which moves to make.</p>
+
+<h2>Clojure TDD</h2>
+
+<p>I also spent some time pairing with both Emmanuel and Kristen on some
+Clojure katas, the bowling game and coin changer respectively. This
+was really fascinating for a couple of reasons. I consider myself
+reasonably competent with Clojure. But I am almost totally unfamiliar
+with trying to do TDD in Clojure.</p>
+
+<p>The pairing that I did with both my fellow apprentices was in the
+Ping-Pong style (mostly), where one of us wrote a test and the other
+tried to make it pass. What was fascinating to me was that the
+incremental development approach that this enforces pushed me towards
+writing very non-idiomatic, highly stateful Clojure code.</p>
+
+<p>After attempting the coin changer with Kristen, I was starting to
+doubt my Clojure-chops and so I tried to TDD it out on my own. I ended
+up arriving at a more satisfactory solution that used a stream model
+of discrete state transformations. So a cleaner stateful solution.</p>
+
+<p>I ended up talking about this with Emmanuel after our pairing session,
+and he showed me a blog post and a screencast about doing the bowling
+kata in Clojure. Both people ended up with similar solutions, which
+basically involved the insight that a frame in bowling is only two
+rolls when no strikes or spares are involved. In retrospect, this
+seems sort of obvious, since a frame can&rsquo;t be scored until all of it&rsquo;s
+rolls have occurred. But combining this with actually duplicating some
+of the numbers from the stream of pin-counts is what leads to an
+elegant Clojure solution.</p>
+
+<p>Besides this key realization, I think I was also missing a critical
+tool in my Clojure toolbox: custom lazy sequences. Both solutions
+Emmanuel had found on the web ended up constructing a function that
+produced a custom lazy sequence. This was necessary because of the
+need to repeat certain elements from the stream.</p>
+
+<p>But what I&rsquo;m realizing now is that I think it&rsquo;s difficult to test
+drive recursive solutions. But maybe I&rsquo;m just doing it wrong. Often
+when I write recursive functions I don&rsquo;t bother to write just the base
+case first. I typically will just jump straight in and write both
+parts at once. But now that I think about it, testing the base case of
+a recursive algorithm would be really natural in TDD. You just have to
+start at the simplest case.</p>
+
+<p>Another thought that occurred to me about why TDD in Clojure is
+harder. In Ruby or Java I have read about different design patterns
+and there are established refactorings for manipulating class-based OO
+code. So when I&rsquo;m doing TDD in those languages I know the patterns of
+it. Not patterns in the design patterns sense, but the flows of code
+configurations you might say. Specifically, I&rsquo;m familiar with the
+intermediate stages and I can imagine them.</p>
+
+<p>But the way I write functional code is somewhat different. Most of the
+time, I experiment with a small piece of code in the REPL, until I&rsquo;ve
+produced the result I want, then I wrap it up into a function. This
+process can proceed top-down where I conceive of the top-level
+function first and then create the necessary pieces to make that
+happen; or it can go bottom-up where I think about little pieces of
+functionality in the domain I&rsquo;m considering, and then start composing
+those pieces to make more complex things.</p>
+
+<p>In both of these styles of development, there isn&rsquo;t always working
+code at all times though. In particular, the interesting sort of
+high level behaviors often don&rsquo;t work until the whole thing comes
+together at the end.</p>
+
+<p>So I think I need at least two things before I can do TDD in Clojure
+more effectively. I need to learn the patterns of Clojure code better,
+and get more familiar with how it can be molded and changed from
+simple and ill-factored to cleaner and well-factored. And second, I
+need to adjust to the paradigm shift of thinking about code tests
+first in a functional context.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Geoff Shannon</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2015-04-29T09:50:55-05:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>9:50 am</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/apprenticeship/'>apprenticeship</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://www.zephyrizing.net/blog/2015/04/29/iteration-two-refactoring-and-minimax/" data-via="RadicalZephyr" data-counturl="http://www.zephyrizing.net/blog/2015/04/29/iteration-two-refactoring-and-minimax/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2015/04/16/on-editors-and-their-benefits/" title="Previous Post: On Editors and their Benefits">&laquo; On Editors and their Benefits</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/04/29/iteration-two-refactoring-and-minimax/">Iteration Two: Refactoring and Minimax</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/04/16/on-editors-and-their-benefits/">On Editors and Their Benefits</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/04/14/learning-tdd/">Learning TDD</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/04/04/shaving-the-clojurescript-yaks/">Shaving the Clojurescript Yak(s)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/04/02/two-days-in/">Two Days In</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/RadicalZephyr">@RadicalZephyr</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'RadicalZephyr',
+            count: 7,
+            skip_forks: true,
+            to_skip: ["radicalzephyr.github.io","home","prelude",".emacs.d","emacs","synapse-admin","old-site"],
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Geoff Shannon -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'zephyrizing';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://www.zephyrizing.net/blog/2015/04/29/iteration-two-refactoring-and-minimax/';
+        var disqus_url = 'http://www.zephyrizing.net/blog/2015/04/29/iteration-two-refactoring-and-minimax/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+<noscript>Please enable JavaScript to view
+  the <a href="http://disqus.com/?ref_noscript">comments powered by
+    Disqus.</a></noscript>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
