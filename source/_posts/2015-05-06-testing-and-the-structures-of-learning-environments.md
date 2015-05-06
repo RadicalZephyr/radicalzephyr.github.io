@@ -166,3 +166,22 @@ with concrete and achievable tasks to mark the route.
 
 One interesting thought I've had recently is an analogy between the
 structure of these various learning environments and software testing.
+I think that the Recurse Center is much like the undisciplined hacking
+on a pet project. There may be tests, but they are impromptu and
+somewhat haphazard. More projected onto the structure of the code
+after completion than designed into it from the beginning. You can get
+a lot done in this fashion, but it's also easy to get lost in the
+weeds (though this is largely the point as far as many RC'ers are
+concerned).
+
+A university degree program is then more like poorly executed TDD. The
+tests are written first - mostly. But they are written with a mind to
+*how* the task will be accomplished and are tightly, almost
+inextricably, coupled to the implementation. They define a rigid but
+currently stable and verified system. But woe betide the person who
+tries to change anything, because much of the code and all of the
+tests will break.
+
+8th Light then is TDD done well. The tests are written first and they
+specify the behavior of the system, not the implementation. The
+desired goal is achieved through (rapid) iteration and feedback.
