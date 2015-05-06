@@ -69,3 +69,77 @@ summarized my attitude towards school by bestowing an award on me at
 the end of the year: "Highest Learning to Grade ratio."
 
 ### The Recurse Center
+
+At the opposite end of the structure spectrum we have the Recurse
+Center. It is often difficult to explain to people exactly why I chose
+to go to the Recurse Center last fall. I usually fall back on
+paraphrasing the tag line from their website:
+
+> The Recurse Center is a free, self-directed, educational retreat for
+> people who want to get better at programming, whether they've been
+> coding for three decades or three months.
+
+The key part of that statement for me is the "self-directed"
+portion. The vast majority of what I learned during my CS degree came
+from entirely self-directed exploration so it seemed like a natural
+fit.
+
+But they are serious when they say self-directed. The structure of
+their environment is at a very bare minimum. About as bare as you can
+get I think and still build a sense of community around a shared
+experience. The structure and workings of the Recurse Center have been
+written about by many of the students as well as the people who run
+it. But for comparison's sake, I want to mention the few structural
+elements that make up the Recurse Center.
+
+First, they spend a half day at the beginning of the batch with a
+welcome meet-and-greet breakfast. This is followed by talks by the
+founders and facilitators to "set the tone" and people's expectations
+for the batch. These mostly consist of talking about what they want
+the Recurse Center to be, and the lightweight social rules that they
+follow to help achieve that. After that, there are a few logistical
+matters like keycards and access to the chat client, but then you are
+thrown head-first into being at the Recurse Center: i.e. sitting in
+room with about 60 other people, and learning about programming.
+
+There are a few more things, like the Monday night talks by the
+current resident or other interesting person, or the daily checkins
+with other RC'ers. But other than that pretty much everything is up to
+the participants of the batch. If people want to organize a daily
+reading group you can do that. Or you can find someone interested in
+pairing on a project with you. Or you can go to a short
+presentation/talk someone has decided to give.
+
+If this sounds vague and confusing it's because of the lack of
+structure. It sounds like a platitude, but spending three months at
+the Recurse Center really can be whatever you want it to be. A lot of
+people take some time to adjust to this looseness, and there are
+facilitators whose job is precisely that, to facilitate people in
+their self-directed learning. Whether that means brain-storming about
+projects to work on, or giving code review, or pairing on a
+particularly difficult problem their whole job is to be available to
+help RC'ers make the most of their time their. As a bonus they get to
+spend their days doing their own self-directed learning.
+
+The structure - or lack thereof - of the Recurse Center was inspired
+at least in part by the unschooling movement as talked about by Grace
+Llewellyn. I've [written before][unschoolove] about how I fell in love
+with the idea of unschooling. But my time at the Recurse Center was
+the first time I actually got to fully and intentionally practice
+it. Three months was not long enough.
+
+[unschoolove]: {% post_url 2014-05-06-s-and-e-part-three:-the-teenage-liberation-handbook %}
+
+Despite the brevity of the experience, it did me a world of good. My
+last year at college playing their game to the hilt sort of killed
+something in me. I stopped enjoying programming, and I stopped seeking
+out learning on my own as much. Killed is a rather strong word but
+that's how it felt. Maybe it would be more appropriate to say that it
+simply wore me out. I had no energy, no [gumption] left to put into
+anything. At the Recurse Center though, I built massive amounts of
+gumption. So much so that I haven't seriously found myself lacking it
+since. If for only that reason, the Recurse Center was the perfect
+antidote to my time at university. And I rediscovered my joy in
+programming.
+
+[gumption]: {% post_url 2014-05-01-s-and-e-part-two:-gumption %}
