@@ -4,7 +4,7 @@
   <title><![CDATA[Zephyrizing]]></title>
   <link href="http://www.zephyrizing.net/atom.xml" rel="self"/>
   <link href="http://www.zephyrizing.net/"/>
-  <updated>2015-04-29T11:14:12-05:00</updated>
+  <updated>2015-05-06T11:36:27-05:00</updated>
   <id>http://www.zephyrizing.net/</id>
   <author>
     <name><![CDATA[Geoff Shannon]]></name>
@@ -12,6 +12,188 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Testing and the Structures of Learning Environments]]></title>
+    <link href="http://www.zephyrizing.net/blog/2015/05/06/testing-and-the-structures-of-learning-environments/"/>
+    <updated>2015-05-06T09:22:53-05:00</updated>
+    <id>http://www.zephyrizing.net/blog/2015/05/06/testing-and-the-structures-of-learning-environments</id>
+    <content type="html"><![CDATA[<p>I&rsquo;ve been fortunate this last year in getting to spend time in several
+radically different learning environments in a relatively short span
+of time. These experiences have gotten me thinking about the relative
+pros and cons, also about how I respond to the amount of structure the
+environment offers.</p>
+
+<!--more-->
+
+
+<h3>The University</h3>
+
+<p>Okay, let&rsquo;s start off with the most structured of all, the
+university. &ldquo;formal education&rdquo; is certainly the most structured of all
+the environments I&rsquo;ve been in recently. Apart from the lower-levels of
+the same system, I&rsquo;m having a hard time of thinking of a more
+structured type of learning. I&rsquo;ve written before quite extensively
+about specific problems I have with the established school system, so
+I&rsquo;ll just leave it at that. However, university courses are highly
+structured. They are actually required to by the nature of the
+system. Even Fairhaven College, a place which essentially strives for
+less structure only achieves that, less structure.</p>
+
+<p>An excellent symbol (and indeed, a representation) of that structure
+is the course syllabus. Contained in that one document are supposed to
+be all the expectations and requirements for &ldquo;doing well&rdquo; in the
+class. I noticed something towards the end of my college career. These
+documents started getting more formulaic. In fact, they seem to be
+approaching the type of jargon-ified meanings as &ldquo;lawyer-ese.&rdquo; For
+instance, my university had a policy that no assignments could be
+given to students during &ldquo;dead week&rdquo; - the week before finals -
+<em>unless</em> the teacher had mentioned that it was possible in the
+syllabus.</p>
+
+<p>Because of this, many professors simply had a clause in their &ldquo;stock&rdquo;
+syllabus that mentioned that there might be assignments due during
+dead week, just to reserve the option. First of all, I have a problem
+with a document that requires so much boilerplate that there can be a
+&ldquo;stock&rdquo; version of it. Second, the system of rules and requirements
+that caused teachers to always include a certain statement in the
+syllabus regardless of their plans for the class, made the whole
+system into a game, pitting students against each other, and often
+also into opposition with their professors.</p>
+
+<p>I resisted playing this game for a long time (most of my life
+actually). After taking two years off from school when my mother fell
+ill, I came back with a conviction that this game was a necessary evil
+that I needed to play, and play well. So I did. I got excellent grades
+in my last several quarters at Western in all of my classes, despite
+taking heavy credit loads of all difficult classes. But I didn&rsquo;t learn
+as much.</p>
+
+<p>My normal method of doing school appears somewhat lackadaisical
+compared to the studious diligence of many &ldquo;good&rdquo; students. But part
+of the reason for this is that I tend to follow my interests, and go
+well beyond what is being asked of me by the teacher. A classic
+example was a paper I needed to write for a history class in high
+school. I needed to do research on some historical topic, but on the
+way I stumbled upon some fascinating information about dolphins. I
+spent most of my evening reading and learning much about dolphins, and
+not researching for the paper. My high school pre-Calculus teacher
+summarized my attitude towards school by bestowing an award on me at
+the end of the year: &ldquo;Highest Learning to Grade ratio.&rdquo;</p>
+
+<h3>The Recurse Center</h3>
+
+<p>At the opposite end of the structure spectrum we have the Recurse
+Center. It is often difficult to explain to people exactly why I chose
+to go to the Recurse Center last fall. I usually fall back on
+paraphrasing the tag line from their website:</p>
+
+<blockquote><p>The Recurse Center is a free, self-directed, educational retreat for
+people who want to get better at programming, whether they&rsquo;ve been
+coding for three decades or three months.</p></blockquote>
+
+<p>The key part of that statement for me is the &ldquo;self-directed&rdquo;
+portion. The vast majority of what I learned during my CS degree came
+from entirely self-directed exploration so it seemed like a natural
+fit.</p>
+
+<p>But they are serious when they say self-directed. The structure of
+their environment is at a very bare minimum. About as bare as you can
+get I think and still build a sense of community around a shared
+experience. The structure and workings of the Recurse Center have been
+written about by many of the students as well as the people who run
+it. But for comparison&rsquo;s sake, I want to mention the few structural
+elements that make up the Recurse Center.</p>
+
+<p>First, they spend a half day at the beginning of the batch with a
+welcome meet-and-greet breakfast. This is followed by talks by the
+founders and facilitators to &ldquo;set the tone&rdquo; and people&rsquo;s expectations
+for the batch. These mostly consist of talking about what they want
+the Recurse Center to be, and the lightweight social rules that they
+follow to help achieve that. After that, there are a few logistical
+matters like keycards and access to the chat client, but then you are
+thrown head-first into being at the Recurse Center: i.e. sitting in
+room with about 60 other people, and learning about programming.</p>
+
+<p>There are a few more things, like the Monday night talks by the
+current resident or other interesting person, or the daily checkins
+with other RC&#8217;ers. But other than that pretty much everything is up to
+the participants of the batch. If people want to organize a daily
+reading group you can do that. Or you can find someone interested in
+pairing on a project with you. Or you can go to a short
+presentation/talk someone has decided to give.</p>
+
+<p>If this sounds vague and confusing it&rsquo;s because of the lack of
+structure. It sounds like a platitude, but spending three months at
+the Recurse Center really can be whatever you want it to be. A lot of
+people take some time to adjust to this looseness, and there are
+facilitators whose job is precisely that, to facilitate people in
+their self-directed learning. Whether that means brain-storming about
+projects to work on, or giving code review, or pairing on a
+particularly difficult problem their whole job is to be available to
+help RC&#8217;ers make the most of their time their. As a bonus they get to
+spend their days doing their own self-directed learning.</p>
+
+<p>The structure - or lack thereof - of the Recurse Center was inspired
+at least in part by the unschooling movement as talked about by Grace
+Llewellyn. I&rsquo;ve <a href="http://www.zephyrizing.net/blog/2014/05/06/s-and-e-part-three:-the-teenage-liberation-handbook/">written before</a> about how I fell in love
+with the idea of unschooling. But my time at the Recurse Center was
+the first time I actually got to fully and intentionally practice
+it. Three months was not long enough.</p>
+
+<p>Despite the brevity of the experience, it did me a world of good. My
+last year at college playing their game to the hilt sort of killed
+something in me. I stopped enjoying programming, and I stopped seeking
+out learning on my own as much. Killed is a rather strong word but
+that&rsquo;s how it felt. Maybe it would be more appropriate to say that it
+simply wore me out. I had no energy, no <a href="http://www.zephyrizing.net/blog/2014/05/01/s-and-e-part-two:-gumption/">gumption</a> left to put into
+anything. At the Recurse Center though, I built massive amounts of
+gumption. So much so that I haven&rsquo;t seriously found myself lacking it
+since. If for only that reason, the Recurse Center was the perfect
+antidote to my time at university. And I rediscovered my joy in
+programming.</p>
+
+<h3>8th Light</h3>
+
+<p>Now I&rsquo;m an apprentice at 8th Light. I sought out 8th Light primarily
+because of their apprenticeship program, and the remarkable similarity
+it bore to <a href="http://www.zephyrizing.net/blog/2014/06/07/s-and-e-part-seven:-onward/">my own idealized conception</a> of how to teach
+someone how to program.</p>
+
+<p>It is sort of a fascinating and fortuitous coincidence that the amount
+of structure here is in between that found at the Recurse Center and
+in universities. Whether it is actually &ldquo;just right&rdquo; remains to be
+seen. So far the balance between guidance and self-directed
+exploration has been fairly ideal. Having weekly check-in&rsquo;s with my
+mentors puts a firm bound on how long I might drift without
+purpose. Though I haven&rsquo;t found that to be a problem here, it was
+definitely something I needed to be mindful of during my time at the
+Recurse Center. I also find it helpful to have a direction set for me,
+with concrete and achievable tasks to mark the route.</p>
+
+<p>One interesting thought I&rsquo;ve had recently is an analogy between the
+structure of these various learning environments and software testing.
+I think that the Recurse Center is much like the undisciplined hacking
+on a pet project. There may be tests, but they are impromptu and
+somewhat haphazard. More projected onto the structure of the code
+after completion than designed into it from the beginning. You can get
+a lot done in this fashion, but it&rsquo;s also easy to get lost in the
+weeds (though this is largely the point as far as many RC&#8217;ers are
+concerned).</p>
+
+<p>A university degree program is then more like poorly executed TDD. The
+tests are written first - mostly. But they are written with a mind to
+<em>how</em> the task will be accomplished and are tightly, almost
+inextricably, coupled to the implementation. They define a rigid but
+currently stable and verified system. But woe betide the person who
+tries to change anything, because much of the code and all of the
+tests will break.</p>
+
+<p>8th Light then is TDD done well. The tests are written first and they
+specify the behavior of the system, not the implementation. The
+desired goal is achieved through (rapid) iteration and feedback.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Iteration Two: Refactoring and Minimax]]></title>
@@ -3526,117 +3708,6 @@ story isn&rsquo;t really serving a particular purpose; it&rsquo;s mostly because
 forget the other parts. In reality, I didn&rsquo;t first teach myself to
 program while I was working for David Firth right before I started at
 Western in 2008. It really started six years earlier, when I was 14.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[The Teenage Liberation Handbook]]></title>
-    <link href="http://www.zephyrizing.net/blog/2014/05/06/s-and-e-part-three:-the-teenage-liberation-handbook/"/>
-    <updated>2014-05-06T22:00:00-05:00</updated>
-    <id>http://www.zephyrizing.net/blog/2014/05/06/s-and-e-part-three:-the-teenage-liberation-handbook</id>
-    <content type="html"><![CDATA[<p>The book that has had the greatest impact on my educational journey is
-<em>The Teenage Liberation Handbook: How to Quit School and Get a Real
-Life and Education</em> by Grace Llewellyn. An opinionated title to be
-sure, and it is an opinionated book. I was first introduced to this
-book by one of my most beloved high school teachers, Steve Miranda. He
-gave the first chapter to us as a reading in a class entitled
-<em>Literature and Philosophy</em>. The section we read is an allegory about
-education that illustrates the author&rsquo;s view of what our educational
-system does to the minds of the young. It is heartbreaking.</p>
-
-<!--more-->
-
-
-<p>Reading that story was probably the first time I was moved to tears by
-a piece of writing. Just thinking about that time brings back powerful
-emotions. That story spoke to me. The author Daniel Quinn defines a
-story as a device that we humans use for understanding the world
-around us better. This story helped me to make sense of my
-relationship with school. It gave me permission to dislike school in a
-way I never had felt free to before. It gave me words to articulate my
-distaste, and it showed me that other people could and did feel the
-same way.</p>
-
-<p>I was touched also because the tale is legitimately a tragic one. It
-tells the story of a young child, full of enthusiasm and the joy of
-learning. And it shows how after exposure to the dull monotony of the
-classroom environment and the &ldquo;processed gruel&rdquo; form of knowledge
-found there, her enthusiasm steadily faded. And finally, it shows her
-breaking free.</p>
-
-<p>Perhaps the most important reason that this story was so powerful for
-me was because it made me grieve for myself. It made me grieve for the
-countless hours, mostly wasted, spent in that limiting school
-environment.  It made me grieve for the massive amount of energy I
-spent resisting the inertia of that system.  It made me grieve for all
-of the times that I had forced myself to crush my own resistance. But
-most of all it made me grieve for the lost opportunity that this story
-represented.</p>
-
-<p>How I wish I had found that book sooner. When I first read that story,
-I was 18 and just three months away from graduating from high school.</p>
-
-<p>I read the rest of book voraciously as soon as I could get my hands on
-it. Through that, I gained a deeper understanding of the ideas about
-school that Llewellyn hinted at in the portion of it that I read for
-my class. <em>The Teenage Liberation Handbook</em> describes something called
-&ldquo;unschooling.&rdquo; Llewellyn intentionally avoids using the term
-&ldquo;home-schooling&rdquo; because of the baggage that it carries, and also
-because of the connotations that it is just &ldquo;school, but at home.&rdquo;</p>
-
-<p>Unschooling is emphatically different from both traditional school,
-and home-schooling. It emphasizes personal interest, and
-self-direction. It defines the role of the parent as facilitator not
-teacher. Most importantly, it emphasizes that learning can - and
-should - happen anywhere, and anytime; in fact, it should happen
-everywhere, and all the time.</p>
-
-<p>The expressiveness of her allegory gave me a hint of what unschooling
-offered.  That hint was enough for me to recognize that I had missed
-my opportunity. I wanted it so badly.</p>
-
-<p>The emotional response is a huge part of why this book was so
-influential for me. But I also loved her vision. The more that I read
-of it, the more engaged I became and the more excited and despairing I
-felt. I was excited by the possibilities that I saw in what Llewellyn
-described. I despaired because it seemed so unattainable for me. And I
-struggled as I read that book. I struggled with whether I wanted to
-quit school and pursue unschooling. Ultimately, I took the easier path
-and simply graduated from high school. But even at that late date, I
-was so inspired by her ideas that I wanted to immediately quit school
-and pursue an unschooled education for myself.</p>
-
-<p>Since then I have wanted to spread the message. The single thing that
-bothers me most about my own history is that I never knew that I had
-any choice other than school. Unfortunately, I&rsquo;m not much of an
-activist - far too introverted - and I don&rsquo;t personally know very many
-teenagers.</p>
-
-<p>So many other pieces of my educational journey since then are deeply
-related to my reading of this book. The time that I took off after I
-graduated high school is a prominent example. So is the two year break
-I took between my junior and senior year at Western. I had been
-considering taking time off after high school before I read the
-handbook, but Llewellyn&rsquo;s description of what she called &ldquo;the
-Vacation&rdquo; made me certain that I wanted that reset.</p>
-
-<p>For a teen pursuing unschooling, the Vacation is the period of time
-between when they stop attending traditional school, and when they
-start pursuing their learning in earnest. Grace warns that if you try
-and make the transition too quickly, too much baggage about learning
-is carried along and your attempts at unschooling will be
-disappointing at best and disastrous at worst. She devotes an entire
-chapter to describing the importance of it, and she presents a very
-convincing case.</p>
-
-<p>Reading the <em>Teenage Liberation Handbook</em> made me realize how toxic my
-attitude towards school had become. Her words helped me decomplect my
-feelings about school from my feelings about learning. It also helped
-me to start to recognize the negative cycle I was in regarding hating
-school and resisting the forms that it imposed. I realized that if I
-was going to go to college, I needed to do it on my own terms, and I
-needed to leave behind some of the baggage that I had accumulated
-about education.</p>
 ]]></content>
   </entry>
   

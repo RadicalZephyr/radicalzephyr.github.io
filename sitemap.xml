@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://www.zephyrizing.net/blog/2015/05/06/testing-and-the-structures-of-learning-environments/</loc>
+    <lastmod>2015-05-06T09:22:53-05:00</lastmod>
+  </url>
+  <url>
     <loc>http://www.zephyrizing.net/blog/2015/04/29/iteration-two-refactoring-and-minimax/</loc>
     <lastmod>2015-04-29T09:50:55-05:00</lastmod>
   </url>
@@ -232,5 +236,14 @@
   </url>
   <url>
     <loc>http://www.zephyrizing.net/blog/categories/apprenticeship/</loc>
+  </url>
+  <url>
+    <loc>http://www.zephyrizing.net/blog/categories/learning/</loc>
+  </url>
+  <url>
+    <loc>http://www.zephyrizing.net/blog/categories/recurse-center/</loc>
+  </url>
+  <url>
+    <loc>http://www.zephyrizing.net/blog/categories/8th-light/</loc>
   </url>
 </urlset>
