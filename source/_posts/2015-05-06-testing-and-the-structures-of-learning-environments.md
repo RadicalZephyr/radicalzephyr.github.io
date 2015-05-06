@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "TDD and the Structures of Learning Environments"
+title: "Testing and the Structures of Learning Environments"
 date: 2015-05-06 09:22:53 -0500
 comments: true
-categories: [Tdd, Learning, Recurse Center, 8th Light]
+categories: [Testing, Learning, Recurse Center, 8th Light]
 ---
 
 I've been fortunate this last year in getting to spend time in several
@@ -163,3 +163,6 @@ purpose. Though I haven't found that to be a problem here, it was
 definitely something I needed to be mindful of during my time at the
 Recurse Center. I also find it helpful to have a direction set for me,
 with concrete and achievable tasks to mark the route.
+
+One interesting thought I've had recently is an analogy between the
+structure of these various learning environments and software testing.
