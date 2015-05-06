@@ -143,3 +143,23 @@ antidote to my time at university. And I rediscovered my joy in
 programming.
 
 [gumption]: {% post_url 2014-05-01-s-and-e-part-two:-gumption %}
+
+### 8th Light
+
+Now I'm an apprentice at 8th Light. I sought out 8th Light primarily
+because of their apprenticeship program, and the remarkable similarity
+it bore to [my own idealized conception][codeacademy] of how to teach
+someone how to program.
+
+[codeacademy]: {% post_url 2014-06-07-s-and-e-part-seven:-onward %}
+
+It is sort of a fascinating and fortuitous coincidence that the amount
+of structure here is in between that found at the Recurse Center and
+in universities. Whether it is actually "just right" remains to be
+seen. So far the balance between guidance and self-directed
+exploration has been fairly ideal. Having weekly check-in's with my
+mentors puts a firm bound on how long I might drift without
+purpose. Though I haven't found that to be a problem here, it was
+definitely something I needed to be mindful of during my time at the
+Recurse Center. I also find it helpful to have a direction set for me,
+with concrete and achievable tasks to mark the route.
