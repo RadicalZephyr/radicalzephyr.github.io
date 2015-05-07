@@ -1,0 +1,27 @@
+---
+layout: presentation
+title: Reimplementing .gitignore in 12 lines of bash
+---
+
+* Prelude
+
+** What is it?
+
+Mostly, configuration.
+
+** What's included?
+
+- lots of random conveniences
+- "nicer" defaults for many things
+- configuration "modules" for lots of different languages/technologies
+
+** Why is it cool?
+
+- easy to install
+- easy to upgrade
+- community of people contributing improvements
+- plus all of the benefits that normally come along with that
+
+#+OPTIONS: H:4 num:nil toc:nil tags:t
+
+#+TAGS: slide(s) note(n)
