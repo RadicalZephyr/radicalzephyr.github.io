@@ -6,6 +6,22 @@ comments: true
 categories: [Clojure, Clojurescript, Walkthrough]
 ---
 
+#### A Note about version numbers
+
+At the time of this writing, there were several newer versions of many
+of the dependencies used in Chestnut. In particular, the ClojureScript
+core team had fairly recently released a new version with
+[vastly simplified REPL setup requirements][cljs-new-repl] which
+triggered changes to many of the related ClojureScript tooling
+libraries (Piggieback, and Weasel especially). So PLEASE! Use the
+latest version of Chestnut, or if you're setting up your own project
+then look up the latest versions on [Clojars][clojars]
+
+[cljs-new-repl]: https://github.com/clojure/clojurescript/wiki/Running-REPLs
+[clojars]: http://clojars.org/
+
+## On to the Annotating!
+
 As I wrote [recently][yaks], I recently dove head first into doing web
 development with Clojure and Clojurescript. Along the way I learned a
 whole heck of a lot about how to actually set up a [Leiningen][lein]
