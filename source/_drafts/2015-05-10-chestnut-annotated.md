@@ -296,3 +296,32 @@ Figwheel:
                               :server-port 3449
                               :css-dirs ["resources/public/css"]}
 ```
+
+Then both the dev and uberjar profiles contain an `:env` map
+specifying either that `:is-dev` is `true` or `false`. These
+configurations hook into the Environ library and allow you to specify
+the value of environment variables directly in the project.clj
+file. This particular usage should be pretty straightforward; it's
+basically a simple switch that allows us to tell in our code whether
+or not this is a dev build/run or not.
+
+```
+                   :env {:is-dev true}
+```
+
+The only thing remaining in the dev profile now is the cljsbuild test
+configuration. Though once again, notice that there is the small
+addition of the `env/dev/cljs` path as a source for our previosly
+configured `app` ClojureScript build.
+
+```
+                   :cljsbuild {:test-commands { "test" ["phantomjs" "env/test/js/unit-test.js" "env/test/unit-test.html"] }
+                               :builds {:app {:source-paths ["env/dev/cljs"]}
+                                        :test {:source-paths ["src/cljs" "test/cljs"]
+                                               :compiler {:output-to     "resources/public/js/app_test.js"
+                                                          :output-dir    "resources/public/js/test"
+                                                          :source-map    "resources/public/js/test.js.map"
+                                                          :preamble      ["react/react.min.js"]
+                                                          :optimizations :whitespace
+                                                          :pretty-print  false}}}}}
+```
