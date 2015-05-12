@@ -161,8 +161,10 @@ library. [Ring-defaults][ring-def] is a library for providing standard
 configurations of [Ring middleware][ring-mid].  [Compojure][compojure]
 is a routing library built on top of Ring.
 
-> I'm not quite sure why the Clojurescript dependency is marked as
-> `provided`...
+<sub>
+I'm not quite sure why the Clojurescript dependency is marked as
+`provided`...
+</sub>
 
 [ring]: https://github.com/ring-clojure/ring#ring
 [ring-def]: https://github.com/ring-clojure/ring-defaults#ring-defaults
@@ -257,6 +259,10 @@ development-only dependencies.
                                   [weasel "0.4.2"]]
 ```
 
+Notice that there is a similar entry under the `:uberjar` profile for
+`:source-paths` but that the `:test-paths` are omitted (since the
+uberjar is typically for distributing production code).
+
 [Figwheel][fig] is a very cool project that "pushes ClojureScript code
 changes to the client." This enables a very smooth Clojurescript
 workflow. It's so seamless in fact that in some ways it makes
@@ -271,9 +277,9 @@ a desirable thing in the README, so go check it out if you're interested.
 [piggie]: https://github.com/cemerick/piggieback#piggieback-
 
 Finally, [Weasel][weasel] allows your ClojureScript REPL to use
-WebSockets to communicate with your chosen environment execution
-environment. Again, their README has good information about why this
-might be a thing you want.
+WebSockets to communicate with your chosen execution environment.
+Again, their README has good information about why this might be a
+thing you want.
 
 [weasel]: https://github.com/tomjakubowski/weasel#weasel
 
