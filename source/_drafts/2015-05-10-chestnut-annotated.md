@@ -325,3 +325,34 @@ configured `app` ClojureScript build.
                                                           :optimizations :whitespace
                                                           :pretty-print  false}}}}}
 ```
+
+Compared to the `:dev` profile, the `:uberjar` is quite simple:
+
+```
+             :uberjar {:source-paths ["env/prod/clj"]
+                       :hooks [leiningen.cljsbuild]
+                       :env {:production true}
+                       :omit-source true
+                       :aot :all
+                       :cljsbuild {:builds {:app
+                                            {:source-paths ["env/prod/cljs"]
+                                             :compiler
+                                             {:optimizations :advanced
+                                              :pretty-print false}}}}}})
+```
+
+The main difference is the addition of three pieces of configuration
+that make this a true production build. The `:hooks` option causes
+leiningen to run the `leiningen.cljsbuild/activate` function to let it
+[hook into the defualt Leiningen tasks][hook].
+
+[hook]: https://github.com/technomancy/leiningen/blob/master/doc/PLUGINS.md#hooks
+
+Then `:omit-source` simply directs leiningen not to include the
+clojure source files in the resulting uberjar, and `:aot :all` causes
+the Clojure compiler to [Ahead-of-time compile][aot] all your clojure
+code. The idea behind both these configs is to make your final uberjar
+as lean and performant as possible, at the expense of some (probably
+not needed) flexibility.
+
+[aot]: http://clojure.org/compilation
