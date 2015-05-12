@@ -15,6 +15,7 @@ nice package called [Chestnut][chestnut]. However, at first glance
 (and second and third glance really) Chestnut projects are complex and
 intimidating.
 
+[lein]: http://leiningen.org/
 [chestnut]: https://github.com/plexus/chestnut
 
 This post is an annotated walkthrough of the configuration that a new
@@ -208,3 +209,68 @@ This is remarkably similar to the configuration from the
 setup to enable source-maps.
 
 [none-example]: https://github.com/emezeske/lein-cljsbuild/blob/1.0.5/example-projects/none/project.clj
+
+### Profiles
+
+So far, most of what we've seen is fairly standard
+clojure/clojurescript configuration stuff. But one of the things that
+makes Chestnut awesome is that it makes really good use of the
+Leiningen profiles feature. In particular, it uses profiles to
+concisely specify different clojurescript compilation settings and add
+dependencies that are only needed for development. If this is the
+first time you've heard about Leiningen profiles, you should probably
+go [read about it][lein-profiles]. The basic summary is this though:
+
+> You can place any arbitrary key/value pairs supported by defproject
+> into a given profile and they will be merged into the project map
+> when that profile is activated.
+
+[lein-profiles]: https://github.com/technomancy/leiningen/blob/master/doc/PROFILES.md#profiles
+
+Let's start with the extra `:dev` setups. It starts off nice and easy
+just adding more clojure source and test paths and some extra
+development-only dependencies.
+
+```
+  :profiles {:dev {:source-paths ["env/dev/clj"]
+                   :test-paths ["test/clj"]
+
+                   :dependencies [[figwheel "0.2.1-SNAPSHOT"]
+                                  [figwheel-sidecar "0.2.1-SNAPSHOT"]
+                                  [com.cemerick/piggieback "0.1.3"]
+                                  [weasel "0.4.2"]]
+```
+
+[Figwheel][fig] is a very cool project that "pushes ClojureScript code
+changes to the client." This enables a very smooth Clojurescript
+workflow. It's so seamless in fact that in some ways it makes
+Clojurescript programming *more enjoyable* than working with Clojure!
+
+[fig]: https://github.com/bhauman/lein-figwheel#lein-figwheel
+
+[Piggieback][piggie] provides support for running a ClojureScript REPL
+on top of an nREPL session. Chas goes into the reasons of why this is
+a desirable thing in the README, so go check it out if you're interested.
+
+[piggie]: https://github.com/cemerick/piggieback#piggieback-
+
+Finally, [Weasel][weasel] allows your ClojureScript REPL to use
+WebSockets to communicate with your chosen environment execution
+environment. Again, their README has good information about why this
+might be a thing you want.
+
+[weasel]: https://github.com/tomjakubowski/weasel#weasel
+
+The next two sections are pretty much just setup for Piggieback and
+Figwheel:
+
+```
+                   :repl-options {:init-ns tour.server
+                                  :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
+
+                   :plugins [[lein-figwheel "0.2.1-SNAPSHOT"]]
+
+                   :figwheel {:http-server-root "public"
+                              :server-port 3449
+                              :css-dirs ["resources/public/css"]}
+```
