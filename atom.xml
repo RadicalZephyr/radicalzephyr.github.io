@@ -4,7 +4,7 @@
   <title><![CDATA[Zephyrizing]]></title>
   <link href="http://www.zephyrizing.net/atom.xml" rel="self"/>
   <link href="http://www.zephyrizing.net/"/>
-  <updated>2015-05-06T11:36:27-05:00</updated>
+  <updated>2015-05-13T10:55:21-05:00</updated>
   <id>http://www.zephyrizing.net/</id>
   <author>
     <name><![CDATA[Geoff Shannon]]></name>
@@ -12,6 +12,39 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Communication, Trust and Honesty]]></title>
+    <link href="http://www.zephyrizing.net/blog/2015/05/12/communication-trust-and-honesty/"/>
+    <updated>2015-05-12T00:10:32-05:00</updated>
+    <id>http://www.zephyrizing.net/blog/2015/05/12/communication-trust-and-honesty</id>
+    <content type="html"><![CDATA[<p>A friend asked me an interesting question in an email the other
+day. It wasn&rsquo;t especially succinctly put, so I&rsquo;ll try to paraphrase
+the best I can. Basically, she was wondering what my take was on a
+story she had from a friend of a friend regarding trust and honesty in
+relationships.</p>
+
+<blockquote><p>A friend of a friend of mine recently got into a big argument with
+her boyfriend because his ex girlfriend called in the middle of the
+night one night, and she asked who called and he said just his buddy
+at work, but then she checked his phone and it was his ex.  And it
+wasn&rsquo;t the fact that it was his ex that got her mad, it was the fact
+that he lied about it Why would he lie about it?</p></blockquote>
+
+<!--more-->
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Git Resources]]></title>
+    <link href="http://www.zephyrizing.net/blog/2015/05/07/git-resources/"/>
+    <updated>2015-05-07T16:55:33-05:00</updated>
+    <id>http://www.zephyrizing.net/blog/2015/05/07/git-resources</id>
+    <content type="html"><![CDATA[<!--more-->
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Testing and the Structures of Learning Environments]]></title>
@@ -3439,275 +3472,6 @@ know what has happened. She is responding to treatment so well, it
 seems like the emergency has been put on hold. But in another way, we
 are all still waiting for the other shoe to drop. But we have to stop
 waiting at some point.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[First Contact]]></title>
-    <link href="http://www.zephyrizing.net/blog/2014/05/14/s-and-e-part-five:-first-contact/"/>
-    <updated>2014-05-14T22:00:00-05:00</updated>
-    <id>http://www.zephyrizing.net/blog/2014/05/14/s-and-e-part-five:-first-contact</id>
-    <content type="html"><![CDATA[<p>At the time, I was infatuated with a particular video game. This game
-was called Neverwinter Nights and it was a sword-and-sorcery adventure
-game. This was one of the reasons that I loved it so much; it brought
-to life all of my favorite childhood stories about dragons and elves
-and magic.</p>
-
-<p>This was not the first such game I had played. It was however, the
-first game I encountered that gave players the ability to use the
-tools of the game to construct their own world and scenarios. The
-developers of the game actually included for free all of the tools
-that they had used themselves to create the game. I was enthralled by
-this toolkit.</p>
-
-<!--more-->
-
-
-<p>I spent hours simply exploring it. I would browse the apparently
-endless menus and dialogs, marveling at the enormity of this program
-and captivated by what it promised to allow me to do. I fiddled around
-with placing groups of fantastic creatures in small worlds of my own
-creation. But I quickly came to realize that the real key to making
-living worlds lay in something called NWScript.</p>
-
-<p>My curiosity in exploring the toolkit exposed me to the existence of a
-programming language embedded within it. This language allowed you to
-do nearly anything in the context of the game. It was through
-&ldquo;scripts&rdquo; - short, specific programs written in NWScript - that you
-could make pulling a lever cause a door to unlock, or make it so that
-a sleeping dragon would awaken with a terrible roar when a character
-tripped over a stone while trying to sneak past.</p>
-
-<p>Somehow, I found a set of tutorials for learning NWScript on the
-internet. From what I recall they were excellent; very informative,
-and engagingly written. I worked through them diligently, and gained a
-rudimentary ability to do things with NWScript. But I was at a loss of
-what to do with my new-found power. I fiddled around making little toy
-things. I expanded on the idea of a switch unlocking a door by
-requiring two switches to be thrown. But I had no idea how to go about
-constructing a compelling story for other players to interact with,
-and without a motivating context my little magic tricks meant nothing.</p>
-
-<p>In retrospect, although I was technically capable of writing simple
-scripts, I actually fundamentally missed one of the central points
-that the tutorials tried to teach me. One of the most basic tools of a
-programmer is the ability to abstract. Dictionary.com provides several
-definitions for using &lsquo;abstract&rsquo; as a verb. The one that suits my
-usage the best is</p>
-
-<blockquote><p>&ldquo;to consider as a general quality or characteristic apart from
-specific objects or instances: to abstract the notions of time,
-space, and matter.&rdquo;</p></blockquote>
-
-<p>To really talk about what abstraction in programming means though,
-first we need to dive into what programming is a bit. To do that, I&rsquo;d
-like to defer to one of the giants of the field, Harold (Hal) Abelson.
-Abelson is responsible for an enormous amount of important work in the
-world of programming and Computer Science. Among the most well known
-of those contributions is his co-development, along with Gerald Jay
-Sussman, of MIT&rsquo;s introductory computer science course <em>6.001
-Structure and Interpretation of Computer Programs</em>. There is also a
-book bearing the same name, which is colluqially referred to as &ldquo;the
-wizard book&rdquo; or simply SICP (&ldquo;SICK-pee,&rdquo; pronounced like chickpea).</p>
-
-<p>There are videos available online of the lecture series, delivered by
-Abelson and Sussman. The first lecture begins with Abelson greeting
-the classroom:</p>
-
-<blockquote><p>I&rsquo;d like to welcome you to this course on &ldquo;Computer Science.&rdquo;
-Actually, that&rsquo;s a terrible way to start. That is a terrible name for
-this business. First of all it&rsquo;s not a science.  It might be
-engineering or it might be art, but we&rsquo;ll actually see that computer
-so-called science actually has a lot in common with magic and we&rsquo;ll
-see that in this course. So it&rsquo;s not a science.  It&rsquo;s also not really
-very much about computers. And it&rsquo;s not about computers in the same
-sense that physics is not really about particle accelerators, and
-biology is not really about microscopes and petri dishes.</p></blockquote>
-
-<p>This gives a brief sense of what programming is not. But that just
-raises the question of what it actually is. What follows is an excerpt
-from the preface to the first edition of the SICP book.</p>
-
-<blockquote><p>&ldquo;&hellip; we want to establish the idea that a computer language is not
-just a way of getting a computer to perform operations but rather
-that it is a novel formal medium for expressing ideas about
-methodology.&rdquo;</p></blockquote>
-
-<p>This was an incredibly novel concept when the book was first
-published. In many ways, it is still novel to many professional
-programmers. It was certainly mind-expanding to me.</p>
-
-<p>There is so much more that I could say about programming. I&rsquo;ve been
-immersed in that world for a large portion of the last six years; I
-can talk almost endlessly about it. I think what&rsquo;s more interesting
-though is to try to communicate why I&rsquo;ve chosen to live in that world
-these several years.</p>
-
-<p>Most of the time when people close to me ask &ldquo;Why programming?&rdquo; I say
-something about how programming is like puzzles. This is true.
-Especially the kind of puzzles where two pieces of metal have been
-formed and twisted together and need to be teased apart in just the
-right way. But it only goes so far. I like puzzles, but I love magic.</p>
-
-<p>I talked earlier about my love for fantasy novels. Especially the kind
-with magic in them. The idea of magic has always intrigued me: the
-invocation of mysterious powers through the precise usage of arcane
-knowledge. To me the best kind of world to live in is one where magic
-abounds.</p>
-
-<p>In many ways, the process of programming is very similar to this
-conception of magic. The practitioner (programmer), learns obscure and
-bizarre languages. Through long and diligent study they gain the
-ability to command formless spirits that are capable of affecting the
-real world.</p>
-
-<p>This is what programming means to me. It is an immensely powerful form
-of expression. It requires serious commitment, and hard work to bear
-fruit. And like any superpower, with great power comes great
-responsibility.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Gap Year]]></title>
-    <link href="http://www.zephyrizing.net/blog/2014/05/10/s-and-e-part-four:-gap-year/"/>
-    <updated>2014-05-10T22:00:00-05:00</updated>
-    <id>http://www.zephyrizing.net/blog/2014/05/10/s-and-e-part-four:-gap-year</id>
-    <content type="html"><![CDATA[<p>So I followed through and took one year off from school. A &ldquo;Gap Year&rdquo;
-as it is somewhat euphemistically referred to. I spent some time
-working for a cousin in Portland doing construction. After that I
-helped my dad move a boat from Puerto Vallarta to San Diego. When I
-returned from that, I was hired by a family friend, David Firth, as a
-shop hand for his small business.</p>
-
-<p>That was about six months into my Vacation.  Shortly after I started
-working for him, I had to start thinking about whether I was going to
-return to school the following fall. It was immediately clear to me
-that I was still not ready to go back, so one year turned into two.</p>
-
-<!--more-->
-
-
-<p>I ended up working for David Firth for most of the balance of my
-Vacation. I learned a fantastic amount there. David is an amazing man,
-both incredibly intelligent and talented, and incredibly driven.</p>
-
-<p>I learned many things during my time working with him. He directly
-trained me in many tasks and skills; through my work I got the chance
-to practice and develop others. I learned how to pressure seal and
-test a vacuum tank, prepare and wire complex devices, turn metal on a
-lathe, use a mill, hand-form sheet metal, arc-weld sheet metal, pour a
-polyethylene mold, along with many other skills.</p>
-
-<p>David also taught me to use &ldquo;gentle but appropriate force.&rdquo; When I
-first started working for him, I had a tendency to apply all of my
-strength to any given task. He taught me to pay attention to what I
-was applying force to - whether it was tightening a bolt, or replacing
-a light bulb - and to gauge whether or not I was over-stressing the
-material. This was an invaluable help to me, at a time when I was
-still becoming used to the full strength of my adult body.</p>
-
-<p>David also taught me many things implicitly. Since I was his only
-employee, I got to work very closely with him. My job was essentially
-to build the machines that he spent his days designing. When I
-encountered unexpected difficulties in production, I would ask David
-how to resolve them. This occurred often at first as I was still
-learning the process of building the machines. Later, the difficulties
-were fewer but often more profound.</p>
-
-<p>Sometimes when I encountered a difficulty in some assembly step, it
-wasn&rsquo;t indicative of my lack of expertise. Sometimes it was the
-process itself that was flawed. As David inspected every issue he
-would analyze the problem out loud. He didn&rsquo;t do this for my benefit;
-it was his process. But it gave me the chance to watch him at work. As
-he was analyzing the issues, he compared them to his intentions in the
-design phase; he triaged which problems were design flaws, and which
-were caused by imprecision in the work done by outside
-contractors. And he talked about the solutions.</p>
-
-<p>It was during one of these reactive design sessions that I decided to
-go back to school. I was so inspired by my exposure to his design
-process, that I wanted to pursue a discipline that would allow me to
-do that kind of work. I have always loved &ldquo;inventing&rdquo; things.  When I
-was little, my mother had a box of mechanical, electrical and plumbing
-junk that was my &ldquo;invention box.&rdquo; Really the process that I love is
-designing things. I used to spend hours drawing pictures of devices
-that I wanted to build. I&rsquo;ve continued to do this throughout my life,
-up to and including while I was working for David. However, I rarely,
-if ever actually ended up building any of my creations. Working with
-David, I got a glimpse of what it would take to bring my ideas into
-the world. It made me want to be able to do that.</p>
-
-<p>I decided to return to college to pursue an engineering degree. In
-retrospect, I&rsquo;m not sure why I decided on engineering. David&rsquo;s degree
-was in Industrial Design. Perhaps I felt intimidated by the art
-requirements. Regardless, because of my new rationale for college, I
-started looking beyond St. John&rsquo;s to different schools with good
-engineering programs. During this time, my mother urged me once again
-to take a look at Western Washington University.</p>
-
-<h2>Going Back?</h2>
-
-<p>Mostly to humor my mother, I did some browsing around on the internet
-about Western. Somehow, I stumbled across the Fairhaven College
-website and was intrigued enough to stick around. I ended up finding a
-list of colleges that had similar goals as Fairhaven. Seeing both
-St. John&rsquo;s College and Colorado College - another college I was very
-intrigued by - on the list, I was immediately sold. Once again, when
-it came time to apply, I knew that Western, and specifically
-Fairhaven, was the only school that I was interested in attending. I
-applied only to Fairhaven, and visited the campus for the first time
-on the day of my Fairhaven interview.</p>
-
-<p>As I was preparing to go to Western during the last few months that I
-worked for David Firth, I started to teach myself programming. That
-was actually part of how I knew I was in a better space to go back to
-school. I had rediscovered my love of learning, and was pursuing it in
-my own free time for my own sake. I have wanted to learn to program
-for a long time. It&rsquo;s very difficult at this point to pinpoint when
-that desire first manifested itself, because for a long time it didn&rsquo;t
-seem feasible. I didn&rsquo;t have much access to computers when I was
-younger, and certainly no mentors to help me get started on that
-path. So I just sort of admired computers from arm&rsquo;s length. When I
-combined this long standing semi-obsession with the sense of
-empowerment and increased interest in learning I got from taking time
-off, it was inevitable that I would start programming; and I loved it.</p>
-
-<p>I spent most of my first year at Western taking mainly Fairhaven
-classes. Along with those, I took the entry level programming class
-during winter quarter, and did quite well. During spring quarter, I
-took my first engineering class. The difference between the two was
-extreme. Despite some initial frustrations with the programming
-language used in Computer Science 141, I thoroughly enjoyed the
-class. Engineering Technology 110 was a very different story.</p>
-
-<p>From a certain perspective, it might just have been happenstance. I
-enjoyed the engineering class, but I had no preparation for it. At the
-same time, I got the feeling that a significant number of the other
-students already had a greater amount of knowledge and experience. In
-the programming class though, I was clearly ahead of the curve. During
-the weekly labs it was obvious that there were only a few other people
-that knew as much about programming as I did. For this class I was
-clearly over-prepared. These seemingly minor differences resulted in
-massively different reactions from me. Solely on the basis of those
-two classes I decided to pursue a computer science major instead of
-engineering.</p>
-
-<p>In another lifetime I can see myself getting more hands on experience
-building things when I was little. Instead of spending all of my
-energy on the initial design phase, I would have learned more about
-how to actually build things. This would have prepared me better for
-the engineering class, and I might have had an experience more
-comparable to the programming class.  What I don&rsquo;t know is whether
-that would have made a difference. As I said earlier, I spent quite a
-lot of time building things with David.</p>
-
-<p>In some respects, this story about how and why I became a CS major is
-another &ldquo;single story&rdquo; that I tell myself about my life. But this
-story isn&rsquo;t really serving a particular purpose; it&rsquo;s mostly because I
-forget the other parts. In reality, I didn&rsquo;t first teach myself to
-program while I was working for David Firth right before I started at
-Western in 2008. It really started six years earlier, when I was 14.</p>
 ]]></content>
   </entry>
   

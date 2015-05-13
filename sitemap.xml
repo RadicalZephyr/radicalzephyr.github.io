@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://www.zephyrizing.net/blog/2015/05/12/communication-trust-and-honesty/</loc>
+    <lastmod>2015-05-12T00:10:32-05:00</lastmod>
+  </url>
+  <url>
+    <loc>http://www.zephyrizing.net/blog/2015/05/07/git-resources/</loc>
+    <lastmod>2015-05-07T16:55:33-05:00</lastmod>
+  </url>
+  <url>
     <loc>http://www.zephyrizing.net/blog/2015/05/06/testing-and-the-structures-of-learning-environments/</loc>
     <lastmod>2015-05-06T09:22:53-05:00</lastmod>
   </url>
@@ -109,13 +117,13 @@
     <lastmod>2013-09-03T03:00:00-05:00</lastmod>
   </url>
   <url>
-    <loc>http://www.zephyrizing.net/</loc>
-  </url>
-  <url>
     <loc>http://www.zephyrizing.net/blog/archives/</loc>
   </url>
   <url>
     <loc>http://www.zephyrizing.net/presentations/</loc>
+  </url>
+  <url>
+    <loc>http://www.zephyrizing.net/</loc>
   </url>
   <url>
     <loc>http://www.zephyrizing.net/projects/</loc>
@@ -124,10 +132,13 @@
     <loc>http://www.zephyrizing.net/about/</loc>
   </url>
   <url>
-    <loc>http://www.zephyrizing.net/presentations/reimplementing-gitignore-in-15-lines-of-bash/</loc>
+    <loc>http://www.zephyrizing.net/presentations/prelude/</loc>
   </url>
   <url>
     <loc>http://www.zephyrizing.net/presentations/introduction-to-bash/</loc>
+  </url>
+  <url>
+    <loc>http://www.zephyrizing.net/presentations/reimplementing-gitignore-in-15-lines-of-bash/</loc>
   </url>
   <url>
     <loc>http://www.zephyrizing.net/8thlight/weeklies/one.html</loc>
@@ -245,5 +256,14 @@
   </url>
   <url>
     <loc>http://www.zephyrizing.net/blog/categories/8th-light/</loc>
+  </url>
+  <url>
+    <loc>http://www.zephyrizing.net/blog/categories/git/</loc>
+  </url>
+  <url>
+    <loc>http://www.zephyrizing.net/posts/2/</loc>
+  </url>
+  <url>
+    <loc>http://www.zephyrizing.net/posts/3/</loc>
   </url>
 </urlset>
