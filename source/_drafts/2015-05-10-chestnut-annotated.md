@@ -356,3 +356,7 @@ as lean and performant as possible, at the expense of some (probably
 not needed) flexibility.
 
 [aot]: http://clojure.org/compilation
+
+So that's it for Chestnut's `project.clj`. It looks intimidating at
+first, but in the end it is quite approachable when you break it down
+into it's component pieces.
