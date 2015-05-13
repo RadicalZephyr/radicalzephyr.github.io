@@ -9,9 +9,8 @@
   <meta name="author" content="Geoff Shannon">
 
   
-  <meta name="description" content="A friend asked me an interesting question in an email the other
-day. It wasn&rsquo;t especially succinctly put, so I&rsquo;ll try to paraphrase
-the &hellip;">
+  <meta name="description" content="A Note about version numbers At the time of this writing, there were several newer versions of many
+of the dependencies used in Chestnut. In &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -100,9 +99,9 @@ the &hellip;">
 
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2015/05/12/communication-trust-and-honesty/">Communication, Trust and Honesty</a></h1>
+      <h1 class="entry-title"><a href="/blog/2015/05/10/chestnut-annotated/">Chestnut - Annotated</a></h1>
       
-      <span class="categories"><a class='category' href='/blog/categories/personal/'>personal</a></span>
+      <span class="categories"><a class='category' href='/blog/categories/clojure/'>clojure</a>, <a class='category' href='/blog/categories/clojurescript/'>clojurescript</a>, <a class='category' href='/blog/categories/walkthrough/'>walkthrough</a></span>
       
     
     
@@ -112,73 +111,48 @@ the &hellip;">
 
 
 
-<time class='entry-date' datetime='2015-05-12T00:10:32-05:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:10 am</span></time>
+<time class='entry-date' datetime='2015-05-10T13:34:16-05:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>10</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>1:34 pm</span></time>
         
-           | <a href="/blog/2015/05/12/communication-trust-and-honesty/#disqus_thread"
-             data-disqus-identifier="http://www.zephyrizing.net/blog/2015/05/12/communication-trust-and-honesty/">Comments</a>
+           | <a href="/blog/2015/05/10/chestnut-annotated/#disqus_thread"
+             data-disqus-identifier="http://www.zephyrizing.net/blog/2015/05/10/chestnut-annotated/">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>A friend asked me an interesting question in an email the other
-day. It wasn&rsquo;t especially succinctly put, so I&rsquo;ll try to paraphrase
-the best I can. Basically, she was wondering what my take was on a
-story she had from a friend of a friend regarding trust and honesty in
-relationships.</p>
+  <div class="entry-content"><h4>A Note about version numbers</h4>
 
-<blockquote><p>A friend of a friend of mine recently got into a big argument with
-her boyfriend because his ex girlfriend called in the middle of the
-night one night, and she asked who called and he said just his buddy
-at work, but then she checked his phone and it was his ex.  And it
-wasn&rsquo;t the fact that it was his ex that got her mad, it was the fact
-that he lied about it Why would he lie about it?</p></blockquote>
+<p>At the time of this writing, there were several newer versions of many
+of the dependencies used in Chestnut. In particular, the ClojureScript
+core team had fairly recently released a new version with
+<a href="https://github.com/clojure/clojurescript/wiki/Running-REPLs">vastly simplified REPL setup requirements</a> which
+triggered changes to many of the related ClojureScript tooling
+libraries (Piggieback, and Weasel especially). So PLEASE! Use the
+latest version of Chestnut, or if you&rsquo;re setting up your own project
+then look up the latest versions on <a href="http://clojars.org/">Clojars</a></p>
+
+<h2>On to the Annotating!</h2>
+
+<p>As I wrote <a href="/blog/2015/04/04/shaving-the-clojurescript-yaks/">recently</a>, I recently dove head first into doing web
+development with Clojure and Clojurescript. Along the way I learned a
+whole heck of a lot about how to actually set up a <a href="http://leiningen.org/">Leiningen</a>
+project to support a nice workflow for such a project. However, most
+of my new-found knowledge has already been put together into a very
+nice package called <a href="https://github.com/plexus/chestnut">Chestnut</a>. However, at first glance
+(and second and third glance really) Chestnut projects are complex and
+intimidating.</p>
+
+<p>This post is an annotated walkthrough of the configuration that a new
+Chestnut comes with. The best way to follow along would be to start
+off by running <code>lein new chestnut tour</code> in shell and then exploring
+the files as I talk about them.</p>
 
 </div>
   
   
     <footer>
-      <a rel="full-article" href="/blog/2015/05/12/communication-trust-and-honesty/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/05/07/git-resources/">Git Resources</a></h1>
-      
-      <span class="categories"><a class='category' href='/blog/categories/git/'>git</a></span>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-05-07T16:55:33-05:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>4:55 pm</span></time>
-        
-           | <a href="/blog/2015/05/07/git-resources/#disqus_thread"
-             data-disqus-identifier="http://www.zephyrizing.net/blog/2015/05/07/git-resources/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"></div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2015/05/07/git-resources/">Read on &rarr;</a>
+      <a rel="full-article" href="/blog/2015/05/10/chestnut-annotated/">Read on &rarr;</a>
     </footer>
   
 
@@ -569,6 +543,58 @@ it turns out, this was a much easier task than I anticipated.</p>
 
     </article>
   
+  
+    <article>
+      
+
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/11/19/getting-started-with-llvm-on-os-x/">Getting Started With LLVM on OS&nbsp;X</a></h1>
+      
+      <span class="categories"><a class='category' href='/blog/categories/llvm/'>llvm</a>, <a class='category' href='/blog/categories/vagrant/'>vagrant</a></span>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-11-19T02:31:00-06:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>19</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>2:31 am</span></time>
+        
+           | <a href="/blog/2014/11/19/getting-started-with-llvm-on-os-x/#disqus_thread"
+             data-disqus-identifier="http://www.zephyrizing.net/blog/2014/11/19/getting-started-with-llvm-on-os-x/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>A few weeks ago, I decided that one of the things I wanted to tackle
+during my time at Hacker School was getting familiar with the LLVM
+project. To that end, myself and several other Hacker Schoolers formed
+an informal group to work through the official
+<a href="http://llvm.org/releases/3.5.0/docs/tutorial/index.html">LLVM Kaleidoscope</a> tutorial. We made reasonable progress at
+first, but as soon as we actually had to start dealing with the LLVM
+tools, I started encountering problems.</p>
+
+<p>Long story short, I ended up getting frustrated with the state of the
+documentation surrounding LLVM and moving on to working on other less
+upsetting projects. This last weekend though I ended up getting back
+into it. I tried two different approaches.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/11/19/getting-started-with-llvm-on-os-x/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -584,11 +610,7 @@ it turns out, this was a much easier task than I anticipated.</p>
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2015/05/12/communication-trust-and-honesty/">Communication, Trust and Honesty</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/05/07/git-resources/">Git Resources</a>
+        <a href="/blog/2015/05/10/chestnut-annotated/">Chestnut - Annotated</a>
       </li>
     
       <li class="post">
@@ -601,6 +623,10 @@ it turns out, this was a much easier task than I anticipated.</p>
     
       <li class="post">
         <a href="/blog/2015/04/16/on-editors-and-their-benefits/">On Editors and Their Benefits</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/04/14/learning-tdd/">Learning TDD</a>
       </li>
     
   </ul>

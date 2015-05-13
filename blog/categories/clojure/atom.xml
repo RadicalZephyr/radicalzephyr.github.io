@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Clojure | Zephyrizing]]></title>
   <link href="http://www.zephyrizing.net/blog/categories/clojure/atom.xml" rel="self"/>
   <link href="http://www.zephyrizing.net/"/>
-  <updated>2015-05-13T10:55:21-05:00</updated>
+  <updated>2015-05-13T12:29:16-05:00</updated>
   <id>http://www.zephyrizing.net/</id>
   <author>
     <name><![CDATA[Geoff Shannon]]></name>
@@ -12,6 +12,452 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Chestnut - Annotated]]></title>
+    <link href="http://www.zephyrizing.net/blog/2015/05/10/chestnut-annotated/"/>
+    <updated>2015-05-10T13:34:16-05:00</updated>
+    <id>http://www.zephyrizing.net/blog/2015/05/10/chestnut-annotated</id>
+    <content type="html"><![CDATA[#### A Note about version numbers
+
+At the time of this writing, there were several newer versions of many
+of the dependencies used in Chestnut. In particular, the ClojureScript
+core team had fairly recently released a new version with
+[vastly simplified REPL setup requirements][cljs-new-repl] which
+triggered changes to many of the related ClojureScript tooling
+libraries (Piggieback, and Weasel especially). So PLEASE! Use the
+latest version of Chestnut, or if you're setting up your own project
+then look up the latest versions on [Clojars][clojars]
+
+[cljs-new-repl]: https://github.com/clojure/clojurescript/wiki/Running-REPLs
+[clojars]: http://clojars.org/
+
+## On to the Annotating!
+
+As I wrote [recently][yaks], I recently dove head first into doing web
+development with Clojure and Clojurescript. Along the way I learned a
+whole heck of a lot about how to actually set up a [Leiningen][lein]
+project to support a nice workflow for such a project. However, most
+of my new-found knowledge has already been put together into a very
+nice package called [Chestnut][chestnut]. However, at first glance
+(and second and third glance really) Chestnut projects are complex and
+intimidating.
+
+[lein]: http://leiningen.org/
+[chestnut]: https://github.com/plexus/chestnut
+
+This post is an annotated walkthrough of the configuration that a new
+Chestnut comes with. The best way to follow along would be to start
+off by running `lein new chestnut tour` in shell and then exploring
+the files as I talk about them.
+
+[yaks]: /blog/2015/04/04/shaving-the-clojurescript-yaks/
+
+<!--more-->
+
+Let&#8217;s start by looking at the base directory.
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># Directories
+</span><span class='line'>- resources
+</span><span class='line'>- src
+</span><span class='line'>- env
+</span><span class='line'>
+</span><span class='line'># Files
+</span><span class='line'>- LICENSE
+</span><span class='line'>- README.md
+</span><span class='line'>- code_of_conduct.md
+</span><span class='line'>- project.clj
+</span><span class='line'>- Procfile
+</span><span class='line'>- system.properties</span></code></pre></td></tr></table></div></figure>
+
+If you&#8217;re familiar with Clojure development at all, this should look
+very familiar to you. But there a few unusual things: the `Procfile`
+and `system.properties` files, and the `env` folder.  The `Procfile`
+is a file for letting [Heroku][hero] know how to run your app, and the
+contents of it are explained well in the
+[Heroku guide to getting started with Clojure][clj-get-started].
+
+[hero]: https://www.heroku.com/
+[clj-get-started]:
+https://devcenter.heroku.com/articles/getting-started-with-clojure#define-a-procfile
+
+If we use the awesome [tree][tree] program to visualize some of these
+directories we can see some interesting stuff. First, `src` looks
+pretty standard for Clojure, with the addition of a second tree for
+cljs files.
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>src
+</span><span class='line'>├── clj
+</span><span class='line'>│   └── tour
+</span><span class='line'>│       └── server.clj
+</span><span class='line'>└── cljs
+</span><span class='line'>    └── tour
+</span><span class='line'>        └── core.cljs</span></code></pre></td></tr></table></div></figure>
+
+The same is true of the `test` folder. But what&#8217;s really interesting
+is what is in that new `env` folder.
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>env
+</span><span class='line'>├── dev
+</span><span class='line'>│   ├── clj
+</span><span class='line'>│   │   └── tour
+</span><span class='line'>│   │       └── dev.clj
+</span><span class='line'>│   └── cljs
+</span><span class='line'>│       └── tour
+</span><span class='line'>│           └── main.cljs
+</span><span class='line'>├── prod
+</span><span class='line'>│   ├── clj
+</span><span class='line'>│   │   └── tour
+</span><span class='line'>│   │       └── dev.clj
+</span><span class='line'>│   └── cljs
+</span><span class='line'>│       └── tour
+</span><span class='line'>│           └── main.cljs
+</span><span class='line'>└── test
+</span><span class='line'>    ├── js
+</span><span class='line'>    │   ├── polyfill.js
+</span><span class='line'>    │   └── unit-test.js
+</span><span class='line'>    └── unit-test.html</span></code></pre></td></tr></table></div></figure>
+
+What we see is that there are three top-level directories underneath
+`env`, and below each of these we see what looks like normal Clojure
+and Clojurescript source trees. Veeery, interesting.
+
+Now let&#8217;s jump and take a look at the `project.clj`. This is where the
+heart of the action is. The first is boring normal project meta-data,
+and we&#8217;re going to skip it. The next section is interesting though.
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'>  <span class="ss">:source-paths</span> <span class="p">[</span><span class="s">&quot;src/clj&quot;</span><span class="p">]</span>
+</span><span class='line'>  <span class="ss">:repl-options</span> <span class="p">{</span><span class="ss">:timeout</span> <span class="mi">200000</span><span class="p">}</span> <span class="c1">;; Defaults to 30000 (30 seconds)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="ss">:test-paths</span> <span class="p">[</span><span class="s">&quot;spec/clj&quot;</span><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+The `:repl-options` is straightforward. It just increases the timeout
+when launching a REPL. Presumably this is because Chestnut REPL&#8217;s are
+so filled with awesome that they take longer to load ;) The `*-paths`
+options are simple too.  They just override the default place that
+Leiningen looks for Clojure source and test files by default.
+
+> N.B. The version of Chestnut I generated this with actually has a
+> bug, since it generated &#8220;spec/clj&#8221; as the test path, but no &#8220;spec&#8221;
+> folder.
+
+Next come the dependencies and plugins needed by this project.
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'>  <span class="ss">:dependencies</span> <span class="p">[[</span><span class="nv">org.clojure/clojure</span> <span class="s">&quot;1.6.0&quot;</span><span class="p">]</span>
+</span><span class='line'>                 <span class="p">[</span><span class="nv">org.clojure/clojurescript</span> <span class="s">&quot;0.0-2511&quot;</span> <span class="ss">:scope</span> <span class="s">&quot;provided&quot;</span><span class="p">]</span>
+</span><span class='line'>                 <span class="p">[</span><span class="nv">ring</span> <span class="s">&quot;1.3.2&quot;</span><span class="p">]</span>
+</span><span class='line'>                 <span class="p">[</span><span class="nv">ring/ring-defaults</span> <span class="s">&quot;0.1.3&quot;</span><span class="p">]</span>
+</span><span class='line'>                 <span class="p">[</span><span class="nv">compojure</span> <span class="s">&quot;1.3.1&quot;</span><span class="p">]</span>
+</span><span class='line'>                 <span class="p">[</span><span class="nv">enlive</span> <span class="s">&quot;1.1.5&quot;</span><span class="p">]</span>
+</span><span class='line'>                 <span class="p">[</span><span class="nv">om</span> <span class="s">&quot;0.8.0-rc1&quot;</span><span class="p">]</span>
+</span><span class='line'>                 <span class="p">[</span><span class="nv">environ</span> <span class="s">&quot;1.0.0&quot;</span><span class="p">]]</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="ss">:plugins</span> <span class="p">[[</span><span class="nv">lein-cljsbuild</span> <span class="s">&quot;1.0.3&quot;</span><span class="p">]</span>
+</span><span class='line'>            <span class="p">[</span><span class="nv">lein-environ</span> <span class="s">&quot;1.0.0&quot;</span><span class="p">]]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+Clojure and Clojurescript are obviously necessary, and when you&#8217;re
+using Clojurescript with Leiningen, you probably want the
+[lein-cljsbuild][cljsbuild] plugin for compiling your
+Clojurescript. [Ring][ring] is the standard Clojure web application&#8217;s
+library. [Ring-defaults][ring-def] is a library for providing standard
+configurations of [Ring middleware][ring-mid].  [Compojure][compojure]
+is a routing library built on top of Ring.
+
+<sub>
+I&#8217;m not quite sure why the Clojurescript dependency is marked as
+`provided`&#8230;
+</sub>
+
+[ring]: https://github.com/ring-clojure/ring#ring
+[ring-def]: https://github.com/ring-clojure/ring-defaults#ring-defaults
+[ring-mid]: https://github.com/ring-clojure/ring/wiki/Concepts#middleware
+[compojure]: https://github.com/weavejester/compojure#compojure
+
+[Enlive][enlive] is a &#8220;a selector-based (à la CSS) templating library
+for Clojure.&#8221; Very cool stuff, and wildly useful for many other HTML
+processing/producing/consuming tasks than just templating.
+Unfortunately very under-documented. [Om][om] is the only
+Clojurescript specific dependency in the list, but it&#8217;s a pretty cool
+one. It&#8217;s a Clojurescript interface to Facebook&#8217;s React.js library.
+
+[enlive]: https://github.com/cgrand/enlive#enlive-
+[om]: https://github.com/omcljs/om#om
+
+Finally we have the [Environ][environ] library, and it&#8217;s associated
+`lein-environ` plugin. As their README says:
+
+> Environ is a Clojure library for managing environment settings from
+> a number of different sources.
+
+[environ]: https://github.com/weavejester/environ#environ
+
+However, it is also the basis for a lot of the really neat things that
+Chestnut does.
+
+Next up, we have some more basic configuration stuff.
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'>  <span class="ss">:min-lein-version</span> <span class="s">&quot;2.5.0&quot;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="ss">:uberjar-name</span> <span class="s">&quot;tour.jar&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+These two settings are specifically to help with deployment to Heroku
+which looks for the `:min-lein-version` key to determine what version
+of lein to build your app with. Chestnut also changes the uberjar name
+so that the Procfile can specify a specific filename. Normally, the
+uberjar name is derived from the project name and the current
+version. However, this makes it a moving target.  Every time you bump
+your version number you would have to update the Procfile to stay in
+sync. This way, the uberjar always has one name and the Procfile never
+needs to change.
+
+Finally, we have the basic cljs build configuration:
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'>  <span class="ss">:cljsbuild</span> <span class="p">{</span><span class="ss">:builds</span> <span class="p">{</span><span class="ss">:app</span> <span class="p">{</span><span class="ss">:source-paths</span> <span class="p">[</span><span class="s">&quot;src/cljs&quot;</span><span class="p">]</span>
+</span><span class='line'>                             <span class="ss">:compiler</span> <span class="p">{</span><span class="ss">:output-to</span>     <span class="s">&quot;resources/public/js/app.js&quot;</span>
+</span><span class='line'>                                        <span class="ss">:output-dir</span>    <span class="s">&quot;resources/public/js/out&quot;</span>
+</span><span class='line'>                                        <span class="ss">:source-map</span>    <span class="s">&quot;resources/public/js/out.js.map&quot;</span>
+</span><span class='line'>                                        <span class="ss">:preamble</span>      <span class="p">[</span><span class="s">&quot;react/react.min.js&quot;</span><span class="p">]</span>
+</span><span class='line'>                                        <span class="ss">:optimizations</span> <span class="ss">:none</span>
+</span><span class='line'>                                        <span class="ss">:pretty-print</span>  <span class="nv">true</span><span class="p">}}}}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+This is remarkably similar to the configuration from the
+[lein-cljsbuild none example project][none-example], and a standard
+setup to enable source-maps.
+
+[none-example]: https://github.com/emezeske/lein-cljsbuild/blob/1.0.5/example-projects/none/project.clj
+
+### Profiles
+
+So far, most of what we&#8217;ve seen is fairly standard
+clojure/clojurescript configuration stuff. But one of the things that
+makes Chestnut awesome is that it makes really good use of the
+Leiningen profiles feature. In particular, it uses profiles to
+concisely specify different clojurescript compilation settings and add
+dependencies that are only needed for development. If this is the
+first time you&#8217;ve heard about Leiningen profiles, you should probably
+go [read about it][lein-profiles]. The basic summary is this though:
+
+> You can place any arbitrary key/value pairs supported by defproject
+> into a given profile and they will be merged into the project map
+> when that profile is activated.
+
+[lein-profiles]: https://github.com/technomancy/leiningen/blob/master/doc/PROFILES.md#profiles
+
+Let&#8217;s start with the extra `:dev` setups. It starts off nice and easy
+just adding more clojure source and test paths and some extra
+development-only dependencies.
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'>  <span class="ss">:profiles</span> <span class="p">{</span><span class="ss">:dev</span> <span class="p">{</span><span class="ss">:source-paths</span> <span class="p">[</span><span class="s">&quot;env/dev/clj&quot;</span><span class="p">]</span>
+</span><span class='line'>                   <span class="ss">:test-paths</span> <span class="p">[</span><span class="s">&quot;test/clj&quot;</span><span class="p">]</span>
+</span><span class='line'>
+</span><span class='line'>                   <span class="ss">:dependencies</span> <span class="p">[[</span><span class="nv">figwheel</span> <span class="s">&quot;0.2.1-SNAPSHOT&quot;</span><span class="p">]</span>
+</span><span class='line'>                                  <span class="p">[</span><span class="nv">figwheel-sidecar</span> <span class="s">&quot;0.2.1-SNAPSHOT&quot;</span><span class="p">]</span>
+</span><span class='line'>                                  <span class="p">[</span><span class="nv">com.cemerick/piggieback</span> <span class="s">&quot;0.1.3&quot;</span><span class="p">]</span>
+</span><span class='line'>                                  <span class="p">[</span><span class="nv">weasel</span> <span class="s">&quot;0.4.2&quot;</span><span class="p">]]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+Notice that there is a similar entry under the `:uberjar` profile for
+`:source-paths` but that the `:test-paths` are omitted (since the
+uberjar is typically for distributing production code).
+
+[Figwheel][fig] is a very cool project that &#8220;pushes ClojureScript code
+changes to the client.&#8221; This enables a very smooth Clojurescript
+workflow. It&#8217;s so seamless in fact that in some ways it makes
+Clojurescript programming *more enjoyable* than working with Clojure!
+
+[fig]: https://github.com/bhauman/lein-figwheel#lein-figwheel
+
+[Piggieback][piggie] provides support for running a ClojureScript REPL
+on top of an nREPL session. Chas goes into the reasons of why this is
+a desirable thing in the README, so go check it out if you&#8217;re interested.
+
+[piggie]: https://github.com/cemerick/piggieback#piggieback-
+
+Finally, [Weasel][weasel] allows your ClojureScript REPL to use
+WebSockets to communicate with your chosen execution environment.
+Again, their README has good information about why this might be a
+thing you want.
+
+[weasel]: https://github.com/tomjakubowski/weasel#weasel
+
+The next two sections are pretty much just setup for Piggieback and
+Figwheel:
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'>               <span class="ss">:repl-options</span> <span class="p">{</span><span class="ss">:init-ns</span> <span class="nv">tour.server</span>
+</span><span class='line'>                              <span class="ss">:nrepl-middleware</span> <span class="p">[</span><span class="nv">cemerick.piggieback/wrap-cljs-repl</span><span class="p">]}</span>
+</span><span class='line'>
+</span><span class='line'>               <span class="ss">:plugins</span> <span class="p">[[</span><span class="nv">lein-figwheel</span> <span class="s">&quot;0.2.1-SNAPSHOT&quot;</span><span class="p">]]</span>
+</span><span class='line'>
+</span><span class='line'>               <span class="ss">:figwheel</span> <span class="p">{</span><span class="ss">:http-server-root</span> <span class="s">&quot;public&quot;</span>
+</span><span class='line'>                          <span class="ss">:server-port</span> <span class="mi">3449</span>
+</span><span class='line'>                          <span class="ss">:css-dirs</span> <span class="p">[</span><span class="s">&quot;resources/public/css&quot;</span><span class="p">]}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+Then both the dev and uberjar profiles contain an `:env` map
+specifying either that `:is-dev` is `true` or `false`. These
+configurations hook into the Environ library and allow you to specify
+the value of environment variables directly in the project.clj
+file. This particular usage should be pretty straightforward; it&#8217;s
+basically a simple switch that allows us to tell in our code whether
+or not this is a dev build/run or not.
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'>               <span class="ss">:env</span> <span class="p">{</span><span class="ss">:is-dev</span> <span class="nv">true</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+The only thing remaining in the dev profile now is the cljsbuild test
+configuration. Though once again, notice that there is the small
+addition of the `env/dev/cljs` path as a source for our previosly
+configured `app` ClojureScript build.
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'>               <span class="ss">:cljsbuild</span> <span class="p">{</span><span class="ss">:test-commands</span> <span class="p">{</span> <span class="s">&quot;test&quot;</span> <span class="p">[</span><span class="s">&quot;phantomjs&quot;</span> <span class="s">&quot;env/test/js/unit-test.js&quot;</span> <span class="s">&quot;env/test/unit-test.html&quot;</span><span class="p">]</span> <span class="p">}</span>
+</span><span class='line'>                           <span class="ss">:builds</span> <span class="p">{</span><span class="ss">:app</span> <span class="p">{</span><span class="ss">:source-paths</span> <span class="p">[</span><span class="s">&quot;env/dev/cljs&quot;</span><span class="p">]}</span>
+</span><span class='line'>                                    <span class="ss">:test</span> <span class="p">{</span><span class="ss">:source-paths</span> <span class="p">[</span><span class="s">&quot;src/cljs&quot;</span> <span class="s">&quot;test/cljs&quot;</span><span class="p">]</span>
+</span><span class='line'>                                           <span class="ss">:compiler</span> <span class="p">{</span><span class="ss">:output-to</span>     <span class="s">&quot;resources/public/js/app_test.js&quot;</span>
+</span><span class='line'>                                                      <span class="ss">:output-dir</span>    <span class="s">&quot;resources/public/js/test&quot;</span>
+</span><span class='line'>                                                      <span class="ss">:source-map</span>    <span class="s">&quot;resources/public/js/test.js.map&quot;</span>
+</span><span class='line'>                                                      <span class="ss">:preamble</span>      <span class="p">[</span><span class="s">&quot;react/react.min.js&quot;</span><span class="p">]</span>
+</span><span class='line'>                                                      <span class="ss">:optimizations</span> <span class="ss">:whitespace</span>
+</span><span class='line'>                                                      <span class="ss">:pretty-print</span>  <span class="nv">false</span><span class="p">}}}}}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+Compared to the `:dev` profile, the `:uberjar` is quite simple:
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'>         <span class="ss">:uberjar</span> <span class="p">{</span><span class="ss">:source-paths</span> <span class="p">[</span><span class="s">&quot;env/prod/clj&quot;</span><span class="p">]</span>
+</span><span class='line'>                   <span class="ss">:hooks</span> <span class="p">[</span><span class="nv">leiningen.cljsbuild</span><span class="p">]</span>
+</span><span class='line'>                   <span class="ss">:env</span> <span class="p">{</span><span class="ss">:production</span> <span class="nv">true</span><span class="p">}</span>
+</span><span class='line'>                   <span class="ss">:omit-source</span> <span class="nv">true</span>
+</span><span class='line'>                   <span class="ss">:aot</span> <span class="ss">:all</span>
+</span><span class='line'>                   <span class="ss">:cljsbuild</span> <span class="p">{</span><span class="ss">:builds</span> <span class="p">{</span><span class="ss">:app</span>
+</span><span class='line'>                                        <span class="p">{</span><span class="ss">:source-paths</span> <span class="p">[</span><span class="s">&quot;env/prod/cljs&quot;</span><span class="p">]</span>
+</span><span class='line'>                                         <span class="ss">:compiler</span>
+</span><span class='line'>                                         <span class="p">{</span><span class="ss">:optimizations</span> <span class="ss">:advanced</span>
+</span><span class='line'>                                          <span class="ss">:pretty-print</span> <span class="nv">false</span><span class="p">}}}}}})</span>
+</span></code></pre></td></tr></table></div></figure>
+
+The main difference is the addition of three pieces of configuration
+that make this a true production build. The `:hooks` option causes
+leiningen to run the `leiningen.cljsbuild/activate` function to let it
+[hook into the defualt Leiningen tasks][hook].
+
+[hook]: https://github.com/technomancy/leiningen/blob/master/doc/PLUGINS.md#hooks
+
+Then `:omit-source` simply directs leiningen not to include the
+clojure source files in the resulting uberjar, and `:aot :all` causes
+the Clojure compiler to [Ahead-of-time compile][aot] all your clojure
+code. The idea behind both these configs is to make your final uberjar
+as lean and performant as possible, at the expense of some (probably
+not needed) flexibility.
+
+[aot]: http://clojure.org/compilation
+
+So that&#8217;s it for Chestnut&#8217;s `project.clj`. It looks intimidating at
+first, but in the end it is quite approachable when you break it down
+into it&#8217;s component pieces.
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Shaving the Clojurescript Yak(s)]]></title>

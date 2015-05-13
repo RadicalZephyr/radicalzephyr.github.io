@@ -4,7 +4,7 @@
   <title><![CDATA[Zephyrizing]]></title>
   <link href="http://www.zephyrizing.net/atom.xml" rel="self"/>
   <link href="http://www.zephyrizing.net/"/>
-  <updated>2015-05-13T10:55:21-05:00</updated>
+  <updated>2015-05-13T12:29:16-05:00</updated>
   <id>http://www.zephyrizing.net/</id>
   <author>
     <name><![CDATA[Geoff Shannon]]></name>
@@ -14,35 +14,427 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Communication, Trust and Honesty]]></title>
-    <link href="http://www.zephyrizing.net/blog/2015/05/12/communication-trust-and-honesty/"/>
-    <updated>2015-05-12T00:10:32-05:00</updated>
-    <id>http://www.zephyrizing.net/blog/2015/05/12/communication-trust-and-honesty</id>
-    <content type="html"><![CDATA[<p>A friend asked me an interesting question in an email the other
-day. It wasn&rsquo;t especially succinctly put, so I&rsquo;ll try to paraphrase
-the best I can. Basically, she was wondering what my take was on a
-story she had from a friend of a friend regarding trust and honesty in
-relationships.</p>
+    <title type="html"><![CDATA[Chestnut - Annotated]]></title>
+    <link href="http://www.zephyrizing.net/blog/2015/05/10/chestnut-annotated/"/>
+    <updated>2015-05-10T13:34:16-05:00</updated>
+    <id>http://www.zephyrizing.net/blog/2015/05/10/chestnut-annotated</id>
+    <content type="html"><![CDATA[<h4>A Note about version numbers</h4>
 
-<blockquote><p>A friend of a friend of mine recently got into a big argument with
-her boyfriend because his ex girlfriend called in the middle of the
-night one night, and she asked who called and he said just his buddy
-at work, but then she checked his phone and it was his ex.  And it
-wasn&rsquo;t the fact that it was his ex that got her mad, it was the fact
-that he lied about it Why would he lie about it?</p></blockquote>
+<p>At the time of this writing, there were several newer versions of many
+of the dependencies used in Chestnut. In particular, the ClojureScript
+core team had fairly recently released a new version with
+<a href="https://github.com/clojure/clojurescript/wiki/Running-REPLs">vastly simplified REPL setup requirements</a> which
+triggered changes to many of the related ClojureScript tooling
+libraries (Piggieback, and Weasel especially). So PLEASE! Use the
+latest version of Chestnut, or if you&rsquo;re setting up your own project
+then look up the latest versions on <a href="http://clojars.org/">Clojars</a></p>
+
+<h2>On to the Annotating!</h2>
+
+<p>As I wrote <a href="http://www.zephyrizing.net/blog/2015/04/04/shaving-the-clojurescript-yaks/">recently</a>, I recently dove head first into doing web
+development with Clojure and Clojurescript. Along the way I learned a
+whole heck of a lot about how to actually set up a <a href="http://leiningen.org/">Leiningen</a>
+project to support a nice workflow for such a project. However, most
+of my new-found knowledge has already been put together into a very
+nice package called <a href="https://github.com/plexus/chestnut">Chestnut</a>. However, at first glance
+(and second and third glance really) Chestnut projects are complex and
+intimidating.</p>
+
+<p>This post is an annotated walkthrough of the configuration that a new
+Chestnut comes with. The best way to follow along would be to start
+off by running <code>lein new chestnut tour</code> in shell and then exploring
+the files as I talk about them.</p>
 
 <!--more-->
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Git Resources]]></title>
-    <link href="http://www.zephyrizing.net/blog/2015/05/07/git-resources/"/>
-    <updated>2015-05-07T16:55:33-05:00</updated>
-    <id>http://www.zephyrizing.net/blog/2015/05/07/git-resources</id>
-    <content type="html"><![CDATA[<!--more-->
 
+<p>Let&rsquo;s start by looking at the base directory.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># Directories
+</span><span class='line'>- resources
+</span><span class='line'>- src
+</span><span class='line'>- env
+</span><span class='line'>
+</span><span class='line'># Files
+</span><span class='line'>- LICENSE
+</span><span class='line'>- README.md
+</span><span class='line'>- code_of_conduct.md
+</span><span class='line'>- project.clj
+</span><span class='line'>- Procfile
+</span><span class='line'>- system.properties</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you&rsquo;re familiar with Clojure development at all, this should look
+very familiar to you. But there a few unusual things: the <code>Procfile</code>
+and <code>system.properties</code> files, and the <code>env</code> folder.  The <code>Procfile</code>
+is a file for letting <a href="https://www.heroku.com/">Heroku</a> know how to run your app, and the
+contents of it are explained well in the
+<a href="">Heroku guide to getting started with Clojure</a>.</p>
+
+<p><a href="https://devcenter.heroku.com/articles/getting-started-with-clojure#define-a-procfile">https://devcenter.heroku.com/articles/getting-started-with-clojure#define-a-procfile</a></p>
+
+<p>If we use the awesome [tree][tree] program to visualize some of these
+directories we can see some interesting stuff. First, <code>src</code> looks
+pretty standard for Clojure, with the addition of a second tree for
+cljs files.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>src
+</span><span class='line'>├── clj
+</span><span class='line'>│   └── tour
+</span><span class='line'>│       └── server.clj
+</span><span class='line'>└── cljs
+</span><span class='line'>    └── tour
+</span><span class='line'>        └── core.cljs</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The same is true of the <code>test</code> folder. But what&rsquo;s really interesting
+is what is in that new <code>env</code> folder.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>env
+</span><span class='line'>├── dev
+</span><span class='line'>│   ├── clj
+</span><span class='line'>│   │   └── tour
+</span><span class='line'>│   │       └── dev.clj
+</span><span class='line'>│   └── cljs
+</span><span class='line'>│       └── tour
+</span><span class='line'>│           └── main.cljs
+</span><span class='line'>├── prod
+</span><span class='line'>│   ├── clj
+</span><span class='line'>│   │   └── tour
+</span><span class='line'>│   │       └── dev.clj
+</span><span class='line'>│   └── cljs
+</span><span class='line'>│       └── tour
+</span><span class='line'>│           └── main.cljs
+</span><span class='line'>└── test
+</span><span class='line'>    ├── js
+</span><span class='line'>    │   ├── polyfill.js
+</span><span class='line'>    │   └── unit-test.js
+</span><span class='line'>    └── unit-test.html</span></code></pre></td></tr></table></div></figure>
+
+
+<p>What we see is that there are three top-level directories underneath
+<code>env</code>, and below each of these we see what looks like normal Clojure
+and Clojurescript source trees. Veeery, interesting.</p>
+
+<p>Now let&rsquo;s jump and take a look at the <code>project.clj</code>. This is where the
+heart of the action is. The first is boring normal project meta-data,
+and we&rsquo;re going to skip it. The next section is interesting though.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'>  <span class="ss">:source-paths</span> <span class="p">[</span><span class="s">&quot;src/clj&quot;</span><span class="p">]</span>
+</span><span class='line'>  <span class="ss">:repl-options</span> <span class="p">{</span><span class="ss">:timeout</span> <span class="mi">200000</span><span class="p">}</span> <span class="c1">;; Defaults to 30000 (30 seconds)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="ss">:test-paths</span> <span class="p">[</span><span class="s">&quot;spec/clj&quot;</span><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The <code>:repl-options</code> is straightforward. It just increases the timeout
+when launching a REPL. Presumably this is because Chestnut REPL&rsquo;s are
+so filled with awesome that they take longer to load ;) The <code>*-paths</code>
+options are simple too.  They just override the default place that
+Leiningen looks for Clojure source and test files by default.</p>
+
+<blockquote><p>N.B. The version of Chestnut I generated this with actually has a
+bug, since it generated &ldquo;spec/clj&rdquo; as the test path, but no &ldquo;spec&rdquo;
+folder.</p></blockquote>
+
+<p>Next come the dependencies and plugins needed by this project.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'>  <span class="ss">:dependencies</span> <span class="p">[[</span><span class="nv">org.clojure/clojure</span> <span class="s">&quot;1.6.0&quot;</span><span class="p">]</span>
+</span><span class='line'>                 <span class="p">[</span><span class="nv">org.clojure/clojurescript</span> <span class="s">&quot;0.0-2511&quot;</span> <span class="ss">:scope</span> <span class="s">&quot;provided&quot;</span><span class="p">]</span>
+</span><span class='line'>                 <span class="p">[</span><span class="nv">ring</span> <span class="s">&quot;1.3.2&quot;</span><span class="p">]</span>
+</span><span class='line'>                 <span class="p">[</span><span class="nv">ring/ring-defaults</span> <span class="s">&quot;0.1.3&quot;</span><span class="p">]</span>
+</span><span class='line'>                 <span class="p">[</span><span class="nv">compojure</span> <span class="s">&quot;1.3.1&quot;</span><span class="p">]</span>
+</span><span class='line'>                 <span class="p">[</span><span class="nv">enlive</span> <span class="s">&quot;1.1.5&quot;</span><span class="p">]</span>
+</span><span class='line'>                 <span class="p">[</span><span class="nv">om</span> <span class="s">&quot;0.8.0-rc1&quot;</span><span class="p">]</span>
+</span><span class='line'>                 <span class="p">[</span><span class="nv">environ</span> <span class="s">&quot;1.0.0&quot;</span><span class="p">]]</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="ss">:plugins</span> <span class="p">[[</span><span class="nv">lein-cljsbuild</span> <span class="s">&quot;1.0.3&quot;</span><span class="p">]</span>
+</span><span class='line'>            <span class="p">[</span><span class="nv">lein-environ</span> <span class="s">&quot;1.0.0&quot;</span><span class="p">]]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Clojure and Clojurescript are obviously necessary, and when you&rsquo;re
+using Clojurescript with Leiningen, you probably want the
+[lein-cljsbuild][cljsbuild] plugin for compiling your
+Clojurescript. <a href="https://github.com/ring-clojure/ring#ring">Ring</a> is the standard Clojure web application&rsquo;s
+library. <a href="https://github.com/ring-clojure/ring-defaults#ring-defaults">Ring-defaults</a> is a library for providing standard
+configurations of <a href="https://github.com/ring-clojure/ring/wiki/Concepts#middleware">Ring middleware</a>.  <a href="https://github.com/weavejester/compojure#compojure">Compojure</a>
+is a routing library built on top of Ring.</p>
+
+<p><sub>
+I&rsquo;m not quite sure why the Clojurescript dependency is marked as
+<code>provided</code>&hellip;
+</sub></p>
+
+<p><a href="https://github.com/cgrand/enlive#enlive-">Enlive</a> is a &ldquo;a selector-based (à la CSS) templating library
+for Clojure.&rdquo; Very cool stuff, and wildly useful for many other HTML
+processing/producing/consuming tasks than just templating.
+Unfortunately very under-documented. <a href="https://github.com/omcljs/om#om">Om</a> is the only
+Clojurescript specific dependency in the list, but it&rsquo;s a pretty cool
+one. It&rsquo;s a Clojurescript interface to Facebook&rsquo;s React.js library.</p>
+
+<p>Finally we have the <a href="https://github.com/weavejester/environ#environ">Environ</a> library, and it&rsquo;s associated
+<code>lein-environ</code> plugin. As their README says:</p>
+
+<blockquote><p>Environ is a Clojure library for managing environment settings from
+a number of different sources.</p></blockquote>
+
+<p>However, it is also the basis for a lot of the really neat things that
+Chestnut does.</p>
+
+<p>Next up, we have some more basic configuration stuff.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'>  <span class="ss">:min-lein-version</span> <span class="s">&quot;2.5.0&quot;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="ss">:uberjar-name</span> <span class="s">&quot;tour.jar&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>These two settings are specifically to help with deployment to Heroku
+which looks for the <code>:min-lein-version</code> key to determine what version
+of lein to build your app with. Chestnut also changes the uberjar name
+so that the Procfile can specify a specific filename. Normally, the
+uberjar name is derived from the project name and the current
+version. However, this makes it a moving target.  Every time you bump
+your version number you would have to update the Procfile to stay in
+sync. This way, the uberjar always has one name and the Procfile never
+needs to change.</p>
+
+<p>Finally, we have the basic cljs build configuration:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'>  <span class="ss">:cljsbuild</span> <span class="p">{</span><span class="ss">:builds</span> <span class="p">{</span><span class="ss">:app</span> <span class="p">{</span><span class="ss">:source-paths</span> <span class="p">[</span><span class="s">&quot;src/cljs&quot;</span><span class="p">]</span>
+</span><span class='line'>                             <span class="ss">:compiler</span> <span class="p">{</span><span class="ss">:output-to</span>     <span class="s">&quot;resources/public/js/app.js&quot;</span>
+</span><span class='line'>                                        <span class="ss">:output-dir</span>    <span class="s">&quot;resources/public/js/out&quot;</span>
+</span><span class='line'>                                        <span class="ss">:source-map</span>    <span class="s">&quot;resources/public/js/out.js.map&quot;</span>
+</span><span class='line'>                                        <span class="ss">:preamble</span>      <span class="p">[</span><span class="s">&quot;react/react.min.js&quot;</span><span class="p">]</span>
+</span><span class='line'>                                        <span class="ss">:optimizations</span> <span class="ss">:none</span>
+</span><span class='line'>                                        <span class="ss">:pretty-print</span>  <span class="nv">true</span><span class="p">}}}}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This is remarkably similar to the configuration from the
+<a href="https://github.com/emezeske/lein-cljsbuild/blob/1.0.5/example-projects/none/project.clj">lein-cljsbuild none example project</a>, and a standard
+setup to enable source-maps.</p>
+
+<h3>Profiles</h3>
+
+<p>So far, most of what we&rsquo;ve seen is fairly standard
+clojure/clojurescript configuration stuff. But one of the things that
+makes Chestnut awesome is that it makes really good use of the
+Leiningen profiles feature. In particular, it uses profiles to
+concisely specify different clojurescript compilation settings and add
+dependencies that are only needed for development. If this is the
+first time you&rsquo;ve heard about Leiningen profiles, you should probably
+go <a href="https://github.com/technomancy/leiningen/blob/master/doc/PROFILES.md#profiles">read about it</a>. The basic summary is this though:</p>
+
+<blockquote><p>You can place any arbitrary key/value pairs supported by defproject
+into a given profile and they will be merged into the project map
+when that profile is activated.</p></blockquote>
+
+<p>Let&rsquo;s start with the extra <code>:dev</code> setups. It starts off nice and easy
+just adding more clojure source and test paths and some extra
+development-only dependencies.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'>  <span class="ss">:profiles</span> <span class="p">{</span><span class="ss">:dev</span> <span class="p">{</span><span class="ss">:source-paths</span> <span class="p">[</span><span class="s">&quot;env/dev/clj&quot;</span><span class="p">]</span>
+</span><span class='line'>                   <span class="ss">:test-paths</span> <span class="p">[</span><span class="s">&quot;test/clj&quot;</span><span class="p">]</span>
+</span><span class='line'>
+</span><span class='line'>                   <span class="ss">:dependencies</span> <span class="p">[[</span><span class="nv">figwheel</span> <span class="s">&quot;0.2.1-SNAPSHOT&quot;</span><span class="p">]</span>
+</span><span class='line'>                                  <span class="p">[</span><span class="nv">figwheel-sidecar</span> <span class="s">&quot;0.2.1-SNAPSHOT&quot;</span><span class="p">]</span>
+</span><span class='line'>                                  <span class="p">[</span><span class="nv">com.cemerick/piggieback</span> <span class="s">&quot;0.1.3&quot;</span><span class="p">]</span>
+</span><span class='line'>                                  <span class="p">[</span><span class="nv">weasel</span> <span class="s">&quot;0.4.2&quot;</span><span class="p">]]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Notice that there is a similar entry under the <code>:uberjar</code> profile for
+<code>:source-paths</code> but that the <code>:test-paths</code> are omitted (since the
+uberjar is typically for distributing production code).</p>
+
+<p><a href="https://github.com/bhauman/lein-figwheel#lein-figwheel">Figwheel</a> is a very cool project that &ldquo;pushes ClojureScript code
+changes to the client.&rdquo; This enables a very smooth Clojurescript
+workflow. It&rsquo;s so seamless in fact that in some ways it makes
+Clojurescript programming <em>more enjoyable</em> than working with Clojure!</p>
+
+<p><a href="https://github.com/cemerick/piggieback#piggieback-">Piggieback</a> provides support for running a ClojureScript REPL
+on top of an nREPL session. Chas goes into the reasons of why this is
+a desirable thing in the README, so go check it out if you&rsquo;re interested.</p>
+
+<p>Finally, <a href="https://github.com/tomjakubowski/weasel#weasel">Weasel</a> allows your ClojureScript REPL to use
+WebSockets to communicate with your chosen execution environment.
+Again, their README has good information about why this might be a
+thing you want.</p>
+
+<p>The next two sections are pretty much just setup for Piggieback and
+Figwheel:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'>               <span class="ss">:repl-options</span> <span class="p">{</span><span class="ss">:init-ns</span> <span class="nv">tour.server</span>
+</span><span class='line'>                              <span class="ss">:nrepl-middleware</span> <span class="p">[</span><span class="nv">cemerick.piggieback/wrap-cljs-repl</span><span class="p">]}</span>
+</span><span class='line'>
+</span><span class='line'>               <span class="ss">:plugins</span> <span class="p">[[</span><span class="nv">lein-figwheel</span> <span class="s">&quot;0.2.1-SNAPSHOT&quot;</span><span class="p">]]</span>
+</span><span class='line'>
+</span><span class='line'>               <span class="ss">:figwheel</span> <span class="p">{</span><span class="ss">:http-server-root</span> <span class="s">&quot;public&quot;</span>
+</span><span class='line'>                          <span class="ss">:server-port</span> <span class="mi">3449</span>
+</span><span class='line'>                          <span class="ss">:css-dirs</span> <span class="p">[</span><span class="s">&quot;resources/public/css&quot;</span><span class="p">]}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then both the dev and uberjar profiles contain an <code>:env</code> map
+specifying either that <code>:is-dev</code> is <code>true</code> or <code>false</code>. These
+configurations hook into the Environ library and allow you to specify
+the value of environment variables directly in the project.clj
+file. This particular usage should be pretty straightforward; it&rsquo;s
+basically a simple switch that allows us to tell in our code whether
+or not this is a dev build/run or not.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'>               <span class="ss">:env</span> <span class="p">{</span><span class="ss">:is-dev</span> <span class="nv">true</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The only thing remaining in the dev profile now is the cljsbuild test
+configuration. Though once again, notice that there is the small
+addition of the <code>env/dev/cljs</code> path as a source for our previosly
+configured <code>app</code> ClojureScript build.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'>               <span class="ss">:cljsbuild</span> <span class="p">{</span><span class="ss">:test-commands</span> <span class="p">{</span> <span class="s">&quot;test&quot;</span> <span class="p">[</span><span class="s">&quot;phantomjs&quot;</span> <span class="s">&quot;env/test/js/unit-test.js&quot;</span> <span class="s">&quot;env/test/unit-test.html&quot;</span><span class="p">]</span> <span class="p">}</span>
+</span><span class='line'>                           <span class="ss">:builds</span> <span class="p">{</span><span class="ss">:app</span> <span class="p">{</span><span class="ss">:source-paths</span> <span class="p">[</span><span class="s">&quot;env/dev/cljs&quot;</span><span class="p">]}</span>
+</span><span class='line'>                                    <span class="ss">:test</span> <span class="p">{</span><span class="ss">:source-paths</span> <span class="p">[</span><span class="s">&quot;src/cljs&quot;</span> <span class="s">&quot;test/cljs&quot;</span><span class="p">]</span>
+</span><span class='line'>                                           <span class="ss">:compiler</span> <span class="p">{</span><span class="ss">:output-to</span>     <span class="s">&quot;resources/public/js/app_test.js&quot;</span>
+</span><span class='line'>                                                      <span class="ss">:output-dir</span>    <span class="s">&quot;resources/public/js/test&quot;</span>
+</span><span class='line'>                                                      <span class="ss">:source-map</span>    <span class="s">&quot;resources/public/js/test.js.map&quot;</span>
+</span><span class='line'>                                                      <span class="ss">:preamble</span>      <span class="p">[</span><span class="s">&quot;react/react.min.js&quot;</span><span class="p">]</span>
+</span><span class='line'>                                                      <span class="ss">:optimizations</span> <span class="ss">:whitespace</span>
+</span><span class='line'>                                                      <span class="ss">:pretty-print</span>  <span class="nv">false</span><span class="p">}}}}}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Compared to the <code>:dev</code> profile, the <code>:uberjar</code> is quite simple:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'>         <span class="ss">:uberjar</span> <span class="p">{</span><span class="ss">:source-paths</span> <span class="p">[</span><span class="s">&quot;env/prod/clj&quot;</span><span class="p">]</span>
+</span><span class='line'>                   <span class="ss">:hooks</span> <span class="p">[</span><span class="nv">leiningen.cljsbuild</span><span class="p">]</span>
+</span><span class='line'>                   <span class="ss">:env</span> <span class="p">{</span><span class="ss">:production</span> <span class="nv">true</span><span class="p">}</span>
+</span><span class='line'>                   <span class="ss">:omit-source</span> <span class="nv">true</span>
+</span><span class='line'>                   <span class="ss">:aot</span> <span class="ss">:all</span>
+</span><span class='line'>                   <span class="ss">:cljsbuild</span> <span class="p">{</span><span class="ss">:builds</span> <span class="p">{</span><span class="ss">:app</span>
+</span><span class='line'>                                        <span class="p">{</span><span class="ss">:source-paths</span> <span class="p">[</span><span class="s">&quot;env/prod/cljs&quot;</span><span class="p">]</span>
+</span><span class='line'>                                         <span class="ss">:compiler</span>
+</span><span class='line'>                                         <span class="p">{</span><span class="ss">:optimizations</span> <span class="ss">:advanced</span>
+</span><span class='line'>                                          <span class="ss">:pretty-print</span> <span class="nv">false</span><span class="p">}}}}}})</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The main difference is the addition of three pieces of configuration
+that make this a true production build. The <code>:hooks</code> option causes
+leiningen to run the <code>leiningen.cljsbuild/activate</code> function to let it
+<a href="https://github.com/technomancy/leiningen/blob/master/doc/PLUGINS.md#hooks">hook into the defualt Leiningen tasks</a>.</p>
+
+<p>Then <code>:omit-source</code> simply directs leiningen not to include the
+clojure source files in the resulting uberjar, and <code>:aot :all</code> causes
+the Clojure compiler to <a href="http://clojure.org/compilation">Ahead-of-time compile</a> all your clojure
+code. The idea behind both these configs is to make your final uberjar
+as lean and performant as possible, at the expense of some (probably
+not needed) flexibility.</p>
+
+<p>So that&rsquo;s it for Chestnut&rsquo;s <code>project.clj</code>. It looks intimidating at
+first, but in the end it is quite approachable when you break it down
+into it&rsquo;s component pieces.</p>
 ]]></content>
   </entry>
   
@@ -3472,6 +3864,132 @@ know what has happened. She is responding to treatment so well, it
 seems like the emergency has been put on hold. But in another way, we
 are all still waiting for the other shoe to drop. But we have to stop
 waiting at some point.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[First Contact]]></title>
+    <link href="http://www.zephyrizing.net/blog/2014/05/14/s-and-e-part-five:-first-contact/"/>
+    <updated>2014-05-14T22:00:00-05:00</updated>
+    <id>http://www.zephyrizing.net/blog/2014/05/14/s-and-e-part-five:-first-contact</id>
+    <content type="html"><![CDATA[<p>At the time, I was infatuated with a particular video game. This game
+was called Neverwinter Nights and it was a sword-and-sorcery adventure
+game. This was one of the reasons that I loved it so much; it brought
+to life all of my favorite childhood stories about dragons and elves
+and magic.</p>
+
+<p>This was not the first such game I had played. It was however, the
+first game I encountered that gave players the ability to use the
+tools of the game to construct their own world and scenarios. The
+developers of the game actually included for free all of the tools
+that they had used themselves to create the game. I was enthralled by
+this toolkit.</p>
+
+<!--more-->
+
+
+<p>I spent hours simply exploring it. I would browse the apparently
+endless menus and dialogs, marveling at the enormity of this program
+and captivated by what it promised to allow me to do. I fiddled around
+with placing groups of fantastic creatures in small worlds of my own
+creation. But I quickly came to realize that the real key to making
+living worlds lay in something called NWScript.</p>
+
+<p>My curiosity in exploring the toolkit exposed me to the existence of a
+programming language embedded within it. This language allowed you to
+do nearly anything in the context of the game. It was through
+&ldquo;scripts&rdquo; - short, specific programs written in NWScript - that you
+could make pulling a lever cause a door to unlock, or make it so that
+a sleeping dragon would awaken with a terrible roar when a character
+tripped over a stone while trying to sneak past.</p>
+
+<p>Somehow, I found a set of tutorials for learning NWScript on the
+internet. From what I recall they were excellent; very informative,
+and engagingly written. I worked through them diligently, and gained a
+rudimentary ability to do things with NWScript. But I was at a loss of
+what to do with my new-found power. I fiddled around making little toy
+things. I expanded on the idea of a switch unlocking a door by
+requiring two switches to be thrown. But I had no idea how to go about
+constructing a compelling story for other players to interact with,
+and without a motivating context my little magic tricks meant nothing.</p>
+
+<p>In retrospect, although I was technically capable of writing simple
+scripts, I actually fundamentally missed one of the central points
+that the tutorials tried to teach me. One of the most basic tools of a
+programmer is the ability to abstract. Dictionary.com provides several
+definitions for using &lsquo;abstract&rsquo; as a verb. The one that suits my
+usage the best is</p>
+
+<blockquote><p>&ldquo;to consider as a general quality or characteristic apart from
+specific objects or instances: to abstract the notions of time,
+space, and matter.&rdquo;</p></blockquote>
+
+<p>To really talk about what abstraction in programming means though,
+first we need to dive into what programming is a bit. To do that, I&rsquo;d
+like to defer to one of the giants of the field, Harold (Hal) Abelson.
+Abelson is responsible for an enormous amount of important work in the
+world of programming and Computer Science. Among the most well known
+of those contributions is his co-development, along with Gerald Jay
+Sussman, of MIT&rsquo;s introductory computer science course <em>6.001
+Structure and Interpretation of Computer Programs</em>. There is also a
+book bearing the same name, which is colluqially referred to as &ldquo;the
+wizard book&rdquo; or simply SICP (&ldquo;SICK-pee,&rdquo; pronounced like chickpea).</p>
+
+<p>There are videos available online of the lecture series, delivered by
+Abelson and Sussman. The first lecture begins with Abelson greeting
+the classroom:</p>
+
+<blockquote><p>I&rsquo;d like to welcome you to this course on &ldquo;Computer Science.&rdquo;
+Actually, that&rsquo;s a terrible way to start. That is a terrible name for
+this business. First of all it&rsquo;s not a science.  It might be
+engineering or it might be art, but we&rsquo;ll actually see that computer
+so-called science actually has a lot in common with magic and we&rsquo;ll
+see that in this course. So it&rsquo;s not a science.  It&rsquo;s also not really
+very much about computers. And it&rsquo;s not about computers in the same
+sense that physics is not really about particle accelerators, and
+biology is not really about microscopes and petri dishes.</p></blockquote>
+
+<p>This gives a brief sense of what programming is not. But that just
+raises the question of what it actually is. What follows is an excerpt
+from the preface to the first edition of the SICP book.</p>
+
+<blockquote><p>&ldquo;&hellip; we want to establish the idea that a computer language is not
+just a way of getting a computer to perform operations but rather
+that it is a novel formal medium for expressing ideas about
+methodology.&rdquo;</p></blockquote>
+
+<p>This was an incredibly novel concept when the book was first
+published. In many ways, it is still novel to many professional
+programmers. It was certainly mind-expanding to me.</p>
+
+<p>There is so much more that I could say about programming. I&rsquo;ve been
+immersed in that world for a large portion of the last six years; I
+can talk almost endlessly about it. I think what&rsquo;s more interesting
+though is to try to communicate why I&rsquo;ve chosen to live in that world
+these several years.</p>
+
+<p>Most of the time when people close to me ask &ldquo;Why programming?&rdquo; I say
+something about how programming is like puzzles. This is true.
+Especially the kind of puzzles where two pieces of metal have been
+formed and twisted together and need to be teased apart in just the
+right way. But it only goes so far. I like puzzles, but I love magic.</p>
+
+<p>I talked earlier about my love for fantasy novels. Especially the kind
+with magic in them. The idea of magic has always intrigued me: the
+invocation of mysterious powers through the precise usage of arcane
+knowledge. To me the best kind of world to live in is one where magic
+abounds.</p>
+
+<p>In many ways, the process of programming is very similar to this
+conception of magic. The practitioner (programmer), learns obscure and
+bizarre languages. Through long and diligent study they gain the
+ability to command formless spirits that are capable of affecting the
+real world.</p>
+
+<p>This is what programming means to me. It is an immensely powerful form
+of expression. It requires serious commitment, and hard work to bear
+fruit. And like any superpower, with great power comes great
+responsibility.</p>
 ]]></content>
   </entry>
   

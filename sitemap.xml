@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://www.zephyrizing.net/blog/2015/05/12/communication-trust-and-honesty/</loc>
-    <lastmod>2015-05-12T00:10:32-05:00</lastmod>
-  </url>
-  <url>
-    <loc>http://www.zephyrizing.net/blog/2015/05/07/git-resources/</loc>
-    <lastmod>2015-05-07T16:55:33-05:00</lastmod>
+    <loc>http://www.zephyrizing.net/blog/2015/05/10/chestnut-annotated/</loc>
+    <lastmod>2015-05-10T13:34:16-05:00</lastmod>
   </url>
   <url>
     <loc>http://www.zephyrizing.net/blog/2015/05/06/testing-and-the-structures-of-learning-environments/</loc>
@@ -258,12 +254,6 @@
     <loc>http://www.zephyrizing.net/blog/categories/8th-light/</loc>
   </url>
   <url>
-    <loc>http://www.zephyrizing.net/blog/categories/git/</loc>
-  </url>
-  <url>
-    <loc>http://www.zephyrizing.net/posts/2/</loc>
-  </url>
-  <url>
-    <loc>http://www.zephyrizing.net/posts/3/</loc>
+    <loc>http://www.zephyrizing.net/blog/categories/walkthrough/</loc>
   </url>
 </urlset>
