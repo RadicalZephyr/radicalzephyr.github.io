@@ -12,8 +12,8 @@ age; his first job was building automated production equipment with
 and recently attended a batch at the [Recurse Center] in New York
 City. In late 2013 he started working with Lego robots by exploring
 the [leJOS][] project and using it to run a
-[Clojure REPL on his EV3][ev3-nrepl]. He currently lives in Seattle,
-WA working as a software engineer.
+[Clojure REPL on his EV3][ev3-nrepl]. He currently lives in Chicago,
+IL working as a software apprentice for 8th Light.
 
 To see what Geoff is currently working on and thinking about, check out
 his blog at [www.zephyrizing.net][z]. You can also follow him on Twitter at
