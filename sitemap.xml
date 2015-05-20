@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://www.zephyrizing.net/blog/2015/05/19/learning-rack/</loc>
+    <lastmod>2015-05-19T23:18:14-05:00</lastmod>
+  </url>
+  <url>
     <loc>http://www.zephyrizing.net/blog/2015/05/10/chestnut-annotated/</loc>
     <lastmod>2015-05-10T13:34:16-05:00</lastmod>
   </url>
@@ -113,13 +117,16 @@
     <lastmod>2013-09-03T03:00:00-05:00</lastmod>
   </url>
   <url>
+    <loc>http://www.zephyrizing.net/about/bio.html</loc>
+  </url>
+  <url>
     <loc>http://www.zephyrizing.net/blog/archives/</loc>
   </url>
   <url>
-    <loc>http://www.zephyrizing.net/presentations/</loc>
+    <loc>http://www.zephyrizing.net/</loc>
   </url>
   <url>
-    <loc>http://www.zephyrizing.net/</loc>
+    <loc>http://www.zephyrizing.net/presentations/</loc>
   </url>
   <url>
     <loc>http://www.zephyrizing.net/projects/</loc>
@@ -131,10 +138,10 @@
     <loc>http://www.zephyrizing.net/presentations/prelude/</loc>
   </url>
   <url>
-    <loc>http://www.zephyrizing.net/presentations/introduction-to-bash/</loc>
+    <loc>http://www.zephyrizing.net/presentations/reimplementing-gitignore-in-15-lines-of-bash/</loc>
   </url>
   <url>
-    <loc>http://www.zephyrizing.net/presentations/reimplementing-gitignore-in-15-lines-of-bash/</loc>
+    <loc>http://www.zephyrizing.net/presentations/introduction-to-bash/</loc>
   </url>
   <url>
     <loc>http://www.zephyrizing.net/8thlight/weeklies/one.html</loc>
@@ -255,5 +262,11 @@
   </url>
   <url>
     <loc>http://www.zephyrizing.net/blog/categories/walkthrough/</loc>
+  </url>
+  <url>
+    <loc>http://www.zephyrizing.net/posts/2/</loc>
+  </url>
+  <url>
+    <loc>http://www.zephyrizing.net/posts/3/</loc>
   </url>
 </urlset>

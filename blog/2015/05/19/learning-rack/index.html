@@ -5,11 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: Clojurescript - Zephyrizing</title>
+  <title>Learning Rack - Zephyrizing</title>
   <meta name="author" content="Geoff Shannon">
 
   
-  <meta name="description" content="Category: clojurescript">
+  <meta name="description" content="For the past two weeks or so I&rsquo;ve been grappling with trying to build
+a simple HTTP front-end for my ruby Tic-Tac-Toe program. There have
+been &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.zephyrizing.net/blog/categories/clojurescript">
+  <link rel="canonical" href="http://www.zephyrizing.net/blog/2015/05/19/learning-rack">
   <link rel="icon" href="/favicon.ico">
   <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
   <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
@@ -90,50 +92,140 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
+
   <header>
-    <h1 class="entry-title">Category: Clojurescript</h1>
+    
+      <h1 class="entry-title">Learning Rack</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-05-19T23:18:14-05:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>19</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>11:18 pm</span></time>
+        
+           | <a href="#disqus_thread"
+             data-disqus-identifier="http://www.zephyrizing.net">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>For the past two weeks or so I&rsquo;ve been grappling with trying to build
+a simple HTTP front-end for my ruby Tic-Tac-Toe program. There have
+been some non-technical hurdles with scheduling and other projects
+demanding my time, but I&rsquo;ve also spent a fair amount of time simply
+struggling to put the pieces together with how the Rack libraries
+work.</p>
 
-  
-  <h2>2015</h2>
-
-<article>
-  
-<h1><a href="/blog/2015/05/10/chestnut-annotated/">Chestnut - Annotated</a></h1>
-<time datetime="2015-05-10T13:34:16-05:00" pubdate><span class='month'>May</span> <span class='day'>10</span> <span class='year'>2015</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/clojure/'>clojure</a>, <a class='category' href='/blog/categories/clojurescript/'>clojurescript</a>, <a class='category' href='/blog/categories/walkthrough/'>walkthrough</a></span>
-</footer>
+<!--more-->
 
 
-</article>
+<p>Rack as a concept is exceptionally simple. Inspired by <a href="https://www.python.org/dev/peps/pep-0333/">PEP 333</a>
+which specified the Python Web Server Gateway Interface or WSGI, Rack
+has come to be the de-facto way that Ruby applications interface with
+web servers. Beyond the <a href="http://rack.github.io/">basic concept</a>, Rack provides a set of
+helper libraries. These include many useful middleware and convenience
+classes for things like static file serving, sessions, and request
+parsing and response generation. However, the documentation for the
+classes included in Rack is pretty dismal.</p>
 
+<p>For the most part it is all auto-generated documentation, but many of
+the classes have only a vague description of what they do, with no
+indication of how they&rsquo;re meant to be used. Conspicuously absent or
+good examples of configuration of middleware, especially in the
+special DSL that is made available in <a href="https://github.com/rack/rack/wiki/%28tutorial%29-rackup-howto">rackup</a> files.</p>
 
+<p>Given the number of different web frameworks that are built on top of
+Rack, it&rsquo;s sort of shocking to me that the documentation is in this
+sort of state. Though I guess it&rsquo;s consistent with my general
+experience of Ruby libraries as a whole.</p>
 
-<article>
-  
-<h1><a href="/blog/2015/04/04/shaving-the-clojurescript-yaks/">Shaving the Clojurescript Yak(s)</a></h1>
-<time datetime="2015-04-04T13:08:18-05:00" pubdate><span class='month'>Apr</span> <span class='day'>04</span> <span class='year'>2015</span></time>
+<p>I&rsquo;ve really worked in Ruby since I started my apprenticeship at 8th
+Light, but from what I&rsquo;ve seen, many Ruby libraries have awkward gaps
+in their documentation. For instance, Guard is an amazing and vital
+piece of a smooth Ruby TDD toolchain. But it&rsquo;s documentation is
+incredibly cryptic about how to properly setup a Guardfile. There are
+more paragraphs about how to debug problems in your Guardfile than
+what the format is!</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/clojure/'>clojure</a>, <a class='category' href='/blog/categories/clojurescript/'>clojurescript</a>, <a class='category' href='/blog/categories/yak-shaving/'>yak-shaving</a></span>
-</footer>
+<p>Now documentation is hard. But over the last several years, it&rsquo;s been
+increasingly clear to me that <a href="https://jacobian.org/writing/great-documentation/">good documentation</a> is one of
+the most valuable assets that a software product can have, especially
+an open-source one.</p>
 
+<p>So then why is writing good documentation still so elusively
+difficult? I know I struggle with it immensely. The majority of
+<a href="https://github.com/RadicalZephyr?tab=repositories">my projects</a> have little to no documentation, with the notable
+exception of <a href="https://github.com/RadicalZephyr/hermit">Hermit</a>.</p>
 
-</article>
+<p>I think there are a few reasons. First off, writing in general is
+hard. It takes effort, and the will to keep re-writing and trying new
+things to end up with a nicely polished piece of writing that reads
+well, and communicates the author&rsquo;s intent clearly and succinctly.</p>
 
+<p>Another reason is that it&rsquo;s much easier to polish a piece of writing
+with good critical feedback from someone else. The complicating factor
+for code documentation is that you need to find the right audience to
+give you feedback. Often this means someone who is totally unfamiliar
+with your exact software, but if it&rsquo;s code documentation it probably
+also can&rsquo;t be your friend who only uses their computer for writing
+Word documents and checking their social media.</p>
+
+<p>But I think the final reason is that we don&rsquo;t do it enough. Again,
+like all other writing, the best way to get better at it, is simply by
+writing lots and lots of documentation. Also, critically reading the
+documentation that you read, and reflecting on what is helpful, and
+what isn&rsquo;t.</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Geoff Shannon</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2015-05-19T23:18:14-05:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>19</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>11:18 pm</span></time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://www.zephyrizing.net/blog/2015/05/19/learning-rack/" data-via="RadicalZephyr" data-counturl="http://www.zephyrizing.net/blog/2015/05/19/learning-rack/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2015/05/10/chestnut-annotated/" title="Previous Post: Chestnut - Annotated">&laquo; Chestnut - Annotated</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -218,7 +310,10 @@
       var disqus_shortname = 'zephyrizing';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://www.zephyrizing.net/blog/2015/05/19/learning-rack/';
+        var disqus_url = 'http://www.zephyrizing.net/blog/2015/05/19/learning-rack/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
