@@ -6,27 +6,29 @@ comments: true
 categories: [Clojure]
 ---
 
-I've been reading an excellent book recently: _Domain Driven Design_
+I've been reading an excellent book recently: [_Domain Driven Design_][DDD]
 by Eric Evans. I just finished the section on Entities and Value
 Objects, and it's caused me to start thinking about Clojure and the
 "sane state management model" that language advocates/enforces.
 
+[DDD]: https://en.wikipedia.org/wiki/Domain-driven_design
+
 <!--more-->
 
-The model of Clojure state bears some strong similarities to what
-Evans talks about when discussing the needs and uses for Entities and
-Value Objects. Entities he says should be used to represent things
-where their continuity of identity is more important than their
-current value. Value Objects are the opposite, the important part of a
-Value Object is the data it holds or represents, to the extent that
-Value Objects with the same value are totally interchangeable.
+The Clojure state model bears some strong similarities to what Evans
+talks about when discussing the needs and uses for Entities and Value
+Objects. Entities he says should be used to represent things where
+their continuity of identity is more important than their current
+value. Value Objects are the opposite, the important part of a Value
+Object is the data it holds or represents, to the extent that Value
+Objects with the same value are totally interchangeable.
 
-He goes on to talk about the benefits immutability and subsequently
-safe arbitrary sharing that this interchangeability can give
-you. Specifically, the fact that the relative looseness of the
-constraints on Value Objects gives you as an engineer more freedom to
-implement the Value Objects in your system in a way that has extra
-benefits, such as increased performance or memory efficiency.
+He goes on to talk about the benefits that immutability and safe
+arbitrary sharing that this interchangeability can give you.
+Specifically, the relative looseness of the constraints on Value
+Objects gives a system designer more freedom to implement Value
+Objects in a way that has extra benefits, such as increased
+performance or memory efficiency.
 
 I'm just going to pull some quotes directly from
 [the page on clojure.org about state][clj-state].
