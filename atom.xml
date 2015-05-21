@@ -4,7 +4,7 @@
   <title><![CDATA[Zephyrizing]]></title>
   <link href="http://www.zephyrizing.net/atom.xml" rel="self"/>
   <link href="http://www.zephyrizing.net/"/>
-  <updated>2015-05-20T01:09:06-05:00</updated>
+  <updated>2015-05-21T11:08:50-05:00</updated>
   <id>http://www.zephyrizing.net/</id>
   <author>
     <name><![CDATA[Geoff Shannon]]></name>
@@ -12,6 +12,74 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Domain Driven Design and Clojure]]></title>
+    <link href="http://www.zephyrizing.net/blog/2015/05/21/domain-driven-design-and-clojure/"/>
+    <updated>2015-05-21T10:41:29-05:00</updated>
+    <id>http://www.zephyrizing.net/blog/2015/05/21/domain-driven-design-and-clojure</id>
+    <content type="html"><![CDATA[<p>I&rsquo;ve been reading an excellent book recently: <a href="https://en.wikipedia.org/wiki/Domain-driven_design"><em>Domain Driven Design</em></a>
+by Eric Evans. I just finished the section on Entities and Value
+Objects, and it&rsquo;s caused me to start thinking about Clojure and the
+&ldquo;sane state management model&rdquo; that language advocates/enforces.</p>
+
+<!--more-->
+
+
+<p>The Clojure state model bears some strong similarities to what Evans
+talks about when discussing the needs and uses for Entities and Value
+Objects. Entities he says should be used to represent things where
+their continuity of identity is more important than their current
+value. Value Objects are the opposite, the important part of a Value
+Object is the data it holds or represents, to the extent that Value
+Objects with the same value are totally interchangeable.</p>
+
+<p>He goes on to talk about the benefits that immutability and safe
+arbitrary sharing that this interchangeability can give you.
+Specifically, the relative looseness of the constraints on Value
+Objects gives a system designer more freedom to implement Value
+Objects in a way that has extra benefits, such as increased
+performance or memory efficiency.</p>
+
+<p>I&rsquo;m just going to pull some quotes directly from
+<a href="http://clojure.org/state">the page on clojure.org about state</a>.</p>
+
+<p>First, some words about identity:</p>
+
+<blockquote><p>While some programs are merely large functions, e.g. compilers or
+theorem provers, many others are not - they are more like working
+models, and as such need to support what I&rsquo;ll refer to in this
+discussion as identity. By identity I mean a stable logical entity
+associated with a series of different values over time. Models need
+identity for the same reasons humans need identity - to represent
+the world. How could it work if identities like &lsquo;today&rsquo; or &lsquo;America&rsquo;
+had to represent a single constant value for all time?</p></blockquote>
+
+<p>And now, values:</p>
+
+<blockquote><p>So, for this discussion, an identity is an entity that has a state,
+which is its value at a point in time. And a value is something that
+doesn&rsquo;t change. 42 doesn&rsquo;t change. June 29th 2008 doesn&rsquo;t
+change. Points don&rsquo;t move, dates don&rsquo;t change, no matter what some
+bad class libraries may cause you to believe. Even aggregates are
+values. The set of my favorite foods doesn&rsquo;t change, i.e. if I
+prefer different foods in the future, that will be a different set.</p></blockquote>
+
+<p>Clearly Rich Hickey was thinking along the same lines as Eric
+Evans. In fact, I would say that Clojure is a programming language
+that is built on a firm conceptual model of the domain of
+programming. I think this is one of the things that makes Clojure such
+a joy to program in. Especially once you&rsquo;re familiar with the
+language, the standard idioms and the general layout of it&rsquo;s
+libraries. Everything is highly conceptually consistent. There have
+been very few points where I learned something new about Clojure and
+thought &ldquo;Well that doesn&rsquo;t really make sense&hellip;&rdquo; More often when I
+learn something new it fits smoothly into the mental model that I
+already have about how the language works.</p>
+
+<p>I guess this Domain Driven Design stuff might really work&hellip;</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Learning Rack]]></title>
@@ -3797,147 +3865,6 @@ number every time changes are made.</p>
 compiled to LaTeX with pandoc and then into a pdf with pdflatex, all
 orchestrated by a Makefile naturally :) had no major sections so every
 section had a leading &ldquo;0.&rdquo;</sub></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Waiting]]></title>
-    <link href="http://www.zephyrizing.net/blog/2014/06/03/s-and-e-part-six:-waiting/"/>
-    <updated>2014-06-03T22:00:00-05:00</updated>
-    <id>http://www.zephyrizing.net/blog/2014/06/03/s-and-e-part-six:-waiting</id>
-    <content type="html"><![CDATA[<p>When I read, I immerse myself in the words. Reading has always been
-an escape for me. I would used to sit for hours in my mother&rsquo;s house
-reading - no, devouring - books, using them to escape from the world
-around me. I loved the fantasy books best, with their worlds of magic
-and dragons, knights and villains.</p>
-
-<p>I learned terrible habits about reading too. I wanted so much to be a
-fast reader that my brain learned to identify passages that were “just
-description.” I’ve never really gotten what people mean when they say
-“I saw the book in my mind.” Visualization has never come easily to
-me, and I think in part it’s because I never really read the
-descriptions.</p>
-
-<!--more-->
-
-
-<p>But this is a weird contradiction. I wanted to escape into these
-books, but I skimmed the details, the little essences? I don’t know.
-But I find myself still doing it. I have to consciously slow myself
-down in order to not skip them. I notice my eyes jump, and then
-recognize that I didn’t actually read that last paragraph.</p>
-
-<p>Part of my Fairhaven graduation requirement was the advanced seminar
-class. In that class, we all read the book <em>Wave</em> by Sonali
-Deraniyagala. In it, she recounts her experience of being swept up in
-the 2004 tsunami in Sri Lanka. She lost her whole family in an
-instant. Her husband, two sons; both her parents. She also writes
-about the aftermath in her life, of how she eventually is able to move
-on and heal. It is a vivid book, and not one that I likely would have
-sought out on my own.</p>
-
-<p>Reading <em>Wave</em> was a different experience for me than most books. I
-didn’t want to escape into it. If anything, I wanted the opposite, to
-help Sonali escape from the life of torment that she relates to us. I
-have lost people in my life. My grandfather, more than a decade ago.
-A childhood friend who I’d fallen out of touch with who took his own
-life. More recently my grandmother; not dead, but lost to us through
-Alzheimers. But it feels… not right to try and compare these to
-Sonali’s loss. Not just because I wasn’t as close to these people as
-she was to her family, though this is true. But because my experience
-of those losses was so different, so much more distant.</p>
-
-<p>There is a one point in her story that I can relate to. Towards the
-middle, when she says &ldquo;But there are those I see time and again , have
-drinks with, share jokes, and even they don’t know.&rdquo; She talks about
-feeling like a fraud. That not telling people she is &ldquo;cut loose,
-adrift, hazy about [her] identity.&rdquo; This I feel I know something
-about.</p>
-
-<p>It started out that I would take just one quarter off. Fall of 2012,
-I signed up for classes, and then I simply couldn’t face it. In
-retrospect, it was amazingly fortuitous. Almost like I knew, deep
-down what was going to happen. Instead of school, I decided to try and
-find work as a programmer. To validate for myself whether finishing up
-my degree was really necessary. This was hard. I learned many hard
-lessons that fall. About managing my time, about the kinds of jobs I
-did not want to do. About the kind of clients to avoid. Then, the
-week after Thanksgiving, my mother was diagnosed with brain cancer.</p>
-
-<p>It started with her having trouble walking. I noticed while strolling
-through the autumnal Arboretum in Seattle near her house. Her right
-foot kept dragging. I asked her about it, and she said it felt very
-odd. On Monday she&rsquo;d make an appointment with her doctor to see what
-was going on. But two days later she couldn&rsquo;t move her leg at all.</p>
-
-<p>Everything after that was a blur. Frantic calls to the doctor,
-eventually rushing off to the hospital. So many of her close friends
-clustered around, I felt lost in the confusion and chaos. In the
-midst of this, I had just started negotiating with a potential new
-client. I kept talking to them, worried enough about my finances that
-it didn&rsquo;t really sink how serious the situation with my mother really
-was.</p>
-
-<p>I imagine what would have happened if I had tried to take classes that
-fall. I would have gone home over Thanksgiving, much as I actually
-did. Then, when my mother was spending her first couple days in the
-hospital, getting a biopsy of her brain, I would have been in the
-midst of dead week. Before we really knew what was wrong with her, I
-would have been immersed in preparing for finals. While she was trying
-to reacclimatize to her own home, I might have been taking finals.</p>
-
-<p>Or else, I would have dropped it all. An entire quarter&rsquo;s worth of
-time and effort made meaningless in the space of a phone call. I&rsquo;m
-honestly not sure what I would have done, how things would have gone.</p>
-
-<p>The months that followed were also a whirl. The madness of trying to
-reorganize her home so that she could live there. Starting
-chemotherapy and radiation treatments. I could smell the poison in the
-chemo pills. The smell of their residue in her urine permeated the
-bathroom. This didn&rsquo;t seem like healing. I saw my mother, the
-strongest person that I know, utterly defeated and humiliated.</p>
-
-<p>But all of this was in Seattle. To my friends in Bellingham, I simply
-disappeared. I only personally told three or four people. Many more
-have heard either from my loving girlfriend or through the proverbial
-grapevine. It was agonizing revealing this massive thing to a few
-close friends. The thought of telling everyone was overwhelming. I
-wanted people to know but not to have to tell them. That made it
-awkward. Most people don&rsquo;t just bring something like that up.</p>
-
-<p>At a time when I most needed my friends physical presence and support,
-everyone seemed determined to let me have my space. But I couldn&rsquo;t
-reach out to them, to tell them that wasn&rsquo;t what I needed. I didn&rsquo;t
-know what I needed.</p>
-
-<p>The first time I told someone not close to me was an old roommate of
-mine. I ran into her in the grocery store in Bellingham. We chatted
-for a moment, this and that. Then she asked what I was up to. I said
-living in Seattle, and she asked &ldquo;Why?&rdquo; &ldquo;Because my mother has brain
-cancer.&rdquo; I responded. That pretty much ended the conversation. I felt
-sad. I hadn&rsquo;t meant to drop that weight on her; as Sonali says, &ldquo;it&rsquo;s
-too horrifying, too huge.&rdquo; But I didn&rsquo;t know how to reveal it any
-other way.</p>
-
-<p>Gradually I learned how to be more circumspect. &ldquo;My mother is very
-ill.&rdquo; My therapist suggested that. She helped me brainstorm. Helped me
-navigate between the feelings of deceit for hiding it and not being
-able to tell. I also grew more comfortable with the weight of it. I no
-longer needed to try and lay it down so abruptly, the way one drops a
-heavy stone. I grew stronger, and marveled at my own strength.</p>
-
-<p>So one quarter turned into two, then three. Suddenly a year had
-passed. Eventually, our lives calmed and settled enough that I sought
-an internship at a local tech company. I stayed there for six months.
-I found stability in the day-to-day routine of working nine to five.
-Or more accurately, ten to six.</p>
-
-<p>Now, more than two years later, my mother is doing quite well. It’s
-strange to be back in Bellingham, and to still have friends who don’t
-know what has happened. She is responding to treatment so well, it
-seems like the emergency has been put on hold. But in another way, we
-are all still waiting for the other shoe to drop. But we have to stop
-waiting at some point.</p>
 ]]></content>
   </entry>
   

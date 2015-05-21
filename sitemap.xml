@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://www.zephyrizing.net/blog/2015/05/21/domain-driven-design-and-clojure/</loc>
+    <lastmod>2015-05-21T10:41:29-05:00</lastmod>
+  </url>
+  <url>
     <loc>http://www.zephyrizing.net/blog/2015/05/19/learning-rack/</loc>
     <lastmod>2015-05-19T23:18:14-05:00</lastmod>
   </url>
