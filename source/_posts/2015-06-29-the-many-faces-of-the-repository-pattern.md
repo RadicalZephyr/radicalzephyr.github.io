@@ -15,6 +15,8 @@ considered, and what we ended up implementing might be in order.
 
 <!--more-->
 
+## What is a "Repository"?
+
 First of all, let's talk briefly about the Repository Pattern
 itself. My first exposure to the idea was through the discussion of it
 in "Domain Driven Design" by Eric Evans. Martin Fowler has
@@ -58,3 +60,66 @@ Finally, he lists the advantages that using Repositories confers:
 - They communicate design decisions about object access.
 - They allow easy substitution of a dummy implementation, for use in
   testing (typically using an in-memory collection).
+
+For someone seeking to implement the Repository Pattern in their own
+project, this list serves as an excellent barometer of the quality of
+their implementation.
+
+
+## My Repository
+
+A few weeks ago I started working on a new client project. It was a
+greenfield application, and we started building it in Ruby on Rails,
+using the basic Rails application structure, and all of the built-in
+Rails Magic &trade;. This meant a standard MVC architecture,
+ActiveRecord models, the whole nine yards.
+
+We embraced the "Rails Way" largely to give the project a
+jump-start. We were pretty confident that eventually we'd start
+feeling the pain of using Rails and want to head towards some sort of
+hybrid Rails architecture.
+
+A few weeks ago, we got to that point and started looking at
+implementing a repository for the new domain object we were about to
+introduce. Unfortunately, I didn't return to the discussion from the
+DDD book referenced earlier, and we basically started to feel our way
+into implementing the Repository pattern based on my teammates prior
+experience, what we generally knew about the pattern and some
+interesting examples we found on blog posts regarding using the
+Repository pattern with Rails' ActiveRecord technology.
+
+We ended up with something that looked basically like this:
+
+```ruby
+module Notes
+  class Repository
+    def initialize(dao = Note)
+      @dao = dao
+    end
+
+    def new(attributes)
+      Notes::Note.new(attributes)
+    end
+
+    def find_by_id(id)
+      record = @dao.find_by_id(id)
+      Notes::Note.new(record.attributes)
+    end
+
+    def save(note)
+      if note.valid?
+        record = @dao.new(note.attributes).save
+        note.id = record.id
+        true
+      else
+        false
+      end
+    end
+  end
+end
+```
+
+This looks a lot like an ActiveRecord model. If we go back to that list
+of benefits that repositories confer, it's not immediately obvious
+that this implementation is really going to give us any of those,
+except possibly the swappable database implementation.
