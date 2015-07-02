@@ -309,15 +309,11 @@ module Accounts
     end
 
     def find_by_user(user)
-      convert(repository.find_by_user_id(user.id))
+      convert(@db.accounts.find_by_user_id(user.id))
     end
 
     def model_class
       Accounts::Account
-    end
-
-    def repository
-      @db.accounts
     end
   end
 end
@@ -329,3 +325,66 @@ store a list of transactions as an array of hashes, and then collapse
 the list of transactions to the new effective balance when saving the
 object. So already, we can see that separating the concerns of data
 storage and domain behaviour has achieved some level of isolation.
+
+Now let's imagine we change the database implementation so there is no
+longer any `db.accounts` object. Instead, we have `db.transactions`
+which has methods like `find_all_transactions_for_account_id`.
+
+Again ignoring details of how the transactions are created or saved:
+
+```ruby
+module Accounts
+  class Repository < Repository::RepoBase
+    def create_for(user)
+      account = create({user_id: user.id})
+      account
+    end
+
+    def find_by_user(user)
+      transactions = @db.transactions.find_by_user_id(user.id)
+      balance = transactions.reduce(0) { |r,t| r + t.amount }
+      convert({user_id: user.id, balance: balance})
+      end
+
+    def model_class
+      Accounts::Account
+    end
+  end
+end
+```
+
+This was a very minor change, given that under the covers data is
+being stored in an entirely different manner. Even better, the change
+is totally isolated to the repository. Because of the original naive
+implementation of the Account domain object, some changes will need to
+be made to the way it handles transfers. This may look like the
+details of the data storage are leaking into the domain, but in fact
+this is a data requirement bubbling up. We can't store transactions if
+we don't record them in the first place. And realistically, we're
+probably going to need the concept of a Transaction to be added to the
+domain model.
+
+You may then find yourself wondering, "What value do we really get
+from this separation if both sides of the boundary are going to need
+to change anyhow?" The answer I think is two things: separation of
+concerns and incremental changes. The details of how we handle
+transactions in the domain layer are going to be different from the
+details needed to handle storing data in the database. This separation
+of concerns allows us to focus on the technical complexity of data
+storage when writing that code, and to focus on the business
+complexity when dealing with the domain code instead of mixing the two
+together.
+
+Second, this separation layer provides us an abstraction layer that we
+can use to isolate changes to our code. Earlier I demonstrated how the
+domain layer could stay the same even though storage had moved to a
+transaction model. It's not too hard to imagine changing the domain
+model to track transactions using pure Ruby data structures and having
+the repository still store accounts with an explicit balance.
+
+This separation layer then gives us a nice stepping stone to move from
+one implementation to the other. This stepping stone is important
+because it's a place where we should be able to stop making code
+changes and have all of our tests pass. To me, being able to make real
+changes in this stepwise manner is one of the hallmarks of
+well-factored and decoupled code.
