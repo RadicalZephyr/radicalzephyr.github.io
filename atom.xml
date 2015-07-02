@@ -4,7 +4,7 @@
   <title><![CDATA[Zephyrizing]]></title>
   <link href="http://www.zephyrizing.net/atom.xml" rel="self"/>
   <link href="http://www.zephyrizing.net/"/>
-  <updated>2015-05-26T21:02:05-05:00</updated>
+  <updated>2015-07-02T00:49:42-05:00</updated>
   <id>http://www.zephyrizing.net/</id>
   <author>
     <name><![CDATA[Geoff Shannon]]></name>
@@ -12,6 +12,539 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[The Many Faces of the Repository Pattern]]></title>
+    <link href="http://www.zephyrizing.net/blog/2015/06/29/the-many-faces-of-the-repository-pattern/"/>
+    <updated>2015-06-29T00:43:06-05:00</updated>
+    <id>http://www.zephyrizing.net/blog/2015/06/29/the-many-faces-of-the-repository-pattern</id>
+    <content type="html"><![CDATA[<p>Last week I spent quite a lot of time working closely with my a fellow
+apprentice on refactoring a Rails application away from direct usage
+of ActiveRecord for data persistence, and towards some incarnation of
+the Repository Pattern. Now that we&rsquo;ve finished, I thought some
+reflection on the different possible implementations that we
+considered, and what we ended up implementing might be in order.</p>
+
+<!--more-->
+
+
+<h2>What is a &ldquo;Repository&rdquo;?</h2>
+
+<p>First of all, let&rsquo;s talk briefly about the Repository Pattern
+itself. My first exposure to the idea was through the discussion of it
+in &ldquo;Domain Driven Design&rdquo; by Eric Evans. Martin Fowler has
+<a href="http://martinfowler.com/eaaCatalog/repository.html">a page on Repositories</a> where he summarizes the pattern
+with this description:</p>
+
+<blockquote><p>Mediates between the domain and data mapping layers using a
+collection-like interface for accessing domain objects.</p></blockquote>
+
+<p>This is a good high-level summary of what Eric Evans describes as
+well. Broadly speaking, the idea is that you use the Repository
+Pattern to thoroughly isolate your domain layer from whatever
+strategies are used to persist the domain data. Evans offers this
+description of the problem that Repositories help to solve:</p>
+
+<blockquote><p>A subset of persistent objects must be globally accessible through a
+search based on object attributes. &hellip; Providing access to other
+objects muddies important distinctions. Free database queries can
+actually breach the encapsulation of domain objects and
+AGGREGATES. Exposure of technical infrastructure and database access
+mechanisms complicates the client and obscures the MODEL-DRIVEN
+DESIGN.</p></blockquote>
+
+<p>He further explains that:</p>
+
+<blockquote><p>A repository lifts a huge burden from the client, which can now talk
+to a simple, intention-revealing interface, and ask for what it
+needs in terms of the model. To support all this requires a lot of
+complex technical infrastructure, but the interface is simple and
+conceptually connected to the domain model.</p></blockquote>
+
+<p>Finally, he lists the advantages that using Repositories confers:</p>
+
+<ul>
+<li>They present clients with a simple model for obtaining persistent
+objects and managing their life cycle.</li>
+<li>They decouple application and domain design from persistence
+technology, multiple database strategies, or even multiple data
+sources.</li>
+<li>They communicate design decisions about object access.</li>
+<li>They allow easy substitution of a dummy implementation, for use in
+testing (typically using an in-memory collection).</li>
+</ul>
+
+
+<p>For someone seeking to implement the Repository Pattern in their own
+project, this list serves as an excellent barometer of the quality of
+their implementation.</p>
+
+<h2>My Repository</h2>
+
+<p>A few weeks ago I started working on a new client project. It was a
+greenfield application, and we started building it in Ruby on Rails,
+using the basic Rails application structure, and all of the built-in
+Rails Magic &trade;. This meant a standard MVC architecture,
+ActiveRecord models, the whole nine yards.</p>
+
+<p>We embraced the &ldquo;Rails Way&rdquo; largely to give the project a
+jump-start. We were pretty confident that eventually we&rsquo;d start
+feeling the pain of using Rails and want to head towards some sort of
+hybrid Rails architecture.</p>
+
+<p>A few weeks ago, we got to that point and started looking at
+implementing a repository for the new domain object we were about to
+introduce. Unfortunately, I didn&rsquo;t return to the discussion from the
+DDD book referenced earlier, and we basically started to feel our way
+into implementing the Repository pattern based on my teammates prior
+experience, what we generally knew about the pattern and some
+interesting examples we found on blog posts regarding using the
+Repository pattern with Rails&#8217; ActiveRecord technology.</p>
+
+<p>We ended up with something that looked basically like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">Notes</span>
+</span><span class='line'>  <span class="k">class</span> <span class="nc">Repository</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">dao</span> <span class="o">=</span> <span class="no">Note</span><span class="p">)</span>
+</span><span class='line'>      <span class="vi">@dao</span> <span class="o">=</span> <span class="n">dao</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">new</span><span class="p">(</span><span class="n">attributes</span><span class="p">)</span>
+</span><span class='line'>      <span class="no">Notes</span><span class="o">::</span><span class="no">Note</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">attributes</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">find_by_id</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">record</span> <span class="o">=</span> <span class="vi">@dao</span><span class="o">.</span><span class="n">find_by_id</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+</span><span class='line'>      <span class="no">Notes</span><span class="o">::</span><span class="no">Note</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">record</span><span class="o">.</span><span class="n">attributes</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>
+</span><span class='line'>      <span class="k">if</span> <span class="n">note</span><span class="o">.</span><span class="n">valid?</span>
+</span><span class='line'>        <span class="n">record</span> <span class="o">=</span> <span class="vi">@dao</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">attributes</span><span class="p">)</span><span class="o">.</span><span class="n">save</span>
+</span><span class='line'>        <span class="n">note</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">record</span><span class="o">.</span><span class="n">id</span>
+</span><span class='line'>        <span class="kp">true</span>
+</span><span class='line'>      <span class="k">else</span>
+</span><span class='line'>        <span class="kp">false</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This looks pretty similar to the interface that ActiveRecord gives
+us. If we go back to that list of benefits that repositories are
+supposed to confer, it&rsquo;s not immediately obvious that this
+implementation is really going to give us any of those, except
+possibly the ability to swap database implementations.</p>
+
+<p>But what are we to do instead? Well, as it turns out waiting a few
+days provided an answer. Over the weekend one of the Craftsmen at 8th
+Light took the initiative to toss our codebase headfirst into a
+slightly different repository implementation. This was a tricky
+prospect for a codebase that was fairly coupled to the use of
+ActiveRecord, but once we got everything figured out we ended up with
+something that looked sort of like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">Repository</span>
+</span><span class='line'>  <span class="k">class</span> <span class="nc">RepositoryBase</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">db</span><span class="p">)</span>
+</span><span class='line'>      <span class="vi">@db</span> <span class="o">=</span> <span class="n">db</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="n">attributes</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">convert</span><span class="p">(</span><span class="n">repository</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">attributes</span><span class="p">))</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">find_by_id</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">convert</span><span class="p">(</span><span class="n">repository</span><span class="o">.</span><span class="n">find_by_id</span><span class="p">(</span><span class="nb">id</span><span class="o">.</span><span class="n">to_i</span><span class="p">))</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">all</span>
+</span><span class='line'>      <span class="n">repository</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">e</span><span class="o">|</span> <span class="n">convert</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="p">}</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">count</span>
+</span><span class='line'>      <span class="n">repository</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">count</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">convert</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</span><span class='line'>      <span class="vi">@db</span><span class="o">.</span><span class="n">adapter</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">model_class</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">model_class</span>
+</span><span class='line'>      <span class="k">raise</span> <span class="no">NotImplementedError</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">repository</span>
+</span><span class='line'>      <span class="k">raise</span> <span class="no">NotImplementedError</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">module</span> <span class="nn">Notes</span>
+</span><span class='line'>  <span class="k">class</span> <span class="nc">Repository</span> <span class="o">&lt;</span> <span class="no">Repository</span><span class="o">::</span><span class="no">RepositoryBase</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">find_all_by_user_id</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">repository</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="ss">user_id</span><span class="p">:</span> <span class="n">user_id</span><span class="p">)</span><span class="o">.</span><span class="n">map</span> <span class="k">do</span> <span class="o">|</span><span class="n">note</span><span class="o">|</span>
+</span><span class='line'>        <span class="n">convert</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">model_class</span>
+</span><span class='line'>      <span class="no">Notes</span><span class="o">::</span><span class="no">Note</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">repository</span>
+</span><span class='line'>      <span class="vi">@db</span><span class="o">.</span><span class="n">notes</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This actually looks substantially similar, and in some ways bears even
+more resemblance to an ActiveRecord API.</p>
+
+<p>Since it&rsquo;s come up a few times, let&rsquo;s consider the differences between
+ActiveRecord and the Repository pattern. From the Rails Guide on
+ActiveRecord:</p>
+
+<blockquote><p> In Active Record, objects carry both persistent data and behavior
+ which operates on that data. Active Record takes the opinion that
+ ensuring data access logic as part of the object will educate users
+ of that object on how to write to and read from the database.</p></blockquote>
+
+<p>So the essential feature of ActiveRecord is that the Model class
+represents both the domain model, and the data model. Contrast this
+with one of the primary features of the Repository Pattern as
+described by Eric Evans:</p>
+
+<blockquote><p>[The repository] Mediates between the domain and data mapping layers
+using a collection-like interface for accessing domain objects.</p></blockquote>
+
+<p>Instead of combining domain and data access into the same object, the
+Repository gives us an explicit boundary to partition our system
+on. On one side, we can hide the often significant technical
+complexity of storing and retrieving data. On the other side we can be
+concerned solely with domain objects and their behaviour.</p>
+
+<p>So it&rsquo;s not really the difference in API that we&rsquo;re looking for, it&rsquo;s
+the architecture surrounding that API. In particular, simply by having
+a separate Repository object we&rsquo;ve started to achieve that separation
+between data and domain. So despite the fact that our Repositories
+don&rsquo;t try to fully emulate a collection of domain objects we&rsquo;ve
+actually managed to achieve one of the primary goals of the Repository
+Pattern.</p>
+
+<h2>Taking it Further</h2>
+
+<p>I think the most important question to ask when talking about
+technical infrastructure is &ldquo;What does it buy me?&rdquo; In this case, what
+might we be able to do now that we use repositories everywhere that
+would have been difficult or impossible before? It just so happens
+that one of the next features on our list was implementing users in
+the system having a balance of some kind.</p>
+
+<p>We decided that in the domain, this could naturally be represented by
+each user having an Account. This <a href="https://en.wikipedia.org/wiki/Indirection">indirection</a> conveniently
+gives us the ability to potentially model transfers to non-User
+entities. But how would we actually store the data associated with an
+Account? The most obvious (and somewhat naive) way would be to store a
+simple integer balance for each Account. As an ActiveRecord migration
+it would probably look something like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">create_table</span> <span class="s2">&quot;accounts&quot;</span><span class="p">,</span> <span class="ss">force</span><span class="p">:</span> <span class="ss">:cascade</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">t</span><span class="o">.</span><span class="n">integer</span>  <span class="s2">&quot;balance&quot;</span><span class="p">,</span>    <span class="ss">null</span><span class="p">:</span> <span class="kp">false</span>
+</span><span class='line'>  <span class="n">t</span><span class="o">.</span><span class="n">integer</span>  <span class="s2">&quot;user_id&quot;</span><span class="p">,</span>    <span class="ss">null</span><span class="p">:</span> <span class="kp">false</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>But a common model for recording balances in the domain of accounting
+is typified by double entry book-keeping. In this model the sum of all
+debits and credits must always be equal, and the balance for a
+particular account can be calculated by the sum of debits and credits
+associated with that account. Again, in ActiveRecord that might look
+something like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">create_table</span> <span class="s2">&quot;accounts&quot;</span><span class="p">,</span> <span class="ss">force</span><span class="p">:</span> <span class="ss">:cascade</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">t</span><span class="o">.</span><span class="n">integer</span>  <span class="s2">&quot;user_id&quot;</span><span class="p">,</span> <span class="ss">null</span><span class="p">:</span> <span class="kp">false</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">create_table</span> <span class="s2">&quot;transactions&quot;</span><span class="p">,</span> <span class="ss">force</span><span class="p">:</span> <span class="ss">:cascade</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">t</span><span class="o">.</span><span class="n">integer</span> <span class="s2">&quot;account_id&quot;</span><span class="p">,</span> <span class="ss">null</span><span class="p">:</span> <span class="kp">false</span>
+</span><span class='line'>  <span class="n">t</span><span class="o">.</span><span class="n">integer</span> <span class="s2">&quot;amount&quot;</span><span class="p">,</span> <span class="ss">null</span><span class="p">:</span> <span class="kp">false</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If we&rsquo;ve implemented a successful Repository, it should be possible
+for us to write the Repository using the naive strategy, develop
+client code that utilizes the Repository, and then transition the
+Repository to use the more sophisticated transaction scheme without
+making any changes to the clients.</p>
+
+<p>The first key element for implementing the accounts repository is
+going to be an Account domain object. Ignoring how it gets created for
+the moment, here&rsquo;s a basic implementation.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">Accounts</span>
+</span><span class='line'>  <span class="k">class</span> <span class="nc">Account</span>
+</span><span class='line'>    <span class="kp">attr_reader</span> <span class="ss">:id</span><span class="p">,</span> <span class="ss">:balance</span><span class="p">,</span> <span class="ss">:user_id</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">deposit</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span>
+</span><span class='line'>      <span class="vi">@balance</span> <span class="o">+=</span> <span class="n">amount</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">transfer_to</span><span class="p">(</span><span class="n">account</span><span class="p">,</span> <span class="n">amount</span><span class="p">)</span>
+</span><span class='line'>      <span class="k">if</span> <span class="o">!</span><span class="n">has_funds?</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span>
+</span><span class='line'>        <span class="k">raise</span> <span class="s2">&quot;Balance too low&quot;</span>
+</span><span class='line'>      <span class="k">else</span>
+</span><span class='line'>        <span class="vi">@balance</span> <span class="o">-=</span> <span class="n">amount</span>
+</span><span class='line'>        <span class="n">account</span><span class="o">.</span><span class="n">deposit</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">has_funds?</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span>
+</span><span class='line'>      <span class="vi">@balance</span> <span class="o">&gt;=</span> <span class="n">amount</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">class</span> <span class="nc">Repository</span> <span class="o">&lt;</span> <span class="no">Repository</span><span class="o">::</span><span class="no">RepoBase</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">create_for</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">account</span> <span class="o">=</span> <span class="n">create</span><span class="p">({</span><span class="ss">user_id</span><span class="p">:</span> <span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">})</span>
+</span><span class='line'>      <span class="n">account</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">find_by_user</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">convert</span><span class="p">(</span><span class="vi">@db</span><span class="o">.</span><span class="n">accounts</span><span class="o">.</span><span class="n">find_by_user_id</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">))</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">model_class</span>
+</span><span class='line'>      <span class="no">Accounts</span><span class="o">::</span><span class="no">Account</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Notice that this version of the account uses the same naive model of
+storing a simple balance. We could rewrite this domain level code to
+store a list of transactions as an array of hashes, and then collapse
+the list of transactions to the new effective balance when saving the
+object. So already, we can see that separating the concerns of data
+storage and domain behaviour has achieved some level of isolation.</p>
+
+<p>Now let&rsquo;s imagine we change the database implementation so there is no
+longer any <code>db.accounts</code> object. Instead, we have <code>db.transactions</code>
+which has methods like <code>find_all_transactions_for_account_id</code>.</p>
+
+<p>Again ignoring details of how the transactions are created or saved:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">Accounts</span>
+</span><span class='line'>  <span class="k">class</span> <span class="nc">Repository</span> <span class="o">&lt;</span> <span class="no">Repository</span><span class="o">::</span><span class="no">RepoBase</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">create_for</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">account</span> <span class="o">=</span> <span class="n">create</span><span class="p">({</span><span class="ss">user_id</span><span class="p">:</span> <span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">})</span>
+</span><span class='line'>      <span class="n">account</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">find_by_user</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">transactions</span> <span class="o">=</span> <span class="vi">@db</span><span class="o">.</span><span class="n">transactions</span><span class="o">.</span><span class="n">find_by_user_id</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">balance</span> <span class="o">=</span> <span class="n">transactions</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="o">|</span><span class="n">r</span><span class="p">,</span><span class="n">t</span><span class="o">|</span> <span class="n">r</span> <span class="o">+</span> <span class="n">t</span><span class="o">.</span><span class="n">amount</span> <span class="p">}</span>
+</span><span class='line'>      <span class="n">convert</span><span class="p">({</span><span class="ss">user_id</span><span class="p">:</span> <span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="ss">balance</span><span class="p">:</span> <span class="n">balance</span><span class="p">})</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">model_class</span>
+</span><span class='line'>      <span class="no">Accounts</span><span class="o">::</span><span class="no">Account</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This was a very minor change, given that under the covers data is
+being stored in an entirely different manner. Even better, the change
+is totally isolated to the repository. Because of the original naive
+implementation of the Account domain object, some changes will need to
+be made to the way it handles transfers. This may look like the
+details of the data storage are leaking into the domain, but in fact
+this is a data requirement bubbling up. We can&rsquo;t store transactions if
+we don&rsquo;t record them in the first place. And realistically, we&rsquo;re
+probably going to need the concept of a Transaction to be added to the
+domain model.</p>
+
+<p>You may then find yourself wondering, &ldquo;What value do we really get
+from this separation if both sides of the boundary are going to need
+to change anyhow?&rdquo; The answer I think is two things: separation of
+concerns and incremental changes. The details of how we handle
+transactions in the domain layer are going to be different from the
+details needed to handle storing data in the database. This separation
+of concerns allows us to focus on the technical complexity of data
+storage when writing that code, and to focus on the business
+complexity when dealing with the domain code instead of mixing the two
+together.</p>
+
+<p>Second, this separation layer provides us an abstraction layer that we
+can use to isolate changes to our code. Earlier I demonstrated how the
+domain layer could stay the same even though storage had moved to a
+transaction model. It&rsquo;s not too hard to imagine changing the domain
+model to track transactions using pure Ruby data structures and having
+the repository still store accounts with an explicit balance.</p>
+
+<p>This separation layer then gives us a nice stepping stone to move from
+one implementation to the other. This stepping stone is important
+because it&rsquo;s a place where we should be able to stop making code
+changes and have all of our tests pass. To me, being able to make real
+changes in this stepwise manner is one of the hallmarks of
+well-factored and decoupled code.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Estimating Is Hard]]></title>
@@ -3051,617 +3584,6 @@ there it was. Simple instructions to do the simple, straightforward
 thing.</p>
 
 <p>[[virtualenv]: <a href="http://virtualenv.readthedocs.org/en/latest/virtualenv.html">http://virtualenv.readthedocs.org/en/latest/virtualenv.html</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Keybase Hacker News Q&A]]></title>
-    <link href="http://www.zephyrizing.net/blog/2014/06/11/keybase-hackernews-q-and-a/"/>
-    <updated>2014-06-11T23:00:00-05:00</updated>
-    <id>http://www.zephyrizing.net/blog/2014/06/11/keybase-hackernews-q-and-a</id>
-    <content type="html"><![CDATA[<p>I started using <a href="https://keybase.io">Keybase</a> sometime back in April. I&rsquo;ve been interested
-in doing crypto stuff for a long time, starting with using an SSH
-keypair instead of a password to access the WWU CS department&rsquo;s
-computer labs remotely.</p>
-
-<p>Learning more about GPG and actually figuring out how to send and
-receive encrypted messages has been on my list of things to learn for
-a while, but every time I had a couple spare minutes and tried to
-approach it I was rebuffed by the impenetrability of the manuals for
-gpg.</p>
-
-<p>However, recently while thinking about who to give my remaining five
-invites to, I decided to do some more research on what those more
-security-savvy than I thought about Keybase.</p>
-
-<!--more-->
-
-
-<p>The results were somewhat of a mixed bag. In no particular order, I
-read:</p>
-
-<ul>
-<li><a href="http://blog.lrdesign.com/2014/03/thoughts-on-keybase-io/">A thoughtful critique</a></li>
-<li><a href="http://www.tbray.org/ongoing/When/201x/2014/03/19/Keybase">A nice first look</a></li>
-<li><a href="https://filippo.io/on-keybase-dot-io-and-encrypted-private-key-sharing/">A response to the people decrying the upload private key feature</a></li>
-<li><a href="http://blog.lizdenys.com/2014/03/31/refusing-to-verify-myself/">A brief look at the chain of trust in even getting Keybase</a></li>
-</ul>
-
-
-<p>I also came across the discussion that occurred on Hacker News shortly
-after Keybase first appeared. As so often happens when I stumble on to
-a HN comment page, I ended up reading the whole thing. What I noticed
-was that there seems to be some information from Max and Chris (the
-founders of Keybase) that I hadn&rsquo;t run across on the Keybase website
-itself.</p>
-
-<p>So I volunteered myself for a public service. I extracted the parts of
-the discussion that were interesting and relevant into a text
-document. I tried to focus on the questions that got interesting
-responses. I left out many little asides, and tangential discussions.</p>
-
-<p>The founders of Keybase are malgorithms and maxtaco. Most of the
-answers are by them, though in some cases I&rsquo;ve preserved a chain of
-replies, with only the first marked as a &ldquo;question&rdquo;. Without further
-ado:</p>
-
-<blockquote><h3>General Announcement</h3>
-
-<p>malgorithms 118 days ago</p>
-
-<p>There were multiple questions/comments below about this, so I felt I
-should clarify one detail about the keybase client&rsquo;s trust of the
-server. When the keybase client requests maria&rsquo;s key from the keybase
-server, it does not simply trust the public key because it trusts the
-server (or uses https - huh?).</p>
-
-<p>Rather, the server replies with links to tweets, gists, etc. &ndash;
-maria&rsquo;s public identity proofs. The keybase client does not trust that
-these are honest, so it scrapes them directly and makes sure they were
-signed by the same public key that the server provided. In other
-words, the server could reply with a different maria, and simply lie,
-but not with the real maria&rsquo;s github or twitter account.</p>
-
-<p>The server could also lie by omission, leaving out an identity. But it
-cannot invent ones that do not exist, without the client knowing.</p>
-
-<p>Again, the premise here is that maria is the sum of her online
-identities.</p>
-
-<p>The website itself is of course a different story. When you look up
-maria on keybase&rsquo;s website, you are trusting that keybase.io did not
-lie about her github account. Fortunately you can confirm by following
-the link to her gist, where she announced her keybase username and
-posted her key fingerprint.</p>
-
-<h3>Q:</h3>
-
-<p>theboss 118 days ago</p>
-
-<p>I don&rsquo;t see why you don&rsquo;t just get the key once, allow you to verify
-it, and store it locally. It seems pointless to make all these extra
-requests to you.</p>
-
-<p>There&rsquo;s a reason that gpg does this&hellip;.. Maria&rsquo;s twitter being hacked,
-Maria&rsquo;s github being hacked, Maria&rsquo;s Keystore being hacked&hellip;.a lot
-can go wrong.</p>
-
-<p>There are still weaknesses like, you lie about a github and link to
-your own github, and lie about the public key. And&hellip;many others.</p>
-
-<h3>A:</h3>
-
-<p>malgorithms 118 days ago</p>
-
-<p>yes, it does do this; once you&rsquo;re satisfied with maria&rsquo;s identity,
-that she&rsquo;s the person you want, you sign a statement to that effect,
-which you can store just locally or post back to the server. (or of
-course you can just sign her key in GPG!) The latter - posting back to
-the server - is for portability reasons. A keybase user will likely
-use keybase on multiple machines.</p>
-
-<h3>Q:</h3>
-
-<p>riquito 117 days ago</p>
-
-<p>The first thing I thought about is a man in the middle attack with
-homoglyphs. I don&rsquo;t know if I&rsquo;m paranoid, but look at this</p>
-
-<blockquote><p>keybase id maria</p></blockquote>
-
-<p>   pgp: C4B3 15B4 7154 5281 5100 1C58 C2A5 977B 0022 github:
-   mаria_leah ✓ <a href="https://gist.github.com/23423">https://gist.github.com/23423</a> twitter: mаria_h20 ✓
-   <a href="https://t.co/m%D0%B0ria_h20/523554">https://t.co/m%D0%B0ria_h20/523554</a> site: mаriah20.com ✓
-   <a href="https://m%D0%B0riah20.com/X904F...">https://m%D0%B0riah20.com/X904F&#8230;</a></p>
-
-<p>I looked up for &lsquo;maria&rsquo;, all ascii. The answer, served by a malicious
-server, contains the first &lsquo;a&rsquo; of maria in Cyrillic (check yourself,
-you&rsquo;ll see that &lsquo;mаria_leah&rsquo; != &lsquo;maria_leah&rsquo;). This would fool the
-user.</p>
-
-<p>Maybe the client should apply some logic as browsers do for IDN
-homograph attack to show characters not in your locale in a different
-way, or at least warn you.</p>
-
-<h3>A:</h3>
-
-<p>malgorithms 117 days ago</p>
-
-<p>Hi riquito - this is a very legitimate concern, and it has to be
-reviewed individually for each type of proof keybase supports, in the
-client. With twitter, keybase, and github, you can&rsquo;t have a username
-containing any character other than an alphanumeric, dash, or
-underscore. Which means this kind of attack is impossible.</p>
-
-<p>But for future identity proofs (domains, for example, which we&rsquo;ve yet
-to implement), this kind of attack is real. Our approach here will be
-that anything outside of normal ascii will be highlighted and
-addressed to the user, as a serious warning.</p>
-
-<h3>Q:</h3>
-
-<p>sweis 118 days ago</p>
-
-<p>Even though there is a disclaimer, I think the &ldquo;encrypt in your
-browser&rdquo; feature (<a href="https://keybase.io/encrypt">https://keybase.io/encrypt</a>) undermines Keybase&rsquo;s
-security credibility.</p>
-
-<p>This form has essentially the same level of security as
-Hushmail. Anybody using it should consider the content exposed to
-Keybase or anyone compromising Keybase.</p>
-
-<h3>A:</h3>
-
-<p>maxtaco 118 days ago</p>
-
-<p>I&rsquo;m not an authority on hushmail, but it seems like they do crypto on
-the server, and the server is just trusted to throw away the keys and
-plaintext?</p>
-
-<p>In the keybase Web client, all crypto happens on the browser. The
-server knows no keys or data in plaintext. Of course, you&rsquo;d have to
-audit the front-end JS code to believe that claim.</p>
-
-<p>But our intention is that the only way to compromise the Web-based
-tools would be to insert malicious JavaScript into the client&rsquo;s
-browser. A read-only compromise of the server yields only encrypted
-data, and the server never has access to the decryption keys.</p>
-
-<h3>Q:</h3>
-
-<p>JustARandomGuy 118 days ago</p>
-
-<p>Hi Chris, a few comments:</p>
-
-<ol>
-<li><p>I like the site design, the story flow on the front page does a
-great job of explaining what keybase is.</p></li>
-<li><p>I see (from the abovementioned story flow) that keys can be
-verified by reviewing signed tweets/gists. Is this functionality
-extendable to arbitrary links; i.e. verifying keys against personal
-blogs, Tumblr, WordPress or does the third-party site need to
-implement a recognized API?</p></li>
-</ol>
-
-
-<p>Again, thanks so much, and it looks like a terrific site so far.</p>
-
-<h3>A:</h3>
-
-<p>malgorithms 118 days ago</p>
-
-<p>Good question! There will be no such thing as a general check, because
-&ndash; for any identity &ndash; the client software has to perform a check that
-a human would agree means something. For example, what does it mean
-that you own a certain blog? How would a person confirm it? Well, at
-first glance it might mean that you have the power to post a message
-there. But someone else could do that it in a comment, and so that
-wouldn&rsquo;t work with Keybase. So any given identity check has to match
-some human definition of what it means to have that identity. And it
-has to be publicly auditable.</p>
-
-<p>With twitter, it&rsquo;s the ability to post a tweet under a certain
-username. With owning a tumblr account, it might be something
-similar. With your known StackExchange profile it might mean posting a
-statement in a specific part of your profile. And so on.</p>
-
-<p>The common thread in each case is (1) that you post in a place where
-only your identity can, and (2) what you post is a signed statement
-claiming a connection among three things: (a) your keybase username,
-(b) your public key, and (3) the identity on that third party
-service. (The third one is necessary so it can&rsquo;t be moved elsewhere.)
-Note how twitter and github&rsquo;s are totally different, but achieving
-these three things.</p>
-
-<p>We will build out this list of identity checks, hopefully making all
-kinds of them easy to do. Everything from proving you own a domain to
-having a tumblr or reddit accoun. The definition of those checks will
-all be publicly reviewable, both in the spec and in the client, which
-is what checks them for you.</p>
-
-<h3>Q:</h3>
-
-<p>ghayes 118 days ago</p>
-
-<p>Well, to follow up, could this be extended to ownership of a domain
-(via DNS txt record)? Could we use this as a means of authentication
-of a self-signed certificate for a domain?</p>
-
-<h3>A:</h3>
-
-<p>maxtaco 118 days ago</p>
-
-<p>Yes to DNS, though we have to be careful here since DNS can be spoofed
-more easily than github or twitter proofs over https. I was thinking a
-slightly better way to prove ownership of foo.com would be to post a
-proof at <a href="https://foo.com/_keybase">https://foo.com/_keybase</a> (or something similar). To spoof
-this, an attacker would have to spoof DNS and also the https
-certificate.</p>
-
-<p>Authenticating a self-signed domain certificate via keybase is a neat
-idea, but would probably need some browser support, unless there&rsquo;s a
-clever hack that I&rsquo;m not thinking of.</p>
-
-<h3>Q:</h3>
-
-<p>sneak 118 days ago</p>
-
-<p>I really, really want crypto, specifically, safe and secure-by-default
-crypto, to become much more usable.</p>
-
-<p>Despite this hope, I can&rsquo;t seem to help the fact that the first thing
-that popped into my head when I read their webpage is &ldquo;oh, they&rsquo;re
-wrapping and abstracting important key authentication and critical key
-trust configuration to make it more user-friendly, and implementing it
-all in javascript. WHAT COULD POSSIBLY GO WRONG?&rdquo;</p>
-
-<p>Even if I got whacked on the head one day and suddenly loved
-javascript, I would not use it for certain projects when I wanted to
-be taken seriously by, say, cryptographers.</p>
-
-<p>Then again, look at all the success cryptocat has had!</p>
-
-<h3>A:</h3>
-
-<p>FiloSottile 118 days ago</p>
-
-<p>As long as the trust model is that the server is untrusted, it can be
-written in the language they prefer. As for the client, there can be
-as many implementations in as many languages as needed to make
-everyone happy IMHO (they call it reference client in the home).</p>
-
-<h3>Q:</h3>
-
-<p>sneak 118 days ago</p>
-
-<p>If this talks to keybase&rsquo;s API over https and any large groups come to
-rely on this, we&rsquo;ve then effectively replaced the decentralized safety
-of the Web of Trust used for authenticating PGP keys with the PKI
-that&rsquo;s used in browsers, which is completely and totally fucked.</p>
-
-<p>I cannot support a project that doesn&rsquo;t build and strengthen the
-underlying WoT. Getting https involved for authenticating unknown keys
-is a huge step backwards. Madness.</p>
-
-<h3>A:</h3>
-
-<p>maxtaco 118 days ago</p>
-
-<p>We&rsquo;re not big fans of browser PKI either, but we&rsquo;re using it as
-scaffolding that hopefully one day can be torn down.</p>
-
-<p><code>keybase-installer</code> needs an initial install over https from npm. We
-unfortunately saw no way around this.</p>
-
-<p>Assuming that install succeeds with integrity, then all future
-upgrades of the installer and client are verified with PGP keys stored
-locally on the client.</p>
-
-<p>Once the client is installed, it speaks HTTPS to the server, but we&rsquo;re
-not trusting the root CA. Rather, we sign with our own CA that we ship
-with the client.</p>
-
-<p>The proofs themselves, on twitter and github, all can be verified in
-the clear, as FiloSottile points out, but of course relying upon the
-HTTPS certificates of twitter and github to make sure the proofs
-weren&rsquo;t corrupted in transit between those services and the client.</p>
-
-<h3>Q:</h3>
-
-<p>bqe 118 days ago</p>
-
-<p>I don&rsquo;t understand how using HTTPS for the API has any bearing
-whatsoever on the WoT built via PGP.</p>
-
-<p>You can still verify the keys with your client&rsquo;s cached copies, or
-using another PGP client.</p>
-
-<h3>A:</h3>
-
-<p>FiloSottile 118 days ago</p>
-
-<p>Exactly, and moreover. If there is no trust in the server, everything
-can even go over unencrypted HTTP. CAs have no business here.</p>
-
-<h3>Q:</h3>
-
-<p>IgorPartola 118 days ago</p>
-
-<p>OK, finally looking at it on a desktop&hellip;</p>
-
-<p>So my first question is this: if I know &ldquo;maria&rdquo; and I want to look her
-up to get her GPG key, how does keybase handle that? Does it just do
-an email address lookup, as in goes to, say, GitHub, grabs her email
-address, maria@example.com, then goes to a public key server and grabs
-the key that corresponds to maria@example.com?</p>
-
-<p>If that&rsquo;s the case, there is a security issue: what if Maria never
-published a GPG key, but Chloe did using Maria&rsquo;s email address?
-Moreover, what if Chloe has access to Maria&rsquo;s inbox and can read these
-messages I believe to be only readable by Maria?</p>
-
-<p>Edit: I see from responses below that various online presences of an
-identity tied to &ldquo;maria&rdquo; are checked. Is this not then susceptible to
-its own attack? For example, if Maria does not have a Twitter account
-and I create one, or compromise hers and post a different key, will I
-be able to at least introduce doubt into her identity, if not take it
-over outright?</p>
-
-<h3>A:</h3>
-
-<p>maxtaco 118 days ago</p>
-
-<p>No, there are no proofs based on e-mail addresses, because such proofs
-are not publicly-auditable. We could ask that maria prove to the
-server that she controls a given gmail account, but there&rsquo;s no way for
-the server to prove that to you.</p>
-
-<p>We want the server to be untrusted, ideally just a dumb message
-router.</p>
-
-<p>If Chloe wants to impersonate maria, she&rsquo;ll need to get control of
-maria&rsquo;s twitter and github accounts. Just claiming maria&rsquo;s email
-address won&rsquo;t get her anywhere. (Note that GPG keyservers are
-susceptible to exactly the attack you describe).</p>
-
-<h3>A:</h3>
-
-<p>IgorPartola 118 days ago</p>
-
-<p>Hold on. First, GPG servers are susceptible to the same type of
-attack, except they would never be used that way. You never look up a
-person by email, the send them an encrypted message using the key you
-get. Instead, you verify their key and email address out of band: you
-meet them, check their credentials, then sign the key. Keybase is
-trying to get rid of the in-person verification, an effort I applaud,
-but in favor of a much weaker check: whether a few centralized
-accounts had been compromised.</p>
-
-<p>The other part, where you check Maria&rsquo;s Twitter and GitHub accounts,
-means that a few things like Twitter, and GitHub are impervious to
-Chloe: a tall order and a centralized one at that.</p>
-
-<p>Once again, is the point here for me to get a tuple of (email address,
-public GPG key) so I can email Maria securely? If so, then someone
-somewhere has to prove that this tuple fetched from the public key
-servers is valid.</p>
-
-<p>If the point is to only communicate via keybase.io, then the service
-is centralized, and useless once actual sensitive info is exchanged,
-the US government takes notice and shuts it down at the DNS level.</p>
-
-<h3>A:</h3>
-
-<p>maxtaco 118 days ago</p>
-
-<p>Cool, I agree no one should use PGP servers the way I described, but
-you never know what people are doing out there. To do things the
-proper way, as you described, is difficult in practice for lots of
-people.</p>
-
-<p>To answer the question, the point isn&rsquo;t to get an (email address,
-GPG-key) mapping. It&rsquo;s to get a (public-internet-identity, GPG-key)
-mapping. People sometimes do this today in an adhoc manner
-(e.g. tweeting your GPG fingerprint). We want it to be checkable by
-user-friendly software.</p>
-
-<h3>A:</h3>
-
-<p>IgorPartola 118 days ago</p>
-
-<p>I see. That MO makes a bit more sense then, though is it not then
-limited to just Keybase.io and will no longer work if something
-happens to this service? Or more importantly, is there a way to make
-this distributed?</p>
-
-<h3>A:</h3>
-
-<p>maxtaco 118 days ago</p>
-
-<p>If the site went away tomorrow, you&rsquo;d still have keys in your GPG
-keychain. You&rsquo;d also have a local cache of the server-side data
-relevant to you.</p>
-
-<p>All public server-side data is available as a dump
-(<a href="https://keybase.io/__/api-docs/1.0#call-dump-all">https://keybase.io/__/api-docs/1.0#call-dump-all</a>). Private data like
-encrypted public keys and password hashes we of course will keep under
-wraps.</p>
-
-<p>We don&rsquo;t have immediate plans to make the system distributed, but if
-someone did it, we&rsquo;d find it very cool. It&rsquo;s just too much for us to
-do right now.</p>
-
-<h3>Q:</h3>
-
-<p>theboss 118 days ago</p>
-
-<p>Where are the security details published? I think that&rsquo;s what we all
-want to see&hellip;</p>
-
-<p>On top of this&hellip;.I think this is cool in theory but bad in practice.</p>
-
-<p>The assumption that Root CA&rsquo;s are trustworthy is already hard enough
-to make, how do I know that Maria is actually Maria? How will you
-verify that &ldquo;Maria&rdquo; actually owns that twitter, github, gmail. Maybe
-it is possible to devise some type of scheme for those sites, but how
-about more obscure services?</p>
-
-<p>One mistake in one single account causes the entire thing to fall
-apart&hellip;</p>
-
-<h3>A:</h3>
-
-<p>maxtaco 118 days ago</p>
-
-<p>As Chris said, we would like to publish everything, just haven&rsquo;t found
-the time yet. We have bits and pieces in wikis in our various github
-repositories (almost all of which are open source and public).</p>
-
-<p>The high bits are: all crypto is with GPG/RSA as per RFC4880. There
-are of course problems here, but we wanted backwards-compatibility and
-well-tested, well-used clients.</p>
-
-<p>We encrypt server-stored GPG private keys (if you choose to use that
-option) with TripleSec (see <a href="https://keybase.io/triplesec">https://keybase.io/triplesec</a>).</p>
-
-<p>Users use GPG to sign a series of JSON objects, of the form &ldquo;I&rsquo;m
-maxtaco on twitter&rdquo;, or &ldquo;I checked Chris&rsquo;s proofs as of 2014/2/14 and
-they look good to me.&rdquo; All JSON objects that a user signs are chained
-together with SHA-2 hashes. So a user can sign the whole group of JSON
-statements by just signing the most recent one.</p>
-
-<p>Here&rsquo;s an example (click on &ldquo;Show the Proof&rdquo;)
-<a href="https://keybase.io/max/sigs/ZnBizHMA8RKSB598TaDtjlPlLKSEu1Wu...">https://keybase.io/max/sigs/ZnBizHMA8RKSB598TaDtjlPlLKSEu1Wu&#8230;</a></p>
-
-<p>There&rsquo;s a fair amount of engineering that went into the software
-distribution system. We rely first on npm to get the initial client
-out there, but after that, exclusively GPG for code-signing. That&rsquo;s
-documented here:</p>
-
-<p><a href="https://github.com/keybase/node-installer/wiki/Update-Archit...">https://github.com/keybase/node-installer/wiki/Update-Archit&#8230;</a></p>
-
-<p>We hope to have better documentation soon, and we value feedback, we
-just haven&rsquo;t had the time to put it together yet.</p>
-
-<h3>Q:</h3>
-
-<p>caf 118 days ago</p>
-
-<p>The idea here isn&rsquo;t that you use keybase to find out Maria&rsquo;s twitter,
-github or gmail identities - it&rsquo;s the opposite. The idea is that you
-already know who Maria is on one or more of those services, so the
-fact that the account you know is Maria&rsquo;s at github has posted a
-signed message from that public key is supposed to testify to you that
-that is really your Maria&rsquo;s public key.</p>
-
-<p>You could of course manually review and verify Maria&rsquo;s github post
-that contains her public key - all that keybase is really doing here
-is providing an easy way of discovering that github post (or tweet, or
-whatever).</p>
-
-<h3>A:</h3>
-
-<p>andrewaylett 117 days ago</p>
-
-<p>s/could/should/?</p>
-
-<h3>A:</h3>
-
-<p>caf 116 days ago</p>
-
-<p>Only if you don&rsquo;t trust your copy of the keybase client (as opposed to
-the server, which you should not need to trust).</p>
-
-<h3>Q:</h3>
-
-<p>theboss 118 days ago</p>
-
-<p>When I get someone&rsquo;s GPG key I can call them on the telephone or go to
-their house and make sure I got the right one.</p>
-
-<p>I add it and use it. When you use this, I&rsquo;m assuming I get that key
-every time from the server. I can get it and verify it once, or twice,
-or three times, but what about the 1000th time? What happens when I am
-important enough that they return a public key that is not Maria&rsquo;s,
-and I am none the wiser.</p>
-
-<h3>A:</h3>
-
-<p>malgorithms 117 days ago</p>
-
-<p>boss, I&rsquo;m glad you answered this question. Because it explains the
-impetus for Keybase.</p>
-
-<p>I think what Keybase is addressing in the status quo is twofold: (1)
-sadly, almost no one does what you describe; in person meeting key
-exchanges and webs of trust may sadly be as unpopular in 20 years as
-they are now, and as they were 20 years ago. People who go to them are
-often confused, even programmers. I wish it were different.</p>
-
-<p>And (2) more important, in 2014, often the person you&rsquo;re dealing with
-is someone whose digital public identity is what matters, not their
-face in real life or phone number. If you know me online as
-github/malgorithms and twitter/malgorithms, to get my key, meeting
-someone in person or talking on the phone to someone who claims to be
-me is actually less compelling than a signed statement by malgorithms
-in all those places you know me.</p>
-
-<p>And if you do know me in real life, then I can tell you my keybase
-username and fingerprint, exactly as you&rsquo;re used to. So it&rsquo;s still as
-powerful for meeting in person. With the added benefit you can confirm
-my other identities, which you likely know to.</p>
-
-<p>In answer to your scenario about verifying: you only need to review
-the &ldquo;maria&rdquo; the server provides once, and then your private key signs
-a full summary of maria &ndash; her key and proofs. Cases 2 through 1000 of
-performing a crypto action on maria involve you only trusting your own
-signature of what &ldquo;maria&rdquo; is. The client can query the server for
-changes to her identity, and this will be configurable; if maria adds
-a new proof, you might wish to know.</p>
-
-<h3>A:</h3>
-
-<p>jonesetc 117 days ago</p>
-
-<p>This is what I assumed the answer would be, and at this point it just
-becomes a difference in opinion. I personally do not believe that the
-methods you describe are generally acceptable options in the modern
-age. My phone number and address are much more important to me than
-the off chance of someone capturing my https traffic, breaking it, and
-inserting a fake public key. There is a point where the absolute
-security of exchanging public keys written on pieces of paper in a
-park are called for, but it&rsquo;s not for everyone or even most.</p>
-
-<h3>Q:</h3>
-
-<p>jonesetc 118 days ago</p>
-
-<p>Is there a way to remove an associated account?</p>
-
-<h3>A:</h3>
-
-<p>maxtaco 118 days ago</p>
-
-<p>Yes, though it might be broken right now. Our plan is to allow this,
-for sure.</p>
-
-<h3>Q:</h3>
-
-<p>diasp 117 days ago</p>
-
-<p>Interesting. Another approach is <a href="https://encrypt.to/">https://encrypt.to/</a> which loads the
-public key from key servers and encrypts client-side via JS.</p>
-
-<h3>A:</h3>
-
-<p>malgorithms 117 days ago</p>
-
-<p>To clarify the difference, it seems encrypt.to is a service which does
-PGP crypto in the browser, based on keys pulled from keyservers. In
-contrast, Keybase is an identity-proving service, which proves key X
-belongs to person with twitter account Y, github account Z, etc. As a
-convenience, it also does encryption and other crypto actions for its
-users.</p></blockquote>
 ]]></content>
   </entry>
   
