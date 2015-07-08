@@ -1,0 +1,432 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Domain Driven Writing - Zephyrizing</title>
+  <meta name="author" content="Geoff Shannon">
+
+  
+  <meta name="description" content="I&rsquo;ve been reading Domain Driven Design by Eric Evans for the past
+month or so, and thinking about the ideas and concepts in it has been &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://www.zephyrizing.net/blog/2015/07/03/domain-driven-writing">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+  <link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
+  <link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160">
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Zephyrizing" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+</head>
+
+<body   >
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-43671921-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+  <header role="banner"><hgroup>
+  <h1><a href="/">Zephyrizing</a></h1>
+  
+    <h2>Thoughts on cast-iron seasoning, programming and everything&#8230;</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:www.zephyrizing.net" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/about">About</a></li>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/presentations">Presentations</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+
+  <header>
+    
+      <h1 class="entry-title">Domain Driven Writing</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-07-03T23:28:51-05:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>3</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>11:28 pm</span></time>
+        
+           | <a href="#disqus_thread"
+             data-disqus-identifier="http://www.zephyrizing.net">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>I&rsquo;ve been reading <em>Domain Driven Design</em> by Eric Evans for the past
+month or so, and thinking about the ideas and concepts in it has been
+consuming a lot of my mental space and time. One thing in particular
+that I&rsquo;ve found to be really interesting is his concept of developing
+a <strong>Ubiquitous Language</strong> for the project.</p>
+
+<p>At a very high level, the idea of having a Ubiquitous Language for a
+project just means that there is specific vocabulary and jargon that
+is used to describe certain key concepts about the domain of the
+project and the particular implementation that the team is
+developing. Or to put it even more simply, that when someone on the
+team uses a word or a phrase, everyone else knows what they are
+talking about.</p>
+
+<!--more-->
+
+
+<p>This is actually something that people do constantly. You build up a
+common language with the people you are closest to: your family,
+friends, teammates at work. I know that my group of close friends has
+a very particular way of speaking with one another, that probably
+sounds somewhat odd to &ldquo;outsiders.&rdquo;</p>
+
+<p>Sometimes it happens organically over a long period of time, and
+sometimes we do it intentionally. My favorite example of this second
+category are the talks that Rich Hickey gives. Some of them at least
+have followed a particular format. He starts with the definition of a
+word, possibly two. He defines them precisely, and he defines the
+context that he is talking within. He then builds on this definition
+to talk about some fundamental idea in programming, or some insight
+that this rigorous definition gave him.</p>
+
+<p>The key part though, is that a good portion of his talk is given to
+building up a sort of basic common language so that he is confident
+that when he uses a word, we understand as well as we possibly can
+what he intended by saying it.</p>
+
+<p>A good friend of mine often has a very hard time with this. I have had
+many conversations with him about interesting and deep topics that
+have turned into arguments, largely about what a particular word
+means. The problem is often that he has a deeper context and specific
+meaning that he intends when he says something. But because I haven&rsquo;t
+studied the same things or shared the same experiences, I don&rsquo;t
+realize he means something different than usual.</p>
+
+<p>I wish I had a concrete example that I could talk about, because this
+sounds very wish-washy.</p>
+
+<h3>A Slight Digression</h3>
+
+<p>I&rsquo;m strangely reminded of the final program from Mark Pilgrim&rsquo;s
+excellent - though sorely out-dated - <em>Dive Into Greasemonkey</em>. He
+spends the first several tens of lines of code writing some facilities
+that will make programming Javascript more reminiscent of programming
+in Python because he&rsquo;s so familiar with Python.</p>
+
+<p>One thing that Eric Evans returns to throughout <em>DDD</em> is leaning on
+the <em>Ubiquitous Language</em> of the project to suss out design issues
+early. He emphasizes that we should try and engage all of our ways of
+communicating and understanding the ideas of the project: with
+language, with diagrams, and with code.</p>
+
+<p>Uncle Bob has written at length about how (good) tests are really
+specifications for how a program works. They should clearly
+communicate the intent of the system.</p>
+
+<p>Gerald Sussman and Hal Abelson write in the preface to their classic
+<em>Structure and Interpretation of Computer Programs</em> that they believe
+that programming is not just an activity concerned with causing
+computers to enact computations. It is much more importantly &ldquo;a novel
+formal medium for expressing ideas about process.&rdquo;</p>
+
+<p>These two ideas, tests as specifications, and computer languages as
+formal language describing processes have started to seem intimately
+connected to me.</p>
+
+<h3>Automation and Communication</h3>
+
+<p>Several years ago I was working on a project to build a video game AI
+with several other students at my university. Another student and I
+were pioneering the project, and in particular I took on the task of
+figuring out how to get the development environment working on the
+Computer Science lab machines.</p>
+
+<p>This setup was non-trivial. It involved setting environment variables,
+setting compatibility flags on the game executable, and installing
+plugins into the game&rsquo;s binary directory. On top of that, but because
+of the way the lab machines were setup, there was additional setup
+that needed to be done at the start of <em>every development session</em>.</p>
+
+<p>Once I had gotten everything working through a long process of trial
+and error, I then set about attempting to duplicate my success from a
+clean profile. As I figured out the minimal set of setup steps, I
+wrote them down. I then proceeded to test the quality of these
+instructions by handing them off to another student to replicate with
+me watching over his shoulder.</p>
+
+<p>You will of course be shocked to learn that he had almost no success
+in following the steps I had written down. This is because I had
+written them in enough detail for me to understand and remember
+what needed to be done, but there was still a huge amount of context
+for those instructions that resided only in my own head. Context that
+I head gained by the laborious trial, error and troubleshooting
+process of setting the environment up initially.</p>
+
+<p>I iterated on the instructions several more times, each time finding
+some new guinea pig to test them on. Until eventually, I came to the
+conclusion that I would actually need pictures of the GUI dialogs and
+full nearly click-by-click instructions in order to get a set of
+instructions that other students could follow without making mistakes.</p>
+
+<p>At that moment, I realized that I would be far less work, both
+up-front and continuing to simply figure out how to write code to
+automate the development environment setup.</p>
+
+<p>This seems like a no-brainer. Write two scripts one time, spend a few
+hours figuring out the nuances of scripting Windows and then tell
+people &ldquo;Download those two scripts. Run this one once, then run that
+one every time you want to work on the project.&rdquo; Done.</p>
+
+<p>The problem for me is the same problem that a math tutor has with
+simply telling the student the formula they need to use to calculate
+the answer. There is a <em>lot</em> of important context that is missing.</p>
+
+<p>My setup script was incredibly effective. Not only did it flawlessly
+setup up the dev environment, but it was at least an order of
+magnitude faster than for a human to accomplish the same tasks.</p>
+
+<p>That small script I wrote, expressed the idea of how to setup that
+development environment incredibly precisely. But there was now
+something missing. There was no context for that process to fit in
+to. The why of it was lost, and all that was left was for people to
+run it.</p>
+
+<p>Even reading the contents of the script, it was possible to determine
+what it did, but the <em>why</em> was completely missing.</p>
+
+<p>I think testing, at it&rsquo;s very best, can start to supplement this
+deficiency in code. It can help to answer the question &ldquo;Yes, it
+works. But why does it do <em>that</em> way?&rdquo;</p>
+
+<h4>p.s.</h4>
+
+<p>Some interesting papers that are somewhat related to this post:</p>
+
+<ul>
+<li><a href="https://www.recurse.com/blog/58-paper-of-the-week-notation-as-a-tool-of-thought">Notation as a Tool of Thought</a></li>
+<li><a href="https://www.recurse.com/blog/41-introducing-paper-of-the-week">Growing A Language</a></li>
+</ul>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Geoff Shannon</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2015-07-03T23:28:51-05:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>3</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>11:28 pm</span></time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://www.zephyrizing.net/blog/2015/07/03/domain-driven-writing/" data-via="RadicalZephyr" data-counturl="http://www.zephyrizing.net/blog/2015/07/03/domain-driven-writing/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2015/06/29/the-many-faces-of-the-repository-pattern/" title="Previous Post: The Many Faces of the Repository Pattern">&laquo; The Many Faces of the Repository Pattern</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/07/03/domain-driven-writing/">Domain Driven Writing</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/06/29/the-many-faces-of-the-repository-pattern/">The Many Faces of the Repository Pattern</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/05/26/estimating-is-hard/">Estimating Is Hard</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/05/21/domain-driven-design-and-clojure/">Domain Driven Design and Clojure</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/05/19/learning-rack/">Learning Rack</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/RadicalZephyr">@RadicalZephyr</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'RadicalZephyr',
+            count: 7,
+            skip_forks: true,
+            to_skip: ["radicalzephyr.github.io","home","prelude",".emacs.d","emacs","synapse-admin","old-site"],
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Geoff Shannon -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'zephyrizing';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://www.zephyrizing.net/blog/2015/07/03/domain-driven-writing/';
+        var disqus_url = 'http://www.zephyrizing.net/blog/2015/07/03/domain-driven-writing/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+<noscript>Please enable JavaScript to view
+  the <a href="http://disqus.com/?ref_noscript">comments powered by
+    Disqus.</a></noscript>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

@@ -147,11 +147,11 @@ This seems like a useful way to break up the problem.
 
     find . -type f -name .hignore
     {
-        find -X . -type f -name .hignore | xargs -n1 dirname |
-        <span style="font-weight: bold;">while </span><span style="font-weight: bold;">read</span> dir
-        <span style="font-weight: bold;">do</span>
-            sed <span style="font-style: italic;">'s|^|'"$dir/"'|'</span> <span style="font-style: italic;">"$dir"</span>/.hignore
-        <span style="font-weight: bold;">done</span>
+	find -X . -type f -name .hignore | xargs -n1 dirname |
+	while read dir
+	do
+	    sed 's|^|'"$dir/"'|' "$dir"/.hignore
+	done
     } | xargs -n1 find . -type d -name .git -prune -o -type f -path
 
 } | sort | uniq -u | cut -c3-
@@ -169,34 +169,34 @@ This seems like a useful way to break up the problem.
 <div class="org-src-container">
 
 <pre class="src src-sh">{
-    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Print the list of all files, but don't recurse into the .git folder</span>
+    # Print the list of all files, but don't recurse into the .git folder
     find . -type f -o -type d -name .git -prune
 
-    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Print out all .hignore files a second time so we ignore them</span>
+    # Print out all .hignore files a second time so we ignore them
     find . -type f -name .hignore
 
-    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Concatenate a listing of all .hignore files, with the path to the</span>
-    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">ignore file it came from prefixed to each pattern</span>
+    # Concatenate a listing of all .hignore files, with the path to the
+    # ignore file it came from prefixed to each pattern
     {
-        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Process all directories with a .hignore file</span>
-        find -X . -type f -name .hignore | xargs -n1 dirname |
-        <span style="font-weight: bold;">while </span><span style="font-weight: bold;">read</span> dir
-        <span style="font-weight: bold;">do</span>
-            <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Prefix the contents of each .hignore file with the path</span>
-            <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">to the file it came from</span>
-            sed <span style="font-style: italic;">'s|^|'"$dir/"'|'</span> <span style="font-style: italic;">"$dir"</span>/.hignore
-        <span style="font-weight: bold;">done</span>
+	# Process all directories with a .hignore file
+	find -X . -type f -name .hignore | xargs -n1 dirname |
+	while read dir
+	do
+	    # Prefix the contents of each .hignore file with the path
+	    # to the file it came from
+	    sed 's|^|'"$dir/"'|' "$dir"/.hignore
+	done
 
-        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">And finally, print out all of the files that match each of the</span>
-        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">patterns from all .hignore files. Using find and the -path</span>
-        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">option allows us to respect the relative placement of each</span>
-        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">pattern in the directory hiearchy.</span>
+	# And finally, print out all of the files that match each of the
+	# patterns from all .hignore files. Using find and the -path
+	# option allows us to respect the relative placement of each
+	# pattern in the directory hiearchy.
     } | xargs -n1 find . -type d -name .git -prune -o -type f -path
 
-    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Now, sort and then print only the unique lines.  This works</span>
-    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">because anything that matched an ignored pattern was printed</span>
-    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">once by the first find, and then once by the ignore find, thus</span>
-    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">duplicating it. Also, remove the leading ./</span>
+    # Now, sort and then print only the unique lines.  This works
+    # because anything that matched an ignored pattern was printed
+    # once by the first find, and then once by the ignore find, thus
+    # duplicating it. Also, remove the leading ./
 } | sort | uniq -u | cut -c3-
 </pre>
 </div>
