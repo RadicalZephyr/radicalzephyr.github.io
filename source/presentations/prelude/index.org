@@ -1,7 +1,11 @@
 ---
 layout: presentation
-title: Reimplementing .gitignore in 12 lines of bash
+title: "Prelude: An Emacs Distribution"
 ---
+
+A brief tour of what Prelude is, and why you might want to use it.
+
+<!--more-->
 
 * Prelude
 
