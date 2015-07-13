@@ -146,7 +146,7 @@ what it did, but the *why* was completely missing.
 
 I think testing, at it's very best, can start to supplement this
 deficiency in code. It can help to answer the question "Yes, it
-works. But why does it do *that* way?"
+works. But why does it do it *that* way?"
 
 #### p.s.
 
