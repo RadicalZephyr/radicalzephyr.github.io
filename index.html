@@ -9,8 +9,9 @@
   <meta name="author" content="Geoff Shannon">
 
   
-  <meta name="description" content="I&rsquo;ve been reading Domain Driven Design by Eric Evans for the past
-month or so, and thinking about the ideas and concepts in it has been &hellip;">
+  <meta name="description" content="At a high-level, when storing secrets like passwords, the standard
+best practice is to never store the plain-text version of the password
+in the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -92,6 +93,58 @@ month or so, and thinking about the ideas and concepts in it has been &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/07/13/secure-password-storage/">Secure Password Storage</a></h1>
+      
+      <span class="categories"><a class='category' href='/blog/categories/security/'>security</a></span>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-07-13T14:34:31-05:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>13</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>2:34 pm</span></time>
+        
+           | <a href="/blog/2015/07/13/secure-password-storage/#disqus_thread"
+             data-disqus-identifier="http://www.zephyrizing.net/blog/2015/07/13/secure-password-storage/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>At a high-level, when storing secrets like passwords, the standard
+best practice is to never store the plain-text version of the password
+in the system.  Instead, you store some information that is uniquely
+and repeatably derived from the password in an irreversible fashion.
+This is often called a &ldquo;digest.&rdquo;</p>
+
+<p>This preserves the ability to check whether someone has entered the
+correct password for an account in order to authenticate them (you
+simply recalculate the derived value and check those for equality),
+but it prevents an attacker who somehow obtains the password digest
+from immediately having access to the plain-text version of a user&rsquo;s
+password. That&rsquo;s the process at a very high-level.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2015/07/13/secure-password-storage/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -541,52 +594,6 @@ uses the standard QWERTY layout, and he also uses Vim.</p>
 
     </article>
   
-  
-    <article>
-      
-
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/04/14/learning-tdd/">Learning TDD</a></h1>
-      
-      <span class="categories"><a class='category' href='/blog/categories/8thlight/'>8thlight</a>, <a class='category' href='/blog/categories/tdd/'>tdd</a>, <a class='category' href='/blog/categories/testing/'>testing</a></span>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-04-14T14:37:34-05:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>2:37 pm</span></time>
-        
-           | <a href="/blog/2015/04/14/learning-tdd/#disqus_thread"
-             data-disqus-identifier="http://www.zephyrizing.net/blog/2015/04/14/learning-tdd/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>This is my first week at 8th Light and I&rsquo;ve been working on writing an
-object-oriented Tic Tac Toe program.  This would be no big deal for
-typically, even though I&rsquo;m doing it in a language I&rsquo;m unfamiliar with.</p>
-
-<p>Except! I&rsquo;m trying to very rigorously drive the development with
-tests.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2015/04/14/learning-tdd/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -602,6 +609,10 @@ tests.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/07/13/secure-password-storage/">Secure Password Storage</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/07/03/domain-driven-writing/">Domain Driven Writing</a>
       </li>
     
@@ -615,10 +626,6 @@ tests.</p>
     
       <li class="post">
         <a href="/blog/2015/05/21/domain-driven-design-and-clojure/">Domain Driven Design and Clojure</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/05/19/learning-rack/">Learning Rack</a>
       </li>
     
   </ul>

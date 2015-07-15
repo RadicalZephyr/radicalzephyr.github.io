@@ -5,13 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Demonstrating demonstrate.sh - Zephyrizing</title>
+  <title>Secure Password Storage - Zephyrizing</title>
   <meta name="author" content="Geoff Shannon">
 
   
-  <meta name="description" content="Edit 2014/12/30: I ended up rewriting demonstrate in several
-different languages, but the implementation that I like the
-best is in python. So, in &hellip;">
+  <meta name="description" content="At a high-level, when storing secrets like passwords, the standard
+best practice is to never store the plain-text version of the password
+in the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +20,7 @@ best is in python. So, in &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.zephyrizing.net/blog/2014/10/30/demonstrating-demonstrate-dot-sh">
+  <link rel="canonical" href="http://www.zephyrizing.net/blog/2015/07/13/secure-password-storage">
   <link rel="icon" href="/favicon.ico">
   <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
   <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
@@ -97,7 +97,7 @@ best is in python. So, in &hellip;">
 
   <header>
     
-      <h1 class="entry-title">Demonstrating demonstrate.sh</h1>
+      <h1 class="entry-title">Secure Password Storage</h1>
     
     
       <p class="meta">
@@ -106,7 +106,7 @@ best is in python. So, in &hellip;">
 
 
 
-<time class='entry-date' datetime='2014-10-30T15:33:34-05:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>30</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>3:33 pm</span></time>
+<time class='entry-date' datetime='2015-07-13T14:34:31-05:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>13</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>2:34 pm</span></time>
         
            | <a href="#disqus_thread"
              data-disqus-identifier="http://www.zephyrizing.net">Comments</a>
@@ -116,83 +116,90 @@ best is in python. So, in &hellip;">
   </header>
 
 
-<div class="entry-content"><p><em>Edit 2014/12/30: I ended up rewriting demonstrate in <a href="https://github.com/RadicalZephyr/demonstrate.sh">several</a>
-<a href="https://github.com/RadicalZephyr/demonstrate">different</a> languages, but the implementation that I like the
-best is in <a href="https://github.com/RadicalZephyr/demonstrate.py">python</a>.</em></p>
+<div class="entry-content"><p>At a high-level, when storing secrets like passwords, the standard
+best practice is to never store the plain-text version of the password
+in the system.  Instead, you store some information that is uniquely
+and repeatably derived from the password in an irreversible fashion.
+This is often called a &ldquo;digest.&rdquo;</p>
 
-<p>So, in the course of trying to prepare a presentation for this
-Thursday (today!), I ended up creating a program called
-<code>demonstrate.sh</code>. Basically, it lets you write a script, meant for an
-interpreter (like bash, python, irb, coffee etc.) and then execute it
-on demand.</p>
+<p>This preserves the ability to check whether someone has entered the
+correct password for an account in order to authenticate them (you
+simply recalculate the derived value and check those for equality),
+but it prevents an attacker who somehow obtains the password digest
+from immediately having access to the plain-text version of a user&rsquo;s
+password. That&rsquo;s the process at a very high-level.</p>
 
 <!--more-->
 
 
-<p>What do I mean by &ldquo;on demand&rdquo;? Well, basically it invokes the
-interpreter and then reads the script file one line at a time. Then it
-prints out a fake prompt based on the interpreter you specified, and
-then it prints out the line of input it&rsquo;s processing.  When you hit
-enter, the script sends that line of input to the interpreter and it
-then prints its output to the screen. Oh, there&rsquo;s one little
-caveat. When <code>demonstrate.sh</code> prints the line of output, it prints it
-character by character with a small randomized delay. So it looks a
-bit like you&rsquo;re actually typing out the command.</p>
+<p>Now there are a number of different types of attacks that can be
+executed against a web application and a legitimate user to attempt to
+intercept the plain text version of a single user&rsquo;s password.  The
+defenses for these are well known, and all of the countermeasures that
+are part of the source code of the app are being used.  There are some
+further countermeasures (such as usage of https) that are a concern
+of how the app is deployed, but we will certainly be implementing
+those when we get to the point of production deployment.</p>
 
-<p>That&rsquo;s it! It&rsquo;s a simple script, but it allows you to create and then
-run in a repeatable way a sequence of commands that you want to
-<em>demonstrate</em>.</p>
+<p>This leaves the main attack vector for obtaining user passwords as
+somehow obtaining access to the password digests that we store in our
+database.  In our meeting on Thursday, Paul outlined some of the
+deployment choices we can make to help prevent this from ever
+occurring, but for illustrative purposes let&rsquo;s assume that an attacker
+has compromised our database in some manner and now has access to our
+user password digests offline.</p>
 
-<p>There are some improvements I&rsquo;d like to add. The ability to
-recursively run demonstrate scripts inside of a demonstrate script
-would be awesome. Currently because I&rsquo;m doing everything in the
-simplest possible way, and the script is run in the background running
-demonstrate inside of a demonstrate script doesn&rsquo;t work very well. I&rsquo;m
-actually not entirely sure why it doesn&rsquo;t work, but the results are
-demonstrably not what I want.</p>
+<p>It is at this point that a detail I have glossed over becomes very
+important: the method that we use to generate the password
+digests. The industry standard is to use a key derivation function
+(KDF). There are three current industry standard KDF&rsquo;s: PBKDF2,
+bcrypt, and scrypt.</p>
 
-<p>It would also be nice to make it so that you can insert arbitrary
-commands to the interpreter, instead of only being able to run the
-commands in the script. This is a particularly key feature since if
-you just start another interpreter to run ad-hoc commands, you don&rsquo;t
-have the same environment. This isn&rsquo;t important if your script doesn&rsquo;t
-contain any side-effectful things, but I think that a lot of scripts
-will tend to.</p>
+<p>All three of these KDF&rsquo;s produce values that cannot be used to derive
+the original key (i.e. the plain-text of the user password).  This
+leaves two avenues of attack: a brute-force search for the original
+password plain-text (a &ldquo;preimage attack&rdquo;), or a brute-force search for
+another password plain-text that produces the same digest (a &ldquo;collision
+attack&rdquo;).</p>
 
-<p>Finally, it would be really nice if the <code>demonstrate.sh</code> didn&rsquo;t need
-to fake the prompts for the interpreters. In an ideal world, those
-prompts would be transparently printed directly to the screen. I&rsquo;m
-sure there&rsquo;s a way to do it, but it probably isn&rsquo;t possible/easy in
-<code>bash</code>.</p>
+<p>It&rsquo;s important to realize that defending against a brute-force
+password search is not a question of making it &ldquo;impossible.&rdquo;  It&rsquo;s
+really a question of how expensive it would be, and how long it would
+take. The goal in this case is to make it so that the attacker can&rsquo;t
+try enough passwords in a &ldquo;reasonable amount of time&rdquo; that they will
+get a sufficient return on the hardware they need to throw at the
+problem, without making password authentication take so long that it
+makes users upset.</p>
 
-<p>When I talked to <a href="https://github.com/doy">Jesse</a> about this, he asked the critical question.
-Why not just record the output? My answer was essentially because I
-wanted to eventually be able to run arbitrary commands in addition to
-the script commands. This is sort of a weak answer, since it depends
-on a feature I haven&rsquo;t yet implemented!</p>
+<p>At a high-level, all three of the industry standard KDF&rsquo;s are tunable
+as to how much time they take, so they effectively have equivalent
+resistance to a brute-force attack.  However, PBKDF2 is a relatively
+simple algorithm that can be very efficiently computed in specialized
+hardware, or on commercial graphics cards.  This makes it
+substantially weaker than the other two because graphics cards and
+specialized hardware can increase the number of passwords that an
+attacker can test per unit of time.</p>
 
-<p>But there&rsquo;s another answer, that I discovered today when I was playing
-with the classic Unix utility <code>script</code> that does exactly what Jesse
-was talking about. The difference between recording an interaction
-with <code>script</code> and writing a demonstrate script is this. Recording with
-<code>script</code> is <em>still live coding</em>. This is especially true if you want
-to use the timing feature to play it back at the same speed that it
-happened at. In contrast, writing a <code>demonstrate</code> script is the same
-as writing any regular script for the interpreter you&rsquo;re
-targeting. You are totally offline, and you can write and edit the
-script directly, and then run it with demonstrate to make sure it does
-exactly what you want.</p>
+<p>To quote an piece of writing I found about bcrypt:</p>
 
-<p>From what I&rsquo;ve been told about the early days of programming, the
-difference between recording an interaction with <code>script</code> and writing
-a <code>demonstrate</code> script is approximately the same as the difference
-between writing programs on punch cards and writing programs in a text
-editor on a computer. If you mess up while punching the card, you have
-to start over from the beginning (barring awesome hacks
-<a href="https://twitter.com/francesc/status/521602168022118400">like this</a>).</p>
+<blockquote><p>Bcrypt has the best kind of repute that can be achieved for a
+cryptographic algorithm: it has been around for quite some time,
+used quite widely, &ldquo;attracted attention&rdquo;, and yet remains unbroken
+to date.</p></blockquote>
 
-<p>Yup, that&rsquo;s it. If you&rsquo;re interested, check it out
-<a href="https://github.com/RadicalZephyr/demonstrate.sh">on Github</a>. Pull requests welcome :)</p>
+<p>Recently, advances in hardware have made bcrypt somewhat vulnerable in
+a similar manner to PBKDF2.  Scrypt was designed to be tunable in both
+speed and memory usage.  This tunable memory usage makes scrypt far
+less susceptible to these specialized hardware attacks.</p>
+
+<p>In general though these types of hardware attacks come at significant
+cost, so for many applications tuned usage of PBKDF2 or bcrypt is more
+than adequate.  Using scrypt also carries another form of risk. Since
+it is a much newer algorithm it hasn&rsquo;t had time to be subjected to the
+same analysis and attack attempts as PBKDF2 and bcrypt.  This means
+that it is possible for a security vulnerability to be discovered in
+scrypt at some point in the future that makes it significantly less
+secure than the other two.</p>
 </div>
 
 
@@ -208,12 +215,12 @@ to start over from the beginning (barring awesome hacks
 
 
 
-<time class='entry-date' datetime='2014-10-30T15:33:34-05:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>30</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>3:33 pm</span></time>
+<time class='entry-date' datetime='2015-07-13T14:34:31-05:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>13</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>2:34 pm</span></time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/bash/'>bash</a>, <a class='category' href='/blog/categories/live-coding/'>live-coding</a>, <a class='category' href='/blog/categories/python/'>python</a>
+    <a class='category' href='/blog/categories/security/'>security</a>
   
 </span>
 
@@ -222,7 +229,7 @@ to start over from the beginning (barring awesome hacks
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://www.zephyrizing.net/blog/2014/10/30/demonstrating-demonstrate-dot-sh/" data-via="RadicalZephyr" data-counturl="http://www.zephyrizing.net/blog/2014/10/30/demonstrating-demonstrate-dot-sh/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://www.zephyrizing.net/blog/2015/07/13/secure-password-storage/" data-via="RadicalZephyr" data-counturl="http://www.zephyrizing.net/blog/2015/07/13/secure-password-storage/" >Tweet</a>
   
   
   
@@ -231,10 +238,8 @@ to start over from the beginning (barring awesome hacks
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/10/27/playing-with-org-mode/" title="Previous Post: Playing with Org-mode">&laquo; Playing with Org-mode</a>
+        <a class="basic-alignment left" href="/blog/2015/07/03/domain-driven-writing/" title="Previous Post: Domain Driven Writing">&laquo; Domain Driven Writing</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/11/19/getting-started-with-llvm-on-os-x/" title="Next Post: Getting Started with LLVM on OS&nbsp;X">Getting Started with LLVM on OS&nbsp;X &raquo;</a>
       
     </p>
   </footer>
@@ -330,8 +335,8 @@ to start over from the beginning (barring awesome hacks
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://www.zephyrizing.net/blog/2014/10/30/demonstrating-demonstrate-dot-sh/';
-        var disqus_url = 'http://www.zephyrizing.net/blog/2014/10/30/demonstrating-demonstrate-dot-sh/';
+        var disqus_identifier = 'http://www.zephyrizing.net/blog/2015/07/13/secure-password-storage/';
+        var disqus_url = 'http://www.zephyrizing.net/blog/2015/07/13/secure-password-storage/';
         var disqus_script = 'embed.js';
       
     (function () {

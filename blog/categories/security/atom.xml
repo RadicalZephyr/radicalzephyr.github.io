@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Security | Zephyrizing]]></title>
+  <link href="http://www.zephyrizing.net/blog/categories/security/atom.xml" rel="self"/>
+  <link href="http://www.zephyrizing.net/"/>
+  <updated>2015-07-15T12:28:09-05:00</updated>
+  <id>http://www.zephyrizing.net/</id>
+  <author>
+    <name><![CDATA[Geoff Shannon]]></name>
+    <email><![CDATA[geoffpshannon@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Secure Password Storage]]></title>
+    <link href="http://www.zephyrizing.net/blog/2015/07/13/secure-password-storage/"/>
+    <updated>2015-07-13T14:34:31-05:00</updated>
+    <id>http://www.zephyrizing.net/blog/2015/07/13/secure-password-storage</id>
+    <content type="html"><![CDATA[At a high-level, when storing secrets like passwords, the standard
+best practice is to never store the plain-text version of the password
+in the system.  Instead, you store some information that is uniquely
+and repeatably derived from the password in an irreversible fashion.
+This is often called a "digest."
+
+This preserves the ability to check whether someone has entered the
+correct password for an account in order to authenticate them (you
+simply recalculate the derived value and check those for equality),
+but it prevents an attacker who somehow obtains the password digest
+from immediately having access to the plain-text version of a user's
+password. That's the process at a very high-level.
+
+<!--more-->
+
+Now there are a number of different types of attacks that can be
+executed against a web application and a legitimate user to attempt to
+intercept the plain text version of a single user&#8217;s password.  The
+defenses for these are well known, and all of the countermeasures that
+are part of the source code of the app are being used.  There are some
+further countermeasures (such as usage of https) that are a concern
+of how the app is deployed, but we will certainly be implementing
+those when we get to the point of production deployment.
+
+This leaves the main attack vector for obtaining user passwords as
+somehow obtaining access to the password digests that we store in our
+database.  In our meeting on Thursday, Paul outlined some of the
+deployment choices we can make to help prevent this from ever
+occurring, but for illustrative purposes let&#8217;s assume that an attacker
+has compromised our database in some manner and now has access to our
+user password digests offline.
+
+It is at this point that a detail I have glossed over becomes very
+important: the method that we use to generate the password
+digests. The industry standard is to use a key derivation function
+(KDF). There are three current industry standard KDF&#8217;s: PBKDF2,
+bcrypt, and scrypt.
+
+All three of these KDF&#8217;s produce values that cannot be used to derive
+the original key (i.e. the plain-text of the user password).  This
+leaves two avenues of attack: a brute-force search for the original
+password plain-text (a &#8220;preimage attack&#8221;), or a brute-force search for
+another password plain-text that produces the same digest (a &#8220;collision
+attack&#8221;).
+
+It&#8217;s important to realize that defending against a brute-force
+password search is not a question of making it &#8220;impossible.&#8221;  It&#8217;s
+really a question of how expensive it would be, and how long it would
+take. The goal in this case is to make it so that the attacker can&#8217;t
+try enough passwords in a &#8220;reasonable amount of time&#8221; that they will
+get a sufficient return on the hardware they need to throw at the
+problem, without making password authentication take so long that it
+makes users upset.
+
+At a high-level, all three of the industry standard KDF&#8217;s are tunable
+as to how much time they take, so they effectively have equivalent
+resistance to a brute-force attack.  However, PBKDF2 is a relatively
+simple algorithm that can be very efficiently computed in specialized
+hardware, or on commercial graphics cards.  This makes it
+substantially weaker than the other two because graphics cards and
+specialized hardware can increase the number of passwords that an
+attacker can test per unit of time.
+
+To quote an piece of writing I found about bcrypt:
+
+> Bcrypt has the best kind of repute that can be achieved for a
+> cryptographic algorithm: it has been around for quite some time,
+> used quite widely, &#8220;attracted attention&#8221;, and yet remains unbroken
+> to date.
+
+Recently, advances in hardware have made bcrypt somewhat vulnerable in
+a similar manner to PBKDF2.  Scrypt was designed to be tunable in both
+speed and memory usage.  This tunable memory usage makes scrypt far
+less susceptible to these specialized hardware attacks.
+
+In general though these types of hardware attacks come at significant
+cost, so for many applications tuned usage of PBKDF2 or bcrypt is more
+than adequate.  Using scrypt also carries another form of risk. Since
+it is a much newer algorithm it hasn&#8217;t had time to be subjected to the
+same analysis and attack attempts as PBKDF2 and bcrypt.  This means
+that it is possible for a security vulnerability to be discovered in
+scrypt at some point in the future that makes it significantly less
+secure than the other two.
+]]></content>
+  </entry>
+  
+</feed>
