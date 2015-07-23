@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Tdd | Zephyrizing]]></title>
   <link href="http://www.zephyrizing.net/blog/categories/tdd/atom.xml" rel="self"/>
   <link href="http://www.zephyrizing.net/"/>
-  <updated>2015-07-15T12:28:09-05:00</updated>
+  <updated>2015-07-23T09:56:17-05:00</updated>
   <id>http://www.zephyrizing.net/</id>
   <author>
     <name><![CDATA[Geoff Shannon]]></name>
@@ -12,6 +12,176 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[The Importance of Focusing Small With TDD]]></title>
+    <link href="http://www.zephyrizing.net/blog/2015/07/23/the-importance-of-focusing-small-with-tdd/"/>
+    <updated>2015-07-23T09:12:30-05:00</updated>
+    <id>http://www.zephyrizing.net/blog/2015/07/23/the-importance-of-focusing-small-with-tdd</id>
+    <content type="html"><![CDATA[Since I've been an apprentice at 8th Light, I've been focusing on
+really trying to _get_ TDD as a practice and a discipline. As part of
+that I've done a lot of reading and reflecting on past reading's about
+TDD. One thing that jumped out at me about the way that Martin Fowler,
+Kent Beck and Bob Martin all talk about TDD: the all tend to say
+minorly self-deprecating things like: "I'm just not smart enough to
+hold all that complexity in my head.  TDD helps me get away with not
+seeing the big picture." But I think this statement is fundamentally
+misleading.
+
+<!--more-->
+
+I was always a little confused when I read statements like that,
+because to me the clarity of their writing and thoughts indicate to me
+that they are in fact pretty smart. Another way they say it is that
+&#8220;you don&#8217;t have to be super smart to do TDD.&#8221; This is I think a more
+genuine statement, but it&#8217;s much more about marketing than about TDD.
+
+When I was writing Tic-Tac-Toe in Ruby during the first month of my
+apprenticeship though, I was trying to rigorously test-drive all of
+the development in a very intentional way for the first time in my
+coding career. As I got into the swing of things, I started noticing
+that I was focusing on smaller portions of the code.
+
+Normally when I&#8217;m programming, I have something close to
+[this experience][dont-interrupt]. I try and build up an understanding
+and mental structure of as much of the program as I can hold in my
+head at once. I do this largely because if I have the structure of the
+whole program in my head then I know that when I make changes, they&#8217;re
+going to be good ones, and remain consistent with the rest of the
+program.
+
+[dont-interrupt]: http://heeris.id.au/2013/this-is-why-you-shouldnt-interrupt-a-programmer/
+
+One of the side-benefits of TDD is that you end up with a
+comprehensive test suite for your program as you build it. So instead
+of having to build a huge mental model of the software as you are
+programming, you can simply make a change and then run the test
+suite. This will tell you, with far greater accuracy, whether the
+change is consistent with the state of the actual program. There&#8217;s no
+layer of indirection through a potentially inconsistent mental model.
+
+So, having tests allows you not to have a large mental model of the
+program you&#8217;re building. Another (desirable!) consequence of rigorous
+test-driving is a well-factored design. If the objects in your system
+have small, well-defined responsibilities and interact with other
+objects in reasonable and well-defined ways the system is simpler.
+When the system is simpler, you can get away with having only a local
+view of the code when making changes.
+
+But here&#8217;s the thing, these are reasons why you can still program
+without a comprehensive understanding of the codebase when practicing
+TDD. But the revelation that I had, what caused me to say that Uncle
+Bob and company are being misleading, is that I think TDD is actually
+easier to do when you let go of trying to build a comprehensive mental
+model of the code. This is more true the &#8220;smarter&#8221; you are.
+
+I had a friend in college who was arguably a genius. Assignments that
+the rest of our class would take a week to do, he would churn out in a
+12-hour Mountain Dew-fueled frenzy of coding. He would intentionally
+seek to make assignments more challenging - for example doing a simple
+assembly language project, he developed an Object Oriented style of
+assembly programming.
+
+I ended up working with him on a number of projects though, and I
+discovered something. If I had thought that I had a tendency to
+overengineer solutions, my tendency was nothing compared to this
+friend.
+
+One summer we decided to create an AI to play the video game StarCraft
+and enter it in a contest at the end of the summer.  When we were
+planning the architecture of the AI , he immediately started
+describing this incredibly elaborate structure, with pluggable modules
+that would allow swapping out of different components of the AI, and a
+tiered architecture of decision making that would separate the low
+level movements of units from the tactical and strategic
+decision-making required to win the game.
+
+This structure was impressive and compelling in a certain way, and we
+spent weeks talking about it and sketching diagrams and class
+hierarchies on the whiteboard. But after a month or so, interest in
+the project sort of fizzled out and most people drifted away. Nothing
+was ever built of that grand architecture.
+
+From what I&#8217;ve seen, most of the best programmers that I know have
+this tendency to over-engineer solutions. From what I&#8217;ve read, this is
+not an isolated phenomenon in my social circle.
+
+This type of pure thought design work is actually very similar to
+building a mental model of how a piece of software works. It&#8217;s really
+just a change in tense: over-engineering is just building a mental
+model of how a piece of software _will_ work, in the future. There is
+probably some fascinating psychology of why this is such a common
+tendency, and an easy trap to fall into. My contention is that the
+smaller your mental model of a piece of software is, the more
+restricted your focus, the easier it is to refrain from attempting to
+over-engineer it.
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[TDD and the Art of Picking Tests]]></title>
+    <link href="http://www.zephyrizing.net/blog/2015/07/19/tdd-and-the-art-of-picking-tests/"/>
+    <updated>2015-07-19T21:57:19-05:00</updated>
+    <id>http://www.zephyrizing.net/blog/2015/07/19/tdd-and-the-art-of-picking-tests</id>
+    <content type="html"><![CDATA[> The first [problem] is stuckness, a mental stuckness that
+> accompanies the physical stuckness of whatever it is you&#8217;re working
+> on. A screw sticks, for example, on a side cover assembly. You check
+> the manual to see if there might be any special cause for this screw
+> to come off so hard, but all it says is &#8220;Remove side cover plate&#8221; in
+> that wonderful terse technical style that never tells you what you
+> want to know. There&#8217;s no earlier procedure left undone that might
+> cause the cover screws to stick.
+>
+> If you&#8217;re experienced you&#8217;d probably apply a penetrating liquid and
+> an impact driver at this point. But suppose you&#8217;re inexperienced and
+> you attach a self-locking plier wrench to the shank of your
+> screwdriver and really twist it hard, a procedure you&#8217;ve had success
+> with in the past, but which this time succeeds only in tearing the
+> slot of the screw.
+>
+> Your mind was already thinking ahead to what you would do when the
+> cover plate was off, and so it takes a little time to realize that
+> this irritating minor annoyance of a torn screw slot isn&#8217;t just
+> irritating and minor. You&#8217;re stuck. Stopped. Terminated. It&#8217;s
+> absolutely stopped you from fixing the motorcycle.
+>
+> -Robert Pirsig, _Zen and the Art of Motorcycle Maintenance_
+
+There is so much interesting material here it could take a while to
+dig into all of it.
+
+<!--more-->
+
+## Mental Stuckness
+
+Despite it&#8217;s total lack of physical tangibility software can get stuck
+too, and as software developers when our software gets stuck, so do
+we. The canonical example of stuck software is when we need to add a
+new feature to our application, but it can&#8217;t be done without breaking
+everything else. Usually we arrive in this situation because we don&#8217;t
+have tests, and so we can&#8217;t refactor our code. We can only make
+changes and then hope that everything still works.
+
+There is another kind of stuckness though that is less specific to
+software. The stuckness of a blank page. This is what Pirsig is
+talking about in the above quote. Even when you&#8217;re rigorously
+practicing TDD, this kind of stuckness can still affect you. It&#8217;s most
+obvious when starting a new project from scratch. Then it really is
+&#8220;blank page.&#8221; But I&#8217;ve noticed a similar feeling when I&#8217;m adding a new
+_type_ of functionality to an application.
+
+
+
+### Cuttings
+
+Pirsig spends the remainder of the chapter examining in detail what
+stuckness means, and how to deal with it. Many of the
+
+He describes it as the point at which what you think you know about
+something has boxed you into a place where you can&#8217;t conceive of a way
+to move forward.
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Learning TDD]]></title>

@@ -5,11 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: Macros - Zephyrizing</title>
+  <title>TDD and the Art of Picking Tests - Zephyrizing</title>
   <meta name="author" content="Geoff Shannon">
 
   
-  <meta name="description" content="Category: macros">
+  <meta name="description" content="The first [problem] is stuckness, a mental stuckness that
+accompanies the physical stuckness of whatever it is you&rsquo;re working
+on. A screw &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.zephyrizing.net/blog/categories/macros">
+  <link rel="canonical" href="http://www.zephyrizing.net/blog/2015/07/19/tdd-and-the-art-of-picking-tests">
   <link rel="icon" href="/favicon.ico">
   <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
   <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
@@ -90,36 +92,138 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
+
   <header>
-    <h1 class="entry-title">Category: Macros</h1>
+    
+      <h1 class="entry-title">TDD and the Art of Picking Tests</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-07-19T21:57:19-05:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>19</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>9:57 pm</span></time>
+        
+           | <a href="#disqus_thread"
+             data-disqus-identifier="http://www.zephyrizing.net">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><blockquote><p>The first [problem] is stuckness, a mental stuckness that
+accompanies the physical stuckness of whatever it is you&rsquo;re working
+on. A screw sticks, for example, on a side cover assembly. You check
+the manual to see if there might be any special cause for this screw
+to come off so hard, but all it says is &ldquo;Remove side cover plate&rdquo; in
+that wonderful terse technical style that never tells you what you
+want to know. There&rsquo;s no earlier procedure left undone that might
+cause the cover screws to stick.</p>
 
-  
-  <h2>2014</h2>
+<p>If you&rsquo;re experienced you&rsquo;d probably apply a penetrating liquid and
+an impact driver at this point. But suppose you&rsquo;re inexperienced and
+you attach a self-locking plier wrench to the shank of your
+screwdriver and really twist it hard, a procedure you&rsquo;ve had success
+with in the past, but which this time succeeds only in tearing the
+slot of the screw.</p>
 
-<article>
-  
-<h1><a href="/blog/2014/10/14/adventures-with-clojure-macros/">Adventures With Clojure Macros</a></h1>
-<time datetime="2014-10-14T18:20:56-05:00" pubdate><span class='month'>Oct</span> <span class='day'>14</span> <span class='year'>2014</span></time>
+<p>Your mind was already thinking ahead to what you would do when the
+cover plate was off, and so it takes a little time to realize that
+this irritating minor annoyance of a torn screw slot isn&rsquo;t just
+irritating and minor. You&rsquo;re stuck. Stopped. Terminated. It&rsquo;s
+absolutely stopped you from fixing the motorcycle.</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/clojure/'>clojure</a>, <a class='category' href='/blog/categories/macros/'>macros</a>, <a class='category' href='/blog/categories/oops/'>oops</a></span>
-</footer>
+<p>-Robert Pirsig, <em>Zen and the Art of Motorcycle Maintenance</em></p></blockquote>
+
+<p>There is so much interesting material here it could take a while to
+dig into all of it.</p>
+
+<!--more-->
 
 
-</article>
+<h2>Mental Stuckness</h2>
 
+<p>Despite it&rsquo;s total lack of physical tangibility software can get stuck
+too, and as software developers when our software gets stuck, so do
+we. The canonical example of stuck software is when we need to add a
+new feature to our application, but it can&rsquo;t be done without breaking
+everything else. Usually we arrive in this situation because we don&rsquo;t
+have tests, and so we can&rsquo;t refactor our code. We can only make
+changes and then hope that everything still works.</p>
+
+<p>There is another kind of stuckness though that is less specific to
+software. The stuckness of a blank page. This is what Pirsig is
+talking about in the above quote. Even when you&rsquo;re rigorously
+practicing TDD, this kind of stuckness can still affect you. It&rsquo;s most
+obvious when starting a new project from scratch. Then it really is
+&ldquo;blank page.&rdquo; But I&rsquo;ve noticed a similar feeling when I&rsquo;m adding a new
+<em>type</em> of functionality to an application.</p>
+
+<h3>Cuttings</h3>
+
+<p>Pirsig spends the remainder of the chapter examining in detail what
+stuckness means, and how to deal with it. Many of the</p>
+
+<p>He describes it as the point at which what you think you know about
+something has boxed you into a place where you can&rsquo;t conceive of a way
+to move forward.</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Geoff Shannon</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2015-07-19T21:57:19-05:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>19</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>9:57 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/tdd/'>tdd</a>, <a class='category' href='/blog/categories/testing/'>testing</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://www.zephyrizing.net/blog/2015/07/19/tdd-and-the-art-of-picking-tests/" data-via="RadicalZephyr" data-counturl="http://www.zephyrizing.net/blog/2015/07/19/tdd-and-the-art-of-picking-tests/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2015/07/13/secure-password-storage/" title="Previous Post: Secure Password Storage">&laquo; Secure Password Storage</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2015/07/23/the-importance-of-focusing-small-with-tdd/" title="Next Post: The Importance of Focusing Small with TDD">The Importance of Focusing Small with TDD &raquo;</a>
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -204,7 +308,10 @@
       var disqus_shortname = 'zephyrizing';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://www.zephyrizing.net/blog/2015/07/19/tdd-and-the-art-of-picking-tests/';
+        var disqus_url = 'http://www.zephyrizing.net/blog/2015/07/19/tdd-and-the-art-of-picking-tests/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

@@ -5,13 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>LeJOS and Clojure - Zephyrizing</title>
+  <title>The Importance of Focusing Small With TDD - Zephyrizing</title>
   <meta name="author" content="Geoff Shannon">
 
   
-  <meta name="description" content="This is a short followup to my first post about
-experimenting with the Lego EV3&rsquo;s and leJOS. Shortly
-after I wrote that post, I went on the &hellip;">
+  <meta name="description" content="Since I&rsquo;ve been an apprentice at 8th Light, I&rsquo;ve been focusing on
+really trying to get TDD as a practice and a discipline. As part of &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +19,7 @@ after I wrote that post, I went on the &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.zephyrizing.net/blog/2014/04/17/lejos-and-clojure">
+  <link rel="canonical" href="http://www.zephyrizing.net/blog/2015/07/23/the-importance-of-focusing-small-with-tdd">
   <link rel="icon" href="/favicon.ico">
   <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
   <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
@@ -97,7 +96,7 @@ after I wrote that post, I went on the &hellip;">
 
   <header>
     
-      <h1 class="entry-title">LeJOS and Clojure</h1>
+      <h1 class="entry-title">The Importance of Focusing Small With TDD</h1>
     
     
       <p class="meta">
@@ -106,7 +105,7 @@ after I wrote that post, I went on the &hellip;">
 
 
 
-<time class='entry-date' datetime='2014-04-17T18:00:00-05:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>6:00 pm</span></time>
+<time class='entry-date' datetime='2015-07-23T09:12:30-05:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>23</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>9:12 am</span></time>
         
            | <a href="#disqus_thread"
              data-disqus-identifier="http://www.zephyrizing.net">Comments</a>
@@ -116,54 +115,102 @@ after I wrote that post, I went on the &hellip;">
   </header>
 
 
-<div class="entry-content"><p>This is a short followup to my first post about
-<a href="/blog/2013/10/31/leJOS-and-EV3/">experimenting with the Lego EV3&rsquo;s</a> and <a href="http://lejos.org">leJOS</a>. Shortly
-after I wrote that post, I went on the Clojure IRC channel and talked
-to <a href="http://technomancy.us/">Phil Hagelberg</a> and some other helpful folks about my
-issues. They steered me away from attempting to install <a href="http://leiningen.org/">Leiningen</a> on
-the EV3 itself, which was a relief since I think that way lay
-madness. Instead, they suggested that I have a small launcher program
-that would just setup a REPL. Then I could run my robot-controlling
-Clojure code from there.</p>
+<div class="entry-content"><p>Since I&rsquo;ve been an apprentice at 8th Light, I&rsquo;ve been focusing on
+really trying to <em>get</em> TDD as a practice and a discipline. As part of
+that I&rsquo;ve done a lot of reading and reflecting on past reading&rsquo;s about
+TDD. One thing that jumped out at me about the way that Martin Fowler,
+Kent Beck and Bob Martin all talk about TDD: the all tend to say
+minorly self-deprecating things like: &ldquo;I&rsquo;m just not smart enough to
+hold all that complexity in my head.  TDD helps me get away with not
+seeing the big picture.&rdquo; But I think this statement is fundamentally
+misleading.</p>
 
 <!--more-->
 
 
-<p>This advice led to the creation of <a href="https://github.com/RadicalZephyr/ev3-nrepl">ev3-nrepl</a>. It&rsquo;s basically a small
-skeleton Clojure project to provide the basis for running Clojure code
-on the EV3. It&rsquo;s a minimalist setup, so it should provide a good
-starting point for other people to continue experimenting. I tried to
-explain how to use it fairly clearly, as well as add all the links to
-the necessary documentation to get leJOS running on the EV3.</p>
+<p>I was always a little confused when I read statements like that,
+because to me the clarity of their writing and thoughts indicate to me
+that they are in fact pretty smart. Another way they say it is that
+&ldquo;you don&rsquo;t have to be super smart to do TDD.&rdquo; This is I think a more
+genuine statement, but it&rsquo;s much more about marketing than about TDD.</p>
 
-<p>Unfortunately, despite this seemingly great start, I never ended up
-actually doing anything interesting with Clojure on the EV3. There are
-two related reasons for this. First, the robotics class I was in
-started having actual coding assignments (thanks to the fact that we
-could now run leJOS). Second, it turns out that leJOS is designed from
-an incredibly stateful and imperative point of view. This makes it
-very hard to develop clean Clojure code that makes use of their
-API. Specifically, leJOS makes the assumption that any code making use
-of it is going to start-up, do robot stuff, and then die. A Clojure
-REPL obviously breaks this assumption rather badly. As it turned out,
-this was the most painful when I was trying to figure out how to
-program and build my robot at the same time.</p>
+<p>When I was writing Tic-Tac-Toe in Ruby during the first month of my
+apprenticeship though, I was trying to rigorously test-drive all of
+the development in a very intentional way for the first time in my
+coding career. As I got into the swing of things, I started noticing
+that I was focusing on smaller portions of the code.</p>
 
-<p>What I wanted to do was be able to open a Clojure REPL connect to it,
-and then leave it running for a long time. This is my normal modus
-operandi, but the EV3 makes it even more critical that this
-work. Because of the limited hardware, it takes several minutes for
-nrepl to actually boot up.</p>
+<p>Normally when I&rsquo;m programming, I have something close to
+<a href="http://heeris.id.au/2013/this-is-why-you-shouldnt-interrupt-a-programmer/">this experience</a>. I try and build up an understanding
+and mental structure of as much of the program as I can hold in my
+head at once. I do this largely because if I have the structure of the
+whole program in my head then I know that when I make changes, they&rsquo;re
+going to be good ones, and remain consistent with the rest of the
+program.</p>
 
-<p>I think that using Clojure as a prototyping tool for building robots
-with the EV3 could be incredibly powerful. All of the
-<a href="http://www.infoq.com/presentations/Clojure-Java-Interop">arguments</a>
-for why Clojure is a great language for exploring Java API&rsquo;s are
-applicable to working with the EV3 API&rsquo;s. Possibly even more so, since
-there is something really, really cool about typing some commands at
-the REPL and having your robot start moving around and doing
-stuff. Unfortunately, because of the current architecture of leJOS and
-the limited processing power of the EV3&rsquo;s it&rsquo;s not quite there yet.</p>
+<p>One of the side-benefits of TDD is that you end up with a
+comprehensive test suite for your program as you build it. So instead
+of having to build a huge mental model of the software as you are
+programming, you can simply make a change and then run the test
+suite. This will tell you, with far greater accuracy, whether the
+change is consistent with the state of the actual program. There&rsquo;s no
+layer of indirection through a potentially inconsistent mental model.</p>
+
+<p>So, having tests allows you not to have a large mental model of the
+program you&rsquo;re building. Another (desirable!) consequence of rigorous
+test-driving is a well-factored design. If the objects in your system
+have small, well-defined responsibilities and interact with other
+objects in reasonable and well-defined ways the system is simpler.
+When the system is simpler, you can get away with having only a local
+view of the code when making changes.</p>
+
+<p>But here&rsquo;s the thing, these are reasons why you can still program
+without a comprehensive understanding of the codebase when practicing
+TDD. But the revelation that I had, what caused me to say that Uncle
+Bob and company are being misleading, is that I think TDD is actually
+easier to do when you let go of trying to build a comprehensive mental
+model of the code. This is more true the &ldquo;smarter&rdquo; you are.</p>
+
+<p>I had a friend in college who was arguably a genius. Assignments that
+the rest of our class would take a week to do, he would churn out in a
+12-hour Mountain Dew-fueled frenzy of coding. He would intentionally
+seek to make assignments more challenging - for example doing a simple
+assembly language project, he developed an Object Oriented style of
+assembly programming.</p>
+
+<p>I ended up working with him on a number of projects though, and I
+discovered something. If I had thought that I had a tendency to
+overengineer solutions, my tendency was nothing compared to this
+friend.</p>
+
+<p>One summer we decided to create an AI to play the video game StarCraft
+and enter it in a contest at the end of the summer.  When we were
+planning the architecture of the AI , he immediately started
+describing this incredibly elaborate structure, with pluggable modules
+that would allow swapping out of different components of the AI, and a
+tiered architecture of decision making that would separate the low
+level movements of units from the tactical and strategic
+decision-making required to win the game.</p>
+
+<p>This structure was impressive and compelling in a certain way, and we
+spent weeks talking about it and sketching diagrams and class
+hierarchies on the whiteboard. But after a month or so, interest in
+the project sort of fizzled out and most people drifted away. Nothing
+was ever built of that grand architecture.</p>
+
+<p>From what I&rsquo;ve seen, most of the best programmers that I know have
+this tendency to over-engineer solutions. From what I&rsquo;ve read, this is
+not an isolated phenomenon in my social circle.</p>
+
+<p>This type of pure thought design work is actually very similar to
+building a mental model of how a piece of software works. It&rsquo;s really
+just a change in tense: over-engineering is just building a mental
+model of how a piece of software <em>will</em> work, in the future. There is
+probably some fascinating psychology of why this is such a common
+tendency, and an easy trap to fall into. My contention is that the
+smaller your mental model of a piece of software is, the more
+restricted your focus, the easier it is to refrain from attempting to
+over-engineer it.</p>
 </div>
 
 
@@ -179,12 +226,12 @@ the limited processing power of the EV3&rsquo;s it&rsquo;s not quite there yet.<
 
 
 
-<time class='entry-date' datetime='2014-04-17T18:00:00-05:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>6:00 pm</span></time>
+<time class='entry-date' datetime='2015-07-23T09:12:30-05:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>23</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>9:12 am</span></time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/clojure/'>clojure</a>, <a class='category' href='/blog/categories/ev3/'>ev3</a>, <a class='category' href='/blog/categories/programming/'>programming</a>
+    <a class='category' href='/blog/categories/tdd/'>tdd</a>
   
 </span>
 
@@ -193,7 +240,7 @@ the limited processing power of the EV3&rsquo;s it&rsquo;s not quite there yet.<
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://www.zephyrizing.net/blog/2014/04/17/lejos-and-clojure/" data-via="RadicalZephyr" data-counturl="http://www.zephyrizing.net/blog/2014/04/17/lejos-and-clojure/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://www.zephyrizing.net/blog/2015/07/23/the-importance-of-focusing-small-with-tdd/" data-via="RadicalZephyr" data-counturl="http://www.zephyrizing.net/blog/2015/07/23/the-importance-of-focusing-small-with-tdd/" >Tweet</a>
   
   
   
@@ -202,10 +249,8 @@ the limited processing power of the EV3&rsquo;s it&rsquo;s not quite there yet.<
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/10/31/leJOS-and-EV3/" title="Previous Post: Clojure, LeJOS and EV3">&laquo; Clojure, LeJOS and EV3</a>
+        <a class="basic-alignment left" href="/blog/2015/07/19/tdd-and-the-art-of-picking-tests/" title="Previous Post: TDD and the Art of Picking Tests">&laquo; TDD and the Art of Picking Tests</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/04/21/the-summary-and-evaluation-how-i-figured-out-why-i-went-to-college/" title="Next Post: The Summary and Evaluation - How I Figured Out Why I Went to College">The Summary and Evaluation - How I Figured Out Why I Went to College &raquo;</a>
       
     </p>
   </footer>
@@ -301,8 +346,8 @@ the limited processing power of the EV3&rsquo;s it&rsquo;s not quite there yet.<
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://www.zephyrizing.net/blog/2014/04/17/lejos-and-clojure/';
-        var disqus_url = 'http://www.zephyrizing.net/blog/2014/04/17/lejos-and-clojure/';
+        var disqus_identifier = 'http://www.zephyrizing.net/blog/2015/07/23/the-importance-of-focusing-small-with-tdd/';
+        var disqus_url = 'http://www.zephyrizing.net/blog/2015/07/23/the-importance-of-focusing-small-with-tdd/';
         var disqus_script = 'embed.js';
       
     (function () {
