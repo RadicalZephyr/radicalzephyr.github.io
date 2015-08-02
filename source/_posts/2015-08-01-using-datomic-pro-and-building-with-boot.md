@@ -199,7 +199,7 @@ snippets that I've included in this blog post. But because of my
 build's-as-specification indoctrination, I had fallen into a rhythm of
 always having my `build.boot` files have a certain structure to them.
 
-```clojure My proto-typical boot.build
+```clojure My proto-typical build.boot
 ;;; Start with source paths and dependencies
 (set-env!
  :source-paths #{"src" "test"}
