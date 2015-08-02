@@ -340,13 +340,13 @@ get rid of that too.
 ```
 
 The code is longer now, but it's been decomposed and de-duplicated
-significantly. It also gained the ability to prompt only for values
-only if the corresponding environment variable wasn't set. We could
-keep going with this, and define that `let` block as a function. We
-could move all this code into a Clojure source file in the source
-folder of the project, and then `require` it in. Or we could put it
-into a separate library like [my bootlaces][my-bootlaces] and add that
-as a dependency. We could add another method for retrieving the
+significantly. It also gained the ability to prompt for values only if
+the corresponding environment variable isn't set. We could keep going
+with this, and define that `let` block as a function. We could move
+all this code into a Clojure source file in the source folder of the
+project, and then `require` it in. Or we could put it into a separate
+library like [my bootlaces][my-bootlaces] and add that as a
+dependency. We could add another method for retrieving the
 credentials. Perhaps storing them in an encrypted edn file, which we
 read in if it exists.
 
