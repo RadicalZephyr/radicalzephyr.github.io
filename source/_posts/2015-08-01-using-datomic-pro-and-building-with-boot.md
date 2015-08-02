@@ -94,11 +94,11 @@ like this:
  :dependencies '[[com.datomic/datomic-pro "0.9.5206"]])
 ```
 
-If we try this out, it pretty clearly fails, on my machine spitting
-out a huge amount of junk error messages that boil down to "Sorry
-chap, I couldn't find com.datomic/datomic-pro version 0.9.5206 for
-you." Of course, this is because we haven't told boot how to look in
-the Maven repository where it exists: `https://my.datomic.com/repo`.
+If we try this out it pretty clearly fails. On my machine Boot spat
+out a huge amount of junk that boiled down to "Sorry chap, I couldn't
+find version `0.9.5206` of `com.datomic/datomic-pro` for you." Of
+course, this is because we haven't told boot how to look in the Maven
+repository where it exists: `https://my.datomic.com/repo`.
 
 Let's try the simplest thing that could possibly work. If we look at
 the Boot
