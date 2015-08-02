@@ -91,8 +91,7 @@ like this:
 
 ```clojure build.boot
 (set-env!
- :dependencies '[[org.clojure/clojure  "1.7.0"]
-                 [com.datomic/datomic-pro "0.9.5206"]])
+ :dependencies '[[com.datomic/datomic-pro "0.9.5206"]])
 ```
 
 If we try this out, it pretty clearly fails, on my machine spitting
@@ -116,8 +115,7 @@ map. Concretely our `build.boot` should look more like this:
 
 ```clojure build.boot
 (set-env!
- :dependencies '[[org.clojure/clojure  "1.7.0"]
-                 [com.datomic/datomic-pro "0.9.5206"]]
+ :dependencies '[[com.datomic/datomic-pro "0.9.5206"]]
  :repositories #(conj %
                       ["my-datomic" {:url "https://my.datomic.com/repo"
                                      :username "notmyemail@example.com"
