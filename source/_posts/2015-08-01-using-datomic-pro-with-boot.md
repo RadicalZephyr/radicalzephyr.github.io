@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Using Datomic Pro and Building with Boot"
+title: "Using Datomic Pro with Boot"
 date: 2015-08-01 20:14:20 -0500
 comments: true
 categories: [Clojure, Boot, Datomic]
