@@ -84,6 +84,8 @@ securely using the My Datomic Maven repository with Boot.
 
 Sounds like the perfect opportunity for a blog post :D
 
+<a id="top-down"></a>
+
 ## Top Down
 
 Let's start from what we want to be able to do. In an ideal world, I
@@ -115,7 +117,7 @@ map. Concretely our `build.boot` should look more like this:
 [boot-env]: https://github.com/boot-clj/boot/wiki/Boot-Environment#env-keys
 [pom-doc]: https://github.com/cemerick/pomegranate/blob/pomegranate-0.3.0/src/main/clojure/cemerick/pomegranate/aether.clj#L639-L650
 
-<a id="first-working"/>
+<a id="first-working"></a>
 
 ```clojure build.boot
 (set-env!
@@ -136,6 +138,8 @@ adds entries for pulling from [Maven Central][mvn-central] and
 [mvn-central]: http://search.maven.org/
 [clojars]: https://clojars.org/
 
+<a id="side-note"></a>
+
 ### Side Note
 
 Rather than bothering to go and read the Pomegranate documentation, we
@@ -146,6 +150,8 @@ case, since we're interested in what's in the environment we want to
 run `boot show -e` or `boot show --env`.  And of course, as with all
 Boot tasks we could find out this information by running `boot show
 -h`. Okay, `</side note>`.
+
+<a id="back-to-it"></a>
 
 ## Back to It
 
@@ -253,6 +259,8 @@ program. This is true for a reason though, and again it's mentioned in
 Boot's rationale. Simple projects don't need the flexibility of having
 their build be a real program. But here's the thing, simple projects
 tend to become complex projects over time.
+
+<a id="back-to-datomic"></a>
 
 ## Back to Datomic
 
