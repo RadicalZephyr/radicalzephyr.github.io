@@ -22,20 +22,17 @@ exciting to me.
 At the time I had been tasked with writing some code to determine
 usage metrics for our system. One of my boss's hopes was that we could
 generate usage data from some time ago as well to compare with our
-current levels. Because we were using traditional relations databases
+current levels. Because we were using traditional relational databases
 and hadn't planned for this use case, that turned out to be
 impossible. However, if we had been using Datomic, that back-dated
 query would have been absolutely trivial.
 
 <!--more-->
 
-At the time I was overwhelmed by the intensity and scarcity of the
-documentation on Datomic. Also, my general inexperience meant that I
-wasn't prepared to be an early adopter of this technology. This
-statement from a [tutorial blog about Datomic][datomic-tut] that I
-recently ran across really resonated with my experiences:
-
-[datomic-tut]: http://ben.vandgrift.com/2014/04/24/a-clojure-datomic-web-app-tutorial.html
+When I attempted to actually learn to use Datomic however, I was
+overwhelmed by the intensity and relative scarcity of the
+documentation. My general inexperience meant that I wasn't prepared to
+be an early adopter of this technology.
 
 > My problem with the vast majority [of Datomic tutorials] is that
 > they seem to be written for people who don't need a tutorial, and by
@@ -43,11 +40,16 @@ recently ran across really resonated with my experiences:
 > understand," quickly coupled with "and if you don't, you're not smart
 > enough to use this technology anyway."
 
-So nothing much came of my first attempt to learn Datomic. Recently
-though, my interest was piqued again by a talk by a co-worker at my
-current job at [8th Light][8l]. At the same time, I've been inspired
+I read this in a [tutorial blog about Datomic][datomic-tut] that I
+recently ran across. It neatly sums up how I felt about Datomic at
+that time. So nothing much came of my first attempt to learn Datomic.
+
+[datomic-tut]: http://ben.vandgrift.com/2014/04/24/a-clojure-datomic-web-app-tutorial.html
+
+Recently though, my interest was piqued again by a talk given by one
+of my current co-workers. At the same time, I've been inspired
 recently to pick up again a project I started around the time I was
-first interested in Datomic, [Rotateam][rotateam]. But given my recent
+first interested in Datomic, [Rotateam][rotateam]. Given my recent
 love affair/obsession with Clojure, and in particular the
 [Boot][boot-git] project for creating Clojure [build tooling][boot], I
 obviously wanted to rebuild the project using a
@@ -76,9 +78,9 @@ tells you how to setup Maven and Leiningen projects to pull from these
 repositories. They show you an excellent setup too, that doesn't
 require the security-sin of committing secrets to a Git repository.
 
-Unfortunately, since Boot is a still a relative newcomer to the
-Clojure ecosystem, there are no supported instructions for securely
-using the My Datomic Maven repository with Boot.
+Unfortunately, since Boot is still a relative newcomer to the Clojure
+ecosystem, there are no official Coginitect-supported instructions for
+securely using the My Datomic Maven repository with Boot.
 
 Sounds like the perfect opportunity for a blog post :D
 
