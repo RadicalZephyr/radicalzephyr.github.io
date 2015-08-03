@@ -1,0 +1,768 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Using Datomic Pro and Building With Boot - Zephyrizing</title>
+  <meta name="author" content="Geoff Shannon">
+
+  
+  <meta name="description" content="I first heard about Datomic shortly after it was initially
+released. I think I almost immediately went and read all of the
+documents that Relevance &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://www.zephyrizing.net/blog/2015/08/01/using-datomic-pro-and-building-with-boot">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+  <link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
+  <link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160">
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Zephyrizing" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+</head>
+
+<body   >
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-43671921-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+  <header role="banner"><hgroup>
+  <h1><a href="/">Zephyrizing</a></h1>
+  
+    <h2>Thoughts on cast-iron seasoning, programming and everything&#8230;</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:www.zephyrizing.net" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/about">About</a></li>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/presentations">Presentations</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+
+  <header>
+    
+      <h1 class="entry-title">Using Datomic Pro and Building With Boot</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-08-01T20:14:20-05:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>8:14 pm</span></time>
+        
+           | <a href="#disqus_thread"
+             data-disqus-identifier="http://www.zephyrizing.net">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>I first heard about <a href="http://www.datomic.com/">Datomic</a> shortly after it was initially
+released. I think I almost immediately went and read all of the
+documents that <del><a href="http://thinkrelevance.com/">Relevance</a></del> <a href="http://cognitect.com/">Cognitect</a> released about
+it&rsquo;s architecture. I was duly impressed, and really interested in
+using it. In particular, the potential for
+<a href="http://www.datomic.com/benefits.html">time-travelling</a> was really interesting and
+exciting to me.</p>
+
+<p>At the time I had been tasked with writing some code to determine
+usage metrics for our system. One of my boss&rsquo;s hopes was that we could
+generate usage data from some time ago as well to compare with our
+current levels. Because we were using traditional relational databases
+and hadn&rsquo;t planned for this use case, that turned out to be
+impossible. However, if we had been using Datomic, that back-dated
+query would have been absolutely trivial.</p>
+
+<!--more-->
+
+
+<p>When I attempted to actually learn to use Datomic however, I was
+overwhelmed by the intensity and relative scarcity of the
+documentation. My general inexperience meant that I wasn&rsquo;t prepared to
+be an early adopter of this technology.</p>
+
+<blockquote><p>My problem with the vast majority [of Datomic tutorials] is that
+they seem to be written for people who don&rsquo;t need a tutorial, and by
+and large all have the stench of &ldquo;read the code and you&rsquo;ll
+understand,&rdquo; quickly coupled with &ldquo;and if you don&rsquo;t, you&rsquo;re not smart
+enough to use this technology anyway.&rdquo;</p></blockquote>
+
+<p>I read this in a <a href="http://ben.vandgrift.com/2014/04/24/a-clojure-datomic-web-app-tutorial.html">tutorial blog about Datomic</a> that I
+recently ran across. It neatly sums up how I felt about Datomic at
+that time. So nothing much came of my first attempt to learn Datomic.</p>
+
+<p>Recently though, my interest was piqued again by a talk given by one
+of my current co-workers. At the same time, I&rsquo;ve been inspired
+recently to pick up again a project I started around the time I was
+first interested in Datomic, <a href="https://github.com/RadicalZephyr/rotateam">Rotateam</a>. Given my recent
+love affair/obsession with Clojure, and in particular the
+<a href="https://github.com/boot-clj/boot">Boot</a> project for creating Clojure <a href="http://boot-clj.com/">build tooling</a>, I
+obviously wanted to rebuild the project using a
+Boot/Clojure/Clojurescript stack. And what better database technology
+to use than Datomic!</p>
+
+<p>I chose to tackle the part I was least familiar with first: Datomic. I
+followed the links and instructions from the Datomic home page until I
+found out about the new (to me at least) free license for
+<a href="http://www.datomic.com/get-datomic.html">Datomic Pro Starter Edition</a>. From there I just followed
+the getting started instructions and the tutorial.</p>
+
+<p>Since Datomic is very proprietary software, the jar&rsquo;s for it aren&rsquo;t
+available from public repositories. Instead, when you register with My
+Datomic you get a generated password that gives you access to their
+private, password-protected Maven repository. Conveniently, when you
+sign up for the Starter Edition you are presented with a page that
+tells you how to setup Maven and Leiningen projects to pull from these
+repositories. They show you an excellent setup too, that doesn&rsquo;t
+require the security-sin of committing secrets to a Git repository.</p>
+
+<p>Unfortunately, since Boot is still a relative newcomer to the Clojure
+ecosystem, there are no official Coginitect-supported instructions for
+securely using the My Datomic Maven repository with Boot.</p>
+
+<p>Sounds like the perfect opportunity for a blog post :D</p>
+
+<p><a id="top-down"></a></p>
+
+<h2>Top Down</h2>
+
+<p>Let&rsquo;s start from what we want to be able to do. In an ideal world, I
+would be able to simply include Datomic Pro as a dependency in my
+<code>:dependencies</code> list. In a typical <code>build.boot</code> file that would look
+like this:</p>
+
+<figure class='code'><figcaption><span>build.boot</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">set-env!</span>
+</span><span class='line'> <span class="ss">:dependencies</span> <span class="o">&#39;</span><span class="p">[[</span><span class="nv">com.datomic/datomic-pro</span> <span class="s">&quot;0.9.5206&quot;</span><span class="p">]])</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If we try this out it pretty clearly fails. On my machine Boot spat
+out a huge amount of junk that boiled down to &ldquo;Sorry chap, I couldn&rsquo;t
+find version <code>0.9.5206</code> of <code>com.datomic/datomic-pro</code> for you.&rdquo; Of
+course, this is because we haven&rsquo;t told boot how to look in the Maven
+repository where it exists: <code>https://my.datomic.com/repo</code>.</p>
+
+<p>Let&rsquo;s try the simplest thing that could possibly work. If we look at
+the Boot
+<a href="https://github.com/boot-clj/boot/wiki/Boot-Environment#env-keys">documentation on the keys in the Boot environment</a>, we can
+see that there is a handy <code>:repositories</code> key that we should probably
+be setting with the details of our My Datomic credentials. If we check
+out the <a href="https://github.com/cemerick/pomegranate/blob/pomegranate-0.3.0/src/main/clojure/cemerick/pomegranate/aether.clj#L639-L650">documentation in Pomegranate</a> for what the values of
+the <code>:repositories</code> vector should look like, we can see that to
+include authentication credentials, we need to specify it as a
+map. Concretely our <code>build.boot</code> should look more like this:</p>
+
+<p><a id="first-working"></a></p>
+
+<figure class='code'><figcaption><span>build.boot</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">set-env!</span>
+</span><span class='line'> <span class="ss">:dependencies</span> <span class="o">&#39;</span><span class="p">[[</span><span class="nv">com.datomic/datomic-pro</span> <span class="s">&quot;0.9.5206&quot;</span><span class="p">]]</span>
+</span><span class='line'> <span class="ss">:repositories</span> <span class="o">#</span><span class="p">(</span><span class="nb">conj </span><span class="nv">%</span>
+</span><span class='line'>                      <span class="p">[</span><span class="s">&quot;my-datomic&quot;</span> <span class="p">{</span><span class="ss">:url</span> <span class="s">&quot;https://my.datomic.com/repo&quot;</span>
+</span><span class='line'>                                     <span class="ss">:username</span> <span class="s">&quot;notmyemail@example.com&quot;</span>
+</span><span class='line'>                                     <span class="ss">:password</span> <span class="s">&quot;obviously-not-my-password&quot;</span><span class="p">}]))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The reason for the funny syntax of specifying a lambda function as the
+repositories value is because we want to update the value
+<code>:repositories</code> by adding (<code>conj</code>ing) the <code>my-datomic</code> repository. We
+can&rsquo;t just blindly override the repositories, because by default Boot
+adds entries for pulling from <a href="http://search.maven.org/">Maven Central</a> and
+<a href="https://clojars.org/">Clojars</a> which we probably don&rsquo;t want to blow away.</p>
+
+<p><a id="side-note"></a></p>
+
+<h3>Side Note</h3>
+
+<p>Rather than bothering to go and read the Pomegranate documentation, we
+also could have inspect Boot&rsquo;s default environment. Boot ships with a
+handy task called <code>show</code> which is useful for this sort of inspection.
+For Leiningen users, it&rsquo;s sort of equivalent to <code>lein pprint</code>. In this
+case, since we&rsquo;re interested in what&rsquo;s in the environment we want to
+run <code>boot show -e</code> or <code>boot show --env</code>.  And of course, as with all
+Boot tasks we could find out this information by running <code>boot show
+-h</code>. Okay, <code>&lt;/side note&gt;</code>.</p>
+
+<p><a id="back-to-it"></a></p>
+
+<h2>Back to It</h2>
+
+<p>Obviously you&rsquo;d need to put your real My Datomic credentials in
+there. Just as obviously, this can&rsquo;t be the final form our solution
+takes. The <code>build.boot</code> file pretty much <em>needs</em> to be under source
+control, and those secrets need to <strong><em>not</em></strong> be present in source
+control.</p>
+
+<p>So <a href="#first-working">that</a> works. But to develop a more elegant and
+secure solution, we&rsquo;re probably going to need a better understanding
+of just how Boot goes about loading dependencies. Now, we could go and
+read the source. Or we could treat Boot as a black box and play with
+it until we have a better understanding of how it works. I vote the
+latter.</p>
+
+<p>Let&rsquo;s start with the simplest thing that probably <strong>won&rsquo;t</strong> work. What if
+we move the <code>:repositories</code> update into a separate <code>set-env!</code> like this:</p>
+
+<figure class='code'><figcaption><span>build.boot</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">set-env!</span>
+</span><span class='line'> <span class="ss">:dependencies</span> <span class="o">&#39;</span><span class="p">[[</span><span class="nv">com.datomic/datomic-pro</span> <span class="s">&quot;0.9.5206&quot;</span><span class="p">]])</span>
+</span><span class='line'><span class="p">(</span><span class="nf">set-env!</span>
+</span><span class='line'> <span class="ss">:repositories</span> <span class="o">#</span><span class="p">(</span><span class="nb">conj </span><span class="nv">%</span>
+</span><span class='line'>                      <span class="p">[</span><span class="s">&quot;my-datomic&quot;</span> <span class="p">{</span><span class="ss">:url</span> <span class="s">&quot;https://my.datomic.com/repo&quot;</span>
+</span><span class='line'>                                     <span class="ss">:username</span> <span class="s">&quot;notmyemail@example.com&quot;</span>
+</span><span class='line'>                                     <span class="ss">:password</span> <span class="s">&quot;obviously-not-my-password&quot;</span><span class="p">}]))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This again fails spectacularly for the same reason of not being able
+to resolve the Datomic dependency. But this test has told us something
+important. It tells us that the dependency resolution happened <em>during
+the first call to <code>set-env!</code></em>. This is important, because it implies
+that if we get the <code>my-datomic</code> repository configuration into the boot
+environment before that call, then everything should work just
+fine. Let&rsquo;s try it out:</p>
+
+<figure class='code'><figcaption><span>build.boot</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">set-env!</span>
+</span><span class='line'> <span class="ss">:repositories</span> <span class="o">#</span><span class="p">(</span><span class="nb">conj </span><span class="nv">%</span>
+</span><span class='line'>                      <span class="p">[</span><span class="s">&quot;my-datomic&quot;</span> <span class="p">{</span><span class="ss">:url</span> <span class="s">&quot;https://my.datomic.com/repo&quot;</span>
+</span><span class='line'>                                     <span class="ss">:username</span> <span class="s">&quot;notmyemail@example.com&quot;</span>
+</span><span class='line'>                                     <span class="ss">:password</span> <span class="s">&quot;obviously-not-my-password&quot;</span><span class="p">}]))</span>
+</span><span class='line'><span class="p">(</span><span class="nf">set-env!</span>
+</span><span class='line'> <span class="ss">:dependencies</span> <span class="o">&#39;</span><span class="p">[[</span><span class="nv">com.datomic/datomic-pro</span> <span class="s">&quot;0.9.5206&quot;</span><span class="p">]])</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Hey, presto! It works. Let&rsquo;s think about why this works for a moment
+and what the implications are. Obviously, at some point during the
+`set-env! function, some code gets called that notices that a new
+dependency was added, and attempts to resolve it. As long as the
+repository required to resolve that dependency is present in the list
+of repositories at that moment, then everything works fine. This is an
+excellent example of what the Boot authors are talking about when they
+say that Boot builds are programs.</p>
+
+<p>If you&rsquo;re like me then long familiarity with declarative build systems
+has lulled you into thinking of build description files as
+fundamentally not code. Even though a Leiningen project map is
+entirely made of Clojure data structures, my experiences have taught
+me that it isn&rsquo;t really code. But a Boot build file is. It&rsquo;s executing
+Clojure code on an epicly simple level.</p>
+
+<p>When I was first discovering how this worked for myself, I was working
+on an actual project, and the <code>build.boot</code> was significantly more
+complex. As such, I broke out the Datomic specific portions into the
+snippets that I&rsquo;ve included in this blog post. But because of my
+build&rsquo;s-as-specification indoctrination, I had fallen into a rhythm of
+always having my <code>build.boot</code> files have a certain structure to them.</p>
+
+<figure class='code'><figcaption><span>My proto-typical build.boot</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="c1">;;; Start with source paths and dependencies</span>
+</span><span class='line'><span class="p">(</span><span class="nf">set-env!</span>
+</span><span class='line'> <span class="ss">:source-paths</span> <span class="o">#</span><span class="p">{</span><span class="s">&quot;src&quot;</span> <span class="s">&quot;test&quot;</span><span class="p">}</span>
+</span><span class='line'> <span class="ss">:dependencies</span> <span class="o">&#39;</span><span class="p">[[</span><span class="nv">org.clojure/clojure</span>      <span class="s">&quot;1.6.0&quot;</span><span class="p">]</span>
+</span><span class='line'>                 <span class="p">[</span><span class="nv">midje</span>                    <span class="s">&quot;1.7.0&quot;</span>          <span class="ss">:scope</span> <span class="s">&quot;test&quot;</span><span class="p">]</span>
+</span><span class='line'>                 <span class="p">[</span><span class="nv">zilti/boot-midje</span>         <span class="s">&quot;0.2.1-SNAPSHOT&quot;</span> <span class="ss">:scope</span> <span class="s">&quot;test&quot;</span><span class="p">]</span>
+</span><span class='line'>                 <span class="p">[</span><span class="nv">radicalzephyr/bootlaces</span>  <span class="s">&quot;0.1.15-SNAPSHOT&quot;</span><span class="p">]])</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">;;; Require bootlaces and other boot tasks</span>
+</span><span class='line'><span class="p">(</span><span class="nf">require</span> <span class="o">&#39;</span><span class="p">[</span><span class="nv">radicalzephyr.bootlaces</span> <span class="ss">:refer</span> <span class="ss">:all</span><span class="p">]</span>
+</span><span class='line'>         <span class="o">&#39;</span><span class="p">[</span><span class="nv">zilti.boot-midje</span>        <span class="ss">:refer</span> <span class="p">[</span><span class="nv">midje</span><span class="p">]])</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">;;; Define the project version</span>
+</span><span class='line'><span class="p">(</span><span class="k">def </span><span class="nv">+version+</span> <span class="s">&quot;0.1.1-SNAPSHOT&quot;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">;;; And use the bootlaces configuration</span>
+</span><span class='line'><span class="p">(</span><span class="nf">bootlaces!</span> <span class="nv">+version+</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">;;; Finally, configure any default task-options</span>
+</span><span class='line'><span class="p">(</span><span class="nf">task-options!</span>
+</span><span class='line'> <span class="nv">pom</span>  <span class="p">{</span><span class="ss">:project</span>     <span class="ss">&#39;radicalzephyr/rotateam</span>
+</span><span class='line'>       <span class="ss">:version</span>     <span class="nv">+version+</span>
+</span><span class='line'>       <span class="ss">:description</span> <span class="s">&quot;A web-app for scheduling team role rotations.&quot;</span>
+</span><span class='line'>       <span class="ss">:url</span>         <span class="s">&quot;https://github.com/radicalzephyr/clj-rotateam&quot;</span>
+</span><span class='line'>       <span class="ss">:scm</span>         <span class="p">{</span><span class="ss">:url</span> <span class="s">&quot;https://github.com/radicalzephyr/clj-rotateam&quot;</span><span class="p">}</span>
+</span><span class='line'>       <span class="ss">:license</span>     <span class="p">{</span><span class="s">&quot;Eclipse Public License&quot;</span>
+</span><span class='line'>                     <span class="s">&quot;http://www.eclipse.org/legal/epl-v10.html&quot;</span><span class="p">}})</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This structure is <em>very</em> reminiscent of a <code>project.clj</code> file. It&rsquo;s
+format is slightly different, but there&rsquo;s really nothing that takes
+advantage of the fact that this is actually a regular Clojure
+program. This is true for a reason though, and again it&rsquo;s mentioned in
+Boot&rsquo;s rationale. Simple projects don&rsquo;t need the flexibility of having
+their build be a real program. But here&rsquo;s the thing, simple projects
+tend to become complex projects over time.</p>
+
+<p><a id="back-to-datomic"></a></p>
+
+<h2>Back to Datomic</h2>
+
+<p>Okay, enough philosophizing. What does this build as program mean for
+storing and accessing our My Datomic credentials securely? Well for
+starters, it means we can do something really simple like following
+the Heroku paradigm of putting secrets into environment
+variables. Pulling them out is easy with a little bit of Java-interop.</p>
+
+<figure class='code'><figcaption><span>build.boot</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">set-env!</span>
+</span><span class='line'> <span class="ss">:dependencies</span> <span class="o">&#39;</span><span class="p">[[</span><span class="nv">com.datomic/datomic-pro</span> <span class="s">&quot;0.9.5206&quot;</span><span class="p">]]</span>
+</span><span class='line'> <span class="ss">:repositories</span> <span class="o">#</span><span class="p">(</span><span class="nb">conj </span><span class="nv">%</span>
+</span><span class='line'>                      <span class="p">[</span><span class="s">&quot;my-datomic&quot;</span> <span class="p">{</span><span class="ss">:url</span> <span class="s">&quot;https://my.datomic.com/repo&quot;</span>
+</span><span class='line'>                                     <span class="ss">:username</span> <span class="p">(</span><span class="nf">System/getenv</span> <span class="s">&quot;DATOMIC_USERNAME&quot;</span><span class="p">)</span>
+</span><span class='line'>                                     <span class="ss">:password</span> <span class="p">(</span><span class="nf">System/getenv</span> <span class="s">&quot;DATOMIC_PASSWORD&quot;</span><span class="p">)}]))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This again works perfectly. But why stop there? This solution only
+works when you have your Datomic username and password set as
+environment variables. Instead, we could fallback to prompting the
+user for the credentials. Borrowing and adapting some code from
+<a href="https://github.com/adzerk-oss/bootlaces">Adzerk&rsquo;s bootlaces</a>, we can provide a reasonable
+fallback experience.</p>
+
+<figure class='code'><figcaption><span>build.boot</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="k">let </span><span class="p">[[</span><span class="nv">user</span> <span class="nv">pass</span><span class="p">]</span> <span class="p">(</span><span class="nf">mapv</span> <span class="o">#</span><span class="p">(</span><span class="nf">System/getenv</span> <span class="nv">%</span><span class="p">)</span> <span class="p">[</span><span class="s">&quot;DATOMIC_USERNAME&quot;</span> <span class="s">&quot;DATOMIC_PASS&quot;</span><span class="p">])</span>
+</span><span class='line'>      <span class="nv">datomic-creds</span> <span class="p">(</span><span class="nf">atom</span> <span class="p">{})]</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">and </span><span class="nv">user</span> <span class="nv">pass</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">(</span><span class="nf">swap!</span> <span class="nv">datomic-creds</span> <span class="nb">assoc </span><span class="ss">:username</span> <span class="nv">user</span> <span class="ss">:password</span> <span class="nv">pass</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">(</span><span class="k">do </span><span class="p">(</span><span class="nb">println </span><span class="p">(</span><span class="nb">str </span><span class="s">&quot;DATOMIC_USERNAME and DATOMIC_PASS were not set;&quot;</span>
+</span><span class='line'>                      <span class="s">&quot; please enter your Datomic credentials.&quot;</span><span class="p">))</span>
+</span><span class='line'>        <span class="p">(</span><span class="nb">print </span><span class="s">&quot;Username: &quot;</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">(</span><span class="o">#</span><span class="p">(</span><span class="nf">swap!</span> <span class="nv">datomic-creds</span> <span class="nb">assoc </span><span class="ss">:username</span> <span class="nv">%</span><span class="p">)</span> <span class="p">(</span><span class="nf">read-line</span><span class="p">))</span>
+</span><span class='line'>        <span class="p">(</span><span class="nb">print </span><span class="s">&quot;Password: &quot;</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">(</span><span class="o">#</span><span class="p">(</span><span class="nf">swap!</span> <span class="nv">datomic-creds</span> <span class="nb">assoc </span><span class="ss">:password</span> <span class="nv">%</span><span class="p">)</span>
+</span><span class='line'>         <span class="p">(</span><span class="nb">apply str </span><span class="p">(</span><span class="nf">.readPassword</span> <span class="p">(</span><span class="nf">System/console</span><span class="p">))))))</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">set-env!</span> <span class="ss">:repositories</span>
+</span><span class='line'>            <span class="o">#</span><span class="p">(</span><span class="nb">conj </span><span class="p">[</span><span class="s">&quot;my-datomic&quot;</span> <span class="p">(</span><span class="nb">merge </span><span class="o">@</span><span class="nv">datomic-creds</span>
+</span><span class='line'>                                        <span class="p">{</span><span class="ss">:url</span> <span class="s">&quot;https://my.datomic.com/repo&quot;</span><span class="p">})])))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This code may look a bit intimidating, but it&rsquo;s mostly managing the
+details of user friendly input and output. But again, why stop here?
+This is <em>just Clojure code</em> here, so all of Clojure&rsquo;s ability to
+define and use abstractions is right there.</p>
+
+<figure class='code'><figcaption><span>build.boot</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">get-cleartext</span> <span class="p">[</span><span class="nv">prompt</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nb">print </span><span class="nv">prompt</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">read-line</span><span class="p">))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">get-password</span> <span class="p">[</span><span class="nv">prompt</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nb">print </span><span class="nv">prompt</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nb">apply str </span><span class="p">(</span><span class="nf">.readPassword</span> <span class="p">(</span><span class="nf">System/console</span><span class="p">))))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">user</span> <span class="p">(</span><span class="nb">or </span><span class="p">(</span><span class="nf">System/getenv</span> <span class="s">&quot;DATOMIC_USERNAME&quot;</span><span class="p">)</span>
+</span><span class='line'>               <span class="p">(</span><span class="nf">get-cleartext</span> <span class="s">&quot;DATOMIC_USERNAME was not defined.\nUsername: &quot;</span><span class="p">))</span>
+</span><span class='line'>      <span class="nv">pass</span> <span class="p">(</span><span class="nb">or </span><span class="p">(</span><span class="nf">System/getenv</span> <span class="s">&quot;DATOMIC_PASSORD&quot;</span><span class="p">)</span>
+</span><span class='line'>               <span class="p">(</span><span class="nf">get-password</span>  <span class="s">&quot;DATOMIC_PASSWORD was not defined.\nPassword: &quot;</span><span class="p">))]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">set-env!</span> <span class="ss">:repositories</span>
+</span><span class='line'>            <span class="o">#</span><span class="p">(</span><span class="nb">conj </span><span class="p">[</span><span class="s">&quot;my-datomic&quot;</span> <span class="p">{</span><span class="ss">:url</span> <span class="s">&quot;https://my.datomic.com/repo&quot;</span>
+</span><span class='line'>                                  <span class="ss">:username</span> <span class="nv">user</span>
+</span><span class='line'>                                  <span class="ss">:password</span> <span class="nv">pass</span><span class="p">}])))</span>
+</span><span class='line'><span class="p">(</span><span class="nf">set-env!</span>
+</span><span class='line'> <span class="ss">:dependencies</span> <span class="o">&#39;</span><span class="p">[[</span><span class="nv">com.datomic/datomic-pro</span> <span class="s">&quot;0.9.5206&quot;</span><span class="p">]])</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>There&rsquo;s still some obvious duplication in there. Let&rsquo;s see if we can
+get rid of that too.</p>
+
+<figure class='code'><figcaption><span>build.boot</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">get-cleartext</span> <span class="p">[</span><span class="nv">prompt</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nb">print </span><span class="nv">prompt</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">read-line</span><span class="p">))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">get-password</span> <span class="p">[</span><span class="nv">prompt</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nb">print </span><span class="nv">prompt</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nb">apply str </span><span class="p">(</span><span class="nf">.readPassword</span> <span class="p">(</span><span class="nf">System/console</span><span class="p">))))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nf">require</span> <span class="o">&#39;</span><span class="p">[</span><span class="nv">clojure.string</span> <span class="ss">:as</span> <span class="nv">str</span><span class="p">])</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">get-env-or-prompt</span> <span class="p">[</span><span class="nv">prefix</span> <span class="nv">prompt-fmt</span> <span class="nv">word</span> <span class="nv">get-fn</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">env-name</span> <span class="p">(</span><span class="nb">str </span><span class="nv">prefix</span> <span class="nv">word</span><span class="p">)]</span>
+</span><span class='line'>    <span class="p">(</span><span class="nb">or </span><span class="p">(</span><span class="nf">System/getenv</span> <span class="nv">env-name</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">(</span><span class="nf">get-fn</span> <span class="p">(</span><span class="nf">format</span> <span class="nv">prompt-fmt</span> <span class="nv">env-name</span> <span class="p">(</span><span class="nf">str/capitalize</span> <span class="nv">word</span><span class="p">))))))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="k">let </span><span class="p">[[</span><span class="nv">user</span> <span class="nv">pass</span><span class="p">]</span> <span class="p">(</span><span class="nf">mapv</span> <span class="o">#</span><span class="p">(</span><span class="nf">get-env-or-prompt</span> <span class="s">&quot;DATOMIC_&quot;</span>
+</span><span class='line'>                                            <span class="s">&quot;%s was not defined.\n%s&quot;</span>
+</span><span class='line'>                                            <span class="nv">%1</span> <span class="nv">%2</span><span class="p">)</span>
+</span><span class='line'>                        <span class="p">[</span><span class="s">&quot;USERNAME&quot;</span>    <span class="s">&quot;PASSWORD&quot;</span><span class="p">]</span>
+</span><span class='line'>                        <span class="p">[</span><span class="nv">get-cleartext</span> <span class="nv">get-password</span><span class="p">])]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">set-env!</span> <span class="ss">:repositories</span>
+</span><span class='line'>            <span class="o">#</span><span class="p">(</span><span class="nb">conj </span><span class="p">[</span><span class="s">&quot;my-datomic&quot;</span> <span class="p">{</span><span class="ss">:url</span> <span class="s">&quot;https://my.datomic.com/repo&quot;</span>
+</span><span class='line'>                                  <span class="ss">:username</span> <span class="nv">user</span>
+</span><span class='line'>                                  <span class="ss">:password</span> <span class="nv">pass</span><span class="p">}])))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nf">set-env!</span>
+</span><span class='line'> <span class="ss">:dependencies</span> <span class="o">&#39;</span><span class="p">[[</span><span class="nv">com.datomic/datomic-pro</span> <span class="s">&quot;0.9.5206&quot;</span><span class="p">]])</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The code is longer now, but it&rsquo;s been decomposed and de-duplicated
+significantly. It also gained the ability to prompt for values only if
+the corresponding environment variable isn&rsquo;t set. We could keep going
+with this, and define that <code>let</code> block as a function. We could move
+all this code into a Clojure source file in the <code>src</code> folder of the
+current project, and then <code>require</code> it in. Or we could put it into a
+separate library like <a href="https://github.com/radicalzephyr/rotateam">my bootlaces</a> and add that as a
+dependency. Once we extract this functionality into a libryr we could
+add tests for it, and then continue to expand it&rsquo;s functionality. We
+could add another method for retrieving the credentials. Perhaps
+storing them in an encrypted edn file, which we read in if it exists.</p>
+
+<p>All of these various permutations are possible, and more. And we
+always have the full power of Clojure at our disposal. Notice what we
+didn&rsquo;t have to do at any point along this process. We didn&rsquo;t have to
+write a plugin for our build tool, or try to get a patch merged into
+the source code and wait for it&rsquo;s release. It&rsquo;s all just been regular
+Clojure code, following a very natural and easy code growth
+path. Start out with an inline-definition and usage, then slowly
+abstract and tease apart into a separate package.</p>
+
+<p>This is the philosophy of Lisp writ large in the paradigm of building
+programs. There is no difference between what is built into Boot, and
+what we define personally. There is nothing done in the Boot built-in
+tasks that could not have been done by a Boot user. Based on a few
+carefully chosen &ldquo;primitves&rdquo; an elegant and powerful structure can be
+built. This is what happens when your code is just data, or your build
+is just a program.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Geoff Shannon</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2015-08-01T20:14:20-05:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>8:14 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/boot/'>boot</a>, <a class='category' href='/blog/categories/clojure/'>clojure</a>, <a class='category' href='/blog/categories/datomic/'>datomic</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://www.zephyrizing.net/blog/2015/08/01/using-datomic-pro-and-building-with-boot/" data-via="RadicalZephyr" data-counturl="http://www.zephyrizing.net/blog/2015/08/01/using-datomic-pro-and-building-with-boot/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2015/07/23/the-importance-of-focusing-small-with-tdd/" title="Previous Post: The Importance of Focusing Small with TDD">&laquo; The Importance of Focusing Small with TDD</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/08/01/using-datomic-pro-and-building-with-boot/">Using Datomic Pro and Building With Boot</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/07/23/the-importance-of-focusing-small-with-tdd/">The Importance of Focusing Small With TDD</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/07/19/tdd-and-the-art-of-picking-tests/">TDD and the Art of Picking Tests</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/07/13/secure-password-storage/">Secure Password Storage</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/07/03/domain-driven-writing/">Domain Driven Writing</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/RadicalZephyr">@RadicalZephyr</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'RadicalZephyr',
+            count: 7,
+            skip_forks: true,
+            to_skip: ["radicalzephyr.github.io","home","prelude",".emacs.d","emacs","synapse-admin","old-site"],
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Geoff Shannon -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'zephyrizing';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://www.zephyrizing.net/blog/2015/08/01/using-datomic-pro-and-building-with-boot/';
+        var disqus_url = 'http://www.zephyrizing.net/blog/2015/08/01/using-datomic-pro-and-building-with-boot/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+<noscript>Please enable JavaScript to view
+  the <a href="http://disqus.com/?ref_noscript">comments powered by
+    Disqus.</a></noscript>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
