@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Boot | Zephyrizing]]></title>
   <link href="http://www.zephyrizing.net/blog/categories/boot/atom.xml" rel="self"/>
   <link href="http://www.zephyrizing.net/"/>
-  <updated>2015-08-03T04:38:16-05:00</updated>
+  <updated>2015-08-03T04:40:15-05:00</updated>
   <id>http://www.zephyrizing.net/</id>
   <author>
     <name><![CDATA[Geoff Shannon]]></name>
@@ -14,10 +14,10 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Using Datomic Pro and Building With Boot]]></title>
-    <link href="http://www.zephyrizing.net/blog/2015/08/01/using-datomic-pro-and-building-with-boot/"/>
+    <title type="html"><![CDATA[Using Datomic Pro With Boot]]></title>
+    <link href="http://www.zephyrizing.net/blog/2015/08/01/using-datomic-pro-with-boot/"/>
     <updated>2015-08-01T20:14:20-05:00</updated>
-    <id>http://www.zephyrizing.net/blog/2015/08/01/using-datomic-pro-and-building-with-boot</id>
+    <id>http://www.zephyrizing.net/blog/2015/08/01/using-datomic-pro-with-boot</id>
     <content type="html"><![CDATA[I first heard about [Datomic][datomic] shortly after it was initially
 released. I think I almost immediately went and read all of the
 documents that ~~[Relevance][relevance]~~ [Cognitect][cognitect] released about
