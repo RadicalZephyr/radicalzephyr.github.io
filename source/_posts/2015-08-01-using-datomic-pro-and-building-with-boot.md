@@ -128,12 +128,24 @@ The reason for the funny syntax of specifying a lambda function as the
 repositories value is because we want to update the value
 `:repositories` by adding (`conj`ing) the `my-datomic` repository. We
 can't just blindly override the repositories, because by default Boot
-adds entries (which we can see by running `boot show -e` for pulling
-from [Maven Central][mvn-central] and [Clojars][clojars] which we
-probably don't want to blow away.
+adds entries for pulling from [Maven Central][mvn-central] and
+[Clojars][clojars] which we probably don't want to blow away.
 
 [mvn-central]: http://search.maven.org/
 [clojars]: https://clojars.org/
+
+### SIde Note
+
+Rather than bothering to go and read the Pomegranate documentation, we
+also could have inspect Boot's default environment. Boot ships with a
+handy task called `show` which is useful for this sort of inspection.
+For Leiningen users, it's sort of equivalent to `lein pprint`. In this
+case, since we're interested in what's in the environment we want to
+run `boot show -e` or `boot show --env`.  And of course, as with all
+Boot tasks we could find out this information by running `boot show
+-h`. Okay, `</side note>`.
+
+## Back to It
 
 Obviously you'd need to put your real My Datomic credentials in
 there. Just as obviously, this can't be the final form our solution
@@ -161,7 +173,7 @@ we move the `:repositories` update into a separate `set-env!` like this:
 ```
 
 This again fails spectacularly for the same reason of not being able
-to resolve the datomic dependency. But this test has told us something
+to resolve the Datomic dependency. But this test has told us something
 important. It tells us that the dependency resolution happened _during
 the first call to `set-env!`_. This is important, because it implies
 that if we get the `my-datomic` repository configuration into the boot
