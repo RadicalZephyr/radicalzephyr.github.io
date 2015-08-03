@@ -115,6 +115,8 @@ map. Concretely our `build.boot` should look more like this:
 [boot-env]: https://github.com/boot-clj/boot/wiki/Boot-Environment#env-keys
 [pom-doc]: https://github.com/cemerick/pomegranate/blob/pomegranate-0.3.0/src/main/clojure/cemerick/pomegranate/aether.clj#L639-L650
 
+<a id="first-working"/>
+
 ```clojure build.boot
 (set-env!
  :dependencies '[[com.datomic/datomic-pro "0.9.5206"]]
@@ -134,7 +136,7 @@ adds entries for pulling from [Maven Central][mvn-central] and
 [mvn-central]: http://search.maven.org/
 [clojars]: https://clojars.org/
 
-### SIde Note
+### Side Note
 
 Rather than bothering to go and read the Pomegranate documentation, we
 also could have inspect Boot's default environment. Boot ships with a
@@ -153,13 +155,14 @@ takes. The `build.boot` file pretty much _needs_ to be under source
 control, and those secrets need to __*not*__ be present in source
 control.
 
-So that works. But to develop a more elegant and secure solution,
-we're probably going to need a better understanding of just how Boot
-goes about loading dependencies. We could go and read the source. Or
-we could treat it as a black box and play with Boot until we have a
-better understanding of how it works.
+So [that](#first-working) works. But to develop a more elegant and
+secure solution, we're probably going to need a better understanding
+of just how Boot goes about loading dependencies. Now, we could go and
+read the source. Or we could treat Boot as a black box and play with
+it until we have a better understanding of how it works. I vote the
+latter.
 
-Let's start with the simplest thing that probably won't work. What if
+Let's start with the simplest thing that probably __won't__ work. What if
 we move the `:repositories` update into a separate `set-env!` like this:
 
 ```clojure build.boot
@@ -194,17 +197,17 @@ Hey, presto! It works. Let's think about why this works for a moment
 and what the implications are. Obviously, at some point during the
 `set-env! function, some code gets called that notices that a new
 dependency was added, and attempts to resolve it. As long as the
-repository needed to resolve that dependency is present in the list of
-repositories at that moment, then everything works fine. This is an
+repository required to resolve that dependency is present in the list
+of repositories at that moment, then everything works fine. This is an
 excellent example of what the Boot authors are talking about when they
 say that Boot builds are programs.
 
 If you're like me then long familiarity with declarative build systems
-has lulled me into thinking of my build description files as
+has lulled you into thinking of build description files as
 fundamentally not code. Even though a Leiningen project map is
 entirely made of Clojure data structures, my experiences have taught
-me that it isn't code in the way I expect it to be. But a Boot build
-file is. It's executing Clojure code on an epicly simple level.
+me that it isn't really code. But a Boot build file is. It's executing
+Clojure code on an epicly simple level.
 
 When I was first discovering how this worked for myself, I was working
 on an actual project, and the `build.boot` was significantly more
@@ -245,17 +248,19 @@ always having my `build.boot` files have a certain structure to them.
 
 This structure is _very_ reminiscent of a `project.clj` file. It's
 format is slightly different, but there's really nothing that takes
-advantage of the fact that this is actually an regular Clojure
+advantage of the fact that this is actually a regular Clojure
 program. This is true for a reason though, and again it's mentioned in
-the Boot's rationale. Simple projects don't need the flexibility of
-having their build be a real program. But here's the thing, simple
-projects tend to become complex projects over time.
+Boot's rationale. Simple projects don't need the flexibility of having
+their build be a real program. But here's the thing, simple projects
+tend to become complex projects over time.
 
 ## Back to Datomic
 
 Okay, enough philosophizing. What does this build as program mean for
 storing and accessing our My Datomic credentials securely? Well for
-starters, it means we can do really simple things like this:
+starters, it means we can do something really simple like following
+the Heroku paradigm of putting secrets into environment
+variables. Pulling them out is easy with a little bit of Java-interop.
 
 ```clojure build.boot
 (set-env!
@@ -268,8 +273,8 @@ starters, it means we can do really simple things like this:
 
 This again works perfectly. But why stop there? This solution only
 works when you have your Datomic username and password set as
-environment variables. Instead, we could have a fallback
-option. Borrowing and adapting some code from
+environment variables. Instead, we could fallback to prompting the
+user for the credentials. Borrowing and adapting some code from
 [Adzerk's bootlaces][adzerk-bootlaces], we can provide a reasonable
 fallback experience.
 
@@ -357,12 +362,13 @@ The code is longer now, but it's been decomposed and de-duplicated
 significantly. It also gained the ability to prompt for values only if
 the corresponding environment variable isn't set. We could keep going
 with this, and define that `let` block as a function. We could move
-all this code into a Clojure source file in the source folder of the
-project, and then `require` it in. Or we could put it into a separate
-library like [my bootlaces][my-bootlaces] and add that as a
-dependency. We could add another method for retrieving the
-credentials. Perhaps storing them in an encrypted edn file, which we
-read in if it exists.
+all this code into a Clojure source file in the `src` folder of the
+current project, and then `require` it in. Or we could put it into a
+separate library like [my bootlaces][my-bootlaces] and add that as a
+dependency. Once we extract this functionality into a libryr we could
+add tests for it, and then continue to expand it's functionality. We
+could add another method for retrieving the credentials. Perhaps
+storing them in an encrypted edn file, which we read in if it exists.
 
 [my-bootlaces]: https://github.com/radicalzephyr/rotateam
 
@@ -370,11 +376,15 @@ All of these various permutations are possible, and more. And we
 always have the full power of Clojure at our disposal. Notice what we
 didn't have to do at any point along this process. We didn't have to
 write a plugin for our build tool, or try to get a patch merged into
-the source code and wait for it's release. This is the philosophy of
-Lisp writ large in the paradigm of building programs. There is no
-difference between what is built into Boot, and what we define
-personally. There is nothing done in the Boot built-in tasks that
-could not have been done by a Boot user. Based on a few carefully
-chosen "primitves" an elegant and powerful structure can be
-built. This is what happens when your build is just a program, or your
-code is just data.
+the source code and wait for it's release. It's all just been regular
+Clojure code, following a very natural and easy code growth
+path. Start out with an inline-definition and usage, then slowly
+abstract and tease apart into a separate package.
+
+This is the philosophy of Lisp writ large in the paradigm of building
+programs. There is no difference between what is built into Boot, and
+what we define personally. There is nothing done in the Boot built-in
+tasks that could not have been done by a Boot user. Based on a few
+carefully chosen "primitves" an elegant and powerful structure can be
+built. This is what happens when your code is just data, or your build
+is just a program.
