@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Clojure | Zephyrizing]]></title>
   <link href="http://www.zephyrizing.net/blog/categories/clojure/atom.xml" rel="self"/>
   <link href="http://www.zephyrizing.net/"/>
-  <updated>2015-08-03T04:40:15-05:00</updated>
+  <updated>2015-09-06T13:40:39-05:00</updated>
   <id>http://www.zephyrizing.net/</id>
   <author>
     <name><![CDATA[Geoff Shannon]]></name>
@@ -375,8 +375,8 @@ fallback experience.
 </span><span class='line'>        <span class="p">(</span><span class="o">#</span><span class="p">(</span><span class="nf">swap!</span> <span class="nv">datomic-creds</span> <span class="nb">assoc </span><span class="ss">:password</span> <span class="nv">%</span><span class="p">)</span>
 </span><span class='line'>         <span class="p">(</span><span class="nb">apply str </span><span class="p">(</span><span class="nf">.readPassword</span> <span class="p">(</span><span class="nf">System/console</span><span class="p">))))))</span>
 </span><span class='line'>  <span class="p">(</span><span class="nf">set-env!</span> <span class="ss">:repositories</span>
-</span><span class='line'>            <span class="o">#</span><span class="p">(</span><span class="nb">conj </span><span class="p">[</span><span class="s">&quot;my-datomic&quot;</span> <span class="p">(</span><span class="nb">merge </span><span class="o">@</span><span class="nv">datomic-creds</span>
-</span><span class='line'>                                        <span class="p">{</span><span class="ss">:url</span> <span class="s">&quot;https://my.datomic.com/repo&quot;</span><span class="p">})])))</span>
+</span><span class='line'>            <span class="o">#</span><span class="p">(</span><span class="nb">conj </span><span class="nv">%</span> <span class="p">[</span><span class="s">&quot;my-datomic&quot;</span> <span class="p">(</span><span class="nb">merge </span><span class="o">@</span><span class="nv">datomic-creds</span>
+</span><span class='line'>                                          <span class="p">{</span><span class="ss">:url</span> <span class="s">&quot;https://my.datomic.com/repo&quot;</span><span class="p">})])))</span>
 </span></code></pre></td></tr></table></div></figure>
 
 This code may look a bit intimidating, but it&#8217;s mostly managing the
@@ -415,9 +415,9 @@ define and use abstractions is right there.
 </span><span class='line'>      <span class="nv">pass</span> <span class="p">(</span><span class="nb">or </span><span class="p">(</span><span class="nf">System/getenv</span> <span class="s">&quot;DATOMIC_PASSORD&quot;</span><span class="p">)</span>
 </span><span class='line'>               <span class="p">(</span><span class="nf">get-password</span>  <span class="s">&quot;DATOMIC_PASSWORD was not defined.\nPassword: &quot;</span><span class="p">))]</span>
 </span><span class='line'>  <span class="p">(</span><span class="nf">set-env!</span> <span class="ss">:repositories</span>
-</span><span class='line'>            <span class="o">#</span><span class="p">(</span><span class="nb">conj </span><span class="p">[</span><span class="s">&quot;my-datomic&quot;</span> <span class="p">{</span><span class="ss">:url</span> <span class="s">&quot;https://my.datomic.com/repo&quot;</span>
-</span><span class='line'>                                  <span class="ss">:username</span> <span class="nv">user</span>
-</span><span class='line'>                                  <span class="ss">:password</span> <span class="nv">pass</span><span class="p">}])))</span>
+</span><span class='line'>            <span class="o">#</span><span class="p">(</span><span class="nb">conj </span><span class="nv">%</span> <span class="p">[</span><span class="s">&quot;my-datomic&quot;</span> <span class="p">{</span><span class="ss">:url</span> <span class="s">&quot;https://my.datomic.com/repo&quot;</span>
+</span><span class='line'>                                    <span class="ss">:username</span> <span class="nv">user</span>
+</span><span class='line'>                                    <span class="ss">:password</span> <span class="nv">pass</span><span class="p">}])))</span>
 </span><span class='line'><span class="p">(</span><span class="nf">set-env!</span>
 </span><span class='line'> <span class="ss">:dependencies</span> <span class="o">&#39;</span><span class="p">[[</span><span class="nv">com.datomic/datomic-pro</span> <span class="s">&quot;0.9.5206&quot;</span><span class="p">]])</span>
 </span></code></pre></td></tr></table></div></figure>
@@ -475,9 +475,9 @@ get rid of that too.
 </span><span class='line'>                        <span class="p">[</span><span class="s">&quot;USERNAME&quot;</span>    <span class="s">&quot;PASSWORD&quot;</span><span class="p">]</span>
 </span><span class='line'>                        <span class="p">[</span><span class="nv">get-cleartext</span> <span class="nv">get-password</span><span class="p">])]</span>
 </span><span class='line'>  <span class="p">(</span><span class="nf">set-env!</span> <span class="ss">:repositories</span>
-</span><span class='line'>            <span class="o">#</span><span class="p">(</span><span class="nb">conj </span><span class="p">[</span><span class="s">&quot;my-datomic&quot;</span> <span class="p">{</span><span class="ss">:url</span> <span class="s">&quot;https://my.datomic.com/repo&quot;</span>
-</span><span class='line'>                                  <span class="ss">:username</span> <span class="nv">user</span>
-</span><span class='line'>                                  <span class="ss">:password</span> <span class="nv">pass</span><span class="p">}])))</span>
+</span><span class='line'>            <span class="o">#</span><span class="p">(</span><span class="nb">conj </span><span class="nv">%</span> <span class="p">[</span><span class="s">&quot;my-datomic&quot;</span> <span class="p">{</span><span class="ss">:url</span> <span class="s">&quot;https://my.datomic.com/repo&quot;</span>
+</span><span class='line'>                                    <span class="ss">:username</span> <span class="nv">user</span>
+</span><span class='line'>                                    <span class="ss">:password</span> <span class="nv">pass</span><span class="p">}])))</span>
 </span><span class='line'>
 </span><span class='line'><span class="p">(</span><span class="nf">set-env!</span>
 </span><span class='line'> <span class="ss">:dependencies</span> <span class="o">&#39;</span><span class="p">[[</span><span class="nv">com.datomic/datomic-pro</span> <span class="s">&quot;0.9.5206&quot;</span><span class="p">]])</span>
@@ -510,7 +510,7 @@ This is the philosophy of Lisp writ large in the paradigm of building
 programs. There is no difference between what is built into Boot, and
 what we define personally. There is nothing done in the Boot built-in
 tasks that could not have been done by a Boot user. Based on a few
-carefully chosen &#8220;primitves&#8221; an elegant and powerful structure can be
+carefully chosen &#8220;primitives&#8221; an elegant and powerful structure can be
 built. This is what happens when your code is just data, or your build
 is just a program.
 ]]></content>
