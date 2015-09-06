@@ -79,7 +79,7 @@ repositories. They show you an excellent setup too, that doesn't
 require the security-sin of committing secrets to a Git repository.
 
 Unfortunately, since Boot is still a relative newcomer to the Clojure
-ecosystem, there are no official Coginitect-supported instructions for
+ecosystem, there are no official Cognitect-supported instructions for
 securely using the My Datomic Maven repository with Boot.
 
 Sounds like the perfect opportunity for a blog post :D
@@ -373,7 +373,7 @@ with this, and define that `let` block as a function. We could move
 all this code into a Clojure source file in the `src` folder of the
 current project, and then `require` it in. Or we could put it into a
 separate library like [my bootlaces][my-bootlaces] and add that as a
-dependency. Once we extract this functionality into a libryr we could
+dependency. Once we extract this functionality into a library we could
 add tests for it, and then continue to expand it's functionality. We
 could add another method for retrieving the credentials. Perhaps
 storing them in an encrypted edn file, which we read in if it exists.
