@@ -301,8 +301,8 @@ fallback experience.
         (#(swap! datomic-creds assoc :password %)
          (apply str (.readPassword (System/console))))))
   (set-env! :repositories
-            #(conj ["my-datomic" (merge @datomic-creds
-                                        {:url "https://my.datomic.com/repo"})])))
+            #(conj % ["my-datomic" (merge @datomic-creds
+                                          {:url "https://my.datomic.com/repo"})])))
 ```
 
 This code may look a bit intimidating, but it's mostly managing the
@@ -324,9 +324,9 @@ define and use abstractions is right there.
       pass (or (System/getenv "DATOMIC_PASSORD")
                (get-password  "DATOMIC_PASSWORD was not defined.\nPassword: "))]
   (set-env! :repositories
-            #(conj ["my-datomic" {:url "https://my.datomic.com/repo"
-                                  :username user
-                                  :password pass}])))
+            #(conj % ["my-datomic" {:url "https://my.datomic.com/repo"
+                                    :username user
+                                    :password pass}])))
 (set-env!
  :dependencies '[[com.datomic/datomic-pro "0.9.5206"]])
 ```
@@ -358,9 +358,9 @@ get rid of that too.
                         ["USERNAME"    "PASSWORD"]
                         [get-cleartext get-password])]
   (set-env! :repositories
-            #(conj ["my-datomic" {:url "https://my.datomic.com/repo"
-                                  :username user
-                                  :password pass}])))
+            #(conj % ["my-datomic" {:url "https://my.datomic.com/repo"
+                                    :username user
+                                    :password pass}])))
 
 (set-env!
  :dependencies '[[com.datomic/datomic-pro "0.9.5206"]])
@@ -393,6 +393,6 @@ This is the philosophy of Lisp writ large in the paradigm of building
 programs. There is no difference between what is built into Boot, and
 what we define personally. There is nothing done in the Boot built-in
 tasks that could not have been done by a Boot user. Based on a few
-carefully chosen "primitves" an elegant and powerful structure can be
+carefully chosen "primitives" an elegant and powerful structure can be
 built. This is what happens when your code is just data, or your build
 is just a program.
