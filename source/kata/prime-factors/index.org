@@ -1,0 +1,99 @@
+---
+layout: kata
+title: The Prime Factors Kata
+---
+
+This is really just a transcription of [[http://butunclebob.com/ArticleS.UncleBob.ThePrimeFactorsKata][Uncle Bob's Prime Factor's kata]]
+into a web-based slideshow format. I have re-posted the content of his
+post here for simplicity.
+
+<!--more-->
+
+* Main
+
+** Prime Factors                                                      :slide:
+
+Here is a kata for the Prime Factors problem.
+
+This is a very short Kata. The final algorithm is three lines of
+code. Interestingly enough there are 40 lines of test code.
+
+Although quite short, this kata is fascinating in the way it shows
+how ‘if’ statements become ‘while’ statements as the number of test
+cases increase. It’s also a wonderful example of how algorithms
+sometimes become simpler as they become more general.
+
+I stumbled upon this little kata one evening when my son was in 7th
+grade. He had just discovered that all numbers can be broken down into
+a product of primes and was interested in exploring this further. So I
+wrote a little ruby program, test-first, and was stunned by how the
+algorithm evolved.
+
+I have done this particular kata in Java 5.0. This should give you a
+feel for the power and convenience of some of the new features.
+
+** The Requirements
+
+Write a class named “PrimeFactors” that has one static method:
+generate.
+
+The generate method takes an integer argument and returns a list of
+integers.  That list contains the prime factors in numerical sequence.
+
+** Begin                                                              :slide:
+
+- Create a project named PrimeFactors
+- Create a package named primeFactors
+- Create a unit test named PrimeFactorsTest
+
+#+BEGIN_SRC java
+package primeFactors;
+
+import junit.framework.TestCase;
+
+public class PrimeFactorsTest extends TestCase {
+
+}
+#+END_SRC
+
+** The First Test                                                     :slide:
+
+#+BEGIN_SRC java
+package primeFactors;
+
+import junit.framework.TestCase;
+
+public class PrimeFactorsTest extends TestCase {
+
+  public void testOne() throws Exception {
+    assertEquals(list(),PrimeFactors.generate(1));
+  }
+}
+#+END_SRC
+
+** The First Test                                                     :slide:
+
+#+BEGIN_SRC java
+package primeFactors;
+
+import junit.framework.TestCase;
+
+import java.util.List;
+
+public class PrimeFactorsTest extends TestCase {
+
+  public void testOne() throws Exception {
+    assertEquals(list(),PrimeFactors.generate(1));
+  }
+
+  private List<Integer> list() {
+    return null;
+  }
+}
+#+END_SRC
+
+* Dummy                                                               :slide:
+
+#+OPTIONS: H:4 num:nil toc:nil tags:t
+
+#+TAGS: slide(s) note(n)

@@ -1,0 +1,14 @@
+---
+layout: kata
+title: The Bowling Game Kata
+---
+
+* Bowling Game
+
+** Begin
+
+* Dummy                                                               :slide:
+
+#+OPTIONS: H:4 num:nil toc:nil tags:t
+
+#+TAGS: slide(s) note(n)

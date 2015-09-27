@@ -1,0 +1,16 @@
+---
+layout: kata
+title: The String Calculator Kata
+---
+
+http://osherove.com/tdd-kata-1/
+
+* String Calculator
+
+** Begin
+
+* Dummy                                                               :slide:
+
+#+OPTIONS: H:4 num:nil toc:nil tags:t
+
+#+TAGS: slide(s) note(n)
