@@ -1,0 +1,63 @@
+---
+layout: presentation
+title: Functional Reactive Programming
+---
+
+* Top
+
+** Functional Reactive Programming                                    :slide:
+- What is it?
+- Why do we care?
+
+*** Replaces The "Observer" pattern (aka listeners, aka callbacks)    :slide:
+
+*** (Ubiquitous) Asynchronous Data Streams                            :slide:
+
+** Reactive Programming                                               :slide:
+- Event-based
+- Acts in response to input
+- Is viewed as a flow of data, not flow of control
+
+** Functional Programming                                             :slide:
+
+*** Mathematical Functions                                            :slide:
+
+*** Compositionality                                                  :slide:
+
+** Putting them together => FP + RP = FRP                             :slide:
+
+** Examples
+
+*** Clojure
+- core.async
+
+*** Clojurescript
+- Om?, Reagent?, Reframe
+- Ratom's
+
+*** Elm
+
+*** Rx*
+
+** Resources                                                          :slide:
+
+- SO: What is (functional) reactive programming -
+  http://stackoverflow.com/questions/1028250/what-is-functional-reactive-programming
+- The introduction to Reactive Programming you've been missing -
+  https://gist.github.com/staltz/868e7e9bc2a7b8c1f754
+- What is Reactive Programming? - Paul Stovell -
+  http://paulstovell.com/blog/reactive-programming
+- Elm: Concurrent FRP for Functional GUIs - Evan Czaplicki -
+  https://www.seas.harvard.edu/sites/default/files/files/archived/Czaplicki.pdf
+- How does FRP work? -
+  http://freecontent.manning.com/wp-content/uploads/2015/05/how-does-frp-work.pdf
+- Functional Reactive Programming: In Search of the Mythical von
+  Neumann machine -
+  http://freecontent.manning.com/wp-content/uploads/functional-reactive-programming-in-search-of-the-mythical-von-neumann-machine.pdf
+
+
+*** Dummy                                                             :slide:
+
+#+OPTIONS: H:4 num:nil toc:nil tags:t
+
+    #+TAGS: slide(s) note(n)
