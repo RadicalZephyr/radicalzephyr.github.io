@@ -5,6 +5,11 @@
 At an extremely high-level, Functional Reactive Programming is about
 datatypes that represent a value 'over time'.
 
+This is diametrically opposed to how we deal with time in imperative
+or object oriented languages, which is typically with mutation of
+state, or creation of new values that are only conceptually related to
+the old values.
+
 That's sort of abstract though. Let's dive into it a little bit
 deeper.
 
@@ -27,7 +32,7 @@ programming is when a system is
 Or as the wikipedia page says: "a programming paradigm oriented around
 data flows and propagation of change"
 
-Intuitively, the most basic intuitively accesible form of a reactive
+Intuitively, the most intuitively accessible form of a reactive
 program is a spreadsheet with formulas. Formulas can depend on the
 values of other cells, which can in turn contain formulas dependent on
 other cells.  These eventually depend on cells containing data, and
@@ -62,31 +67,11 @@ the hands of more people. This is one of the main reasons that it was
 developed as a declarative language, since Elliott believed that would
 be more accessible than the then-current imperative techniques.
 
-Much of the initial research and early implementations of FRP was done
-in Haskell.  That work seems to have been motivated at least partly as
-a way of dealing with needs of interactive programs written in
-Haskell.
-
-More recently, FRP has been gaining broader acceptance with libraries
+More recently, FRP has been gaining a broader audience with libraries
 to implement it in a wide variety of languages, from Java and C++ to
 Javascript. In addition, in 2012 a new programming language called Elm
 was introduced that has Functional Reactive Programming as the basis
 for the entire language.
-
-Much of the research for this talk was drawn from the work of Evan
-Czaplicki, the creator of Elm and Stephen Blackheath, the creator of a
-library for Functional Reactive Programming called Sodium, and author
-of a forthcoming book on FRP.
-
-One of the reasons that FRP doesn't have a more mainstream presence is
-because it came out of the Haskell community, and it is very math
-heavy. If you look at the original FRP papers, especially those
-written by Conal Elliot and Paul Hudak they contain quite a lot of
-math, describing what they call the denotational semantics of FRP.
-
-This can be quite daunting to a lot of people (myself included!), and
-I think the popularity of FRP as a paradigm has grown in tandem with
-the accessibility of the available resources.
 
 ## History
 
@@ -102,6 +87,8 @@ Behaviors are modeled as a function from a time to a value.
 
 Events represent a sequence of discrete events as a time stamped list
 of values.
+
+Work on discrete vs continuous.
 
 One issue with classical FRP was that for a number of reasons, the
 initial implementation suffered from both space and time leaks. That
@@ -125,15 +112,13 @@ Event-driven FRP or E-FRP introduced discrete signals. The importance
 of this is that unlike in RT-FRP or Classical FRP, no changes need to
 be propagated unless an event has occurred.
 
-In the classical formulation of FRP, Behaviours are viewed as
-continuous, time-varying values.
-
 However, it seems like RT-FRP and E-FRP fell by the wayside.
 
 ### Arrowized FRP
 
 > Arrowized FRP [28] aims to maintain the full expressiveness of
 > Classical FRP without the difficult-to-spot space and time leaks.
+- Elm thesis
 
 Formulated by Henrik Nilsson, Antony Courtney and John Peterson in
 2002 at Yale University, Arrowized FRP makes use of signal-functions,
@@ -167,5 +152,9 @@ the implementations of FRP to-date had been less easily accessible in
 terms of "ease of installation, quality of documentation and examples
 and apparent conceptual difficulty."
 
-So another goal of his with Elm was to make a very easily accessible
-FRP implementation.
+So another goal of Elm was to make an easily accessible implementation
+of FRP.
+
+(25 minutes, generously)
+
+Examples:
