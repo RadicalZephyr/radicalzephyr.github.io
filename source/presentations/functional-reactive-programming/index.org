@@ -54,7 +54,24 @@ title: Functional Reactive Programming
 - Functional Reactive Programming: In Search of the Mythical von
   Neumann machine -
   http://freecontent.manning.com/wp-content/uploads/functional-reactive-programming-in-search-of-the-mythical-von-neumann-machine.pdf
+- Why (Functional) Reactive Programming? - Steven Blackheath -
+  https://www.youtube.com/watch?v=gaG3tIb3Lbk&feature=youtu.be
+- Reactive Programming Blog - http://blog.reactiveprogramming.org/
+- LANPAR Spreadsheet -
+  http://www.renepardo.com/articles/spreadsheet.pdf
+- Push-Pull Functional Reactive Programming -
+  http://conal.net/papers/push-pull-frp/push-pull-frp.pdf
+- Re-frame README - https://github.com/Day8/re-frame
+- Elm Reactivity - http://elm-lang.org/guide/reactivity
+- Functional Reactive Animation -
+  http://conal.net/papers/icfp97/icfp97.pdf
 
+
+** People                                                             :slide:
+
+- Conal Elliott
+- Paul Hudak
+- Stephen Blackheath
 
 *** Dummy                                                             :slide:
 
