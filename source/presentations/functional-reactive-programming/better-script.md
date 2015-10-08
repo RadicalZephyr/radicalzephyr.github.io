@@ -32,11 +32,11 @@ programming is when a system is
 Or as the wikipedia page says: "a programming paradigm oriented around
 data flows and propagation of change"
 
-Intuitively, the most intuitively accessible form of a reactive
-program is a spreadsheet with formulas. Formulas can depend on the
-values of other cells, which can in turn contain formulas dependent on
-other cells.  These eventually depend on cells containing data, and
-change is propagated in "natural order" as that data is updated.
+The most intuitively accessible form of a reactive program is a
+spreadsheet with formulas. Formulas can depend on the values of other
+cells, which can in turn contain formulas dependent on other cells.
+These eventually depend on cells containing data, and change is
+propagated in "natural order" as that data is updated.
 
 Quick Detour: What is "natural order"? Basically, it means to update
 everything that a cell depends on before you update that cell. (draw diagram)
@@ -67,11 +67,7 @@ the hands of more people. This is one of the main reasons that it was
 developed as a declarative language, since Elliott believed that would
 be more accessible than the then-current imperative techniques.
 
-More recently, FRP has been gaining a broader audience with libraries
-to implement it in a wide variety of languages, from Java and C++ to
-Javascript. In addition, in 2012 a new programming language called Elm
-was introduced that has Functional Reactive Programming as the basis
-for the entire language.
+More recently, FRP has been gaining a broader audience with libraries to implement it in a wide variety of languages, from Java and C++ to Javascript. In addition, in 2012 a new programming language called Elm was introduced that has Functional Reactive Programming as the basis for the entire language.
 
 ## History
 
@@ -116,8 +112,8 @@ However, it seems like RT-FRP and E-FRP fell by the wayside.
 
 ### Arrowized FRP
 
-> Arrowized FRP [28] aims to maintain the full expressiveness of
-> Classical FRP without the difficult-to-spot space and time leaks.
+Arrowized FRP [28] aims to maintain the full expressiveness of
+Classical FRP without the difficult-to-spot space and time leaks.
 - Elm thesis
 
 Formulated by Henrik Nilsson, Antony Courtney and John Peterson in
