@@ -1,5 +1,48 @@
 # FRP's
 
+## What is it?
+
+At an extremely high-level, Functional Reactive Programming is about
+datatypes that represent a value 'over time'.
+
+That's sort of abstract though. Let's dive into it a little bit
+deeper.
+
+From one perspective it's just a concatenation of two other types of
+programming: Functional Programming, and Reactive Programming. So
+let's talk about those two first.
+
+First, functional programming. According to wikipedia Functional
+programming is a style of programming that "treats computation as the
+evaluation of mathematical functions and avoids changing-state and
+mutable data."
+
+Now the second half, Reactive Programming.  Broadly speaking, Reactive
+programming is when a system is
+
+1) event based
+2) acts in response to input
+3) flow of data (data flow) instead of flow of control.
+
+Or as the wikipedia page says: "a programming paradigm oriented around
+data flows and propagation of change"
+
+Intuitively, the most basic intuitively accesible form of a reactive
+program is a spreadsheet with formulas. Formulas can depend on the
+values of other cells, which can in turn contain formulas dependent on
+other cells.  These eventually depend on cells containing data, and
+change is propagated in "natural order" as that data is updated.
+
+Quick Detour: What is "natural order"? Basically, it means to update
+everything that a cell depends on before you update that cell. (draw diagram)
+
+Functional Reactive Programming then is simply the combination of
+these two paradigms.  As Blackheath and Jones put it:
+
+> (FRP is) A specific method of reactive programming that enforces the
+> rules of functional programming.
+
+
 ## Who's Who?
 
 Functional Reactive Programming, or FRP for short, was originally
