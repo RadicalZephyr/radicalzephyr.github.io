@@ -153,4 +153,39 @@ of FRP.
 
 (25 minutes, generously)
 
-Examples:
+## Okay, but what does it look like?
+
+Okay, now that I've told you all about what it is in the abstract,
+let's dig into what the code actually looks like.
+
+## Alternatives to FRP
+
+So FRP's raison d'etre is to help organize the code in event-driven
+systems.
+
+### Classical model - Call everything
+
+When you get the event telling you about an update you simply call all
+the pieces of code that need to run in response. This has some obvious
+issues, not least that it couples the event firing code directly to
+the code that is using the update.
+
+### Observer Pattern
+
+A more modern way of handling this is to use some sort of "listener"
+or "callback" or Observer Pattern.
+
+This works better than the manual calling convention, for one it's
+extensible and less coupled.
+
+However, this approach has a number of problems associated with it in
+practice.
+
+- Unpredictable Order of Event Firing
+- Missed first event
+- Messy state
+- Threading issues
+- Leaking callbacks
+- Accidental recursion
+
+## Crossovers to other
