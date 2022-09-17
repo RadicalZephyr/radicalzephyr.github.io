@@ -1,0 +1,44 @@
+{% extends "hermit/templates/index.html" %}
+
+{% block favicon %}
+<link rel="apple-touch-icon" sizes="180x180" href="{{get_url(path="apple-touch-icon.png")}}"/>
+<link rel="icon" type="image/png" sizes="32x32" href="{{get_url(path="favicon-32x32.png")}}" />
+<link rel="icon" type="image/png" sizes="16x16" href="{{get_url(path="favicon-16x16.png")}}" />
+<link rel="shortcut icon" href="{{get_url(path="favicon.ico")}}" />
+<link rel="manifest" href="{{get_url(path="site.webmanifest")}}">
+<link rel="mask-icon" href="{{get_url(path="safari-pinned-tab.svg")}}" color="#5bbad5">
+<meta name="apple-mobile-web-app-title" content="Zefs Garden">
+<meta name="application-name" content="Zefs Garden">
+<meta name="msapplication-TileColor" content="#224679">
+<meta name="theme-color" content="#dadada">
+{% endblock %}
+
+{% block footer %}
+<div id="home-footer">
+  {% if config.generate_feed %}
+  <p>
+    <a href="{{ get_url(path=config.feed_filename, trailing_slash=false) }}" target="_blank" title="atom">
+      atom
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss">
+        <path d="M4 11a9 9 0 0 1 9 9"></path>
+        <path d="M4 4a16 16 0 0 1 16 16"></path>
+        <circle cx="5" cy="19" r="1"></circle>
+      </svg>
+  </p>
+  {% endif %}
+
+  <p  xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
+    <span property="dct:title">This blog is</span>
+    &copy; {{ now() | date(format="%Y")}} by
+    <span property="cc:attributionName">Zefira Shannon</span>,
+    licensed under
+    <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">
+      CC BY-NC-SA 4.0
+      <img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1">
+      <img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1">
+      <img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1">
+      <img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1">
+    </a>
+  </p>
+</div>
+{% endblock  %}
