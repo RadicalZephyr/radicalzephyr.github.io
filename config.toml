@@ -23,8 +23,6 @@ highlight_theme = "zenburn"
 author = { name = "Zefira Shannon", email = "zefira@hey.com" }
 
 # Hermit theme config
-home_subtitle = """Out beyond ideas of wrongdoing and rightdoing there is a garden.
-Let us meet there and talk about code."""
 
 hermit_menu = [
     { name = "Posts", link = "/posts" },
