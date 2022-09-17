@@ -4,7 +4,7 @@ theme = "hermit"
 default_language = "en"
 
 # Feed info
-title = "Zefira's Code Garden"
+title = "Zefira's Digital Garden"
 description = "Out beyond ideas of wrongdoing and rightdoing there is a garden. Let us meet there and talk about code."
 
 # Building Options
@@ -20,10 +20,19 @@ highlight_theme = "zenburn"
 
 [extra]
 
+author = { name = "Zefira Shannon", email = "zefira@hey.com" }
+
 # Hermit theme config
-home_subtitle = "Out beyond ideas of wrongdoing and rightdoing there is a garden. Let us meet there and talk about code."
+home_subtitle = """Out beyond ideas of wrongdoing and rightdoing there is a garden.
+Let us meet there and talk about code."""
 
-[extra.author]
+hermit_menu = [
+    { name = "Posts", link = "/posts" },
+    { name = "About", link = "/about" }
+]
 
-name = "Zefira Shannon"
-email = "zefira@hey.com"
+hermit_social = [
+    { name = "github", link = "https://github.com/RadicalZephyr" },
+    { name = "twitter", link = "https://twitter.com/RadicalZephyr" },
+    { name = "email", link = "mailto:zefira@hey.com" }
+]
