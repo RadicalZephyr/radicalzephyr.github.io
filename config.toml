@@ -1,0 +1,29 @@
+# Basic config
+base_url = "https://zefira.dev"
+theme = "hermit"
+default_language = "en"
+
+# Feed info
+title = "Zefira's Code Garden"
+description = "Out beyond ideas of wrongdoing and rightdoing there is a garden. Let us meet there and talk about code."
+
+# Building Options
+compile_sass = true
+minify_html = true
+generate_feed = true
+build_search_index = true
+
+[markdown]
+# Code Syntax Highlighting
+highlight_code = true
+highlight_theme = "zenburn"
+
+[extra]
+
+# Hermit theme config
+home_subtitle = "Out beyond ideas of wrongdoing and rightdoing there is a garden. Let us meet there and talk about code."
+
+[extra.author]
+
+name = "Zefira Shannon"
+email = "zefira@hey.com"
