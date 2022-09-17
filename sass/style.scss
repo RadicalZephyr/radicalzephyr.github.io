@@ -1,4 +1,25 @@
-@import "../themes/hermit/sass/style.scss";
+@font-face {
+  font-family: "Berkeley Mono Variable";
+  src: url("/fonts/BerkeleyMonoVariable-Regular.woff2") format("woff2"),
+       url("/fonts/BerkeleyMonoVariable-Regular.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Berkeley Mono";
+  src: url("/fonts/BerkeleyMono-Regular.woff2") format("woff2"),
+       url("/fonts/BerkeleyMono-Regular.woff") format("woff");
+}
+$fonts: "Berkeley Mono Variable", "Trebuchet MS", "Verdana", "Verdana Ref",
+        "Segoe UI", "Candara", "Lucida Grande", "Lucida Sans Unicode",
+        "Lucida Sans", "Tahoma", "sans-serif";
+
+$code-fonts: "Berkeley Mono", "Consolas", "Andale Mono WT", "Andale Mono",
+             "Menlo", "Monaco", "Lucida Console", "Lucida Sans Typewriter",
+             "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono",
+             "Nimbus Mono L", "Courier New", "Courier", "YaHei Consolas Hybrid",
+             "Segoe UI Emoji", "PingFang SC", "Microsoft YaHei", "monospace;";
+
+@import "../themes/hermit/sass/style";
 
 #background {
   display: flex;
