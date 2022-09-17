@@ -9,6 +9,7 @@
   src: url("/fonts/BerkeleyMono-Regular.woff2") format("woff2"),
        url("/fonts/BerkeleyMono-Regular.woff") format("woff");
 }
+
 $fonts: "Berkeley Mono Variable", "Trebuchet MS", "Verdana", "Verdana Ref",
         "Segoe UI", "Candara", "Lucida Grande", "Lucida Sans Unicode",
         "Lucida Sans", "Tahoma", "sans-serif";
@@ -18,6 +19,11 @@ $code-fonts: "Berkeley Mono", "Consolas", "Andale Mono WT", "Andale Mono",
              "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono",
              "Nimbus Mono L", "Courier New", "Courier", "YaHei Consolas Hybrid",
              "Segoe UI Emoji", "PingFang SC", "Microsoft YaHei", "monospace;";
+
+$theme: #6328c6;
+$light-grey: #444a57;
+$dark-grey: #35313d;
+$midnightblue: #31338d;
 
 @import "../themes/hermit/sass/style";
 
