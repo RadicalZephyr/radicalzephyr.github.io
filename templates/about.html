@@ -1,0 +1,20 @@
+{% extends "index.html" %}
+
+{% block header %}
+{% endblock %}
+
+{% block title %}
+{% endblock %}
+
+{% block main %}
+<main class="site-main section-inner animated fadeIn faster">
+  <article class="thin">
+    <header class="post-header">
+      <h1> {{ page.title }} </h1>
+    </header>
+    <div class="content">
+      {{ page.content | safe }}
+    </div>
+  </article>
+</main>
+{% endblock %}

@@ -1,7 +1,9 @@
 +++
 
-title = "Zefira Shannon"
+title = "About Zefira"
 weight = 0
+
+template = "about.html"
 +++
 
 Heya, I'm Zefira! My [pronouns] are [she]/[they] (either set is

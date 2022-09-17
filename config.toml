@@ -25,12 +25,12 @@ author = { name = "Zefira Shannon", email = "zefira@hey.com" }
 # Hermit theme config
 
 hermit_menu = [
+    { name = "About", link = "/about" },
     { name = "Posts", link = "/posts" },
-    { name = "About", link = "/about" }
 ]
 
 hermit_social = [
     { name = "github", link = "https://github.com/RadicalZephyr" },
     { name = "twitter", link = "https://twitter.com/RadicalZephyr" },
-    { name = "email", link = "mailto:zefira@hey.com" }
+    { name = "email", link = "mailto:zefira@hey.com" },
 ]
