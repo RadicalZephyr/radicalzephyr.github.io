@@ -1,5 +1,6 @@
 {% extends "hermit/templates/index.html" %}
 
+
 {% block favicon %}
 <link rel="apple-touch-icon" sizes="180x180" href="{{get_url(path="apple-touch-icon.png")}}"/>
 <link rel="icon" type="image/png" sizes="32x32" href="{{get_url(path="favicon-32x32.png")}}" />
@@ -12,6 +13,14 @@
 <meta name="msapplication-TileColor" content="#224679">
 <meta name="theme-color" content="#dadada">
 {% endblock %}
+
+
+{% block header %}
+<div id="background">
+  <img src="{{ get_url(path="./electric-rose.png")}}" />
+</div>
+{% endblock %}
+
 
 {% block footer %}
 <div id="home-footer">
