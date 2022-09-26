@@ -10,9 +10,15 @@
        url("/fonts/BerkeleyMono-Regular.woff") format("woff");
 }
 
+@import "firasans-embedded";
+
 $fonts: "Berkeley Mono Variable", "Trebuchet MS", "Verdana", "Verdana Ref",
         "Segoe UI", "Candara", "Lucida Grande", "Lucida Sans Unicode",
         "Lucida Sans", "Tahoma", "sans-serif";
+
+$body-fonts: "Fira Sans", "Trebuchet MS", "Verdana", "Verdana Ref",
+             "Segoe UI", "Candara", "Lucida Grande", "Lucida Sans Unicode",
+             "Lucida Sans", "Tahoma", "sans-serif";
 
 $code-fonts: "Berkeley Mono", "Consolas", "Andale Mono WT", "Andale Mono",
              "Menlo", "Monaco", "Lucida Console", "Lucida Sans Typewriter",
@@ -43,4 +49,8 @@ $midnightblue: #31338d;
   height: 22px !important;
   margin-left: 3px;
   vertical-align: text-bottom;
+}
+
+div.content {
+  font-family: $body-fonts;
 }
