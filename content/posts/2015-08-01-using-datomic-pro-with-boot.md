@@ -296,7 +296,8 @@ fallback experience.
 
 ##### build.boot
 ```clj
-(let [[user pass] (mapv #(System/getenv %) ["DATOMIC_USERNAME" "DATOMIC_PASS"])
+(let [[user pass] (mapv #(System/getenv %)
+                        ["DATOMIC_USERNAME" "DATOMIC_PASS"])
       datomic-creds (atom {})]
   (if (and user pass)
     (swap! datomic-creds assoc :username user :password pass)
@@ -308,8 +309,9 @@ fallback experience.
         (#(swap! datomic-creds assoc :password %)
          (apply str (.readPassword (System/console))))))
   (set-env! :repositories
-            #(conj % ["my-datomic" (merge @datomic-creds
-                                          {:url "https://my.datomic.com/repo"})])))
+            #(conj % ["my-datomic"
+                      (merge @datomic-creds
+                             {:url "https://my.datomic.com/repo"})])))
 ```
 
 This code may look a bit intimidating, but it's mostly managing the
@@ -327,10 +329,12 @@ define and use abstractions is right there.
   (print prompt)
   (apply str (.readPassword (System/console))))
 
-(let [user (or (System/getenv "DATOMIC_USERNAME")
-               (get-cleartext "DATOMIC_USERNAME was not defined.\nUsername: "))
-      pass (or (System/getenv "DATOMIC_PASSORD")
-               (get-password  "DATOMIC_PASSWORD was not defined.\nPassword: "))]
+(let [user
+      (or (System/getenv "DATOMIC_USERNAME")
+          (get-cleartext "DATOMIC_USERNAME was not defined.\nUsername: "))
+      pass
+      (or (System/getenv "DATOMIC_PASSORD")
+          (get-password  "DATOMIC_PASSWORD was not defined.\nPassword: "))]
   (set-env! :repositories
             #(conj % ["my-datomic" {:url "https://my.datomic.com/repo"
                                     :username user
