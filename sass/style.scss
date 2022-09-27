@@ -54,3 +54,14 @@ $midnightblue: #31338d;
 div.content {
   font-family: $body-fonts;
 }
+
+ul {
+  li.fa {
+    --fa-display: block;
+    margin-bottom: 10px;
+  }
+
+  .fa::before {
+    padding-right: 10px;
+  }
+}
