@@ -144,7 +144,7 @@ adds entries for pulling from [Maven Central][mvn-central] and
 ### Side Note
 
 Rather than bothering to go and read the Pomegranate documentation, we
-also could have inspect Boot's default environment. Boot ships with a
+also could have inspected Boot's default environment. Boot ships with a
 handy task called `show` which is useful for this sort of inspection.
 For Leiningen users, it's sort of equivalent to `lein pprint`. In this
 case, since we're interested in what's in the environment we want to
@@ -204,7 +204,7 @@ fine. Let's try it out:
 
 Hey, presto! It works. Let's think about why this works for a moment
 and what the implications are. Obviously, at some point during the
-`set-env! function, some code gets called that notices that a new
+`set-env!` function, some code gets called that notices that a new
 dependency was added, and attempts to resolve it. As long as the
 repository required to resolve that dependency is present in the list
 of repositories at that moment, then everything works fine. This is an
@@ -215,8 +215,8 @@ If you're like me then long familiarity with declarative build systems
 has lulled you into thinking of build description files as
 fundamentally not code. Even though a Leiningen project map is
 entirely made of Clojure data structures, my experiences have taught
-me that it isn't really code. But a Boot build file is. It's executing
-Clojure code on an epicly simple level.
+me that it isn't really code. But a Boot build file is. It's really just
+executing Clojure code.
 
 When I was first discovering how this worked for myself, I was working
 on an actual project, and the `build.boot` was significantly more
