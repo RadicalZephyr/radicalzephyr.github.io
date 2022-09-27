@@ -1,6 +1,6 @@
 +++
 layout = "post"
-title = "Getting started with LLVM and OCaml on OS&nbsp;X"
+title = "Getting started with LLVM and OCaml on OS X"
 comments = "true"
 categories = ["LLVM", "OCaml", "Homebrew"]
 +++

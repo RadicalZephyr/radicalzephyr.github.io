@@ -1,6 +1,6 @@
 +++
 layout = "post"
-title = "... and this is why master should be stable"
+title = "...and this is why master should be stable"
 comments = "true"
 categories = ["Programming", "Rant", "Troubleshooting"]
 +++

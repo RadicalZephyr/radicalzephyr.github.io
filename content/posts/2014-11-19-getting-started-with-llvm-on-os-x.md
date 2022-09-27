@@ -1,6 +1,6 @@
 +++
 layout = "post"
-title = "Getting Started with LLVM on OS&nbsp;X"
+title = "Getting Started with LLVM on OS X"
 comments = "true"
 categories = ["LLVM", "Vagrant"]
 +++
