@@ -89,7 +89,7 @@ error occurs, and then transform that text using the org->html backend,
 and finally print out the generated html.
 
 
-``` common-lisp
+``` lisp
 (progn
   (require 'org)
   (progn

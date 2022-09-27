@@ -92,7 +92,8 @@ would be able to simply include Datomic Pro as a dependency in my
 `:dependencies` list. In a typical `build.boot` file that would look
 like this:
 
-```clojure build.boot
+##### build.boot
+```clj
 (set-env!
  :dependencies '[[com.datomic/datomic-pro "0.9.5206"]])
 ```
@@ -118,13 +119,14 @@ map. Concretely our `build.boot` should look more like this:
 
 <a id="first-working"></a>
 
-```clojure build.boot
+##### build.boot
+```clj
 (set-env!
  :dependencies '[[com.datomic/datomic-pro "0.9.5206"]]
- :repositories #(conj %
-                      ["my-datomic" {:url "https://my.datomic.com/repo"
-                                     :username "notmyemail@example.com"
-                                     :password "obviously-not-my-password"}]))
+ :repositories
+ #(conj % ["my-datomic" {:url "https://my.datomic.com/repo"
+                         :username "notmyemail@example.com"
+                         :password "obviously-not-my-password"}]))
 ```
 
 The reason for the funny syntax of specifying a lambda function as the
@@ -170,14 +172,15 @@ latter.
 Let's start with the simplest thing that probably __won't__ work. What if
 we move the `:repositories` update into a separate `set-env!` like this:
 
-```clojure build.boot
+##### build.boot
+```clj
 (set-env!
  :dependencies '[[com.datomic/datomic-pro "0.9.5206"]])
 (set-env!
- :repositories #(conj %
-                      ["my-datomic" {:url "https://my.datomic.com/repo"
-                                     :username "notmyemail@example.com"
-                                     :password "obviously-not-my-password"}]))
+ :repositories
+ #(conj % ["my-datomic" {:url "https://my.datomic.com/repo"
+                         :username "notmyemail@example.com"
+                         :password "obviously-not-my-password"}]))
 ```
 
 This again fails spectacularly for the same reason of not being able
@@ -188,12 +191,13 @@ that if we get the `my-datomic` repository configuration into the boot
 environment before that call, then everything should work just
 fine. Let's try it out:
 
-```clojure build.boot
+##### build.boot
+```clj
 (set-env!
- :repositories #(conj %
-                      ["my-datomic" {:url "https://my.datomic.com/repo"
-                                     :username "notmyemail@example.com"
-                                     :password "obviously-not-my-password"}]))
+ :repositories
+ #(conj % ["my-datomic" {:url "https://my.datomic.com/repo"
+                         :username "notmyemail@example.com"
+                         :password "obviously-not-my-password"}]))
 (set-env!
  :dependencies '[[com.datomic/datomic-pro "0.9.5206"]])
 ```
@@ -221,7 +225,9 @@ snippets that I've included in this blog post. But because of my
 build's-as-specification indoctrination, I had fallen into a rhythm of
 always having my `build.boot` files have a certain structure to them.
 
-```clojure My proto-typical build.boot
+##### My prototypical build.boot
+
+```clj
 ;;; Start with source paths and dependencies
 (set-env!
  :source-paths #{"src" "test"}
@@ -269,13 +275,14 @@ starters, it means we can do something really simple like following
 the Heroku paradigm of putting secrets into environment
 variables. Pulling them out is easy with a little bit of Java-interop.
 
-```clojure build.boot
+##### build.boot
+```clj
 (set-env!
  :dependencies '[[com.datomic/datomic-pro "0.9.5206"]]
- :repositories #(conj %
-                      ["my-datomic" {:url "https://my.datomic.com/repo"
-                                     :username (System/getenv "DATOMIC_USERNAME")
-                                     :password (System/getenv "DATOMIC_PASSWORD")}]))
+ :repositories
+ #(conj % ["my-datomic" {:url "https://my.datomic.com/repo"
+                         :username (System/getenv "DATOMIC_USERNAME")
+                         :password (System/getenv "DATOMIC_PASSWORD")}]))
 ```
 
 This again works perfectly. But why stop there? This solution only
@@ -287,7 +294,8 @@ fallback experience.
 
 [adzerk-bootlaces]: https://github.com/adzerk-oss/bootlaces
 
-```clojure build.boot
+##### build.boot
+```clj
 (let [[user pass] (mapv #(System/getenv %) ["DATOMIC_USERNAME" "DATOMIC_PASS"])
       datomic-creds (atom {})]
   (if (and user pass)
@@ -309,7 +317,8 @@ details of user friendly input and output. But again, why stop here?
 This is _just Clojure code_ here, so all of Clojure's ability to
 define and use abstractions is right there.
 
-```clojure build.boot
+##### build.boot
+```clj
 (defn get-cleartext [prompt]
   (print prompt)
   (read-line))
@@ -335,7 +344,8 @@ There's still some obvious duplication in there. Let's see if we can
 get rid of that too.
 
 
-```clojure build.boot
+##### build.boot
+```clj
 (defn get-cleartext [prompt]
   (print prompt)
   (read-line))
