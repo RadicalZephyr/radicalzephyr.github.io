@@ -1,7 +1,6 @@
 +++
 title = "Curriculum Vitae"
 author = ["Zefira Shannon"]
-draft = false
 +++
 
 <ul id="cvcontacts">
