@@ -6,7 +6,7 @@ author = ["Zefira Shannon"]
 <ul id="cvcontacts">
 <li class="fa fa-envelope"><a href="mailto:zefira@hey.com">zefira@hey.com</a></li>
 <li class="fa fa-globe"><a href="https://https://zefira.dev">https://zefira.dev</a></li>
-<li class="fa fa-github"><a href="https://www.github.com/RadicalZephyr"> RadicalZephyr</a></li>
+<li class="fa fa-github"><a href="https://www.github.com/RadicalZephyr">RadicalZephyr</a></li>
 </ul>
 
 ## Employment {#employment}
