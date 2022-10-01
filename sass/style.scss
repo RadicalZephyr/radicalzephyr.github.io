@@ -1,27 +1,12 @@
-@font-face {
-  font-family: "Berkeley Mono Variable";
-  src: url("/fonts/BerkeleyMonoVariable-Regular.woff2") format("woff2"),
-       url("/fonts/BerkeleyMonoVariable-Regular.woff") format("woff");
-}
-
-@font-face {
-  font-family: "Berkeley Mono";
-  src: url("/fonts/BerkeleyMono-Regular.woff2") format("woff2"),
-       url("/fonts/BerkeleyMono-Regular.woff") format("woff");
-}
-
-@import "firasans-regular-italic";
-@import "firasans-regular";
-
-$fonts: "Berkeley Mono Variable", "Trebuchet MS", "Verdana", "Verdana Ref",
+$fonts: "Trebuchet MS", "Verdana", "Verdana Ref",
         "Segoe UI", "Candara", "Lucida Grande", "Lucida Sans Unicode",
         "Lucida Sans", "Tahoma", "sans-serif";
 
-$body-fonts: "Fira Sans", "Trebuchet MS", "Verdana", "Verdana Ref",
+$body-fonts: "Trebuchet MS", "Verdana", "Verdana Ref",
              "Segoe UI", "Candara", "Lucida Grande", "Lucida Sans Unicode",
              "Lucida Sans", "Tahoma", "sans-serif";
 
-$code-fonts: "Berkeley Mono", "Consolas", "Andale Mono WT", "Andale Mono",
+$code-fonts: "Consolas", "Andale Mono WT", "Andale Mono",
              "Menlo", "Monaco", "Lucida Console", "Lucida Sans Typewriter",
              "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono",
              "Nimbus Mono L", "Courier New", "Courier", "YaHei Consolas Hybrid",
