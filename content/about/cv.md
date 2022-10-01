@@ -1,12 +1,15 @@
 +++
 title = "Curriculum Vitae"
 author = ["Zefira Shannon"]
+tags = ["ignore"]
+draft = false
 +++
 
 <ul id="cvcontacts">
-<li class="fa fa-envelope"><a href="mailto:zefira@hey.com">zefira@hey.com</a></li>
-<li class="fa fa-globe"><a href="https://https://zefira.dev">https://zefira.dev</a></li>
-<li class="fa fa-github"><a href="https://www.github.com/RadicalZephyr">RadicalZephyr</a></li>
+<li class="fa fa-envelope"><a href="mailto:zefira@hey.com"> zefira@hey.com</a></li>
+<li class="fa fa-globe"><a href="https://zefira.dev"> zefira.dev</a></li>
+<li class="fa fa-stack-overflow"><a href="https://www.stackoverflow.com/users/242135/zefira"> Zefira</a></li>
+<li class="fa fa-github"><a href="https://www.github.com/RadicalZephyr"> RadicalZephyr</a></li>
 </ul>
 
 ## Employment {#employment}
@@ -18,6 +21,19 @@ author = ["Zefira Shannon"]
     <li class="fa fa-building"> Bespoke Binary</li>
     <li class="fa fa-map-marker"> Portland, OR, USA</li>
     <li class="fa fa-calendar"> Feb 2017 -- Present</li>
+    <li class="fa fa-tags">
+      <ul class="cventry-tags">
+        <li class="cventry-tag">ansible</li>
+        <li class="cventry-tag">clojure</li>
+        <li class="cventry-tag">clojurescript</li>
+        <li class="cventry-tag">reframe</li>
+        <li class="cventry-tag">ring-clojure</li>
+        <li class="cventry-tag">rust</li>
+        <li class="cventry-tag">async-rust</li>
+        <li class="cventry-tag">tokio</li>
+      </ul>
+    </li>
+
 </ul>
 
 -   Provided CTO consulting services to a client developing a new
@@ -38,6 +54,19 @@ author = ["Zefira Shannon"]
     <li class="fa fa-building"> 8th Light Inc.</li>
     <li class="fa fa-map-marker"> Chicago, IL, USA</li>
     <li class="fa fa-calendar"> Oct 2015 -- Feb 2017</li>
+    <li class="fa fa-tags">
+      <ul class="cventry-tags">
+        <li class="cventry-tag">clojure</li>
+        <li class="cventry-tag">clojurescript</li>
+        <li class="cventry-tag">ring-clojure</li>
+        <li class="cventry-tag">javascript</li>
+        <li class="cventry-tag">html</li>
+        <li class="cventry-tag">sass</li>
+        <li class="cventry-tag">ruby</li>
+        <li class="cventry-tag">ruby‐on‐rails</li>
+      </ul>
+    </li>
+
 </ul>
 
 -   Ramped up quickly with a small team to rapidly deliver
@@ -57,21 +86,43 @@ author = ["Zefira Shannon"]
     <li class="fa fa-building"> 8th Light Inc.</li>
     <li class="fa fa-map-marker"> Chicago, IL, USA</li>
     <li class="fa fa-calendar"> Apr 2015 -- Oct 2015</li>
+    <li class="fa fa-tags">
+      <ul class="cventry-tags">
+        <li class="cventry-tag">agile</li>
+        <li class="cventry-tag">clojure</li>
+        <li class="cventry-tag">http</li>
+        <li class="cventry-tag">ruby</li>
+        <li class="cventry-tag">rack</li>
+        <li class="cventry-tag">java</li>
+        <li class="cventry-tag">jruby</li>
+        <li class="cventry-tag">tdd</li>
+      </ul>
+    </li>
+
 </ul>
 
 I spent the first few months of my apprenticeship improving my
 discipline in basic practices like writing code test first and
 creating clean, well‐factored code in both object-oriented and
-functional style.
+functional style. Some examples of these projects include:
+
+-   a tic-tac-toe implementation in Ruby, factored into multiple library components
+    -   [a common core library of game functionality](https://github.com/RadicalZephyr/tic_tac_toe)
+    -   [a console text UI](https://github.com/RadicalZephyr/ttt_cli)
+    -   [an HTTP REST API](https://github.com/RadicalZephyr/ttt_web/blob/master/lib/ttt_web/rack_shell.rb) / [a graphical SPA web UI](https://github.com/RadicalZephyr/ttt_web/tree/master/public/js)
+
+-   [an HTTP/1 server implemented from the socket level in Java](https://github.com/radicalzephyr/http-server)
+-   [a custom Rack server implementation in JRuby using my Java HTTP
+    server to serve any Rack app or framework](https://github.com/RadicalZephyr/rack-jax)
 
 After the first few months I was put on a client project, working
-to recreate in Ruby a PHP prototype for a web application. I worked
-closely with a small team, and with the client. We delivered
-valuable features on a weekly iteration schedule, giving accurate
-estimates and presenting feature complete demos to the client every
-iteration. While doing this, we used our deepening knowledge of the
-client's domain to continuously improve the quality of the
-code base.
+to rebuild a PHP prototype provided by the client as a Ruby on
+Rails web application. I worked closely with a small team, and with
+the client. We delivered valuable features on a weekly iteration
+schedule, giving accurate estimates and presenting feature complete
+demos to the client every iteration. While doing this, we used our
+deepening knowledge of the client's domain to continuously improve
+the quality of the code base.
 
 
 ### Software Developer
@@ -80,6 +131,16 @@ code base.
     <li class="fa fa-building"> BRER Technical Inc.</li>
     <li class="fa fa-map-marker"> Bellingham, WA, USA</li>
     <li class="fa fa-calendar"> Jul 2013 -- Jan 2014</li>
+    <li class="fa fa-tags">
+      <ul class="cventry-tags">
+        <li class="cventry-tag">c#</li>
+        <li class="cventry-tag">sqlite</li>
+        <li class="cventry-tag">winforms</li>
+        <li class="cventry-tag">latex</li>
+        <li class="cventry-tag">stringtemplate</li>
+      </ul>
+    </li>
+
 </ul>
 
 As one of the most senior developers on the project, I was heavily
@@ -101,6 +162,15 @@ produce professional looking final reports.
     <li class="fa fa-building"> Provel Inc.</li>
     <li class="fa fa-map-marker"> Bellingham, WA, USA</li>
     <li class="fa fa-calendar"> Aug 2012 -- Jul 2013</li>
+    <li class="fa fa-tags">
+      <ul class="cventry-tags">
+        <li class="cventry-tag">c++</li>
+        <li class="cventry-tag">boost</li>
+        <li class="cventry-tag">cmake</li>
+        <li class="cventry-tag">signal‐processing</li>
+      </ul>
+    </li>
+
 </ul>
 
 At Provel I was part of a distributed team including two other
@@ -122,6 +192,16 @@ project moved in a different direction.
     <li class="fa fa-building"> Sage Bionetworks</li>
     <li class="fa fa-map-marker"> Seattle, WA, USA</li>
     <li class="fa fa-calendar"> May 2012 -- Dec 2012</li>
+    <li class="fa fa-tags">
+      <ul class="cventry-tags">
+        <li class="cventry-tag">java</li>
+        <li class="cventry-tag">spring</li>
+        <li class="cventry-tag">aop</li>
+        <li class="cventry-tag">amazon‐web‐services</li>
+        <li class="cventry-tag">gwt</li>
+      </ul>
+    </li>
+
 </ul>
 
 I worked closely with a team of ten other developers, helping to
@@ -147,6 +227,16 @@ about the usage of the system.
     <li class="fa fa-building"> Hesselgrave Tours Ltd.</li>
     <li class="fa fa-map-marker"> Bellingham, WA, USA</li>
     <li class="fa fa-calendar"> Oct 2011 -- Jul 2012</li>
+    <li class="fa fa-tags">
+      <ul class="cventry-tags">
+        <li class="cventry-tag">php</li>
+        <li class="cventry-tag">mysql</li>
+        <li class="cventry-tag">coldfusion</li>
+        <li class="cventry-tag">perl</li>
+        <li class="cventry-tag">javascript</li>
+      </ul>
+    </li>
+
 </ul>
 
 Migrated a 10,000+ lines ColdFusion web application to PHP in two
@@ -161,6 +251,16 @@ ColdFusion.
     <li class="fa fa-building"> Western Washington University</li>
     <li class="fa fa-map-marker"> Bellingham, WA, USA</li>
     <li class="fa fa-calendar"> Apr 2011 -- Sep 2011</li>
+    <li class="fa fa-tags">
+      <ul class="cventry-tags">
+        <li class="cventry-tag">objective‐c</li>
+        <li class="cventry-tag">cocoa</li>
+        <li class="cventry-tag">cocoa‐touch</li>
+        <li class="cventry-tag">xml</li>
+        <li class="cventry-tag">svn</li>
+      </ul>
+    </li>
+
 </ul>
 
 I worked on a team with three other student employees, under the
@@ -175,6 +275,15 @@ contribution to the project was to fully revamp the animation
 effects being used in the application to help highlight changes and
 provide a good visual experience.
 
+
+## Personal Projects {#personal-projects}
+
+
+### Comic Reader {#comic-reader}
+
+A SPA web app that scrapes the HTML from large Manga aggregator
+sites to display the comic images in an ad-less and mobile-friendly
+continuous scroll format.
 
 
 ## Programming {#programming}
