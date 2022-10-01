@@ -14,7 +14,7 @@ $code-fonts: "Consolas", "Andale Mono WT", "Andale Mono",
 
 $theme: #6328c6;
 $light-grey: #444a57;
-$dark-grey: #35313d;
+$dark-grey: #3a3447;
 $midnightblue: #393939;
 
 @import "../themes/hermit/sass/style";
@@ -43,11 +43,29 @@ div.content {
 
 ul {
   li.fa {
-    --fa-display: block;
+    --fa-display: flex;
     margin-bottom: 10px;
   }
 
   .fa::before {
     padding-right: 10px;
+  }
+}
+
+ul.cventry-tags {
+  display: inline;
+  list-style-image: none;
+  margin-left: 0;
+
+  li.cventry-tag {
+    display: inline-flex;
+    font-family: $code-fonts;
+    font-weight: 100;
+    font-size: x-small;
+    background-color: $dark-grey;
+    padding: 4px;
+    margin-right: 10px;
+    margin-bottom: 4px;
+    border-radius: 4px;
   }
 }
