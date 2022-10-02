@@ -19,6 +19,10 @@ $midnightblue: #393939;
 
 @import "../themes/hermit/sass/style";
 
+article.thin {
+  text-justify: none;
+}
+
 #background {
   display: flex;
   align-items: center;
