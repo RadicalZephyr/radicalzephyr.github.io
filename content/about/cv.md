@@ -52,8 +52,8 @@ draft = false
         <li class="cventry-tag">ansible</li>
         <li class="cventry-tag">clojure</li>
         <li class="cventry-tag">clojurescript</li>
-        <li class="cventry-tag">reframe</li>
-        <li class="cventry-tag">ring-clojure</li>
+        <li class="cventry-tag">re-frame</li>
+        <li class="cventry-tag">compojure</li>
         <li class="cventry-tag">rust</li>
         <li class="cventry-tag">async-rust</li>
         <li class="cventry-tag">tokio</li>
@@ -82,14 +82,15 @@ draft = false
     <li class="fa fa-calendar"> Oct 2015 -- Feb 2017</li>
     <li class="fa fa-tags">
       <ul class="cventry-tags">
+        <li class="cventry-tag">angular-js</li>
         <li class="cventry-tag">clojure</li>
         <li class="cventry-tag">clojurescript</li>
-        <li class="cventry-tag">ring-clojure</li>
+        <li class="cventry-tag">compojure</li>
         <li class="cventry-tag">javascript</li>
-        <li class="cventry-tag">html</li>
-        <li class="cventry-tag">sass</li>
+        <li class="cventry-tag">react</li>
         <li class="cventry-tag">ruby</li>
         <li class="cventry-tag">ruby‐on‐rails</li>
+        <li class="cventry-tag">sass</li>
       </ul>
     </li>
 
