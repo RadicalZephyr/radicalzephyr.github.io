@@ -12,6 +12,32 @@ draft = false
 <li class="fa fa-github"><a href="https://www.github.com/RadicalZephyr"> RadicalZephyr</a></li>
 </ul>
 
+## Tech Skills {#tech-skills}
+
+
+### Languages {#languages}
+
+-   Rust
+-   Clojure/Script
+-   Javascript
+-   Java
+-   Python
+-   C/C++
+-   OCaml
+
+
+### Web Frameworks {#web-frameworks}
+
+-   [compojure](https://github.com/weavejester/compojure)
+-   [re-frame](https://day8.github.io/re-frame/)
+-   [rails](https://rubyonrails.org/)
+-   [sinatra](https://sinatrarb.com/)
+-   [flask](https://palletsprojects.com/p/flask/)
+-   [django](https://www.djangoproject.com/)
+-   [angular-js](https://angularjs.org/)
+-   [react](https://reactjs.org/)
+
+
 ## Employment {#employment}
 
 
@@ -274,21 +300,6 @@ took the initiative to clean up much of the code. My main
 contribution to the project was to fully revamp the animation
 effects being used in the application to help highlight changes and
 provide a good visual experience.
-
-
-## Personal Projects {#personal-projects}
-
-
-## Programming {#programming}
-
--   Rust
--   Clojure/Script
--   Python
--   OCaml
--   Javascript
--   Java
--   C/C++
--   Anything else (I can learn it)
 
 
 ## Certifications {#certifications}
