@@ -294,7 +294,24 @@ provide a good visual experience.
 ## Certifications {#certifications}
 
 
-### Test‐Driven Development for Embedded C {#test-driven-development-for-embedded-c}
+### Test‐Driven Development for Embedded C
+
+<ul class="cventry">
+    <li class="fa fa-building"> Wingman Software</li>
+    <li class="fa fa-map-marker"> Chicago, IL, USA</li>
+    <li class="fa fa-calendar"> 2016-01-13 -- 2016-01-16</li>
+    <li class="fa fa-tags">
+      <ul class="cventry-tags">
+        <li class="cventry-tag">c</li>
+        <li class="cventry-tag">c++</li>
+        <li class="cventry-tag">tdd</li>
+      </ul>
+    </li>
+
+</ul>
+
+Completed [a three day training](https://wingman-sw.com/training/tdd-embedded-c) on how to use TDD coding practices
+in embedded code projects using standards compliant C.
 
 
 ## Education {#education}
