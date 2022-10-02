@@ -279,13 +279,6 @@ provide a good visual experience.
 ## Personal Projects {#personal-projects}
 
 
-### Comic Reader {#comic-reader}
-
-A SPA web app that scrapes the HTML from large Manga aggregator
-sites to display the comic images in an ad-less and mobile-friendly
-continuous scroll format.
-
-
 ## Programming {#programming}
 
 -   Rust
