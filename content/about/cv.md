@@ -6,7 +6,7 @@ draft = false
 +++
 
 <ul id="cvcontacts">
-<li class="fa fa-envelope"><a href="mailto:zefira@hey.com"> zefira@hey.com</a></li>
+<li class="fa fa-envelope"><a href="mailto:earthlingzephyr@gmail.com"> earthlingzephyr@gmail.com</a></li>
 <li class="fa fa-globe"><a href="https://zefira.dev"> zefira.dev</a></li>
 <li class="fa fa-stack-overflow"><a href="https://www.stackoverflow.com/users/242135/zefira"> Zefira</a></li>
 <li class="fa fa-github"><a href="https://www.github.com/RadicalZephyr"> RadicalZephyr</a></li>
