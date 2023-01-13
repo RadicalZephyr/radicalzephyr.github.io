@@ -1,0 +1,646 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2023-01-12 Thu 20:28 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>An Introduction to Bash Scripting</title>
+<meta name="author" content="Zefira Shannon" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" type="text/css" href="common.css" />
+<link rel="stylesheet" type="text/css" href="screen.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="projection.css" media="projection" />
+<link rel="stylesheet" type="text/css" href="presenter.css" media="presenter" />
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">An Introduction to Bash Scripting</h1>
+
+<div id="outline-container-orgddb0bb4" class="outline-2">
+<h2 id="orgddb0bb4">A.K.A. - How To Use The Command-Line Like A Pro</h2>
+<div class="outline-text-2" id="text-orgddb0bb4">
+</div>
+<div id="outline-container-org5c33081" class="outline-3">
+<h3 id="org5c33081">Unix Tools Philosophy&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h3>
+<div class="outline-text-3" id="text-org5c33081">
+<ul class="org-ul">
+<li>Files and plain-text</li>
+<li>Library of composable tools</li>
+<li>Arguments</li>
+<li>Standard Input/Output/Error</li>
+<li>Pipes</li>
+<li>The Environment</li>
+</ul>
+</div>
+
+<div id="outline-container-org7e1dbf8" class="outline-4">
+<h4 id="org7e1dbf8">Everything is a (plain-text) file&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h4>
+<div class="outline-text-4" id="text-org7e1dbf8">
+<ul class="org-ul">
+<li>Very file-oriented</li>
+<li>Characters are characters</li>
+
+<li>As opposed to office suites
+<ul class="org-ul">
+<li>Binary file format (also proprietary)</li>
+<li>Need specialized code to read/write in the correct format</li>
+<li>Has "export" functions to transform it to different formats</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org319a7fb" class="outline-4">
+<h4 id="org319a7fb">Library of Tools&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h4>
+<div class="outline-text-4" id="text-org319a7fb">
+<p>
+Check it out:
+</p>
+
+<p>
+<a href="https://en.wikipedia.org/wiki/List_of_Unix_commands">https://en.wikipedia.org/wiki/List_of_Unix_commands</a>
+</p>
+</div>
+
+<div id="outline-container-orgff28fb1" class="outline-5">
+<h5 id="orgff28fb1">Notes&#xa0;&#xa0;&#xa0;<span class="tag"><span class="note">note</span></span></h5>
+<div class="outline-text-5" id="text-orgff28fb1">
+<p>
+Focus on a few at a time.  Empahasize incremental learning.  It's a
+large toolbox and potentially overwhelming.  Take away is that adding
+even one tool is a valuable outcome.
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org1ec2ee6" class="outline-4">
+<h4 id="org1ec2ee6">Arguments&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h4>
+<div class="outline-text-4" id="text-org1ec2ee6">
+<ul class="org-ul">
+<li>Two types
+<ul class="org-ul">
+<li>Switches (i.e. <code>-c</code> or <code>--count</code>)</li>
+<li>Other</li>
+</ul></li>
+
+<li>Conventional Switches                                               :slide:
+<ul class="org-ul">
+<li>Short and long switches</li>
+<li><code>-v</code> / <code>--version</code> - program version</li>
+<li><code>-h</code> / <code>--help</code> - help!</li>
+<li><code>--</code> - end of switches</li>
+</ul></li>
+</ul>
+
+<p>
+There are MANY exceptions!!
+</p>
+</div>
+
+<div id="outline-container-orgb9d7f80" class="outline-5">
+<h5 id="orgb9d7f80">Notes&#xa0;&#xa0;&#xa0;<span class="tag"><span class="note">note</span></span></h5>
+<div class="outline-text-5" id="text-orgb9d7f80">
+<p>
+For instance, ruby supports -v and &#x2013;version
+git only supports &#x2013;version
+java requires -version!!!
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org8a729d6" class="outline-4">
+<h4 id="org8a729d6">Standard Input/Output/Error&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h4>
+<div class="outline-text-4" id="text-org8a729d6">
+<p>
+Most standard unix tools except to receive on stdin
+</p>
+
+<p>
+After processing they put the changed text to stdout
+</p>
+
+<p>
+Three streams. One for input, two for output.
+</p>
+<ul class="org-ul">
+<li>All programs have these.</li>
+<li>That doesn't mean they're always different!</li>
+</ul>
+</div>
+
+<div id="outline-container-orgd2fb3a7" class="outline-5">
+<h5 id="orgd2fb3a7">Notes&#xa0;&#xa0;&#xa0;<span class="tag"><span class="note">note</span></span></h5>
+<div class="outline-text-5" id="text-orgd2fb3a7">
+<p>
+Demonstrate cat as prototypical of stdin stdout pattern. It takes
+arguments, but in their absence it defaults to read stdin, write stdout
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgaa8ede3" class="outline-4">
+<h4 id="orgaa8ede3">Pipes&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h4>
+<div class="outline-text-4" id="text-orgaa8ede3">
+<p>
+Shorthand for hooking the output of one program to the input of
+another
+</p>
+
+<p>
+There's more to it though&#x2026;
+</p>
+</div>
+
+<div id="outline-container-org67d1b89" class="outline-5">
+<h5 id="org67d1b89">Notes&#xa0;&#xa0;&#xa0;<span class="tag"><span class="note">note</span></span></h5>
+<div class="outline-text-5" id="text-org67d1b89">
+<p>
+Demonstrate tr as very similar to cat, but takes no file arguments
+</p>
+
+<p>
+So how do we feed it files as input? Pipe from cat!
+</p>
+
+<p>
+This demonstrates pretty well the composable toolkit idea, and
+DRY-ness of program logic.  Cat knows how to open files and
+filenames.  So pretty much very few other programs need to.
+</p>
+
+<p>
+Also, pull performance:
+</p>
+
+<p>
+This is a good example though: what does find . -type f -name 'a*' do
+normally?
+</p>
+
+<p>
+Why does the pipe run so much quicker?!?!?!
+</p>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-org260a4fd" class="outline-4">
+<h4 id="org260a4fd">The Environment&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h4>
+<div class="outline-text-4" id="text-org260a4fd">
+<ul class="org-ul">
+<li>Convenient place to store information</li>
+<li>Lots of interesting stuff is there already</li>
+<li>Many commands take cues from environment variables</li>
+</ul>
+</div>
+
+<div id="outline-container-orga964e9e" class="outline-5">
+<h5 id="orga964e9e">Notes</h5>
+<div class="outline-text-5" id="text-orga964e9e">
+<ul class="org-ul">
+<li>Show the <code>env</code> command</li>
+
+<li>Use EDITOR variable and git commit as an example</li>
+</ul>
+
+<p>
+(USE A REAL SHELL!!) Go to hermit, delete runtests, then commit it no
+message
+</p>
+
+<p>
+First time, should open a buffer in zile, then nano, then vi
+Don't write commit messages
+</p>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orga912342" class="outline-3">
+<h3 id="orga912342">Jobs of a shell&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h3>
+<div class="outline-text-3" id="text-orga912342">
+<p>
+High-level
+</p>
+<ul class="org-ul">
+<li>Expansions</li>
+<li>Argument splitting</li>
+<li>Setup environment</li>
+<li>Find/execute program</li>
+<li>Cleanup</li>
+</ul>
+</div>
+
+<div id="outline-container-orga9fa5ac" class="outline-4">
+<h4 id="orga9fa5ac">Expansions&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h4>
+<div class="outline-text-4" id="text-orga9fa5ac">
+<ul class="org-ul">
+<li>file "globs"</li>
+<li>Special variables
+<ul class="org-ul">
+<li>Arguments, <code>$0</code>-<code>$9</code>, <code>$#</code>, <code>$@</code></li>
+<li>Shell info, <code>$$</code> <code>$!</code> <code>$?</code></li>
+</ul></li>
+<li>Variables (so many possibilities!!)
+<ul class="org-ul">
+<li>Controlling variable expansion ${} etc.</li>
+</ul></li>
+<li>Sub-shells</li>
+</ul>
+</div>
+
+<div id="outline-container-org90bdad6" class="outline-5">
+<h5 id="org90bdad6">Notes&#xa0;&#xa0;&#xa0;<span class="tag"><span class="note">note</span></span></h5>
+<div class="outline-text-5" id="text-org90bdad6">
+<p>
+Do many demonstrations here!!
+</p>
+
+<p>
+Have a script that demonstrates how argument expansion works
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org0dc7ac1" class="outline-4">
+<h4 id="org0dc7ac1">Arguments processing&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h4>
+<div class="outline-text-4" id="text-org0dc7ac1">
+<p>
+Who is familiar with processing command-line arguments?
+</p>
+
+<p>
+All command line programs get arguments in this format:
+</p>
+
+<p>
+A list of: <code>program name arg1 arg2 arg3</code>
+</p>
+
+<p>
+But how does it make that list?
+</p>
+</div>
+
+<div id="outline-container-org405dab8" class="outline-5">
+<h5 id="org405dab8">Quoting&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h5>
+<div class="outline-text-5" id="text-org405dab8">
+<p>
+Preventing processing from occurring
+</p>
+
+<ul class="org-ul">
+<li>This can be tricky and subtle</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org82276be" class="outline-4">
+<h4 id="org82276be">Setup environment&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h4>
+<div class="outline-text-4" id="text-org82276be">
+<ul class="org-ul">
+<li>Input/output redirection</li>
+<li>Temporary variable setting</li>
+</ul>
+</div>
+
+<div id="outline-container-orgd4bb1f9" class="outline-5">
+<h5 id="orgd4bb1f9">Notes&#xa0;&#xa0;&#xa0;<span class="tag"><span class="note">note</span></span></h5>
+<div class="outline-text-5" id="text-orgd4bb1f9">
+<p>
+Redux the git commit editor thing with temporary variable
+</p>
+
+<p>
+Use cat to copy a file, use diff to show they're the same
+</p>
+
+<p>
+Append some lines to the end of the new one
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org19d5944" class="outline-4">
+<h4 id="org19d5944">Program look-up/execution&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h4>
+<div class="outline-text-4" id="text-org19d5944">
+<p>
+Search all paths in <code>PATH</code> variable, left-to-right order
+</p>
+
+<ul class="org-ul">
+<li>Overriding default paths</li>
+</ul>
+</div>
+
+<div id="outline-container-org500b6bd" class="outline-5">
+<h5 id="org500b6bd">Notes&#xa0;&#xa0;&#xa0;<span class="tag"><span class="note">note</span></span></h5>
+<div class="outline-text-5" id="text-org500b6bd">
+<p>
+Show adding a directory to PATH and then executing that file from
+somewhere else
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgff99a7a" class="outline-4">
+<h4 id="orgff99a7a">Exit Codes&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h4>
+<div class="outline-text-4" id="text-orgff99a7a">
+<p>
+0 =&gt; success
+anything else =&gt; some kind of failure
+</p>
+
+<ul class="org-ul">
+<li>not always clear what the meaning is for non-zero codes</li>
+</ul>
+</div>
+
+<div id="outline-container-org4c3ad26" class="outline-5">
+<h5 id="org4c3ad26">Notes&#xa0;&#xa0;&#xa0;<span class="tag"><span class="note">note</span></span></h5>
+<div class="outline-text-5" id="text-org4c3ad26">
+<p>
+Redo the diff thing, then show that the exit code changes
+</p>
+
+<p>
+diff defines no differences as success, and different as failure
+</p>
+
+<p>
+git commit -a.  If no commit happens, then 1, else 0
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgdf29952" class="outline-4">
+<h4 id="orgdf29952">Implicit State - this is not so important</h4>
+<div class="outline-text-4" id="text-orgdf29952">
+</div>
+<div id="outline-container-org4f3ca23" class="outline-5">
+<h5 id="org4f3ca23">Current User</h5>
+<div class="outline-text-5" id="text-org4f3ca23">
+<ul class="org-ul">
+<li><code>$UID</code>, <code>$USER</code></li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org5ac9d87" class="outline-5">
+<h5 id="org5ac9d87">Current Directory</h5>
+<div class="outline-text-5" id="text-org5ac9d87">
+<ul class="org-ul">
+<li><code>$PWD</code>, <code>pwd</code>, <code>cd</code></li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-orgfb6ebec" class="outline-5">
+<h5 id="orgfb6ebec">Environment Variables</h5>
+<div class="outline-text-5" id="text-orgfb6ebec">
+<ul class="org-ul">
+<li><code>env</code></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orga836319" class="outline-3">
+<h3 id="orga836319">Actual Scripting&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h3>
+<div class="outline-text-3" id="text-orga836319">
+</div>
+<div id="outline-container-org66199c6" class="outline-4">
+<h4 id="org66199c6">Loops and Conditionals&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h4>
+<div class="outline-text-4" id="text-org66199c6">
+<p>
+These are similar to most programming languages but subtly different.
+</p>
+</div>
+
+
+<div id="outline-container-org205a98e" class="outline-5">
+<h5 id="org205a98e">if&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h5>
+<div class="outline-text-5" id="text-org205a98e">
+<p>
+Runs a program, and checks the exit code
+</p>
+
+<p>
+Show how <code>[</code> is a program also called <code>test</code>
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org50277f7" class="outline-5">
+<h5 id="org50277f7">loops&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h5>
+<div class="outline-text-5" id="text-org50277f7">
+<ul class="org-ul">
+<li>while: similar in concept to if
+<ul class="org-ul">
+<li>Show a standard counter style while loop</li>
+<li>Show a more exotic bash type while loop (using which to figure out
+what path element an executable lives in)</li>
+</ul></li>
+<li>for: very different.  More reminiscent of python
+<ul class="org-ul">
+<li>does expansions, doesn't run commands</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org0dd4fb0" class="outline-5">
+<h5 id="org0dd4fb0">Notes&#xa0;&#xa0;&#xa0;<span class="tag"><span class="note">note</span></span></h5>
+<div class="outline-text-5" id="text-org0dd4fb0">
+<p>
+For demos, consider using common files like /usr/dict and /etc/passwd
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org0d6c79a" class="outline-4">
+<h4 id="org0d6c79a">Cool examples</h4>
+<div class="outline-text-4" id="text-org0d6c79a">
+<p>
+I have none&#x2026;
+</p>
+
+<p>
+Mine my github, the LDP pages, my provel scripts
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org22d0e19" class="outline-4">
+<h4 id="org22d0e19">Common Idioms</h4>
+<div class="outline-text-4" id="text-org22d0e19">
+<p>
+<a href="http://www.billharlan.com/papers/Bourne_shell_idioms.html">http://www.billharlan.com/papers/Bourne_shell_idioms.html</a>
+</p>
+</div>
+
+
+<div id="outline-container-org8c7d83b" class="outline-5">
+<h5 id="org8c7d83b">Argument processing</h5>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org6c2fbe9" class="outline-3">
+<h3 id="org6c2fbe9">Developing Shell Scripts</h3>
+<div class="outline-text-3" id="text-org6c2fbe9">
+</div>
+<div id="outline-container-orgfbe830c" class="outline-4">
+<h4 id="orgfbe830c">Man pages!!&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h4>
+<div class="outline-text-4" id="text-orgfbe830c">
+<p>
+Reading them is sort of an art
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org50f1e71" class="outline-4">
+<h4 id="org50f1e71">Incremental Build-up&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h4>
+<div class="outline-text-4" id="text-org50f1e71">
+<ul class="org-ul">
+<li>Avoid permanent effects</li>
+<li>But learn how to setup test environments for doing destructive stuff</li>
+</ul>
+</div>
+
+<div id="outline-container-orgd25217b" class="outline-5">
+<h5 id="orgd25217b">Notes&#xa0;&#xa0;&#xa0;<span class="tag"><span class="note">note</span></span></h5>
+<div class="outline-text-5" id="text-orgd25217b">
+<p>
+Show the example of trying to figure out how many discrete shell
+scripts
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgd737f80" class="outline-4">
+<h4 id="orgd737f80">Guarding commands with echo&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h4>
+<div class="outline-text-4" id="text-orgd737f80">
+<p>
+Very simple, very effective
+</p>
+</div>
+
+<div id="outline-container-org02f942a" class="outline-5">
+<h5 id="org02f942a">Notes&#xa0;&#xa0;&#xa0;<span class="tag"><span class="note">note</span></span></h5>
+<div class="outline-text-5" id="text-org02f942a">
+<p>
+find all files pipe to xargs echo
+</p>
+
+<p>
+find . -type f -name 'a*' | head | xargs -n1 echo
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgb4ad86e" class="outline-4">
+<h4 id="orgb4ad86e"><code>set -e</code> and <code>set -x</code>&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h4>
+<div class="outline-text-4" id="text-orgb4ad86e">
+<p>
+Really powerful options
+</p>
+</div>
+
+<div id="outline-container-orge79dbdd" class="outline-5">
+<h5 id="orge79dbdd">-e "most important line in any bash script"</h5>
+<div class="outline-text-5" id="text-orge79dbdd">
+<p>
+Default behavior
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orgf553fc0" class="outline-5">
+<h5 id="orgf553fc0">-x "almost as good a debugger"</h5>
+<div class="outline-text-5" id="text-orgf553fc0">
+<p>
+Display everything!!
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org9891697" class="outline-4">
+<h4 id="org9891697">Mindset&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h4>
+<div class="outline-text-4" id="text-org9891697">
+<p>
+Talk about the gitignore thing.  Upfront data structure creation
+(process all .hignore files, then check each filename against all
+patterns.  Obviously really bad in bash because no way to use a hash
+table or something to speed up the checks
+</p>
+
+<p>
+But what about flipping it around? Instead, enumerate all files, then
+enumerate all files that match each pattern in a .hignore.  Then,
+filter the list of those files by the ones that only appear once.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org652fc11" class="outline-4">
+<h4 id="org652fc11">Dummy&#xa0;&#xa0;&#xa0;<span class="tag"><span class="slide">slide</span></span></h4>
+<div class="outline-text-4" id="text-org652fc11">
+<div class="HTML" id="org8584dfd">
+<p>
+&lt;script type="text/javascript" src="org-html-slideshow.js"&gt;&lt;/script&gt;
+</p>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Zefira Shannon</p>
+<p class="date">Created: 2023-01-12 Thu 20:28</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
