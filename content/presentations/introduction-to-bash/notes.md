@@ -1,3 +1,9 @@
++++
+layout = "post"
+title = "Notes on Bash Scripting Talk"
+comments = "false"
++++
+
 Things! Stuff! Words!
 
 Articulate a "floor" of what experience is required for this talk.
