@@ -1,0 +1,48 @@
+on:
+  push:
+    branches: ["main"]
+
+name: Build Zefira's Website
+
+jobs:
+  build:
+    name: Build Site
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Zola
+        run: curl -s -L https://github.com/getzola/zola/releases/download/v0.16.0/zola-v0.16.0-x86_64-unknown-linux-gnu.tar.gz | sudo tar xvzf - -C /usr/local/bin
+
+      - name: Build site
+        run: zola build
+
+      - name: Fix permissions
+        run: |
+          chmod -c -R +rX "build" | while read line; do
+          echo "::warning title=Invalid file permissions automatically fixed::$line"
+          done
+
+      - name: Upload pages bundle
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "public/"
+
+  deploy:
+    name: Deploy Site
+
+    needs: build
+
+    permissions:
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to Github Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
