@@ -108,6 +108,28 @@ vectors are no longer unit vectors but they do point in the correct
 direction and I don't want to get into normalizing vectors because it
 isn't important.
 
+## 3D Printing Overview
+
+Going from a concept to finished 3D printed part require four basic
+steps.
+
+1. Modeling - I don't know anything about this, go learn Blender or
+   Maya or Rhino or SketchUp or whatever 3D modeling program you
+   happen to like.
+
+2. Slicing - I know more about this. It takes a 3D model and "slices"
+   it into layers. 2D printers typically print in lines back and forth
+   moving across the page. 3D printers print in layers vertically
+   going from bottom to top of the part.
+
+3. Printing
+
+4. what's the fourth step? why did I say four. that's nonsense.
+
+
+## Super High Level Overview Without Any Math and Barely Any Physics
+
+
 
 
 ### Self-Notes - REMOVE BEFORE PUBLISHING
@@ -150,3 +172,21 @@ okay, back to the blog post. I want to start by linking to Michael F
 Bryan's series, and say that I want to pick up on where he left off
 because I have some small experience with trajectory planning and it's
 a cool series that deserves to be finished.
+
+
+
+ahhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh, it is so difficult for
+my brain to organize information! it just. it takes so long and I feel
+so confused the entire time. Obviously I need to do this more, but
+damn.
+
+where do I start with this 3D printing stuff? Do I really explicitly
+pick up where Michael left off? What background information that I
+have is actually important? Explaining it to Allie was a pretty good
+way to try and keep it non-technical.
+
+But it's been like a week now and I don't really remember what I said
+to her.
+
+When I sit here like this and try to think about printing, my thoughts
+just wander so much in a not very useful way.
