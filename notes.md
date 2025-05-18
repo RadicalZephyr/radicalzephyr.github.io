@@ -7,10 +7,10 @@ could be a series, it's a pretty deep topic.
   incorrectly like "motion control".
 
 - Considerations for correctness at a high-level.
-  * Is it that right path?
-  * Is it physically possible?
-  * Is it smooth?
-  * Is it fast?
+  * What path?
+  * How fast?
+  * How smooth?
+
 
 - Considerations from physics
   * Can't start going instantly.
