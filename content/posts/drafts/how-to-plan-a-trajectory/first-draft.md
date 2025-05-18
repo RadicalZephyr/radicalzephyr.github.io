@@ -1,11 +1,3 @@
-+++
-layout = "post"
-title = "How to Plan a Trajectory"
-categories = ["3D Printer", "Rust"]
-comments = true
-draft = true
-+++
-
 Have you ever watched a 3D printer worked and thought "That's so cool,
 how does it do that?" No? Just me then. Well, if you're now interested
 in that thought let me tell you what I know about trajectory
