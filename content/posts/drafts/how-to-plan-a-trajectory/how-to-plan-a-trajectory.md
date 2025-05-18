@@ -318,6 +318,50 @@ pattern slicings of a cube). The point is, how long a printer takes to
 create a print often comes down to how fast it can move through
 corners in the print because most prints have a _lot_ of corners.
 
+## Acceleration and Smoothness
+
+There's a quantity in the math in the previous section that I
+completely glossed over and yet is critical in determining how fast
+those print times are, it's called acceleration. Acceleration is one
+of those words that has a subtly different meaning in every day life
+than it does in physics. In everyday life we might say "my car has
+good acceleration" meaning that it can speed up quickly. In physics,
+acceleration doesn't just mean "how fast a car can speed up" and it's
+a quantity we can put numbers to. In physics, acceleration is the rate
+of change of an object's velocity. Velocity is like speed but it also
+includes a direction, i.e. 60 mph is a speed, 60 mph north-bound is a
+velocity. In a physics sense, velocity can become larger, or it can
+become smaller and we call both of these phenomena "acceleration",
+they're just acceleration in different directions relative to your
+velocity.
+
+So, we talked earlier about how you can't start moving instantly. Now
+we can expand on that a bit by saying, you can't instantly accelerate
+from zero velocity to going really fast. You have to start slow, and
+get faster. This should also be pretty intuitive I hope.
+
+How does acceleration relate to smoothness? For that matter, why do we
+care about smoothness in a 3D print in the first place? Well, let's
+take it to the extreme again, if you crank the acceleration your
+printer is allowed to try and create up high enough, you could
+eventually hit a point where the entire printer moves a little bit
+whenever the print head changes direction. If your printer isn't fixed
+to the surface it's on, that movement could cause it to move over
+time, which could cause all sorts of problems from walking off the
+counter where it sits, or pulling out it's own power plug, or twisting
+up it's filament feed. All of these scenarios could spoil a long print
+if you leave the printer unattended.
+
+But even if you have the printer fixed in place so it can't move, too
+high an acceleration setting will cause noise and increased wear and
+tear on your motors and the frame of your printer. It's also possible
+to set an acceleration so high that your printer's motors can't
+physically create the change and the momentum of your print head will
+cause the motors to "skip a step" and lose track of where they are,
+resulting in a totally messed up print that doesn't have the right
+proportions at all.
+
+
 ## Processing Bit by Bit
 
 So, we've sufficiently motivated the idea that whatever we do to plan
