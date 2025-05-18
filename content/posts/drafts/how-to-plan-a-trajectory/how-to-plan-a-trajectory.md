@@ -110,22 +110,81 @@ isn't important.
 
 ## 3D Printing Overview
 
-Going from a concept to finished 3D printed part require four basic
+Going from a concept to finished 3D printed part require three basic
 steps.
 
 1. Modeling - I don't know anything about this, go learn Blender or
    Maya or Rhino or SketchUp or whatever 3D modeling program you
-   happen to like.
+   happen to like. This is often transmitted as an STY file or other
+   similar format.
 
 2. Slicing - I know more about this. It takes a 3D model and "slices"
    it into layers. 2D printers typically print in lines back and forth
    moving across the page. 3D printers print in layers vertically
-   going from bottom to top of the part.
+   going from bottom to top of the part. This is transmitted to the
+   printer as a sequence of gcode instructions.
 
-3. Printing
+3. Printing - This is what we're actually talking about.
 
-4. what's the fourth step? why did I say four. that's nonsense.
+The printing process can itself be broken down into three basic steps.
 
+1. Gcode parsing
+2. Trajectory planning
+3. Step generation
+
+Previous blog posts by Michael Bryan have pretty well covered the
+gcode parsing process, and this blog post is about the trajectory
+planning process. Many 3D printing control programs have very little
+distinction between the trajectory planning and step generation
+processes, and it's possible to treat them as one process.
+
+In fact, because of the size of typical gcode files these three steps
+typically are performed in a loop across the entire gcode file. Gcode
+files for even fairly simple shapes often have many gcode instructions
+in them. Let's take one of the simplest possible shapes, a cube. Let's
+say it's 5mm on each side. With a reasonable sized nozzle of 0.1mm
+with 100% infill, that means that just doing a simple back and forth
+grid pattern there would be 50 lines of plastic need to be layed down
+on each layer of the cube. Depending on the resolution of the printer,
+the height of each layer could be as large as 0.1mm as well, so that
+means 50 layers. Then there is at least one line to transition between
+each parallel line, so that's another 49 per layer. Already, we're at
+around 500 instructions for a 5mm cube. Then you start considering all
+the complexities like different possible infill patterns, outlining,
+nozzle "wiping" techniques to limit plastic filament creation between
+layers and actually printing complex shapes like the standard [Boaty]
+calibration checking shape and I hope it's easy to see how the
+trajectory planner needs to handle small sections of the print at a
+time. In practice slice a 5mm cube with reasonable printing parameters
+usinge [Slic3r] actually produces a gcode file with (TODO: actually
+create this file).
+
+[Slic3r]: TODO::/link-to-slicer
+
+In theory it would be possible to try and plan the trajectory of the
+entire print as one mathematical problem, but the more different
+points you add in the more computationally intensive it becomes to
+compute an answer. (TODO: maybe add some napkin math regarding the
+algorithmic complexity of how many points a trajectory contains).
+
+[Boaty]: TODO::/link-to-boaty-shape
+
+As an additional wrinkle in this, most 3D printer slicers that I'm
+aware of don't really emit the gcodes for arc movements. I'm not
+really sure why this is, though it probably has something to do with
+the imprecise nature of taking 3D models and directly producing paths
+from them with slicing. It also probably stems from the fact that a
+lot of 3D printing is done with shapes that are not mathematically
+precise circles. In fact, it's one of the strengths of 3D printing
+that these kinds of complex shapes are relatively simple to
+produce. Instead, curving shapes are generally approximated using
+large numbers of short straight line segments. This causes the number
+of instructions in a gcode file to rise dramatically. For a similar
+sized 5mm tall and 5mm diameter cylinder, produces a gcode file
+containing (TODO: actually create this file) gcode instructions.
+
+For comparison, a slicing of Boaty model that's about 5cm long and
+tall contains (TODO: actually create this file) gcode instructions.
 
 ## Super High Level Overview Without Any Math and Barely Any Physics
 
