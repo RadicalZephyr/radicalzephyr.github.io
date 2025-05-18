@@ -186,6 +186,68 @@ containing (TODO: actually create this file) gcode instructions.
 For comparison, a slicing of Boaty model that's about 5cm long and
 tall contains (TODO: actually create this file) gcode instructions.
 
+## Really Short Line Segments (Like, How Short?)
+
+I'm going to make an assertion here that hopefully will be intuitively
+appealing if not very mathematically rigorous. Nothing can change
+directions instantaneously. I really don't have a good feeling for how
+much people will intuitively disagree with me on this, so if you feel
+like you have a good example of something that you think does change
+direction instantaneously then let me know and I'll think about using
+it as an example of something that appears to instantly change
+direction, but doesn't actually. Billiards balls are probably the most
+approachable example, but I couldn't find any good high speed video
+online that actually shows the extremely small amount of time it takes
+for a billiards ball to flex and start moving.
+
+If people are interested in the math and science behind _why_ this is
+true, then maybe I'll write another blog post trying to break that
+down. However, that's basically the topic of a few weeks of an
+introductory university physics class so I think it's out of scope for
+this post.
+
+Okay, so the print head of your printer is in fact a thing, and
+according to our previous "law" it cannot change directions
+instantly. If all the curves in our 3D model are being broken down
+into tiny short straight lines that have small angles between them,
+how do we process these as trajectories.
+
+Let's back up to a hopefully more intuitive process. Let's consider
+running in a square. I realize this is a bit unusual since most people
+run in large ovals, which is actually kind of my point. Why don't we
+run in squares instead, or at least rectangles? Especially if your
+favorite local running track is inside a city, and is thus bounded on
+at least a few sides by the straight lines of most modern city
+streets, we could make the track longer if we just made the shape of
+the running area have right angles at the turns right? Ignoring the
+fact that this would make the outside lanes of the track _much_ longer
+than the inside lanes, why don't we do this?
+
+The answer is, because it's really hard for a human to run at speed
+around a right angle corner. If you were attempting to run around a
+right angle corner you basically need to slow down to a speed where
+you can absorb the force need to change your direction 90 degrees in
+one step. This is probably a fairly slow speed, especially compared to
+the speeds to that a sprinter can reach on a straight shot. And think
+about it, even when you're walking down a hallway how often do you
+walk in a perfectly sharp 90 degree angle when you turn down a
+hallway?
+
+Okay, so 90 degree turns are too sharp, what if we cut it in half, and
+made it two forty-five degree turns just separated by a bit. (TODO:
+add a diagram of a 45 degree angle running track). Already, we can see
+this is starting to look a lot more like a typical running track. If
+we keep going with this process of dividing the angles into smaller
+and smaller sections, we rapidly start approaching exactly what most
+running tracks look like.
+
+## Processing Bit by Bit
+
+So, we've sufficiently motivated the idea that whatever we do to plan
+the trajectory of our print head, we need to do it incrementally.
+
+The next thing we need to consider is how much math can we do
+
 ## Super High Level Overview Without Any Math and Barely Any Physics
 
 
