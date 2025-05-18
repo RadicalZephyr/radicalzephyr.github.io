@@ -331,3 +331,12 @@ could be a series, it's a pretty deep topic.
   * Is it physically possible?
   * Is it smooth?
   * Is it fast?
+
+- Considerations from physics
+  * Can't start going instantly.
+  * Can't stop instantly.
+  * Can't change directions instantly.
+
+
+Use Technik's videos on oscillation dampening to show the difference
+between smooth deceleration and not-smooth.
