@@ -302,9 +302,21 @@ top speed only manages to bring our full print time down to just under
 
 Of course, the speeds I chose for this example are meant to be
 illustrative of how the amount of time it takes to speed up and slow
-down for each turn impact the total time for a print.
-
-
+down for each turn impact the total time for a print. Keep in mind
+even this example is leaving out a lot of detail because we're only
+looking at the time it takes to go from a "stop" during the turn to
+the full speed of the long straight segment. In reality, each short
+segment also needs some time to traverse and we need to speed and slow
+down for those 90 degree turns as well. The other thing to keep in
+mind is that this slicing of a cube shape has a pretty idealized path
+that is mostly long straight segments where the printer can accelerate
+to top speed and has minimized the number of turns. A more realistic
+slicing would probably use a lower "infill" percentage and thus need
+less plastic making the part cheaper and lighter, but it makes the
+print path much more complex (TODO: include diagrams of various infill
+pattern slicings of a cube). The point is, how long a printer takes to
+create a print often comes down to how fast it can move through
+corners in the print because most prints have a _lot_ of corners.
 
 ## Processing Bit by Bit
 
