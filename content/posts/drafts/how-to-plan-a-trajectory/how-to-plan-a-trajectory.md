@@ -241,6 +241,71 @@ we keep going with this process of dividing the angles into smaller
 and smaller sections, we rapidly start approaching exactly what most
 running tracks look like.
 
+## How Long is a Print?
+
+If you've never 3D printed anything before, you might be surprised at
+how long printing things can take. I have a fairly cheap low-end 3D
+filament printer, and printing the Boaty calibration piece took (TODO:
+X hours). Even printing very simple slightly larger shapes can take
+what feels like an unreasonable amount of time. Technically, my 3D
+printer can print shapes up to (TODO: mm x mm). If I were to print a
+cube that large however it would take (TODO: X hours)!
+
+Part of this just comes down to the size of the plastic filament
+feeding the printer and how quickly that filament can be heated up to
+temperature where it can be printed and then provide a good bond to
+the previous layer of plastic. Think about using a hot glue gun and
+how you have to wait for it to heat up, and even then it takes fairly
+slow steady pressure to get the glue hot enough to squeeze out the
+nozzle.
+
+However, there's another possible limiting factor to how fast we can
+print something, how many times do we have to change direction? The
+ideal 5mm cube path that I sketched earlier contains two 90 degree
+turns in the transition between each line.
+
+Let's start by saying the maximum speed we can heat plastic at for
+extrusion means that we can move the print head at 1mm per
+second. Since we can't start instantly, because of rule 1, let's say
+it takes 1 second to get fully up to speed, and we travel 0.5mm during
+that time.  Let's assume that we come to a full stop at each corner
+and perfectly execute those 90 degree turns. Let's simplify the math
+and ignore how long each short segment takes and just think about the
+speeding up and slowing down on each long segment. There are 49
+changes of direction, and we have to speed up and slow down for each
+of them, plus speeding up at the beginning and slowing down at the end
+of the layer, means that we have 100 speed transitions. If each one
+takes a whole second, that means each layer of our cube will take at
+least 100 seconds just slowing down for each turn! In reality, because
+it also takes time to traverse the lines, 4 seconds each, 50 lines,
+that's another 200 seconds! So already, each layer is taking 300
+seconds, or 5 minutes. Then there are 50 layers in this print. At 5
+minutes per layer, that's going to take 250 minutes, or just over 4
+hours! And this is a tiny 5mm cube! And speeding up and slowing down
+for the turns was fully 1/3 of that time.
+
+Improving our top speed from 1mm/s to 2mm/s seems like it would cut
+down on the time it takes to print the center of the long lines by
+50%. But in fact, changing that top speed would also change how long
+speeding up and slowing down takes. Using the same acceleration, if
+our top speed is 2mm/s, it would now take us 2 seconds to slow at each
+corner and another 2 seconds to speed up after it. There are still 100
+speed transitions, and they now take 2 seconds each so that's 200
+seconds for the acceleration. And taking longer means that you travel
+farther during the speeding up and slowing down, fully 2mm in each
+case. Now we only get to go full speed for 1mm, which takes 1 second
+times 50 lines, that's 50 seconds of full speed travel time per layer.
+But our total time per layer, including speeding up and slowing down
+is still 250 seconds per layer, or just over 4 minutes. Doubling our
+top speed only manages to bring our full print time down to just under
+3 and 1/2 hours!
+
+Of course, the speeds I chose for this example are meant to be
+illustrative of how the amount of time it takes to speed up and slow
+down for each turn impact the total time for a print.
+
+
+
 ## Processing Bit by Bit
 
 So, we've sufficiently motivated the idea that whatever we do to plan
