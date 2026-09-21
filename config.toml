@@ -10,17 +10,30 @@ description = "Out beyond ideas of wrongdoing and rightdoing there is a garden. 
 # Building Options
 compile_sass = true
 minify_html = true
-generate_feed = true
+generate_feeds = true
 build_search_index = true
+# Working files for drafts in progress, not pages.
+ignored_content = ["**/how-to-plan-a-trajectory/*"]
+# Zola 0.23 runs content through Tera by default. Nothing here uses that (no
+# shortcodes), and several posts contain literal `{% %}`/`{# #}` text, so keep
+# content as plain Markdown like 0.16 did.
+skip_content_templating = ["**/*"]
 
-[markdown]
+[markdown.highlighting]
 # Code Syntax Highlighting
-highlight_code = true
-highlight_theme = "zenburn"
+theme = "gruvbox-dark-soft"
 
 [extra]
 
 author = { name = "Zefira Shannon", email = "zefira@hey.com" }
+footer_copyright = ""
+home_subtitle = ""
+
+# Optional theme features. Tera 2 errors on `config.extra.x.enable` when `x` is
+# absent, so each one is declared off rather than left out.
+highlightjs = { enable = false, clipboard = false, theme = "" }
+disqus = { enable = false, shortname = "" }
+google_analytics = { enable = false, id = "" }
 
 # Hermit theme config
 
